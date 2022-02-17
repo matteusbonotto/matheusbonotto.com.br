@@ -16,7 +16,7 @@ const senha = document.getElementById('senha').value
 
 btnLogout.onclick = event =>{
   firebase.auth().singOut();
-  alert("test")
+  alert("tess")
 
 }
 

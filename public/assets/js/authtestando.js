@@ -27,6 +27,6 @@ function sair(){
 signOut(auth).then(() => {
 window.location.replace('index.html')
 }).catch((error) => {
-// An error happened.
+// An error happened..
 });
 }
