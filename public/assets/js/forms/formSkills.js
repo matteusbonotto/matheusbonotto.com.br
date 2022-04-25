@@ -29,6 +29,7 @@ const renderUser = doc => {
   `;
   tableskills.insertAdjacentHTML('beforeend', tr);
 
+
   // Click edit user
   const btnEdit = document.querySelector(`[data-id='${doc.id}'] .btn-edit`);
   btnEdit.addEventListener('click', () => {
