@@ -9,7 +9,8 @@ const editModalForm = document.querySelector('.edit-modal .form');
 
 const btnAdd = document.querySelector('.btn-add');
 
-const tableskills = document.getElementById('skillsList');
+
+const tableskills = document.querySelector('.table-skills');
 
 let id;
 
@@ -17,10 +18,10 @@ let id;
 const renderUser = doc => {
   const tr = `
     <tr data-id='${doc.id}'>
-      <td>${doc.data().firstName}</td>
-      <td>${doc.data().lastName}</td>
-      <td>${doc.data().phone}</td>
-      <td>${doc.data().email}</td>
+      <td>${doc.data().nome}</td>
+      <td>${doc.data().categoria}</td>
+      <td>${doc.data().descricao}</td>
+      <td>${doc.data().nivelConhecimento}</td>
       <td>
         <button class="btn btn-edit">Edit</button>
         <button class="btn btn-delete">Delete</button>
@@ -36,11 +37,10 @@ const renderUser = doc => {
     editModal.classList.add('modal-show');
 
     id = doc.id;
-    editModalForm.firstName.value = doc.data().firstName;
-    editModalForm.lastName.value = doc.data().lastName;
-    editModalForm.phone.value = doc.data().phone;
-    editModalForm.email.value = doc.data().email;
-
+    editModalForm.nome.value = doc.data().nome
+    editModalForm.categoria.value = doc.data().categoria
+    editModalForm.descricao.value = doc.data().descricao
+    editModalForm.nivelConhecimento.value = doc.data().nivelConhecimento
   });
 
   // Click delete user
@@ -52,17 +52,16 @@ const renderUser = doc => {
       console.log('Error removing document', err);
     });
   });
-
 }
 
 // Click add user button
 btnAdd.addEventListener('click', () => {
   addModal.classList.add('modal-show');
 
-  addModalForm.firstName.value = '';
-  addModalForm.lastName.value = '';
-  addModalForm.phone.value = '';
-  addModalForm.email.value = '';
+  addModalForm.nome.value = ""
+  addModalForm.categoria.value = ""
+  addModalForm.descricao.value = ""
+  addModalForm.nivelConhecimento.value = ""
 });
 
 // User click anyware outside the modal
@@ -106,10 +105,10 @@ db.collection('skills').onSnapshot(snapshot => {
 addModalForm.addEventListener('submit', e => {
   e.preventDefault();
   db.collection('skills').add({
-    firstName: addModalForm.firstName.value,
-    lastName: addModalForm.lastName.value,
-    phone: addModalForm.phone.value,
-    email: addModalForm.email.value,
+    nome: addModalForm.nome.value,
+    categoria: addModalForm.categoria.value,
+    descricao: addModalForm.descricao.value,
+    nivelConhecimento: addModalForm.nivelConhecimento.value
   });
   modalWrapper.classList.remove('modal-show');
 });
@@ -118,10 +117,10 @@ addModalForm.addEventListener('submit', e => {
 editModalForm.addEventListener('submit', e => {
   e.preventDefault();
   db.collection('skills').doc(id).update({
-    firstName: editModalForm.firstName.value,
-    lastName: editModalForm.lastName.value,
-    phone: editModalForm.phone.value,
-    email: editModalForm.email.value,
+    nome: editModalForm.nome.value,
+    categoria: editModalForm.categoria.value,
+    descricao: editModalForm.descricao.value,
+    nivelConhecimento: editModalForm.nivelConhecimento.value
   });
   editModal.classList.remove('modal-show');
   

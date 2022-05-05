@@ -1,0 +1,3 @@
+form.js == crud.js (crudSkills.js)
+class.js == csClass.js (csSkills.js)
+form.html == formPage.html (formSkills.html)
