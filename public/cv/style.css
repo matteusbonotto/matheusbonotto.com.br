@@ -25,14 +25,13 @@ main {
 }
 
 .container {
-    max-width: 250px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
 
 .avatar {
-    padding-top: 70px;
+    padding-top: 60px;
     width: 10rem;
     margin: 6rem 35% -20px;
     position: relative;
@@ -62,7 +61,10 @@ main {
 .h5t {
     margin-top: -30px;
     margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
     color: #ffffff;
+    text-align: center;
 }
 
 ul {
