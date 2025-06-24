@@ -1,0 +1,352 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.home-page {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+  background-color: #000; /* Adicionar fundo preto para evitar espaços brancos */
+  margin: 0;
+  padding: 0;
+}
+
+.home-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: -1;
+}
+
+.home-container {
+  height: 100vh;
+  width: 100vw; /* Aumentado para garantir cobertura total */
+  display: flex;
+  position: absolute;
+  top: 0;
+  transform: skew(0, 0);
+  transform-origin: center;
+  overflow: hidden;
+}
+
+.menu-option {
+  box-shadow:  0 4px 20px rgba(0, 0, 0, 0.5);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* Transição mais suave */
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  width: calc(120vw / 5); /* Largura fixa distribuída igualmente */
+}
+
+.menu-option:first-child {
+  margin-left: 0; /* Removido margem negativa que estava causando problemas */
+}
+
+.menu-option:last-child {
+  margin-right: 0; /* Removido margem negativa que estava causando problemas */
+}
+
+.menu-option > * {
+  transform: none; /* Remove a transformação skew que causava o efeito de itálico */
+  position: relative;
+  z-index: 2;
+}
+
+.menu-option.expanded {
+  flex: 95vw; /* Valor maior para garantir expansão completa */
+  width: 120vw; /* Expandir para cobrir toda a largura */
+  z-index: 10; /* Garantir que fique acima dos outros */
+}
+
+.option-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  position: absolute; /* Posição absoluta para centralizar melhor */
+  top: 0;
+  left: 0;
+}
+
+.option-title {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 2.5rem;
+  font-style: normal; /* Garantir que o texto não esteja em itálico */
+  color: white;
+  text-transform: uppercase;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+
+.option-text {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-style: normal; /* Garantir que o texto não esteja em itálico */
+  color: white;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  display: -webkit-box; /* Usar flexbox para limitar o número de linhas */
+  -webkit-line-clamp: 3;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  max-width: 200px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.bg-primary {
+  background: blue !important;
+}
+
+.bg-qa {
+  background: linear-gradient(25deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgb(183, 213, 36) 100%) !important;
+}
+
+.bg-dev {
+  background: linear-gradient(25deg, rgb(7, 0, 98) 0%, rgb(87, 87, 199) 50%,  rgba(206, 0, 217, 0.601) 100% ) !important;
+}
+
+.bg-cv {
+  background: linear-gradient(25deg, rgb(51, 0, 61) 0%, rgb(255, 0, 0) 50%, rgb(131, 0, 0) 100% ) !important;
+}
+
+.bg-others {
+  background: linear-gradient(25deg, rgb(0, 255, 195) 0%, rgb(58, 156, 255) 50%, rgb(186, 177, 255) 100% ) !important;
+}
+
+/* Adicionar efeito de hover */
+.menu-option::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.menu-option:hover::after {
+  opacity: 1;
+}
+
+/* Estilos para o título de boas-vindas */
+.welcome-title {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 1.5rem 0;
+  color: white;
+  z-index: 20; /* Garantir que fica acima de todos os elementos */
+  text-shadow: 0 2px 8px #000, 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.welcome-title h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  font-style: normal; /* Garantir que o texto não esteja em itálico */
+}
+
+.welcome-title h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-style: normal; /* Garantir que o texto não esteja em itálico */
+  margin-top: 0;
+}
+
+/* Estilos para os ícones 3D */
+.option-content i,
+.option-content v-icon {
+  font-size: 3rem;
+  color: white;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) translateZ(0);
+  transition: all 0.3s ease;
+  text-shadow: 2px 50px 10px rgba(0, 0, 0, 0.5),
+               0 4px 6px rgba(0, 0, 0, 0.2),
+               0 8px 12px rgba(0, 0, 0, 0.1);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+    transform: rotateX(50deg) rotateZ(43deg);
+}
+
+.option-content:hover i,
+.option-content:hover v-icon {
+  transform: perspective(1000px) translateZ(30px) scale(1.2);
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4),
+               0 8px 12px rgba(0, 0, 0, 0.3),
+               0 12px 18px rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+  animation: iconPulse 2s infinite;
+}
+
+@keyframes iconPulse {
+  0% {
+    transform: perspective(1000px) translateZ(30px) scale(1.2);
+  }
+  50% {
+    transform: perspective(1000px) translateZ(40px) scale(1.3);
+  }
+  100% {
+    transform: perspective(1000px) translateZ(30px) scale(1.2);
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page {
+    height: 100vh;
+    width: 100vw;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .home-container {
+    flex-direction: column;
+    transform: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    padding-top: 70px; /* Espaço para o título fixo */
+  }
+
+  .menu-option {
+    transform: none;
+    border: none;
+    border-bottom: 3px solid white;
+    height: calc(100vh / 6);
+    min-height: 100px;
+    width: 100% !important;
+    margin: 0 !important;
+    animation: slideInLeft 0.5s ease forwards;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .menu-option:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  .menu-option:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+
+  .menu-option:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+
+  .menu-option:nth-child(5) {
+    animation-delay: 0.4s;
+  }
+
+  .menu-option > * {
+    transform: none;
+  }
+
+  .option-content {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0.5rem 1.5rem;
+  }
+
+  .option-text {
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-left: 1rem;
+  }
+
+  .menu-option.expanded {
+    height: auto;
+    min-height: 120px;
+    transition: all 0.3s ease;
+  }
+
+  .welcome-title {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0.75rem;
+    z-index: 100;
+  }
+
+  .welcome-title h1 {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .welcome-title h2 {
+    font-size: 1.6rem;
+  }
+}
+
+/* Smartphones em orientação retrato ou telas muito pequenas */
+@media (max-width: 480px) {
+  .welcome-title h1 {
+    font-size: 0.9rem;
+  }
+
+  .welcome-title h2 {
+    font-size: 1.3rem;
+  }
+
+  .menu-option {
+    height: calc(100vh / 6);
+    min-height: 80px;
+  }
+
+  .option-content {
+    padding: 0.5rem 1rem;
+  }
+
+  .option-text {
+    font-size: 1.2rem;
+  }
+
+  /* Ícones menores para telas pequenas */
+  .option-content v-icon {
+    font-size: 36px !important;
+    height: 36px;
+    width: 36px;
+  }
+}
