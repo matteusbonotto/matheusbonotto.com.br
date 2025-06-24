@@ -45,11 +45,12 @@ html {
   align-items: center;
   justify-content: center;
   padding: 0;
-  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* Transição mais suave */
+  transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1); /* Transição mais suave */
   cursor: pointer;
   position: relative;
   overflow: hidden;
   width: calc(120vw / 5); /* Largura fixa distribuída igualmente */
+  
 }
 
 .menu-option:first-child {

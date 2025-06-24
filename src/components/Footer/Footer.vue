@@ -1,11 +1,9 @@
 <template>
-  <v-footer app color="primary" dark>
-    <v-container>
-      <div class="text-center">
-        &copy; {{ new Date().getFullYear() }} - Matheus Bonotto
-      </div>
-    </v-container>
-  </v-footer>
+<footer>
+  <div class="text-center">
+    &copy; {{ new Date().getFullYear() }} - Matheus Bonotto
+  </div>
+</footer>
 </template>
 
 <script setup>
@@ -13,5 +11,12 @@
 </script>
 
 <style scoped>
-/* Estilos específicos do rodapé */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
 </style>

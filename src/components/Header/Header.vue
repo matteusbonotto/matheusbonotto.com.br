@@ -1,16 +1,13 @@
 <template>
-  <v-app-bar app color="primary" dark>
-    <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-    <v-app-bar-title>
-      <router-link to="/" class="white--text text-decoration-none">
-        Matheus Bonotto
-      </router-link>
-    </v-app-bar-title>
-    <v-spacer></v-spacer>
-    <v-btn icon @click="returnToHome">
-      <v-icon>mdi-home</v-icon>
-    </v-btn>
-  </v-app-bar>
+<header>
+  <nav>
+    <router-link to="/" class="logo">Matheus Bonotto</router-link>
+    <div class="nav-links">
+      <router-link to="/cv">CV</router-link>
+      <router-link to="/qa">QA</router-link>
+    </div>
+  </nav>
+</header>
 </template>
 
 <script setup>
@@ -24,7 +21,3 @@ const returnToHome = () => {
   router.push('/')
 }
 </script>
-
-<style scoped>
-/* Estilos específicos do cabeçalho */
-</style>

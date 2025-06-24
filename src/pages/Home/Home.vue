@@ -14,11 +14,11 @@
         :key="index"
         class="menu-option"
         :class="[`bg-${option.color}`, { expanded: hoveredOption === index }]"
-        @mouseover="setHoveredOption(index)"
-        @mouseleave="hoveredOption = null"
+        @mouseenter="handleMouseEnter(index)"
+        @mouseleave="clearHoverState(index)"
+        @click="navigateTo(option.route)"
         @touchstart="handleTouchStart(index)"
         @touchend="handleTouchEnd(index, option.route)"
-        @click="navigateTo(option.route)"
       >
         <div class="option-content">
           <v-icon size="100" :color="option.iconColor">{{ option.icon }}</v-icon>
@@ -31,18 +31,17 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
 import "./Home.css";
 
 const router = useRouter();
 const hoveredOption = ref(null);
+const hoverTimer = ref(null);
+const touchStartTime = ref(0);
+const isMobile = ref(false);
 
-// Função aprimorada para controlar melhor o hover
-const setHoveredOption = (index) => {
-  hoveredOption.value = index;
-};
-
+// Opções do menu
 const options = [
   {
     title: "QA",
@@ -78,43 +77,66 @@ const options = [
   },
 ];
 
-const touchStartTime = ref(0);
-const touchTimeout = ref(null);
-const isMobile = ref(false);
-
 // Verificar se é um dispositivo móvel ao carregar o componente
-import { onMounted } from "vue";
-
 onMounted(() => {
   checkIfMobile();
   window.addEventListener("resize", checkIfMobile);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", checkIfMobile);
+  clearTimeout(hoverTimer.value);
 });
 
 const checkIfMobile = () => {
   isMobile.value = window.innerWidth <= 768;
 };
 
-// Função para lidar com eventos de toque
+// Função simplificada para lidar com mouse enter
+const handleMouseEnter = (index) => {
+  // Limpar qualquer timer pendente antes de criar um novo
+  clearTimeout(hoverTimer.value);
+  
+  // Defina o timer para expandir após um pequeno delay
+  hoverTimer.value = setTimeout(() => {
+    hoveredOption.value = index;
+  }, 150); // Delay curto para evitar expansões acidentais
+};
+
+// Função para limpar o estado do hover
+const clearHoverState = (index) => {
+  clearTimeout(hoverTimer.value);
+  if (hoveredOption.value === index) {
+    hoveredOption.value = null;
+  }
+};
+
+// Funções para lidar com eventos de toque
 const handleTouchStart = (index) => {
   touchStartTime.value = Date.now();
-  // Em dispositivos móveis, mostrar o efeito de hover ao tocar
   if (isMobile.value) {
-    hoveredOption.value = index;
+    // Em dispositivos móveis, mostrar o efeito de hover ao tocar
+    // mas evitar expandir se já estiver expandido (toggle)
+    if (hoveredOption.value === index) {
+      hoveredOption.value = null;
+    } else {
+      hoveredOption.value = index;
+    }
   }
 };
 
 const handleTouchEnd = (index, route) => {
   const touchDuration = Date.now() - touchStartTime.value;
-  // Se o toque foi curto, navegue imediatamente
-  if (touchDuration < 500) {
+  // Se o toque foi curto, navegue
+  if (touchDuration < 300) {
     navigateTo(route);
   }
 };
 
 const navigateTo = (route) => {
-  // Adiciona pequeno atraso para permitir ver o efeito de hover antes de navegar
+  // Atraso reduzido para melhor experiência do usuário
   setTimeout(() => {
     router.push(route);
-  }, 200);
+  }, 150);
 };
 </script>

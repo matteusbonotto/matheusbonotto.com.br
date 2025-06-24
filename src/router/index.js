@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../pages/Home/Home.vue'
-import QA from '../pages/QA.vue'
-import Dev from '../pages/Dev.vue'
-import CV from '../pages/CV.vue'
-import Others from '../pages/Others.vue'
-import Admin from '../pages/Admin.vue'
+import QA from '../pages/Qa/Qa.vue'
+// import Dev from '../pages/Dev.vue'
+// import CV from '../pages/Cv/Cv.vue'
+// import Others from '../pages/Others.vue'
+// import Admin from '../pages/Admin.vue'
 
 const routes = [
   {
@@ -17,26 +17,26 @@ const routes = [
     name: 'QA',
     component: QA
   },
-  {
-    path: '/dev',
-    name: 'Dev',
-    component: Dev
-  },
-  {
-    path: '/cv',
-    name: 'CV',
-    component: CV
-  },
-  {
-    path: '/others',
-    name: 'Others',
-    component: Others
-  },
-  {
-    path: '/admin',
-    name: 'Admin',
-    component: Admin
-  }
+  // {
+  //   path: '/dev',
+  //   name: 'Dev',
+  //   component: Dev
+  // },
+  // {
+  //   path: '/cv',
+  //   name: 'CV',
+  //   component: CV
+  // },
+  // {
+  //   path: '/others',
+  //   name: 'Others',
+  //   component: Others
+  // },
+  // {
+  //   path: '/admin',
+  //   name: 'Admin',
+  //   component: Admin
+  // }
 ]
 
 const router = createRouter({
