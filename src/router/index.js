@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../pages/Home/Home.vue'
 import QA from '../pages/Qa/Qa.vue'
-// import Dev from '../pages/Dev.vue'
-// import CV from '../pages/Cv/Cv.vue'
+import Dev from '../pages/Dev/Dev.vue'
+import CV from '../pages/CV/CV.vue'
 // import Others from '../pages/Others.vue'
 // import Admin from '../pages/Admin.vue'
 
@@ -17,16 +17,16 @@ const routes = [
     name: 'QA',
     component: QA
   },
-  // {
-  //   path: '/dev',
-  //   name: 'Dev',
-  //   component: Dev
-  // },
-  // {
-  //   path: '/cv',
-  //   name: 'CV',
-  //   component: CV
-  // },
+  {
+    path: '/dev',
+    name: 'Dev',
+    component: Dev
+  },
+  {
+    path: '/cv',
+    name: 'CV',
+    component: CV
+  },
   // {
   //   path: '/others',
   //   name: 'Others',
