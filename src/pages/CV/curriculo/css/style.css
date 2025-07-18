@@ -1,0 +1,166 @@
+/* style.css - Controles de interface */
+
+/* =========================
+   MENSAGEM DE CARREGAMENTO
+   ========================= */
+
+.loading-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    font-size: 14pt;
+    color: #666;
+    padding: 2cm;
+    text-align: center;
+    font-style: italic;
+}
+
+/* =========================
+   CONTROLES DO TOPO
+   ========================= */
+
+.controls-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.language-selector {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.language-dropdown {
+    background-color: white !important;
+    border: 1px solid #ced4da;
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 38px;
+    min-width: 120px;
+}
+
+.language-dropdown:hover {
+    background-color: #f8f9fa !important;
+    border-color: #adb5bd;
+}
+
+.language-dropdown:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    border-color: #007bff;
+}
+
+.language-dropdown::after {
+    content: none;
+}
+
+.language-dropdown .dropdown-toggle::after {
+    margin-left: 5px;
+}
+
+.flag-icon {
+    width: 16px;
+    height: 12px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.dropdown-menu {
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    min-width: 140px;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    color: #333 !important;
+    text-decoration: none !important;
+    font-size: 12px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #333 !important;
+}
+
+.dropdown-item:focus {
+    background-color: #f8f9fa;
+    color: #333 !important;
+}
+
+.print-button {
+    background-color: #007bff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+
+.print-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.bi.bi-printer {
+    color: #fff;
+}
+
+/* =========================
+   RESPONSIVIDADE
+   ========================= */
+
+@media screen and (max-width: 21cm) {
+    .a4-page {
+        width: 100%;
+        margin: 10px;
+        padding: 1cm;
+    }
+
+    .controls-container {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin: 20px;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .controls-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .language-dropdown,
+    .print-button {
+        width: 100%;
+        min-width: 200px;
+    }
+}

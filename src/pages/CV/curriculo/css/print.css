@@ -1,0 +1,639 @@
+/* print.css - Configurações específicas para impressão PDF */
+
+/* =========================
+   CONFIGURAÇÕES GLOBAIS DE IMPRESSÃO
+   ========================= */
+
+@media print {
+    /* Forçar cores e backgrounds na impressão */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    /* Reset completo para impressão */
+    html, body {
+        width: 210mm !important;
+        height: 297mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
+        overflow: visible !important;
+        font-size: 10pt !important;
+        line-height: 1.2 !important;
+    }
+    
+    /* Configurações da página */
+    @page {
+        size: A4 portrait !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* =========================
+       CONTAINER PRINCIPAL
+       ========================= */
+    
+    #curriculum-container {
+        width: 210mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+        gap: 0 !important;
+        align-items: stretch !important;
+    }
+    
+    /* =========================
+       CONFIGURAÇÕES DAS PÁGINAS A4
+       ========================= */
+    
+    .a4-page {
+        width: 210mm !important;
+        height: 297mm !important;
+        min-height: 297mm !important;
+        max-height: 297mm !important;
+        margin: 0 !important;
+        padding: 20mm !important;
+        box-shadow: none !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        background: white !important;
+        position: relative !important;
+        overflow: visible !important;
+        display: block !important;
+        box-sizing: border-box !important;
+    }
+    
+    .a4-page:last-child {
+        page-break-after: avoid !important;
+    }
+    
+    /* =========================
+       CONTROLES E ELEMENTOS DE INTERFACE
+       ========================= */
+    
+    .controls-container,
+    .loading-message,
+    .btn,
+    .dropdown {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    
+    /* =========================
+       CABEÇALHO E RODAPÉ
+       ========================= */
+    
+    .page-header {
+        position: absolute !important;
+        top: 5mm !important;
+        left: 20mm !important;
+        right: 20mm !important;
+        width: calc(100% - 40mm) !important;
+        height: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 8pt !important;
+        color: #666 !important;
+        padding-bottom: 3mm !important;
+        margin-bottom: 3mm !important;
+        background: white !important;
+        border-bottom: none !important;
+    }
+
+    /* Garantir que todos os cabeçalhos sejam exibidos da mesma forma */
+    .a4-page .page-header,
+    #page1 .page-header,
+    #page2 .page-header,
+    #page3 .page-header,
+    #page4 .page-header,
+    #page5 .page-header {
+        display: flex !important;
+        position: absolute !important;
+        top: 5mm !important;
+        left: 20mm !important;
+        right: 20mm !important;
+        width: calc(100% - 40mm) !important;
+        height: auto !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 8pt !important;
+        color: #666 !important;
+        padding-bottom: 3mm !important;
+        margin-bottom: 3mm !important;
+        background: white !important;
+        border-bottom: none !important;
+    }
+    
+    /* Sobrescrever especificamente as regras do page.css para remover bordas */
+    #page1 .page-header,
+    .a4-page .page-header,
+    .page-header {
+        border-bottom: none !important;
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        border: none !important;
+    }
+    
+    /* Garantir que não haja bordas em modo de impressão */
+    .printing #page1 .page-header,
+    .printing .a4-page .page-header,
+    .printing .page-header {
+        border-bottom: none !important;
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        border: none !important;
+    }
+
+    .person-header {
+        display: none !important;
+    }
+    
+    #page1 .person-header {
+        display: block !important;
+        position: absolute !important;
+        top: 15mm !important;
+        left: 20mm !important;
+        right: 20mm !important;
+        width: calc(100% - 40mm) !important;
+        height: auto !important;
+        margin-bottom: 10mm !important;
+        background: white !important;
+    }
+    
+    .person-header .name-title {
+        font-size: 16pt !important;
+        font-weight: bold !important;
+        color: #333 !important;
+        margin-bottom: 2mm !important;
+        line-height: 1.2 !important;
+    }
+    
+    .person-header .occupation {
+        font-size: 11pt !important;
+        color: #666 !important;
+        margin-bottom: 2mm !important;
+        line-height: 1.2 !important;
+    }
+    
+    .person-header .contact-info {
+        font-size: 9pt !important;
+        color: #666 !important;
+        line-height: 1.3 !important;
+    }
+    
+    .person-header .contact-info a {
+        color: #0066cc !important;
+        text-decoration: none !important;
+    }
+    
+    /* Configurações do QR Code no cabeçalho */
+    .contact-info-container {
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+    }
+
+    .contact-info {
+        flex: 1 !important;
+        font-size: 9pt !important;
+        line-height: 1.2 !important;
+    }
+
+    .qr-code-container {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-width: 80px !important;
+    }
+
+    .qr-code-header {
+        width: 80px !important;
+        height: 80px !important;
+    }
+    
+    .page-footer {
+        position: absolute !important;
+        bottom: 5mm !important;
+        left: 20mm !important;
+        right: 20mm !important;
+        width: calc(100% - 40mm) !important;
+        height: 10mm !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        font-size: 8pt !important;
+        color: #666 !important;
+        border-top: 1px solid #eee !important;
+        padding-top: 2mm !important;
+        background: white !important;
+    }
+        
+    .page-footer .page-number {
+        font-weight: bold !important;
+        color: #333 !important;
+    }
+    
+    /* =========================
+       AJUSTES DE CONTEÚDO
+       ========================= */
+    
+    #page1 #curriculum-content-1 {
+        margin-top: 12mm !important;
+        padding-top: 3mm !important;
+    }
+    
+    .a4-page:not(#page1) .curriculum-content {
+        margin-top: 12mm !important;
+        padding-top: 3mm !important;
+    }
+    
+    /* =========================
+       SEÇÕES E CONTEÚDO
+       ========================= */
+    
+    .curriculum-section {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin-bottom: 6mm !important;
+        orphans: 2 !important;
+        widows: 2 !important;
+    }
+    
+    .curriculum-section h2 {
+        font-size: 12pt !important;
+        font-weight: bold !important;
+        color: #333 !important;
+        margin-bottom: 3mm !important;
+        padding-bottom: 1mm !important;
+        border-bottom: 1px solid #ddd !important;
+    }
+    
+    .experience-item,
+    .education-item,
+    .project-item,
+    .language-item,
+    .certification-item {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin-bottom: 4mm !important;
+        orphans: 2 !important;
+        widows: 2 !important;
+    }
+    
+    .experience-item h3,
+    .education-item h3,
+    .project-item h3 {
+        font-size: 11pt !important;
+        font-weight: bold !important;
+        color: #333 !important;
+        margin-bottom: 1mm !important;
+        line-height: 1.2 !important;
+    }
+    
+    .experience-item p,
+    .education-item p,
+    .project-item p {
+        font-size: 9pt !important;
+        color: #666 !important;
+        margin-bottom: 1mm !important;
+        line-height: 1.3 !important;
+    }
+    
+    .experience-item ul,
+    .education-item ul,
+    .project-item ul {
+        font-size: 9pt !important;
+        color: #333 !important;
+        margin-left: 4mm !important;
+        margin-bottom: 2mm !important;
+        line-height: 1.3 !important;
+    }
+    
+    .experience-item li,
+    .education-item li,
+    .project-item li {
+        margin-bottom: 1mm !important;
+    }
+    
+    /* =========================
+       TABELAS E LISTAS
+       ========================= */
+    
+    table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        margin-bottom: 5mm !important;
+        font-size: 9pt !important;
+        page-break-inside: avoid !important;
+    }
+    
+    th, td {
+        padding: 2mm !important;
+        text-align: left !important;
+        vertical-align: top !important;
+    }
+    
+    th {
+        background-color: #f8f9fa !important;
+        font-weight: bold !important;
+        color: #333 !important;
+    }
+    
+    /* =========================
+       BADGES E ETIQUETAS
+       ========================= */
+    
+    .badge {
+        display: inline-block !important;
+        padding: 1mm 2mm !important;
+        font-size: 8pt !important;
+        font-weight: normal !important;
+        line-height: 1 !important;
+        border-radius: 2mm !important;
+        background-color: #e9ecef !important;
+        color: #495057 !important;
+        margin-right: 2mm !important;
+        margin-bottom: 1mm !important;
+    }
+    
+    .badge-primary {
+        background-color: #007bff !important;
+        color: white !important;
+    }
+    
+    .badge-secondary {
+        background-color: #6c757d !important;
+        color: white !important;
+    }
+    
+    .badge-success {
+        background-color: #28a745 !important;
+        color: white !important;
+    }
+    
+    .badge-info {
+        background-color: #17a2b8 !important;
+        color: white !important;
+    }
+    
+    /* =========================
+       ESPAÇAMENTOS E MARGENS
+       ========================= */
+    
+    .mb-1 { margin-bottom: 1mm !important; }
+    .mb-2 { margin-bottom: 2mm !important; }
+    .mb-3 { margin-bottom: 3mm !important; }
+    .mb-4 { margin-bottom: 4mm !important; }
+    .mb-5 { margin-bottom: 5mm !important; }
+    
+    .mt-1 { margin-top: 1mm !important; }
+    .mt-2 { margin-top: 2mm !important; }
+    .mt-3 { margin-top: 3mm !important; }
+    .mt-4 { margin-top: 4mm !important; }
+    .mt-5 { margin-top: 5mm !important; }
+    
+    .p-1 { padding: 1mm !important; }
+    .p-2 { padding: 2mm !important; }
+    .p-3 { padding: 3mm !important; }
+    .p-4 { padding: 4mm !important; }
+    .p-5 { padding: 5mm !important; }
+    
+    /* =========================
+       TIPOGRAFIA
+       ========================= */
+    
+    h1 {
+        font-size: 16pt !important;
+        font-weight: bold !important;
+        color: #333 !important;
+        margin-bottom: 4mm !important;
+        line-height: 1.2 !important;
+    }
+    
+    h2 {
+        font-size: 14pt !important;
+        font-weight: bold !important;
+        color: #333 !important;
+        margin-bottom: 3mm !important;
+        line-height: 1.2 !important;
+    }
+    
+    h3 {
+        font-size: 12pt !important;
+        font-weight: bold !important;
+        color: #333 !important;
+        margin-bottom: 2mm !important;
+        line-height: 1.2 !important;
+    }
+    
+    h4 {
+        font-size: 11pt !important;
+        font-weight: bold !important;
+        color: #333 !important;
+        margin-bottom: 2mm !important;
+        line-height: 1.2 !important;
+    }
+    
+    h5 {
+        font-size: 10pt !important;
+        font-weight: bold !important;
+        color: #333 !important;
+        margin-bottom: 1mm !important;
+        line-height: 1.2 !important;
+    }
+    
+    h6 {
+        font-size: 9pt !important;
+        font-weight: bold !important;
+        color: #333 !important;
+        margin-bottom: 1mm !important;
+        line-height: 1.2 !important;
+    }
+    
+    p {
+        font-size: 9pt !important;
+        color: #333 !important;
+        margin-bottom: 2mm !important;
+        line-height: 1.3 !important;
+    }
+    
+    small {
+        font-size: 8pt !important;
+        color: #666 !important;
+        line-height: 1.2 !important;
+    }
+    
+    /* =========================
+       LINKS E TEXTO
+       ========================= */
+    
+    a {
+        color: #0066cc !important;
+        text-decoration: none !important;
+    }
+    
+    strong, b {
+        font-weight: bold !important;
+        color: #333 !important;
+    }
+    
+    em, i {
+        font-style: italic !important;
+        color: #666 !important;
+    }
+    
+    /* =========================
+       CORES E BACKGROUNDS
+       ========================= */
+    
+    .text-primary { color: #007bff !important; }
+    .text-secondary { color: #6c757d !important; }
+    .text-success { color: #28a745 !important; }
+    .text-danger { color: #dc3545 !important; }
+    .text-warning { color: #ffc107 !important; }
+    .text-info { color: #17a2b8 !important; }
+    .text-dark { color: #343a40 !important; }
+    .text-muted { color: #6c757d !important; }
+    
+    .bg-primary { background-color: #007bff !important; }
+    .bg-secondary { background-color: #6c757d !important; }
+    .bg-success { background-color: #28a745 !important; }
+    .bg-danger { background-color: #dc3545 !important; }
+    .bg-warning { background-color: #ffc107 !important; }
+    .bg-info { background-color: #17a2b8 !important; }
+    .bg-light { background-color: #f8f9fa !important; }
+    .bg-dark { background-color: #343a40 !important; }
+    
+    /* =========================
+       IMAGENS E ÍCONES
+       ========================= */
+    
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+    
+    .img-responsive {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    /* =========================
+       QUEBRAS DE PÁGINA
+       ========================= */
+    
+    .page-break {
+        page-break-before: always !important;
+        break-before: always !important;
+    }
+    
+    .page-break-after {
+        page-break-after: always !important;
+        break-after: always !important;
+    }
+    
+    .no-break {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+    
+    .avoid-break {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        orphans: 2 !important;
+        widows: 2 !important;
+    }
+    
+    /* =========================
+       CLASSE PARA MODO IMPRESSÃO
+       ========================= */
+    
+    .printing .controls-container {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    
+    .printing .a4-page {
+        box-shadow: none !important;
+        margin: 0 !important;
+    }
+    
+    .printing .page-header {
+        border-bottom: none !important;
+    }
+    
+    .printing .page-footer {
+        border-top: none !important;
+    }
+    
+    /* =========================
+       REGRA FINAL PARA REMOVER BORDAS DO HEADER
+       ========================= */
+    
+    /* Remover todas as bordas do page-header com máxima especificidade */
+    .a4-page .page-header,
+    #page1 .page-header,
+    .page-header,
+    div.page-header,
+    body .page-header {
+        display: flex !important;
+        border: none !important;
+        border-bottom: none !important;
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
+    }
+    
+    /* Regra específica para modo de impressão */
+    .printing .a4-page .page-header,
+    .printing #page1 .page-header,
+    .printing .page-header,
+    .printing div.page-header,
+    body.printing .page-header {
+        display: flex !important;
+        border: none !important;
+        border-bottom: none !important;
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
+    }
+    
+    /* =========================
+       FORÇAR EXIBIÇÃO DO CABEÇALHO EM TODAS AS PÁGINAS
+       ========================= */
+    
+    /* Sobrescrever a regra display: none do page.css */
+    html .a4-page .page-header,
+    html #page1 .page-header,
+    html #page2 .page-header,
+    html #page3 .page-header,
+    html #page4 .page-header,
+    html #page5 .page-header,
+    html .page-header {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: absolute !important;
+        top: 5mm !important;
+        left: 20mm !important;
+        right: 20mm !important;
+        width: calc(100% - 40mm) !important;
+        height: auto !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 8pt !important;
+        color: #666 !important;
+        padding-bottom: 3mm !important;
+        margin-bottom: 3mm !important;
+        background: white !important;
+        border: none !important;
+        z-index: 1 !important;
+    }
+}
