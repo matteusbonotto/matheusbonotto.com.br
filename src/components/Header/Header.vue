@@ -4,7 +4,7 @@
     <router-link to="/" class="logo">Matheus Bonotto</router-link>
     <div class="nav-links">
       <router-link to="/cv">CV</router-link>
-      <router-link to="/qa">QA</router-link>
+      <!-- <router-link to="/qa">QA</router-link> -->
     </div>
   </nav>
 </header>

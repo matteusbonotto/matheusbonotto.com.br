@@ -43,22 +43,22 @@ const isMobile = ref(false);
 
 // Opções do menu
 const options = [
-  {
-    title: "QA",
-    text: "Quality assurance, testes e automação",
-    icon: "mdi-bug",
-    color: "qa",
-    iconColor: "white",
-    route: "/qa",
-  },
-  {
-    title: "DEV",
-    text: "Desenvolvimentos, aplicações web, e projetos",
-    icon: "mdi-code-tags",
-    color: "dev",
-    iconColor: "white",
-    route: "/dev",
-  },
+  // {
+  //   title: "QA",
+  //   text: "Quality assurance, testes e automação",
+  //   icon: "mdi-bug",
+  //   color: "qa",
+  //   iconColor: "white",
+  //   route: "/qa",
+  // },
+  // {
+  //   title: "DEV",
+  //   text: "Desenvolvimentos, aplicações web, e projetos",
+  //   icon: "mdi-code-tags",
+  //   color: "dev",
+  //   iconColor: "white",
+  //   route: "/dev",
+  // },
   {
     title: "CV",
     text: "Currículo e contatos profissionais",
@@ -67,14 +67,14 @@ const options = [
     iconColor: "white",
     route: "/cv",
   },
-  {
-    title: "OUTROS",
-    text: "Outros projetos que tenho feito, por hobby ou interesse",
-    icon: "mdi-dots-horizontal",
-    color: "others",
-    iconColor: "white",
-    route: "/others",
-  },
+  // {
+  //   title: "OUTROS",
+  //   text: "Outros projetos que tenho feito, por hobby ou interesse",
+  //   icon: "mdi-dots-horizontal",
+  //   color: "others",
+  //   iconColor: "white",
+  //   route: "/others",
+  // },
 ];
 
 // Verificar se é um dispositivo móvel ao carregar o componente

@@ -1,10 +1,10 @@
 <template>
   <div id="app" :class="{ 'home-page': isHomePage }">
-    <Header v-if="!isHomePage" />
+    <Header v-if="!isHomePage && !isCv && !isNotFound" />
     <main class="main-content">
       <router-view />
     </main>
-    <Footer v-if="!isHomePage" />
+    <Footer v-if="!isHomePage && !isCv && !isNotFound" />
   </div>
 </template>
 
@@ -17,10 +17,13 @@ import About from "./components/About/About.vue";
 
 const route = useRoute();
 const isHomePage = computed(() => route.path === "/");
+const isCv = computed(() => route.name === "CV");
+const isNotFound = computed(() => route.name === "NotFound");
 </script>
 
 <style>
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;

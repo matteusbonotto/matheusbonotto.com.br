@@ -4,13 +4,24 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "npm run copy-assets && vite",
+    "dev:watch": "npm run copy-assets && concurrently \"node scripts/watch-assets.js --watch\" \"vite\"",
+    "build": "npm run copy-assets && vite build",
+    "preview": "vite preview",
+    "build:prod": "npm run copy-assets && vite build --mode production",
+    "build:clean": "npm run clean-cache && npm run copy-assets && vite build --mode production",
+    "copy-assets": "node scripts/copy-assets.js",
+    "clean-cache": "node scripts/clean-cache.js",
+    "deploy": "npm run build:clean && firebase deploy",
+    "deploy:force": "npm run clean-cache && npm run build:clean && firebase deploy --force",
+    "firebase:serve": "firebase serve",
+    "firebase:deploy": "firebase deploy"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@vueuse/core": "^13.3.0",
+    "firebase": "^12.0.0",
+    "javascript-obfuscator": "^4.1.1",
     "sass": "^1.89.2",
     "vite-plugin-vuetify": "^2.1.1",
     "vue": "^3.5.13",
@@ -19,6 +30,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",
-    "vite": "^6.3.5"
+    "concurrently": "^9.2.0",
+    "vite": "^6.3.5",
+    "vite-plugin-javascript-obfuscator": "^3.1.0"
   }
 }

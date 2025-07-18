@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Página não encontrada | Matheus Bonotto</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+
+      .container {
+        text-align: center;
+        max-width: 500px;
+        padding: 40px 20px;
+      }
+
+      .error-code {
+        font-size: 6rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        animation: pulse 2s infinite;
+      }
+
+      .error-message {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+      }
+
+      .error-description {
+        font-size: 1.1rem;
+        margin-bottom: 40px;
+        opacity: 0.8;
+      }
+
+      .btn-home {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 15px 30px;
+        background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-home:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+      }
+
+      .icon {
+        font-size: 1.2rem;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .error-code {
+          font-size: 4rem;
+        }
+
+        .error-message {
+          font-size: 1.3rem;
+        }
+
+        .error-description {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="error-code">404</div>
+      <div class="error-message">Página não encontrada</div>
+      <div class="error-description">
+        A página que você está procurando não existe ou foi movida.
+      </div>
+      <a href="/" class="btn-home">
+        <span class="icon">🏠</span>
+        Voltar para Home
+      </a>
+    </div>
+
+    <script>
+      // Redireciona para a SPA após 3 segundos
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 3000);
+    </script>
+  </body>
+</html>
