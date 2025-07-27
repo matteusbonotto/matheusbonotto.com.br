@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run copy-assets && vite",
     "dev:watch": "npm run copy-assets && concurrently \"node scripts/watch-assets.js --watch\" \"vite\"",
-    "build": "npm run copy-assets && vite build",
+    "build": "npm run copy-assets && vite build && node scripts/copy-curriculo.cjs && node scripts/copy-competences.cjs",
     "preview": "vite preview",
     "build:prod": "npm run copy-assets && vite build --mode production",
     "build:clean": "npm run clean-cache && npm run copy-assets && vite build --mode production",

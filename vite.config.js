@@ -47,7 +47,7 @@ export default defineConfig({
     }),
   ],
   build: {
-    outDir: 'producao',
+    outDir: 'public',
     emptyOutDir: true,
     rollupOptions: {
       output: {
