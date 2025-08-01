@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../pages/Home/Home.vue'
 import QA from '../pages/Qa/Qa.vue'
 import Dev from '../pages/Dev/Dev.vue'
-import CV from '../pages/Cv/Cv.vue'
+import CV from '../pages/CV/CV.vue'
+import Competence from '../pages/Competence/Competence.vue'
 import NotFound from '../pages/NotFound/NotFound.vue'
 // import Others from '../pages/Others.vue'
 // import Admin from '../pages/Admin.vue'
@@ -27,6 +28,11 @@ const routes = [
     path: '/cv',
     name: 'CV',
     component: CV
+  },
+  {
+    path: '/competence',
+    name: 'Competence',
+    component: Competence
   },
   // Rota catch-all para 404 - deve ser sempre a última
   {

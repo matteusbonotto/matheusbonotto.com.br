@@ -6,6 +6,13 @@ import JavaScriptObfuscator from 'vite-plugin-javascript-obfuscator'
 
 // https://vite.dev/config/
 export default defineConfig({
+  publicDir: 'public', // Voltar para usar public como publicDir
+  server: {
+    // Configurar para servir arquivos estáticos corretamente
+    fs: {
+      strict: false
+    }
+  },
   plugins: [
     vue(),
     vuetify(),
@@ -47,7 +54,7 @@ export default defineConfig({
     }),
   ],
   build: {
-    outDir: 'producao',
+    outDir: 'dist',
     emptyOutDir: true,
     rollupOptions: {
       output: {

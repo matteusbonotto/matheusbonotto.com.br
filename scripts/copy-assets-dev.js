@@ -31,10 +31,10 @@ function copyDir(src, dest) {
   });
 }
 
-// Copia arquivos do currículo
-console.log('🔄 Copiando arquivos do currículo...');
+// Copia arquivos do currículo para desenvolvimento (public)
+console.log('🔄 Copiando arquivos do currículo para desenvolvimento...');
 const curriculoSrc = path.join(projectRoot, 'src', 'pages', 'Cv', 'curriculo');
-const curriculoDest = path.join(projectRoot, 'dist', 'curriculo');
+const curriculoDest = path.join(projectRoot, 'public', 'curriculo');
 
 if (fs.existsSync(curriculoSrc)) {
   copyDir(curriculoSrc, curriculoDest);
@@ -43,10 +43,10 @@ if (fs.existsSync(curriculoSrc)) {
   console.log('❌ Pasta do currículo não encontrada em:', curriculoSrc);
 }
 
-// Copia arquivos das competências
-console.log('🔄 Copiando arquivos das competências...');
+// Copia arquivos das competências para desenvolvimento (public)
+console.log('🔄 Copiando arquivos das competências para desenvolvimento...');
 const competenceSrc = path.join(projectRoot, 'src', 'pages', 'Competence', 'competence-page');
-const competenceDest = path.join(projectRoot, 'dist', 'competence-page');
+const competenceDest = path.join(projectRoot, 'public', 'competence-page');
 
 if (fs.existsSync(competenceSrc)) {
   copyDir(competenceSrc, competenceDest);
@@ -58,4 +58,4 @@ if (fs.existsSync(competenceSrc)) {
 // Aqui você pode adicionar mais arquivos para copiar se precisar
 // Por exemplo, outros assets que devem estar em produção
 
-console.log('🎉 Copy assets concluído!');
+console.log('🎉 Copy assets para desenvolvimento concluído!');

@@ -8,7 +8,7 @@
         "local": "Campinas-SP",
         "pais": "Brasil",
         "ocupacao": "QA (Quality Assurance)",
-        "descricao": "QA com experiência em testes manuais e automação para clientes como Samsung, Americanas SA, fintechs como Bankeiro e, atualmente, Cinemark LATAM. Atuo com metodologias ágeis (Scrum, Kanban) e práticas de Shift-left Testing, utilizando Gherkin, Robot Framework e priorização PRISMA. Tenho domínio na criação de casos de teste, aplicação de técnicas reconhecidas pelo CTFL e documentação conforme a norma ISO/IEC/IEEE 29119. Possuo espírito de equipe, senso de ownership e também desenvolvo dashboards e planilhas avançadas para apoiar a gestão da qualidade. Sou apaixonado por inovação e busco constantemente contribuir com meus conhecimentos, além de aprender para evoluir pessoalmente e impulsionar os projetos dos quais faço parte. Formado em Tecnologia da Informação, com pós-graduação em QA. Atualmente, estudo inglês pela Open English.  Listening: ★★★★☆ Reading: ★★★★☆ Conversation: ★★☆☆☆ (em evolução)",
+        "descricao": "QA com experiência em testes manuais e automação para clientes como Samsung, Americanas SA, fintechs como Bankeiro e, atualmente, Cinemark LATAM. Atuo com metodologias ágeis (Scrum, Kanban) e práticas de Shift-left Testing, utilizando Gherkin, Robot Framework e priorização PRISMA. Tenho domínio na criação de casos de teste, aplicação de técnicas reconhecidas pelo CTFL e documentação conforme a norma ISO/IEC/IEEE 29119. Possuo espírito de equipe, senso de ownership e também desenvolvo dashboards e planilhas avançadas para apoiar a gestão da qualidade. Sou apaixonado por inovação e busco constantemente contribuir com meus conhecimentos, além de aprender para evoluir pessoalmente e impulsionar os projetos dos quais faço parte. Formado em Tecnologia da Informação, com pós-graduação em QA. Atualmente, estudo inglês pela Open English.",
         "keywords": "Quality Assurance (QA), Test Automation, Shift-left Testing, Agile (Scrum, Kanban), Gherkin, Robot Framework, PRISMA, CTFL Techniques, ISO/IEC/IEEE 29119, Test Case Design, Defect Management, Dashboard Development, Ownership, Continuous Improvement, Functional Testing, Exploratory Testing, Regression Testing, Bug Reporting.",
         "github": "https://github.com/matteusbonotto",
         "linkedin": "https://linkedin.com/in/matheusbonotto",
@@ -143,7 +143,7 @@
         },
         {
             "idioma": "Inglês",
-            "nivel": "A2 - Básico avançado",
+            "nivel": "B1 - Intermediário",
             "cursando": true,
             "instituicao": "Open English"
         },

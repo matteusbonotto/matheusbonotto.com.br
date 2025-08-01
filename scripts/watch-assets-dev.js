@@ -31,16 +31,16 @@ function copyDir(src, dest) {
   });
 }
 
-// Configuração dos assets a serem copiados
+// Configuração dos assets a serem copiados para desenvolvimento (public)
 const assetsConfig = [
   {
     src: path.join(projectRoot, 'src', 'pages', 'Cv', 'curriculo'),
-    dest: path.join(projectRoot, 'dist', 'curriculo'),
+    dest: path.join(projectRoot, 'public', 'curriculo'),
     name: 'Currículo'
   },
   {
     src: path.join(projectRoot, 'src', 'pages', 'Competence', 'competence-page'),
-    dest: path.join(projectRoot, 'dist', 'competence-page'),
+    dest: path.join(projectRoot, 'public', 'competence-page'),
     name: 'Competências'
   }
   // Adicione mais assets aqui se necessário
@@ -48,7 +48,7 @@ const assetsConfig = [
 
 // Função para copiar todos os assets
 function copyAllAssets() {
-  console.log('🔄 Iniciando cópia de assets...');
+  console.log('🔄 Iniciando cópia de assets para desenvolvimento...');
   
   assetsConfig.forEach(config => {
     if (fs.existsSync(config.src)) {
@@ -59,12 +59,12 @@ function copyAllAssets() {
     }
   });
   
-  console.log('🎉 Copy assets concluído!');
+  console.log('🎉 Copy assets para desenvolvimento concluído!');
 }
 
 // Função para assistir mudanças nos arquivos
 function watchAssets() {
-  console.log('👀 Assistindo mudanças nos assets...');
+  console.log('👀 Assistindo mudanças nos assets para desenvolvimento...');
   
   assetsConfig.forEach(config => {
     if (fs.existsSync(config.src)) {

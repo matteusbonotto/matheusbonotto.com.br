@@ -67,6 +67,14 @@ const options = [
     iconColor: "white",
     route: "/cv",
   },
+  {
+    title: "COMPETÊNCIAS",
+    text: "Mapeamento de competências e habilidades técnicas",
+    icon: "mdi-chart-tree",
+    color: "competence",
+    iconColor: "white",
+    route: "/competence",
+  },
   // {
   //   title: "OUTROS",
   //   text: "Outros projetos que tenho feito, por hobby ou interesse",
