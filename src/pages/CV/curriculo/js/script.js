@@ -126,8 +126,7 @@ function createPersonHeader(data) {
         <div class="person-header">
             <div class="row">
                 <div class="col-5">
-                    <div class="name-title">${data.individuo.nomeCompleto}
-                    </div>
+                    <div class="name-title">${data.individuo.nomeCompleto}</div>
                     <div class="occupation">${data.individuo.ocupacao}</div>
                     <span class="age">(${idade} ${getSectionTitle("anos")})</span>
                 </div>
@@ -137,22 +136,12 @@ function createPersonHeader(data) {
                             <img src="${qrCodeUrl}" alt="QR Code" class="qr-code-header">
                         </div>
                         <div class="contact-info">
-                            <i class="bi bi-envelope"></i> <a href="mailto:${data.individuo.email
-    }">${data.individuo.email}</a><br>
-                            <i class="bi bi-whatsapp"></i> <a href="https://wa.me/${data.individuo.telefone.replace(
-      /\D/g,
-      ""
-    )}">${data.individuo.telefone}</a><br>
-                            <i class="bi bi-github"></i> <a href="${data.individuo.github
-    }" target="_blank">${data.individuo.github}</a><br>
-                            <i class="bi bi-linkedin"></i> <a href="${data.individuo.linkedin
-    }" target="_blank">${data.individuo.linkedin
-    }</a><br>
-                            <i class="bi bi-file-earmark-text"></i> <a href="${data.individuo.apresentacao
-    }" target="_blank">${data.individuo.apresentacao
-    }</a> <p style="font-size: 0.8em; display: inline;">(apresentação)</p>
-                            <i class="bi bi-geo-alt"></i> ${data.individuo.local
-    }, ${data.individuo.pais}
+                            <i class="bi bi-envelope"></i> <a href="mailto:${data.individuo.email}">${data.individuo.email}</a><br>
+                            <i class="bi bi-whatsapp"></i> <a href="https://wa.me/${data.individuo.telefone.replace(/\D/g, "")}">${data.individuo.telefone}</a><br>
+                            <i class="bi bi-github"></i> <a href="${data.individuo.github}" target="_blank">${data.individuo.github}</a><br>
+                            <i class="bi bi-linkedin"></i> <a href="${data.individuo.linkedin}" target="_blank">${data.individuo.linkedin}</a><br>
+                            <i class="bi bi-file-earmark-text"></i> <a href="${data.individuo.apresentacao}" target="_blank">${data.individuo.apresentacao}</a> <small>(apresentação)</small><br>
+                            <i class="bi bi-geo-alt"></i> ${data.individuo.local}, ${data.individuo.pais}
                         </div>
                     </div>
                 </div>

@@ -153,14 +153,88 @@
 }
 
 @media screen and (max-width: 768px) {
+    /* NAVBAR FIXED NO TOPO - MOBILE */
     .controls-container {
-        flex-direction: column;
-        gap: 15px;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0.75rem !important;
+        background-color: white !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+        z-index: 1000 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        gap: 0.5rem !important;
+        box-sizing: border-box !important;
+    }
+
+    /* BOTÕES LADO A LADO - PROPORCIONAIS */
+    .language-dropdown,
+    .print-button {
+        flex: 1 !important;
+        width: 48% !important;
+        font-size: 0.9rem !important;
+        padding: 0.6rem !important;
+        height: 40px !important;
+        min-width: auto !important;
+        border: 1px solid #ccc !important;
+        border-radius: 4px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .language-dropdown {
+        background-color: white !important;
+    }
+
+    .print-button {
+        background-color: #007bff !important;
+        color: white !important;
+    }
+
+    /* COMPENSAR ESPAÇO DO NAVBAR FIXO */
+    .container,
+    .a4-page {
+        margin-top: 80px !important;
+        padding-top: 1rem !important;
+    }
+}
+
+/* RESPONSIVIDADE PARA TELAS MUITO PEQUENAS */
+@media screen and (max-width: 480px) {
+    .controls-container {
+        padding: 0.5rem !important;
     }
 
     .language-dropdown,
     .print-button {
-        width: 100%;
-        min-width: 200px;
+        font-size: 0.8rem !important;
+        padding: 0.5rem !important;
+        height: 36px !important;
+    }
+
+    .person-header .name-title {
+        font-size: 1.5rem !important;
+    }
+
+    .person-header .occupation {
+        font-size: 1rem !important;
+    }
+
+    .qr-code-header {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .container,
+    .a4-page {
+        margin-top: 70px !important;
     }
 }
