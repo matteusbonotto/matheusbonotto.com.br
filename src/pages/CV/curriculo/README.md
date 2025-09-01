@@ -1,4 +1,4 @@
-# 🌍 Currículo Multilíngue - Matheus Bonotto
+# 🌍 Currículo Multilíngue
 
 Sistema completo de currículo dinâmico com tradução automática para múltiplos idiomas, desenvolvido com **JavaScript puro** e **Bootstrap**.
 
@@ -179,9 +179,9 @@ const LANGUAGES = {
 
 ## 🎨 Demonstração
 
-![Currículo em Português](https://via.placeholder.com/800x600/007bff/ffffff?text=Currículo+Português)
-![Currículo em Inglês](https://via.placeholder.com/800x600/28a745/ffffff?text=Currículo+English)
-![Currículo em Espanhol](https://via.placeholder.com/800x600/dc3545/ffffff?text=Currículo+Español)
+![Currículo em Português]()
+![Currículo em Inglês]()
+![Currículo em Espanhol]()
 
 ## 🚦 Solução de Problemas
 

@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Administrativo - Competências e Conquistas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Admin Styles -->
+    <link rel="stylesheet" href="styles/globals.css">
+    <link rel="stylesheet" href="styles/desktop-admin.css">
+    <link rel="stylesheet" href="styles/mobile-admin.css">
+    <!-- Data Service -->
+    <script src="scripts/dataService.js"></script>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h1 class="sidebar-title">Admin Panel</h1>
+        <p class="sidebar-subtitle">Gestão de Competências</p>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">Principal</div>
+          <div class="nav-item">
+            <button class="nav-link active" data-page="dashboard">
+              <i class="bi bi-speedometer2"></i>
+              Dashboard
+            </button>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-title">Gestão</div>
+          <div class="nav-item">
+            <button class="nav-link" data-page="skills">
+              <i class="bi bi-lightbulb"></i>
+              Habilidades
+            </button>
+          </div>
+          <div class="nav-item">
+            <button class="nav-link" data-page="achievements">
+              <i class="bi bi-trophy"></i>
+              Conquistas
+            </button>
+          </div>
+        </div>
+
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle" id="menuToggle">
+            <i class="bi bi-list"></i>
+          </button>
+          <h1 class="page-title" id="pageTitle">Dashboard</h1>
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-primary btn-sm" id="addNewBtn" style="display: none;">
+            <i class="bi bi-plus-lg"></i>
+            Adicionar
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Area -->
+      <div class="content-area">
+        <!-- Dashboard Page -->
+        <div class="page-content" id="dashboard-page">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <h3 class="stat-card-title">Total de Habilidades</h3>
+                <div class="stat-card-icon bg-primary">
+                  <i class="bi bi-lightbulb"></i>
+                </div>
+              </div>
+              <p class="stat-card-value" id="totalSkills">0</p>
+              <div class="stat-card-change text-success">
+                <i class="bi bi-arrow-up"></i> Atualizado
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <h3 class="stat-card-title">Total de Conquistas</h3>
+                <div class="stat-card-icon bg-success">
+                  <i class="bi bi-trophy"></i>
+                </div>
+              </div>
+              <p class="stat-card-value" id="totalAchievements">0</p>
+              <div class="stat-card-change text-success">
+                <i class="bi bi-arrow-up"></i> Atualizado
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <h3 class="stat-card-title">Conquistas Desbloqueadas</h3>
+                <div class="stat-card-icon bg-warning">
+                  <i class="bi bi-unlock"></i>
+                </div>
+              </div>
+              <p class="stat-card-value" id="unlockedAchievements">0</p>
+              <div class="stat-card-change text-success">
+                <i class="bi bi-arrow-up"></i> Progresso
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <h3 class="stat-card-title">Domínio Médio</h3>
+                <div class="stat-card-icon bg-danger">
+                  <i class="bi bi-graph-up"></i>
+                </div>
+              </div>
+              <p class="stat-card-value" id="averageDomain">0</p>
+              <div class="stat-card-change text-success">
+                <i class="bi bi-arrow-up"></i> Crescimento
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="content-card">
+                <div class="content-card-header">
+                  <h2 class="content-card-title">Últimas Atividades</h2>
+                </div>
+                <div class="content-card-body">
+                  <div class="p-4 text-center text-muted">
+                    <i class="bi bi-activity" style="font-size: 3rem; opacity: 0.3;"></i>
+                    <p class="mt-3">Nenhuma atividade recente</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="content-card">
+                <div class="content-card-header">
+                  <h2 class="content-card-title">Resumo</h2>
+                </div>
+                <div class="content-card-body p-4">
+                  <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                      <span class="small">Habilidades Ativas</span>
+                      <span class="small text-primary">100%</span>
+                    </div>
+                    <div class="progress-skill">
+                      <div class="progress-skill-bar" style="width: 100%"></div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                      <span class="small">Conquistas Concluídas</span>
+                      <span class="small text-success">75%</span>
+                    </div>
+                    <div class="progress-skill">
+                      <div class="progress-skill-bar bg-success" style="width: 75%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skills Page -->
+        <div class="page-content" id="skills-page" style="display: none;">
+          <div class="content-card">
+            <div class="content-card-header">
+              <h2 class="content-card-title">Gerenciamento de Habilidades</h2>
+              <div class="d-flex gap-2">
+                <button class="btn btn-outline-primary btn-sm" onclick="createNewParent()">
+                  <i class="bi bi-plus-circle"></i> Criar Novo Pai
+                </button>
+                <button class="btn btn-primary btn-sm" id="addNewBtn">
+                  <i class="bi bi-plus"></i> Nova Habilidade
+                </button>
+              </div>
+            </div>
+            
+            <!-- Filters -->
+            <div class="filters-bar">
+              <div class="filter-group">
+                <label class="filter-label">Tipo:</label>
+                <select class="form-select form-select-sm" id="filterSkillType">
+                  <option value="">Todos</option>
+                  <option value="parent">Pai</option>
+                  <option value="child">Filho</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label class="filter-label">Categoria:</label>
+                <select class="form-select form-select-sm" id="filterSkillCategory">
+                  <option value="">Todas</option>
+                  <option value="qa">QA</option>
+                  <option value="dev">DEV</option>
+                  <option value="ux">UX</option>
+                  <option value="data">DATA</option>
+                  <option value="devops">DEVOPS</option>
+                  <option value="infra">INFRA</option>
+                  <option value="idiomas">IDIOMAS</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label class="filter-label">Status:</label>
+                <select class="form-select form-select-sm" id="filterSkillStatus">
+                  <option value="">Todos</option>
+                  <option value="active">Ativo</option>
+                  <option value="inactive">Inativo</option>
+                </select>
+              </div>
+              <div class="filter-group ms-auto">
+                <input type="search" class="form-control form-control-sm" id="searchSkills" placeholder="Buscar habilidades...">
+              </div>
+            </div>
+
+            <div class="content-card-body" id="skillsContainer">
+              <!-- Skills serão renderizadas aqui via JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Achievements Page -->
+        <div class="page-content" id="achievements-page" style="display: none;">
+          <div class="content-card">
+            <div class="content-card-header">
+              <h2 class="content-card-title">Gerenciamento de Conquistas</h2>
+              <div class="d-flex gap-2">
+                <button class="btn btn-outline-success btn-sm" onclick="createNewCategory()">
+                  <i class="bi bi-folder-plus"></i> Nova Categoria
+                </button>
+                <button class="btn btn-primary btn-sm" id="addNewAchievementBtn">
+                  <i class="bi bi-trophy"></i> Nova Conquista
+                </button>
+              </div>
+            </div>
+            
+            <!-- Filters -->
+            <div class="filters-bar">
+              <div class="filter-group">
+                <label class="filter-label">Status:</label>
+                <select class="form-select form-select-sm" id="filterAchievementStatus">
+                  <option value="">Todos</option>
+                  <option value="unlocked">Desbloqueadas</option>
+                  <option value="locked">Bloqueadas</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label class="filter-label">Categoria:</label>
+                <select class="form-select form-select-sm" id="filterAchievementCategory">
+                  <option value="">Todas</option>
+                  <option value="QA">QA</option>
+                  <option value="DEV">DEV</option>
+                  <option value="DESIGN">DESIGN</option>
+                  <option value="DADOS">DADOS</option>
+                  <option value="DEVOPS">DEVOPS</option>
+                  <option value="INFRA">INFRA</option>
+                  <option value="META">META</option>
+                  <option value="INGLÊS">INGLÊS</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label class="filter-label">Dificuldade:</label>
+                <select class="form-select form-select-sm" id="filterAchievementDifficulty">
+                  <option value="">Todas</option>
+                  <option value="1">1 Estrela</option>
+                  <option value="2">2 Estrelas</option>
+                  <option value="3">3 Estrelas</option>
+                  <option value="4">4 Estrelas</option>
+                  <option value="5">5 Estrelas</option>
+                </select>
+              </div>
+              <div class="filter-group ms-auto">
+                <input type="search" class="form-control form-control-sm" id="searchAchievements" placeholder="Buscar conquistas...">
+              </div>
+            </div>
+
+            <div class="content-card-body" id="achievementsContainer">
+              <!-- Conquistas serão renderizadas aqui via JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div class="page-content" id="settings-page" style="display: none;">
+          <div class="content-card">
+            <div class="content-card-header">
+              <h2 class="content-card-title">Configurações do Sistema</h2>
+            </div>
+            <div class="content-card-body p-4">
+              <div class="alert alert-info">
+                <i class="bi bi-info-circle me-2"></i>
+                Configurações do sistema em desenvolvimento
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal para Habilidades -->
+    <div class="modal fade" id="skillModal" tabindex="-1" aria-labelledby="skillModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="skillModalLabel">Adicionar Habilidade</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="skillForm">
+              <!-- Tipo de Habilidade -->
+              <div class="form-section">
+                <h6 class="form-section-title">Tipo de Habilidade</h6>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="skillType" id="skillTypeParent" value="parent" checked>
+                      <label class="form-check-label" for="skillTypeParent">
+                        <i class="bi bi-diagram-3 me-1"></i>
+                        Habilidade Pai
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="skillType" id="skillTypeChild" value="child">
+                      <label class="form-check-label" for="skillTypeChild">
+                        <i class="bi bi-diagram-2 me-1"></i>
+                        Habilidade Filha
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Informações Básicas -->
+              <div class="form-section">
+                <h6 class="form-section-title">Informações Básicas</h6>
+                <div class="row">
+                  <div class="col-md-8">
+                    <label for="skillTitle" class="form-label">Título da Habilidade *</label>
+                    <input type="text" class="form-control" id="skillTitle" required>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="skillCategory" class="form-label">Categoria *</label>
+                    <div class="input-group">
+                      <select class="form-select" id="skillCategory" required>
+                        <option value="">Selecione...</option>
+                        <option value="qa">QA</option>
+                        <option value="dev">DEV</option>
+                        <option value="ux">UX</option>
+                        <option value="data">DATA</option>
+                        <option value="devops">DEVOPS</option>
+                        <option value="infra">INFRA</option>
+                        <option value="idiomas">IDIOMAS</option>
+                        <option value="new">Nova Categoria...</option>
+                      </select>
+                      <button class="btn btn-outline-secondary" type="button" id="btnNewCategory">
+                        <i class="bi bi-plus"></i>
+                      </button>
+                    </div>
+                    <input type="text" class="form-control mt-2" id="newCategoryInput" placeholder="Nova categoria" style="display: none;">
+                  </div>
+                </div>
+                
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <label for="skillDescription" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="skillDescription" rows="3"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Habilidade Pai (mostrado apenas para filhas) -->
+              <div class="form-section" id="parentSkillSection" style="display: none;">
+                <h6 class="form-section-title">Habilidade Pai</h6>
+                <div class="row">
+                  <div class="col-md-8">
+                    <label for="parentSkillSelect" class="form-label">Selecionar Habilidade Pai *</label>
+                    <select class="form-select" id="parentSkillSelect">
+                      <option value="">Selecione...</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check mt-4">
+                      <input class="form-check-input" type="checkbox" id="createNewParent">
+                      <label class="form-check-label" for="createNewParent">
+                        Criar nova habilidade pai
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <input type="text" class="form-control mt-2" id="newParentInput" placeholder="Nome da nova habilidade pai" style="display: none;">
+              </div>
+
+              <!-- Scores -->
+              <div class="form-section">
+                <h6 class="form-section-title">Avaliação de Competências</h6>
+                <div class="row">
+                  <div class="col-md-2">
+                    <label class="form-label">Teórico</label>
+                    <div class="star-rating" data-score="theoretical">
+                      <span class="star" data-value="1">★</span>
+                      <span class="star" data-value="2">★</span>
+                      <span class="star" data-value="3">★</span>
+                      <span class="star" data-value="4">★</span>
+                      <span class="star" data-value="5">★</span>
+                    </div>
+                    <input type="hidden" id="scoreTheoretical" value="3">
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Técnico</label>
+                    <div class="star-rating" data-score="technical">
+                      <span class="star" data-value="1">★</span>
+                      <span class="star" data-value="2">★</span>
+                      <span class="star" data-value="3">★</span>
+                      <span class="star" data-value="4">★</span>
+                      <span class="star" data-value="5">★</span>
+                    </div>
+                    <input type="hidden" id="scoreTechnical" value="3">
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label">Resolução de Problemas</label>
+                    <div class="star-rating" data-score="problemSolving">
+                      <span class="star" data-value="1">★</span>
+                      <span class="star" data-value="2">★</span>
+                      <span class="star" data-value="3">★</span>
+                      <span class="star" data-value="4">★</span>
+                      <span class="star" data-value="5">★</span>
+                    </div>
+                    <input type="hidden" id="scoreProblemSolving" value="3">
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label">Transferência de Conhecimento</label>
+                    <div class="star-rating" data-score="knowledgeTransfer">
+                      <span class="star" data-value="1">★</span>
+                      <span class="star" data-value="2">★</span>
+                      <span class="star" data-value="3">★</span>
+                      <span class="star" data-value="4">★</span>
+                      <span class="star" data-value="5">★</span>
+                    </div>
+                    <input type="hidden" id="scoreKnowledgeTransfer" value="3">
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Tendências</label>
+                    <div class="star-rating" data-score="trends">
+                      <span class="star" data-value="1">★</span>
+                      <span class="star" data-value="2">★</span>
+                      <span class="star" data-value="3">★</span>
+                      <span class="star" data-value="4">★</span>
+                      <span class="star" data-value="5">★</span>
+                    </div>
+                    <input type="hidden" id="scoreTrends" value="3">
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <div class="alert alert-info">
+                      <strong>Domínio Calculado: <span id="calculatedDomain">3.0</span>/5.0</strong>
+                      <div class="progress-skill mt-2">
+                        <div class="progress-skill-bar" id="domainProgressBar" style="width: 60%"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Habilidades Filhas -->
+              <div class="form-section" id="childSkillsSection">
+                <h6 class="form-section-title">Habilidades Filhas</h6>
+                <div class="dynamic-list" id="childSkillsList">
+                  <!-- Items serão adicionados dinamicamente -->
+                </div>
+                <button type="button" class="btn btn-success btn-sm mt-2" onclick="addDynamicListItem('childSkillsList', 'Adicionar Filho')">
+                  <i class="bi bi-plus"></i> Adicionar Habilidade Filha
+                </button>
+              </div>
+
+              <!-- Conquistas Relacionadas -->
+              <div class="form-section">
+                <h6 class="form-section-title">Conquistas Relacionadas</h6>
+                <div class="dynamic-list" id="relatedAchievementsList">
+                  <!-- Items serão adicionados dinamicamente -->
+                </div>
+                <button type="button" class="btn btn-success btn-sm mt-2" onclick="addDynamicListItem('relatedAchievementsList', 'Adicionar Conquista')">
+                  <i class="bi bi-plus"></i> Adicionar Conquista
+                </button>
+              </div>
+
+              <input type="hidden" id="skillId">
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="saveSkillBtn">Salvar Habilidade</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para Conquistas -->
+    <div class="modal fade" id="achievementModal" tabindex="-1" aria-labelledby="achievementModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="achievementModalLabel">Adicionar Conquista</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="achievementForm">
+              <!-- Informações Básicas -->
+              <div class="form-section">
+                <h6 class="form-section-title">Informações Básicas</h6>
+                <div class="row">
+                  <div class="col-md-8">
+                    <label for="achievementTitle" class="form-label">Título da Conquista *</label>
+                    <input type="text" class="form-control" id="achievementTitle" required>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="achievementCategory" class="form-label">Categoria *</label>
+                    <div class="input-group">
+                      <select class="form-select" id="achievementCategory" required>
+                        <option value="">Selecione...</option>
+                        <option value="QA">QA</option>
+                        <option value="DEV">DEV</option>
+                        <option value="DESIGN">DESIGN</option>
+                        <option value="DADOS">DADOS</option>
+                        <option value="DEVOPS">DEVOPS</option>
+                        <option value="INFRA">INFRA</option>
+                        <option value="META">META</option>
+                        <option value="INGLÊS">INGLÊS</option>
+                        <option value="new">Nova Categoria...</option>
+                      </select>
+                      <button class="btn btn-outline-secondary" type="button" id="btnNewAchievementCategory">
+                        <i class="bi bi-plus"></i>
+                      </button>
+                    </div>
+                    <input type="text" class="form-control mt-2" id="newAchievementCategoryInput" placeholder="Nova categoria" style="display: none;">
+                  </div>
+                </div>
+                
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <label for="achievementDescription" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="achievementDescription" rows="3"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Status e Dificuldade -->
+              <div class="form-section">
+                <h6 class="form-section-title">Status e Dificuldade</h6>
+                <div class="row">
+                  <div class="col-md-4">
+                    <label class="form-label">Status</label>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="achievementStatus" checked>
+                      <label class="form-check-label" for="achievementStatus" id="achievementStatusLabel">
+                        Desbloqueada
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Dificuldade</label>
+                    <div class="star-rating" data-score="difficulty">
+                      <span class="star" data-value="1">★</span>
+                      <span class="star" data-value="2">★</span>
+                      <span class="star" data-value="3">★</span>
+                      <span class="star" data-value="4">★</span>
+                      <span class="star" data-value="5">★</span>
+                    </div>
+                    <input type="hidden" id="achievementDifficulty" value="3">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="achievementUnlockedDate" class="form-label">Data de Desbloqueio</label>
+                    <input type="date" class="form-control" id="achievementUnlockedDate">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Imagem -->
+              <div class="form-section">
+                <h6 class="form-section-title">Imagem da Conquista</h6>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="achievementImage" class="form-label">Upload de Imagem</label>
+                    <input type="file" class="form-control" id="achievementImage" accept="image/*">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="achievementImageUrl" class="form-label">ou URL da Imagem</label>
+                    <input type="url" class="form-control" id="achievementImageUrl" placeholder="https://...">
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <div class="text-center">
+                      <img id="achievementImagePreview" src="" alt="Preview" class="achievement-image-large" style="display: none;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Evidência -->
+              <div class="form-section">
+                <h6 class="form-section-title">Evidência</h6>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="achievementEvidence" class="form-label">URL da Evidência</label>
+                    <input type="url" class="form-control" id="achievementEvidence" placeholder="https://...">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="achievementEvidenceFile" class="form-label">Upload de Arquivo</label>
+                    <input type="file" class="form-control" id="achievementEvidenceFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif">
+                    <div class="form-text">PDF, Word, ou imagens até 10MB</div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <div id="evidencePreview" style="display: none;" class="alert alert-info">
+                      <strong>Arquivo selecionado:</strong> <span id="evidenceFileName"></span>
+                      <button type="button" class="btn btn-sm btn-outline-danger ms-2" onclick="clearEvidenceFile()">
+                        <i class="bi bi-x"></i> Remover
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Habilidades Relacionadas -->
+              <div class="form-section">
+                <h6 class="form-section-title">Habilidades Relacionadas</h6>
+                <div class="dynamic-list" id="achievementRelatedSkillsList">
+                  <!-- Items serão adicionados dinamicamente -->
+                </div>
+                <button type="button" class="btn btn-success btn-sm mt-2" onclick="addDynamicListItem('achievementRelatedSkillsList', 'Adicionar Habilidade')">
+                  <i class="bi bi-plus"></i> Adicionar Habilidade
+                </button>
+              </div>
+
+              <input type="hidden" id="achievementId">
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="saveAchievementBtn">Salvar Conquista</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+      // === GLOBAL VARIABLES ===
+      let skillsData = [];
+      let achievementsData = [];
+      let editingSkillId = null;
+      let editingAchievementId = null;
+      let dataService = new DataService();
+
+      // === INITIALIZATION ===
+      document.addEventListener('DOMContentLoaded', function() {
+        initializeApp();
+        loadData();
+        setupEventListeners();
+      });
+
+      function initializeApp() {
+        // Set initial star ratings
+        initializeStarRatings();
+        
+        // Initialize modals
+        window.skillModal = new bootstrap.Modal(document.getElementById('skillModal'));
+        window.achievementModal = new bootstrap.Modal(document.getElementById('achievementModal'));
+
+        // Setup dynamic lists
+        setupDynamicLists();
+      }
+
+      function setupEventListeners() {
+        // Menu navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', function() {
+            const page = this.dataset.page;
+            if (page) {
+              navigateToPage(page);
+            }
+          });
+        });
+
+        // Menu toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+          const sidebar = document.getElementById('sidebar');
+          const mainContent = document.getElementById('mainContent');
+          
+          if (window.innerWidth <= 768) {
+            sidebar.classList.toggle('show');
+          } else {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('full-width');
+          }
+        });
+
+        // Add new button
+        document.getElementById('addNewBtn').addEventListener('click', function() {
+          openSkillModal();
+        });
+
+        // Add new achievement button
+        document.getElementById('addNewAchievementBtn').addEventListener('click', function() {
+          openAchievementModal();
+        });
+
+        // Skill form events
+        setupSkillFormEvents();
+        
+        // Achievement form events
+        setupAchievementFormEvents();
+
+        // Filters
+        setupFilters();
+
+        // Search
+        setupSearch();
+
+        // Responsive behavior
+        window.addEventListener('resize', function() {
+          const sidebar = document.getElementById('sidebar');
+          const mainContent = document.getElementById('mainContent');
+          
+          if (window.innerWidth > 768) {
+            sidebar.classList.remove('show');
+            if (!sidebar.classList.contains('collapsed')) {
+              mainContent.classList.remove('full-width');
+            }
+          }
+        });
+      }
+
+      // === NAVIGATION ===
+      function navigateToPage(pageName) {
+        // Update active nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.remove('active');
+        });
+        document.querySelector(`[data-page="${pageName}"]`).classList.add('active');
+
+        // Hide all pages
+        document.querySelectorAll('.page-content').forEach(page => {
+          page.style.display = 'none';
+        });
+
+        // Show target page
+        document.getElementById(`${pageName}-page`).style.display = 'block';
+
+        // Update page title and add button
+        const titles = {
+          dashboard: 'Dashboard',
+          skills: 'Habilidades',
+          achievements: 'Conquistas',
+          settings: 'Configurações'
+        };
+
+        document.getElementById('pageTitle').textContent = titles[pageName];
+        
+        const addBtn = document.getElementById('addNewBtn');
+        if (pageName === 'skills' || pageName === 'achievements') {
+          addBtn.style.display = 'block';
+        } else {
+          addBtn.style.display = 'none';
+        }
+
+        // Load page specific data
+        if (pageName === 'skills') {
+          renderSkills();
+        } else if (pageName === 'achievements') {
+          renderAchievements();
+        } else if (pageName === 'dashboard') {
+          updateDashboardStats();
+        }
+      }
+
+      // === DATA LOADING ===
+      async function loadData() {
+        const success = await dataService.loadData();
+        if (success) {
+          skillsData = dataService.skills;
+          achievementsData = dataService.achievements;
+          renderSkills();
+          renderAchievements();
+          updateDashboardStats();
+          populateParentSkillsDropdown(); // Carregamento inicial - sem exclusões
+        } else {
+          console.error('Falha ao carregar dados');
+        }
+      }
+
+      // === SKILLS RENDERING ===
+      function renderSkills(filteredSkills = null) {
+        const container = document.getElementById('skillsContainer');
+        const skills = filteredSkills || skillsData;
+
+        if (!skills.length) {
+          container.innerHTML = `
+            <div class="text-center py-5">
+              <i class="bi bi-lightbulb" style="font-size: 3rem; color: #e2e8f0;"></i>
+              <p class="text-muted mt-3">Nenhuma habilidade encontrada</p>
+            </div>
+          `;
+          return;
+        }
+
+        const html = skills.map(skill => `
+          <div class="item-card fade-in">
+            <div class="item-card-content">
+              <div class="item-icon bg-primary">
+                <i class="bi ${skill.icon || 'bi-lightbulb'}"></i>
+              </div>
+              
+              <div class="item-info">
+                <h5 class="item-title">${skill.name || skill.title}</h5>
+                <p class="item-subtitle">${skill.description || ''}</p>
+                
+                <div class="item-meta">
+                  <span class="item-meta-item">
+                    <i class="bi bi-tag"></i>
+                    <span class="badge ${skill.parent ? 'badge-skill-child' : 'badge-skill-parent'} text-white">
+                      ${skill.parent ? 'Filha' : 'Pai'}
+                    </span>
+                  </span>
+                  <span class="item-meta-item">
+                    <i class="bi bi-folder"></i>
+                    ${skill.category?.toUpperCase() || 'SEM CATEGORIA'}
+                  </span>
+                  <span class="item-meta-item">
+                    <i class="bi bi-graph-up"></i>
+                    Domínio: ${skill.domain || 0}/5
+                  </span>
+                  <span class="item-meta-item">
+                    <i class="bi bi-toggles"></i>
+                    <span class="badge ${skill.active !== false ? 'badge-status-active' : 'badge-status-inactive'} text-white">
+                      ${skill.active !== false ? 'Ativo' : 'Inativo'}
+                    </span>
+                  </span>
+                </div>
+
+                <div class="mt-2">
+                  <div class="d-flex justify-content-between mb-1">
+                    <small class="text-muted">Progresso de Domínio</small>
+                    <small class="text-primary">${Math.round((skill.domain || 0) * 20)}%</small>
+                  </div>
+                  <div class="progress-skill">
+                    <div class="progress-skill-bar" style="width: ${(skill.domain || 0) * 20}%"></div>
+                  </div>
+                </div>
+
+                ${skill.scores ? `
+                  <div class="mt-2">
+                    <small class="text-muted">Scores: </small>
+                    <small>Teórico: ${skill.scores.theoretical || 0}</small> |
+                    <small>Técnico: ${skill.scores.technical || 0}</small> |
+                    <small>Problemas: ${skill.scores.problemSolving || 0}</small>
+                  </div>
+                ` : ''}
+              </div>
+              
+              <div class="item-actions">
+                <button class="btn btn-outline-primary btn-icon" onclick="toggleSkillStatus('${skill.id}')" title="${skill.active !== false ? 'Desativar' : 'Ativar'}">
+                  <i class="bi bi-toggle-${skill.active !== false ? 'on' : 'off'}"></i>
+                </button>
+                <button class="btn btn-outline-success btn-icon" onclick="editSkill('${skill.id}')" title="Editar">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-outline-danger btn-icon" onclick="deleteSkill('${skill.id}')" title="Excluir">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        container.innerHTML = html;
+      }
+
+      // === ACHIEVEMENTS RENDERING ===
+      function renderAchievements(filteredAchievements = null) {
+        const container = document.getElementById('achievementsContainer');
+        const achievements = filteredAchievements || achievementsData;
+
+        if (!achievements.length) {
+          container.innerHTML = `
+            <div class="text-center py-5">
+              <i class="bi bi-trophy" style="font-size: 3rem; color: #e2e8f0;"></i>
+              <p class="text-muted mt-3">Nenhuma conquista encontrada</p>
+            </div>
+          `;
+          return;
+        }
+
+        const html = achievements.map(achievement => `
+          <div class="item-card fade-in">
+            <div class="item-card-content">
+              ${achievement.image ? `
+                <img src="${achievement.image}" alt="${achievement.title}" class="achievement-image">
+              ` : `
+                <div class="item-icon bg-warning">
+                  <i class="bi bi-trophy"></i>
+                </div>
+              `}
+              
+              <div class="item-info">
+                <h5 class="item-title">${achievement.title}</h5>
+                <p class="item-subtitle">${achievement.desc || achievement.description || ''}</p>
+                
+                <div class="item-meta">
+                  <span class="item-meta-item">
+                    <i class="bi bi-tag"></i>
+                    ${achievement.category || 'SEM CATEGORIA'}
+                  </span>
+                  <span class="item-meta-item">
+                    <i class="bi bi-star-fill"></i>
+                    ${'★'.repeat(achievement.difficulty || 1)}${'☆'.repeat(5 - (achievement.difficulty || 1))}
+                  </span>
+                  <span class="item-meta-item">
+                    <i class="bi bi-${achievement.status === 'unlocked' ? 'unlock' : 'lock'}"></i>
+                    <span class="badge ${achievement.status === 'unlocked' ? 'bg-success' : 'bg-secondary'} text-white">
+                      ${achievement.status === 'unlocked' ? 'Desbloqueada' : 'Bloqueada'}
+                    </span>
+                  </span>
+                  ${achievement.unlockedDate ? `
+                    <span class="item-meta-item">
+                      <i class="bi bi-calendar"></i>
+                      ${new Date(achievement.unlockedDate).toLocaleDateString('pt-BR')}
+                    </span>
+                  ` : ''}
+                </div>
+
+                ${(achievement.evidence || achievement.evidenceFile) ? `
+                  <div class="mt-2">
+                    ${achievement.evidence ? `
+                      <a href="${achievement.evidence}" target="_blank" class="text-primary text-decoration-none me-3">
+                        <i class="bi bi-link-45deg me-1"></i>
+                        Ver Link
+                      </a>
+                    ` : ''}
+                    ${achievement.evidenceFile ? `
+                      <a href="${achievement.evidenceFile}" target="_blank" class="text-primary text-decoration-none">
+                        <i class="bi bi-file-earmark-arrow-down me-1"></i>
+                        Ver Arquivo
+                      </a>
+                    ` : ''}
+                  </div>
+                ` : ''}
+              </div>
+              
+              <div class="item-actions">
+                <button class="btn btn-outline-primary btn-icon" onclick="toggleAchievementStatus('${achievement.id}')" title="${achievement.status === 'unlocked' ? 'Bloquear' : 'Desbloquear'}">
+                  <i class="bi bi-${achievement.status === 'unlocked' ? 'lock' : 'unlock'}"></i>
+                </button>
+                <button class="btn btn-outline-success btn-icon" onclick="editAchievement('${achievement.id}')" title="Editar">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-outline-danger btn-icon" onclick="deleteAchievement('${achievement.id}')" title="Excluir">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        container.innerHTML = html;
+      }
+
+      // === DASHBOARD STATS ===
+      function updateDashboardStats() {
+        const totalSkills = skillsData.length;
+        const totalAchievements = achievementsData.length;
+        const unlockedAchievements = achievementsData.filter(a => a.status === 'unlocked').length;
+        const averageDomain = totalSkills > 0 
+          ? (skillsData.reduce((sum, skill) => sum + (skill.domain || 0), 0) / totalSkills).toFixed(1)
+          : 0;
+
+        document.getElementById('totalSkills').textContent = totalSkills;
+        document.getElementById('totalAchievements').textContent = totalAchievements;
+        document.getElementById('unlockedAchievements').textContent = unlockedAchievements;
+        document.getElementById('averageDomain').textContent = averageDomain;
+      }
+
+      // === STAR RATINGS ===
+      function initializeStarRatings() {
+        document.querySelectorAll('.star-rating').forEach(rating => {
+          const stars = rating.querySelectorAll('.star');
+          const scoreType = rating.dataset.score;
+          let currentValue = 3;
+
+          stars.forEach((star, index) => {
+            star.addEventListener('click', function() {
+              currentValue = index + 1;
+              updateStars(stars, currentValue);
+              
+              // Update hidden input
+              const hiddenInput = document.getElementById(`score${scoreType.charAt(0).toUpperCase() + scoreType.slice(1)}`) ||
+                                  document.getElementById(`${scoreType}`) ||
+                                  document.getElementById(`achievement${scoreType.charAt(0).toUpperCase() + scoreType.slice(1)}`);
+              if (hiddenInput) {
+                hiddenInput.value = currentValue;
+              }
+
+              // Recalculate domain if it's a skill score
+              if (scoreType !== 'difficulty') {
+                calculateDomain();
+              }
+            });
+
+            star.addEventListener('mouseenter', function() {
+              updateStars(stars, index + 1);
+            });
+          });
+
+          rating.addEventListener('mouseleave', function() {
+            updateStars(stars, currentValue);
+          });
+
+          // Initialize with default value
+          updateStars(stars, currentValue);
+        });
+      }
+
+      function updateStars(stars, value) {
+        stars.forEach((star, index) => {
+          if (index < value) {
+            star.classList.add('active');
+          } else {
+            star.classList.remove('active');
+          }
+        });
+      }
+
+      function calculateDomain() {
+        const scores = [
+          parseInt(document.getElementById('scoreTheoretical')?.value || 3),
+          parseInt(document.getElementById('scoreTechnical')?.value || 3),
+          parseInt(document.getElementById('scoreProblemSolving')?.value || 3),
+          parseInt(document.getElementById('scoreKnowledgeTransfer')?.value || 3),
+          parseInt(document.getElementById('scoreTrends')?.value || 3)
+        ];
+
+        const average = scores.reduce((sum, score) => sum + score, 0) / scores.length;
+        const percentage = (average / 5) * 100;
+
+        document.getElementById('calculatedDomain').textContent = average.toFixed(1);
+        document.getElementById('domainProgressBar').style.width = percentage + '%';
+      }
+
+      // === SKILL MODAL ===
+      function openSkillModal(skillData = null) {
+        editingSkillId = skillData?.id || null;
+        
+        // Reset form
+        document.getElementById('skillForm').reset();
+        
+        // Populate dropdowns
+        populateSkillCategoriesDropdown();
+        populateParentSkillsDropdown(editingSkillId); // Excluir a skill sendo editada
+        
+        // Update modal title
+        document.getElementById('skillModalLabel').textContent = 
+          skillData ? 'Editar Habilidade' : 'Adicionar Habilidade';
+
+        // Reset all star ratings to default
+        document.querySelectorAll('#skillModal .star-rating').forEach(rating => {
+          const stars = rating.querySelectorAll('.star');
+          updateStars(stars, 3);
+        });
+
+        if (skillData) {
+          // Fill form with existing data
+          document.getElementById('skillTitle').value = skillData.name || skillData.title || '';
+          document.getElementById('skillCategory').value = skillData.category || '';
+          document.getElementById('skillDescription').value = skillData.description || '';
+          
+          // Set skill type
+          if (skillData.parent) {
+            document.getElementById('skillTypeChild').checked = true;
+            document.getElementById('parentSkillSection').style.display = 'block';
+            document.getElementById('childSkillsSection').style.display = 'none';
+            document.getElementById('parentSkillSelect').value = skillData.parent;
+          } else {
+            document.getElementById('skillTypeParent').checked = true;
+            document.getElementById('parentSkillSection').style.display = 'none';
+            document.getElementById('childSkillsSection').style.display = 'block';
+          }
+
+          // Set scores if available
+          if (skillData.scores) {
+            ['theoretical', 'technical', 'problemSolving', 'knowledgeTransfer', 'trends'].forEach(scoreType => {
+              const value = skillData.scores[scoreType] || 3;
+              const hiddenInput = document.getElementById(`score${scoreType.charAt(0).toUpperCase() + scoreType.slice(1)}`);
+              if (hiddenInput) {
+                hiddenInput.value = value;
+              }
+              
+              const rating = document.querySelector(`[data-score="${scoreType}"]`);
+              if (rating) {
+                const stars = rating.querySelectorAll('.star');
+                updateStars(stars, value);
+              }
+            });
+          }
+
+          document.getElementById('skillId').value = skillData.id;
+        } else {
+          // Clear hidden ID for new skill
+          document.getElementById('skillId').value = '';
+          // Reset to parent type
+          document.getElementById('skillTypeParent').checked = true;
+          document.getElementById('parentSkillSection').style.display = 'none';
+          document.getElementById('childSkillsSection').style.display = 'block';
+        }
+
+        calculateDomain();
+        skillModal.show();
+      }
+
+      function setupSkillFormEvents() {
+        // Skill type radio buttons
+        document.querySelectorAll('input[name="skillType"]').forEach(radio => {
+          radio.addEventListener('change', function() {
+            const parentSection = document.getElementById('parentSkillSection');
+            const childSection = document.getElementById('childSkillsSection');
+            
+            if (this.value === 'child') {
+              parentSection.style.display = 'block';
+              childSection.style.display = 'none';
+            } else {
+              parentSection.style.display = 'none';
+              childSection.style.display = 'block';
+            }
+          });
+        });
+
+        // Category new button
+        document.getElementById('btnNewCategory').addEventListener('click', function() {
+          const checkbox = document.getElementById('skillCategory');
+          const input = document.getElementById('newCategoryInput');
+          
+          if (input.style.display === 'none') {
+            checkbox.style.display = 'none';
+            input.style.display = 'block';
+            input.focus();
+            this.innerHTML = '<i class="bi bi-arrow-left"></i>';
+          } else {
+            checkbox.style.display = 'block';
+            input.style.display = 'none';
+            this.innerHTML = '<i class="bi bi-plus"></i>';
+          }
+        });
+
+        // Create new parent checkbox
+        document.getElementById('createNewParent').addEventListener('change', function() {
+          const select = document.getElementById('parentSkillSelect');
+          const input = document.getElementById('newParentInput');
+          
+          if (this.checked) {
+            select.style.display = 'none';
+            input.style.display = 'block';
+            input.focus();
+          } else {
+            select.style.display = 'block';
+            input.style.display = 'none';
+          }
+        });
+
+        // Save skill button
+        document.getElementById('saveSkillBtn').addEventListener('click', saveSkill);
+
+        // Setup dynamic lists
+        setupDynamicLists();
+      }
+
+      function saveSkill() {
+        const form = document.getElementById('skillForm');
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        // Disable save button to prevent double submission
+        const saveBtn = document.getElementById('saveSkillBtn');
+        const originalText = saveBtn.innerHTML;
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Salvando...';
+
+        try {
+          // Get category (new or existing)
+          let category = document.getElementById('skillCategory').value;
+          const newCategoryInput = document.getElementById('newCategoryInput');
+          if (newCategoryInput.style.display !== 'none' && newCategoryInput.value.trim()) {
+            category = newCategoryInput.value.trim().toLowerCase();
+          }
+
+          const skillData = {
+            id: editingSkillId || generateId('skill'),
+            title: document.getElementById('skillTitle').value,
+            category: category,
+            description: document.getElementById('skillDescription').value,
+            icon: 'bi-lightbulb',
+            domain: parseFloat(document.getElementById('calculatedDomain').textContent),
+            unlock_threshold: 0, // Valor padrão, pode ser editado manualmente no JSON se necessário
+            scores: {
+              theoretical: parseInt(document.getElementById('scoreTheoretical').value),
+              technical: parseInt(document.getElementById('scoreTechnical').value),
+              problem_solving: parseInt(document.getElementById('scoreProblemSolving').value),
+              knowledge_transfer: parseInt(document.getElementById('scoreKnowledgeTransfer').value),
+              trends: parseInt(document.getElementById('scoreTrends').value)
+            },
+            children: [], // Inicializar como array vazio
+            relatedAchievements: [] // Inicializar como array vazio
+          };
+
+          // Handle parent/child relationship
+          if (document.getElementById('skillTypeChild').checked) {
+            const parentId = document.getElementById('parentSkillSelect').value;
+            if (parentId) {
+              skillData.parent = parentId;
+            }
+          }
+
+          if (editingSkillId) {
+            // Update existing skill
+            const updatedSkill = dataService.updateSkill(editingSkillId, skillData);
+            if (updatedSkill) {
+              const index = skillsData.findIndex(s => s.id === editingSkillId);
+              if (index !== -1) {
+                skillsData[index] = updatedSkill;
+              }
+              console.log('Skill updated:', updatedSkill);
+            }
+          } else {
+            // Add new skill
+            const newSkill = dataService.addSkill(skillData);
+            skillsData.push(newSkill);
+            console.log('Skill added:', newSkill);
+          }
+
+          // Close modal and update UI
+          window.skillModal.hide();
+          renderSkills();
+          updateDashboardStats();
+          
+          // Navigate to skills page
+          navigateToPage('skills');
+          
+          // Reset form
+          editingSkillId = null;
+          
+          // Show success message
+          console.log('Habilidade salva com sucesso!');
+          
+        } catch (error) {
+          console.error('Erro ao salvar habilidade:', error);
+          alert('Erro ao salvar habilidade');
+        } finally {
+          // Re-enable save button
+          saveBtn.disabled = false;
+          saveBtn.innerHTML = originalText;
+        }
+      }
+
+      // === ACHIEVEMENT MODAL ===
+      function openAchievementModal(achievementData = null) {
+        editingAchievementId = achievementData?.id || null;
+        
+        // Clear any pending files
+        window.pendingImageFile = null;
+        window.pendingEvidenceFile = null;
+        clearEvidenceFile();
+        
+        // Reset form
+        document.getElementById('achievementForm').reset();
+        
+        // Populate dropdowns
+        populateAchievementCategoriesDropdown();
+        
+        // Update modal title
+        document.getElementById('achievementModalLabel').textContent = 
+          achievementData ? 'Editar Conquista' : 'Adicionar Conquista';
+
+        if (achievementData) {
+          // Fill form with existing data
+          document.getElementById('achievementTitle').value = achievementData.title || '';
+          document.getElementById('achievementCategory').value = achievementData.category || '';
+          document.getElementById('achievementDescription').value = achievementData.desc || achievementData.description || '';
+          document.getElementById('achievementStatus').checked = achievementData.status === 'unlocked';
+          document.getElementById('achievementUnlockedDate').value = achievementData.unlockedDate || '';
+          document.getElementById('achievementImageUrl').value = achievementData.img || '';
+          document.getElementById('achievementEvidence').value = achievementData.evidence || '';
+          
+          // Set difficulty stars
+          const difficultyValue = achievementData.difficulty || 3;
+          document.getElementById('achievementDifficulty').value = difficultyValue;
+          const difficultyStars = document.querySelector('[data-score="difficulty"]').querySelectorAll('.star');
+          updateStars(difficultyStars, difficultyValue);
+          
+          // Set status label
+          updateAchievementStatusLabel();
+          
+          // Preview image if available
+          if (achievementData.img) {
+            const preview = document.getElementById('achievementImagePreview');
+            preview.src = achievementData.img;
+            preview.style.display = 'block';
+          }
+
+          document.getElementById('achievementId').value = achievementData.id;
+        } else {
+          // Clear hidden ID for new achievement
+          document.getElementById('achievementId').value = '';
+          // Reset difficulty to 3 stars
+          const difficultyStars = document.querySelector('[data-score="difficulty"]').querySelectorAll('.star');
+          updateStars(difficultyStars, 3);
+          document.getElementById('achievementDifficulty').value = 3;
+          
+          // Hide image preview
+          document.getElementById('achievementImagePreview').style.display = 'none';
+        }
+
+        achievementModal.show();
+      }
+
+      function setupAchievementFormEvents() {
+        // Achievement status toggle
+        document.getElementById('achievementStatus').addEventListener('change', updateAchievementStatusLabel);
+
+        // Category new button
+        document.getElementById('btnNewAchievementCategory').addEventListener('click', function() {
+          const select = document.getElementById('achievementCategory');
+          const input = document.getElementById('newAchievementCategoryInput');
+          
+          if (input.style.display === 'none') {
+            select.style.display = 'none';
+            input.style.display = 'block';
+            input.focus();
+            this.innerHTML = '<i class="bi bi-arrow-left"></i>';
+          } else {
+            select.style.display = 'block';
+            input.style.display = 'none';
+            this.innerHTML = '<i class="bi bi-plus"></i>';
+          }
+        });
+
+        // Image preview only (upload will happen on save)
+        document.getElementById('achievementImage').addEventListener('change', function(e) {
+          const file = e.target.files[0];
+          if (file) {
+            // Show preview only
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              const preview = document.getElementById('achievementImagePreview');
+              preview.src = e.target.result;
+              preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+            
+            // Store file reference for later upload
+            window.pendingImageFile = file;
+            console.log('Arquivo selecionado para upload posterior:', file.name);
+          }
+        });
+
+        document.getElementById('achievementImageUrl').addEventListener('input', function() {
+          const url = this.value.trim();
+          if (url) {
+            const preview = document.getElementById('achievementImagePreview');
+            preview.src = url;
+            preview.style.display = 'block';
+          }
+        });
+
+        // Save achievement button
+        document.getElementById('saveAchievementBtn').addEventListener('click', saveAchievement);
+        
+        // Evidence file upload
+        document.getElementById('achievementEvidenceFile').addEventListener('change', function(e) {
+          const file = e.target.files[0];
+          if (file) {
+            // Show preview
+            const preview = document.getElementById('evidencePreview');
+            const fileName = document.getElementById('evidenceFileName');
+            fileName.textContent = file.name;
+            preview.style.display = 'block';
+            
+            // Store file reference for later upload
+            window.pendingEvidenceFile = file;
+            console.log('Arquivo de evidência selecionado:', file.name);
+          }
+        });
+        
+        // Modal close event - clear pending files
+        document.getElementById('achievementModal').addEventListener('hidden.bs.modal', function () {
+          // Clear pending files when modal is closed without saving
+          window.pendingImageFile = null;
+          window.pendingEvidenceFile = null;
+          clearEvidenceFile();
+          console.log('Modal fechado, arquivos pendentes limpos');
+        });
+      }
+
+      // Function to clear evidence file
+      function clearEvidenceFile() {
+        document.getElementById('achievementEvidenceFile').value = '';
+        document.getElementById('evidencePreview').style.display = 'none';
+        window.pendingEvidenceFile = null;
+      }
+
+      function updateAchievementStatusLabel() {
+        const statusCheck = document.getElementById('achievementStatus');
+        const statusLabel = document.getElementById('achievementStatusLabel');
+        statusLabel.textContent = statusCheck.checked ? 'Desbloqueada' : 'Bloqueada';
+      }
+
+      async function saveAchievement() {
+        const form = document.getElementById('achievementForm');
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        // Disable save button to prevent double submission
+        const saveBtn = document.getElementById('saveAchievementBtn');
+        const originalText = saveBtn.innerHTML;
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Salvando...';
+
+        try {
+          // Upload image if there's a pending file
+          let imagePath = document.getElementById('achievementImageUrl').value;
+          
+          if (window.pendingImageFile) {
+            console.log('Fazendo upload da imagem...');
+            
+            try {
+              const formData = new FormData();
+              formData.append('image', window.pendingImageFile);
+              
+              const response = await fetch('http://localhost:3001/api/upload-achievement-image', {
+                method: 'POST',
+                body: formData
+              });
+
+              if (response.ok) {
+                const result = await response.json();
+                imagePath = result.path;
+                console.log('Imagem enviada com sucesso:', result.path);
+                // Clear pending file
+                window.pendingImageFile = null;
+              } else {
+                console.error('Erro ao enviar imagem');
+                alert('Erro ao enviar imagem para o servidor. Verifique se o servidor está rodando.');
+                return;
+              }
+            } catch (uploadError) {
+              console.error('Erro ao fazer upload:', uploadError);
+              // Se falhou o upload, use a imagem em base64 como fallback
+              if (document.getElementById('achievementImagePreview').src.startsWith('data:')) {
+                imagePath = document.getElementById('achievementImagePreview').src;
+                console.log('Usando imagem em base64 como fallback');
+              } else {
+                alert('Erro ao fazer upload da imagem. Verifique se o servidor está rodando.');
+                return;
+              }
+            }
+          }
+
+          // Upload evidence file if there's a pending file
+          let evidenceUrl = document.getElementById('achievementEvidence').value;
+          let evidenceFile = null;
+          
+          if (window.pendingEvidenceFile) {
+            console.log('Fazendo upload da evidência...');
+            
+            try {
+              const formData = new FormData();
+              formData.append('evidence', window.pendingEvidenceFile);
+              
+              const response = await fetch('http://localhost:3001/api/upload-evidence', {
+                method: 'POST',
+                body: formData
+              });
+
+              if (response.ok) {
+                const result = await response.json();
+                evidenceFile = result.path;
+                console.log('Evidência enviada com sucesso:', result.path);
+                // Clear pending file
+                window.pendingEvidenceFile = null;
+              } else {
+                console.error('Erro ao enviar evidência');
+                alert('Erro ao enviar arquivo de evidência para o servidor. Verifique se o servidor está rodando.');
+                return;
+              }
+            } catch (uploadError) {
+              console.error('Erro ao fazer upload da evidência:', uploadError);
+              alert('Erro ao fazer upload da evidência. Verifique se o servidor está rodando.');
+              return;
+            }
+          }
+
+          // Get category (new or existing)
+          let category = document.getElementById('achievementCategory').value;
+          const newCategoryInput = document.getElementById('newAchievementCategoryInput');
+          if (newCategoryInput.style.display !== 'none' && newCategoryInput.value.trim()) {
+            category = newCategoryInput.value.trim().toUpperCase();
+          }
+
+          const achievementData = {
+            id: editingAchievementId || generateId('achievement'),
+            title: document.getElementById('achievementTitle').value,
+            desc: document.getElementById('achievementDescription').value,
+            description: document.getElementById('achievementDescription').value,
+            category: category,
+            status: document.getElementById('achievementStatus').checked ? 'unlocked' : 'locked',
+            difficulty: parseInt(document.getElementById('achievementDifficulty').value),
+            unlockedDate: document.getElementById('achievementUnlockedDate').value,
+            image: imagePath || '',
+            evidence: evidenceUrl || null,
+            evidenceFile: evidenceFile || null,
+            relatedSkills: getDynamicListValues('achievementRelatedSkillsList')
+          };
+
+          if (editingAchievementId) {
+            // Update existing achievement
+            const updatedAchievement = dataService.updateAchievement(editingAchievementId, achievementData);
+            if (updatedAchievement) {
+              const index = achievementsData.findIndex(a => a.id === editingAchievementId);
+              if (index !== -1) {
+                achievementsData[index] = updatedAchievement;
+              }
+              console.log('Achievement updated:', updatedAchievement);
+            }
+          } else {
+            // Add new achievement
+            const newAchievement = dataService.addAchievement(achievementData);
+            achievementsData.push(newAchievement);
+            console.log('Achievement added:', newAchievement);
+          }
+
+          // Close modal and update UI
+          window.achievementModal.hide();
+          renderAchievements();
+          updateDashboardStats();
+          
+          // Navigate to achievements page
+          navigateToPage('achievements');
+          
+          // Reset form
+          editingAchievementId = null;
+          
+          // Show success message
+          console.log('Conquista salva com sucesso!');
+          
+        } catch (error) {
+          console.error('Erro ao salvar conquista:', error);
+          alert('Erro ao salvar conquista');
+        } finally {
+          // Re-enable save button
+          saveBtn.disabled = false;
+          saveBtn.innerHTML = originalText;
+        }
+      }
+
+      // === CRUD OPERATIONS ===
+      function editSkill(skillId) {
+        const skill = skillsData.find(s => s.id === skillId);
+        if (skill) {
+          openSkillModal(skill);
+        }
+      }
+
+      function deleteSkill(skillId) {
+        if (confirm('Tem certeza de que deseja excluir esta habilidade?')) {
+          const deletedSkill = dataService.deleteSkill(skillId);
+          if (deletedSkill) {
+            skillsData = skillsData.filter(s => s.id !== skillId);
+            renderSkills();
+            updateDashboardStats();
+            console.log('Skill deleted:', deletedSkill);
+          }
+        }
+      }
+
+      function toggleSkillStatus(skillId) {
+        const skill = skillsData.find(s => s.id === skillId);
+        if (skill) {
+          skill.active = !skill.active;
+          renderSkills();
+        }
+      }
+
+      function editAchievement(achievementId) {
+        const achievement = achievementsData.find(a => a.id === achievementId);
+        if (achievement) {
+          openAchievementModal(achievement);
+        }
+      }
+
+      function deleteAchievement(achievementId) {
+        if (confirm('Tem certeza de que deseja excluir esta conquista?')) {
+          const deletedAchievement = dataService.deleteAchievement(achievementId);
+          if (deletedAchievement) {
+            achievementsData = achievementsData.filter(a => a.id !== achievementId);
+            renderAchievements();
+            updateDashboardStats();
+            console.log('Achievement deleted:', deletedAchievement);
+          }
+        }
+      }
+
+      function toggleAchievementStatus(achievementId) {
+        const achievement = achievementsData.find(a => a.id === achievementId);
+        if (achievement) {
+          achievement.status = achievement.status === 'unlocked' ? 'locked' : 'unlocked';
+          renderAchievements();
+          updateDashboardStats();
+        }
+      }
+
+      // === FILTERS ===
+      function setupFilters() {
+        // Skills filters
+        ['filterSkillType', 'filterSkillCategory', 'filterSkillStatus'].forEach(filterId => {
+          document.getElementById(filterId)?.addEventListener('change', filterSkills);
+        });
+
+        // Achievements filters
+        ['filterAchievementStatus', 'filterAchievementCategory', 'filterAchievementDifficulty'].forEach(filterId => {
+          document.getElementById(filterId)?.addEventListener('change', filterAchievements);
+        });
+      }
+
+      function filterSkills() {
+        const typeFilter = document.getElementById('filterSkillType').value;
+        const categoryFilter = document.getElementById('filterSkillCategory').value;
+        const statusFilter = document.getElementById('filterSkillStatus').value;
+        const searchTerm = document.getElementById('searchSkills').value.toLowerCase();
+
+        let filtered = skillsData.filter(skill => {
+          const matchesType = !typeFilter || (typeFilter === 'parent' ? !skill.parent : skill.parent);
+          const matchesCategory = !categoryFilter || skill.category === categoryFilter;
+          const matchesStatus = !statusFilter || 
+            (statusFilter === 'active' ? skill.active !== false : skill.active === false);
+          const matchesSearch = !searchTerm || 
+            (skill.name || skill.title || '').toLowerCase().includes(searchTerm) ||
+            (skill.description || '').toLowerCase().includes(searchTerm);
+
+          return matchesType && matchesCategory && matchesStatus && matchesSearch;
+        });
+
+        renderSkills(filtered);
+      }
+
+      function filterAchievements() {
+        const statusFilter = document.getElementById('filterAchievementStatus').value;
+        const categoryFilter = document.getElementById('filterAchievementCategory').value;
+        const difficultyFilter = document.getElementById('filterAchievementDifficulty').value;
+        const searchTerm = document.getElementById('searchAchievements').value.toLowerCase();
+
+        let filtered = achievementsData.filter(achievement => {
+          const matchesStatus = !statusFilter || achievement.status === statusFilter;
+          const matchesCategory = !categoryFilter || achievement.category === categoryFilter;
+          const matchesDifficulty = !difficultyFilter || achievement.difficulty == difficultyFilter;
+          const matchesSearch = !searchTerm || 
+            (achievement.title || '').toLowerCase().includes(searchTerm) ||
+            (achievement.desc || achievement.description || '').toLowerCase().includes(searchTerm);
+
+          return matchesStatus && matchesCategory && matchesDifficulty && matchesSearch;
+        });
+
+        renderAchievements(filtered);
+      }
+
+      // === SEARCH ===
+      function setupSearch() {
+        document.getElementById('searchSkills')?.addEventListener('input', filterSkills);
+        document.getElementById('searchAchievements')?.addEventListener('input', filterAchievements);
+      }
+
+      // === UTILITY FUNCTIONS ===
+      function generateId(type) {
+        return `${type}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      }
+
+      function populateParentSkillsDropdown(excludeSkillId = null) {
+        const select = document.getElementById('parentSkillSelect');
+        select.innerHTML = '<option value="">Selecione...</option>';
+        
+        // Função para adicionar skills recursivamente com indentação
+        function addSkillWithIndentation(skill, level = 0) {
+          if (skill.id === excludeSkillId) return; // Pular skill sendo editada
+          
+          const option = document.createElement('option');
+          option.value = skill.id;
+          const indent = '  '.repeat(level); // Indentação com espaços
+          option.textContent = `${indent}${skill.name || skill.title}`;
+          select.appendChild(option);
+          
+          // Adicionar filhos com mais indentação
+          const children = skillsData.filter(s => s.parent === skill.id);
+          children.forEach(child => addSkillWithIndentation(child, level + 1));
+        }
+        
+        // Começar pelas skills raiz
+        const rootSkills = skillsData.filter(skill => !skill.parent);
+        rootSkills.forEach(skill => addSkillWithIndentation(skill, 0));
+      }
+
+      // === POPULATE DROPDOWNS ===
+      function populateSkillCategoriesDropdown() {
+        const select = document.getElementById('skillCategory');
+        const currentOptions = Array.from(select.options).map(opt => opt.value);
+        
+        // Get unique categories from existing skills
+        const categories = [...new Set(skillsData.map(skill => skill.category).filter(Boolean))];
+        
+        // Add categories that don't already exist in dropdown
+        categories.forEach(category => {
+          if (!currentOptions.includes(category)) {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category.toUpperCase();
+            // Insert before "Nova Categoria..." option
+            select.insertBefore(option, select.lastElementChild);
+          }
+        });
+      }
+
+      function populateAchievementCategoriesDropdown() {
+        const select = document.getElementById('achievementCategory');
+        const currentOptions = Array.from(select.options).map(opt => opt.value);
+        
+        // Get unique categories from existing achievements
+        const categories = [...new Set(achievementsData.map(achievement => achievement.category).filter(Boolean))];
+        
+        // Add categories that don't already exist in dropdown
+        categories.forEach(category => {
+          if (!currentOptions.includes(category)) {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category.toUpperCase();
+            // Insert before "Nova Categoria..." option
+            select.insertBefore(option, select.lastElementChild);
+          }
+        });
+      }
+
+      function populateRelatedSkillsDropdown(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        const existingItems = container.querySelectorAll('.dynamic-list-item');
+        existingItems.forEach(item => {
+          const select = item.querySelector('select');
+          if (select) {
+            select.innerHTML = '<option value="">Selecione uma habilidade...</option>';
+            skillsData.forEach(skill => {
+              const option = document.createElement('option');
+              option.value = skill.id;
+              option.textContent = skill.name || skill.title;
+              select.appendChild(option);
+            });
+          }
+        });
+      }
+
+      function populateRelatedAchievementsDropdown(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        const existingItems = container.querySelectorAll('.dynamic-list-item');
+        existingItems.forEach(item => {
+          const select = item.querySelector('select');
+          if (select) {
+            select.innerHTML = '<option value="">Selecione uma conquista...</option>';
+            achievementsData.forEach(achievement => {
+              const option = document.createElement('option');
+              option.value = achievement.id;
+              option.textContent = achievement.title;
+              select.appendChild(option);
+            });
+          }
+        });
+      }
+
+      // === DYNAMIC LISTS FUNCTIONALITY ===
+      function setupDynamicLists() {
+        // Setup dynamic lists for skills
+        setupDynamicList('childSkillsList', 'Adicionar Filho');
+        setupDynamicList('relatedAchievementsList', 'Adicionar Conquista');
+        setupDynamicList('achievementRelatedSkillsList', 'Adicionar Habilidade');
+      }
+
+      function setupDynamicList(containerId, placeholder) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        // Add event listeners for remove buttons
+        container.addEventListener('click', function(e) {
+          if (e.target.classList.contains('btn-remove-item')) {
+            const item = e.target.closest('.dynamic-list-item');
+            if (container.children.length > 1) {
+              item.remove();
+            }
+          }
+        });
+
+        // Add event listener for the add button (if exists)
+        const addButton = container.parentElement.querySelector('.btn-add-item');
+        if (addButton) {
+          addButton.addEventListener('click', function() {
+            addDynamicListItem(containerId, placeholder);
+          });
+        }
+      }
+
+      function addDynamicListItem(containerId, placeholder) {
+        const container = document.getElementById(containerId);
+        const newItem = document.createElement('div');
+        newItem.className = 'dynamic-list-item';
+        
+        let selectHTML = '';
+        let checkboxHTML = '';
+        let inputHTML = '';
+        
+        if (containerId === 'childSkillsList') {
+          // Lista de habilidades filhas
+          selectHTML = `
+            <select class="form-control form-control-sm">
+              <option value="">Selecione uma habilidade...</option>
+            </select>
+          `;
+          checkboxHTML = `
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="newChildSkill_${Date.now()}">
+              <label class="form-check-label">Nova</label>
+            </div>
+          `;
+          inputHTML = `<input type="text" placeholder="Nova habilidade filha" class="form-control form-control-sm" style="display: none;">`;
+        } else if (containerId === 'relatedAchievementsList') {
+          // Lista de conquistas relacionadas
+          selectHTML = `
+            <select class="form-control form-control-sm">
+              <option value="">Selecione uma conquista...</option>
+            </select>
+          `;
+          checkboxHTML = `
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="newAchievement_${Date.now()}">
+              <label class="form-check-label">Nova</label>
+            </div>
+          `;
+          inputHTML = `<input type="text" placeholder="Nova conquista" class="form-control form-control-sm" style="display: none;">`;
+        } else if (containerId === 'achievementRelatedSkillsList') {
+          // Lista de habilidades relacionadas a conquistas
+          selectHTML = `
+            <select class="form-control form-control-sm">
+              <option value="">Selecione uma habilidade...</option>
+            </select>
+          `;
+          checkboxHTML = `
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="newSkillForAchievement_${Date.now()}">
+              <label class="form-check-label">Nova</label>
+            </div>
+          `;
+          inputHTML = `<input type="text" placeholder="Nova habilidade" class="form-control form-control-sm" style="display: none;">`;
+        }
+        
+        newItem.innerHTML = `
+          <i class="bi bi-grip-vertical text-muted"></i>
+          <div class="flex-grow-1">
+            ${selectHTML}
+            ${inputHTML}
+          </div>
+          ${checkboxHTML}
+          <button type="button" class="btn-remove-item">
+            <i class="bi bi-x"></i>
+          </button>
+        `;
+        
+        container.appendChild(newItem);
+        
+        // Populate the select dropdown
+        const select = newItem.querySelector('select');
+        if (select) {
+          if (containerId === 'childSkillsList' || containerId === 'achievementRelatedSkillsList') {
+            skillsData.forEach(skill => {
+              const option = document.createElement('option');
+              option.value = skill.id;
+              option.textContent = skill.name || skill.title;
+              select.appendChild(option);
+            });
+          } else if (containerId === 'relatedAchievementsList') {
+            achievementsData.forEach(achievement => {
+              const option = document.createElement('option');
+              option.value = achievement.id;
+              option.textContent = achievement.title;
+              select.appendChild(option);
+            });
+          }
+        }
+        
+        // Setup checkbox toggle
+        const checkbox = newItem.querySelector('input[type="checkbox"]');
+        const textInput = newItem.querySelector('input[type="text"]');
+        if (checkbox && textInput && select) {
+          checkbox.addEventListener('change', function() {
+            if (this.checked) {
+              select.style.display = 'none';
+              textInput.style.display = 'block';
+              textInput.focus();
+            } else {
+              select.style.display = 'block';
+              textInput.style.display = 'none';
+            }
+          });
+        }
+      }
+
+      function getDynamicListValues(containerId) {
+        const container = document.getElementById(containerId);
+        const inputs = container.querySelectorAll('input[type="text"]');
+        return Array.from(inputs).map(input => input.value.trim()).filter(value => value !== '');
+      }
+
+      function setDynamicListValues(containerId, values) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';
+        
+        if (!values || values.length === 0) {
+          values = [''];
+        }
+
+        values.forEach(value => {
+          const item = document.createElement('div');
+          item.className = 'dynamic-list-item';
+          item.innerHTML = `
+            <i class="bi bi-grip-vertical text-muted"></i>
+            <input type="text" value="${value}" class="form-control form-control-sm">
+            <button type="button" class="btn-remove-item">
+              <i class="bi bi-x"></i>
+            </button>
+          `;
+          container.appendChild(item);
+        });
+      }
+
+      // === PARENT CREATION FUNCTIONALITY ===
+      function createNewParent() {
+        const parentName = prompt('Nome da nova habilidade pai:');
+        if (parentName && parentName.trim()) {
+          const parentKey = parentName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+          const newParent = {
+            [parentKey]: {
+              name: parentName.trim(),
+              children: {},
+              score: 0,
+              maxScore: 0
+            }
+          };
+          
+          // Add to skills data (this would need to be saved to the server)
+          Object.assign(skillsData, newParent);
+          
+          // Refresh the skills display
+          renderSkills();
+          
+          alert(`Nova habilidade pai "${parentName}" criada com sucesso!`);
+        }
+      }
+
+      // === CATEGORY CREATION FUNCTIONALITY ===
+      function createNewCategory() {
+        const categoryName = prompt('Nome da nova categoria:');
+        if (categoryName && categoryName.trim()) {
+          // Add to achievement categories (this would need to be saved to the server)
+          const select = document.getElementById('achievementCategory');
+          const option = document.createElement('option');
+          option.value = categoryName.trim().toUpperCase();
+          option.textContent = categoryName.trim().toUpperCase();
+          select.insertBefore(option, select.lastElementChild);
+          
+          alert(`Nova categoria "${categoryName}" criada com sucesso!`);
+        }
+      }
+
+      // === EXPOSE GLOBAL FUNCTIONS ===
+      window.editSkill = editSkill;
+      window.deleteSkill = deleteSkill;
+      window.toggleSkillStatus = toggleSkillStatus;
+      window.editAchievement = editAchievement;
+      window.deleteAchievement = deleteAchievement;
+      window.toggleAchievementStatus = toggleAchievementStatus;
+      window.openSkillModal = openSkillModal;
+      window.openAchievementModal = openAchievementModal;
+      window.createNewParent = createNewParent;
+      window.createNewCategory = createNewCategory;
+      window.addDynamicListItem = addDynamicListItem;
+    </script>
+  </body>
+</html>

@@ -153,6 +153,7 @@
 }
 
 @media screen and (max-width: 768px) {
+<<<<<<< HEAD
     /* NAVBAR FIXED NO TOPO - MOBILE */
     .controls-container {
         position: fixed !important;
@@ -211,6 +212,35 @@
 @media screen and (max-width: 480px) {
     .controls-container {
         padding: 0.5rem !important;
+=======
+
+    /* Oculta todo o conteúdo da página exceto o container de controles */
+    body>*:not(.controls-container) {
+        display: none !important;
+    }
+
+    /* Exibe e centraliza o container de controles */
+    .controls-container {
+        display: flex !important;
+        flex-direction: column;
+        gap: 15px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2000;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 12px 8px 20px 8px;
+        border-radius: 16px;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08), 0 1.5px 6px rgba(0, 0, 0, 0.04);
+        min-width: 240px;
+        max-width: 90vw;
+    }
+
+    /* Esconde todos os filhos exceto o dropdown e o botão imprimir */
+    .controls-container>*:not(.language-selector):not(.print-button) {
+        display: none !important;
+>>>>>>> Home
     }
 
     .language-dropdown,
@@ -236,5 +266,10 @@
     .container,
     .a4-page {
         margin-top: 70px !important;
+    }
+
+    /* Garante que o body fique com fundo claro para o container */
+    body {
+        background: #f8f9fa !important;
     }
 }

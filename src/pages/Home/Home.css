@@ -135,7 +135,7 @@ html {
 }
 
 .bg-competence {
-  background: linear-gradient(25deg, rgb(0, 98, 51) 0%, rgb(0, 255, 128) 50%, rgb(0, 131, 65) 100% ) !important;
+  background: linear-gradient(25deg, rgb(255, 165, 0) 0%, rgb(255, 215, 0) 50%, rgb(218, 165, 32) 100% ) !important;
 }
 
 .bg-others {

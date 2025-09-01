@@ -60,7 +60,7 @@ const options = [
   //   route: "/dev",
   // },
   {
-    title: "CV",
+    title: "CURRÍCULO",
     text: "Currículo e contatos profissionais",
     icon: "mdi-file-document",
     color: "cv",
@@ -69,8 +69,8 @@ const options = [
   },
   {
     title: "COMPETÊNCIAS",
-    text: "Mapeamento de competências e habilidades técnicas",
-    icon: "mdi-chart-tree",
+    text: "Sistema de habilidades e conquistas profissionais",
+    icon: "mdi-trophy",
     color: "competence",
     iconColor: "white",
     route: "/competence",
