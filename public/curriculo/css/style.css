@@ -177,7 +177,6 @@
     .language-dropdown,
     .print-button {
         flex: 1 !important;
-        width: 48% !important;
         font-size: 0.9rem !important;
         padding: 0.6rem !important;
         height: 40px !important;
@@ -245,7 +244,7 @@
 
     .language-dropdown,
     .print-button {
-        font-size: 0.8rem !important;
+        font-size: 0.65rem !important;
         padding: 0.5rem !important;
         height: 36px !important;
     }

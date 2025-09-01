@@ -67,11 +67,21 @@ if (fs.existsSync(distPath)) {
     const srcPath = path.join(distPath, item);
     const destPath = path.join(publicPath, item);
     
+    // Pula pastas específicas que já existem para evitar conflitos
+    if (item === 'competence-page' || item === 'curriculo') {
+      console.log(`⏭️ Pulando ${item} - pasta já existe e é mantida separadamente`);
+      return;
+    }
+    
     // Só copia se não existir ou se for diferente do que já existe
     if (fs.statSync(srcPath).isDirectory()) {
-      // Para diretórios, copia tudo
+      // Para diretórios, copia tudo (exceto os excluídos acima)
       if (fs.existsSync(destPath)) {
-        fs.rmSync(destPath, { recursive: true, force: true });
+        try {
+          fs.rmSync(destPath, { recursive: true, force: true });
+        } catch (error) {
+          console.log(`⚠️ Não foi possível remover ${destPath}, tentando sobrescrever...`);
+        }
       }
       copyDir(srcPath, destPath);
     } else {
