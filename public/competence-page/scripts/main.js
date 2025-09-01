@@ -204,7 +204,16 @@ class SkillMappingApp {
         let statusHTML = '';
         if (isUnlocked) {
             if (achievement.unlockedDate) {
-                const date = new Date(achievement.unlockedDate);
+                // Corrige o problema de D-1 ao exibir datas (força timezone local)
+                const dateParts = achievement.unlockedDate.split('-');
+                let date;
+                if (dateParts.length === 3 && achievement.unlockedDate.length === 10) {
+                    // Se for apenas data (YYYY-MM-DD), cria como local
+                    date = new Date(Number(dateParts[0]), Number(dateParts[1]) - 1, Number(dateParts[2]));
+                } else {
+                    // Se vier com hora/timezone, deixa o JS interpretar
+                    date = new Date(achievement.unlockedDate);
+                }
                 const formattedDate = date.toLocaleDateString('pt-BR', {
                     day: '2-digit',
                     month: '2-digit',
@@ -213,7 +222,7 @@ class SkillMappingApp {
                 statusHTML = `
                     <div class="achievement-status unlocked">
                         <i class="bi bi-unlock"></i>
-                        DESBLOQUEADA EM <span style=" color: #0FD;">${formattedDate}</span
+                        DESBLOQUEADA EM <span style=" color: #0FD;">${formattedDate}</span>
                     </div>
                 `;
             } else {

@@ -125,15 +125,16 @@ html {
   background: linear-gradient(25deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgb(183, 213, 36) 100%) !important;
 }
 
-.bg-dev {
+.bg-competence {
   background: linear-gradient(25deg, rgb(7, 0, 98) 0%, rgb(87, 87, 199) 50%,  rgba(206, 0, 217, 0.601) 100% ) !important;
 }
 
-.bg-cv {
+.bg-others {
   background: linear-gradient(25deg, rgb(51, 0, 61) 0%, rgb(255, 0, 0) 50%, rgb(131, 0, 0) 100% ) !important;
 }
 
-.bg-others {
+
+.bg-cv {
   background: linear-gradient(25deg, rgb(0, 255, 195) 0%, rgb(58, 156, 255) 50%, rgb(186, 177, 255) 100% ) !important;
 }
 

@@ -9,7 +9,7 @@
     "build": "npm run copy-assets && vite build && node scripts/copy-curriculo.cjs && node scripts/copy-competences.cjs",
     "preview": "vite preview",
     "build:prod": "npm run copy-assets && vite build --mode production",
-    "build:clean": "npm run clean-cache && npm run copy-assets && vite build --mode production",
+    "build:clean": "npm run clean-cache && vite build --mode production && npm run copy-assets",
     "copy-assets": "node scripts/copy-assets.js",
     "clean-cache": "node scripts/clean-cache.js",
     "deploy": "npm run build:clean && firebase deploy",

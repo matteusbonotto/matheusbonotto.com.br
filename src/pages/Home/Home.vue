@@ -60,12 +60,20 @@ const options = [
   //   route: "/dev",
   // },
   {
-    title: "CV",
+    title: "CURRÍCULO",
     text: "Currículo e contatos profissionais",
     icon: "mdi-file-document",
     color: "cv",
     iconColor: "white",
     route: "/cv",
+  },
+  {
+    title: "COMPETÊNCIAS",
+    text: "Sistema de habilidades e conquistas profissionais",
+    icon: "mdi-chart-tree",
+    color: "competence",
+    iconColor: "white",
+    route: "/competence",
   },
   // {
   //   title: "OUTROS",

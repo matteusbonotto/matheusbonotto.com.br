@@ -28,6 +28,14 @@ const routes = [
     name: 'CV',
     component: CV
   },
+  {
+    path: '/competence',
+    name: 'Competence',
+    beforeEnter() {
+      // Redireciona para a página estática de competências
+      window.location.href = '/competence-page/'
+    }
+  },
   // Rota catch-all para 404 - deve ser sempre a última
   {
     path: '/:pathMatch(.*)*',

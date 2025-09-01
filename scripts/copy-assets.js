@@ -38,6 +38,47 @@ if (fs.existsSync(curriculoSrc)) {
   console.log('❌ Pasta do currículo não encontrada em:', curriculoSrc);
 }
 
+// Copia arquivos da página de competências
+console.log('🔄 Copiando arquivos da página de competências...');
+const competenceSrc = path.join(projectRoot, 'src', 'pages', 'Competence', 'competence-page');
+const competenceDest = path.join(projectRoot, 'public', 'competence-page');
+
+if (fs.existsSync(competenceSrc)) {
+  copyDir(competenceSrc, competenceDest);
+  console.log('✅ Arquivos da página de competências copiados com sucesso!');
+} else {
+  console.log('❌ Pasta da página de competências não encontrada em:', competenceSrc);
+}
+
+// Copia arquivos do build (dist) para public se existir
+console.log('🔄 Copiando arquivos do build...');
+const distPath = path.join(projectRoot, 'dist');
+const publicPath = path.join(projectRoot, 'public');
+
+if (fs.existsSync(distPath)) {
+  const items = fs.readdirSync(distPath);
+  
+  items.forEach(item => {
+    const srcPath = path.join(distPath, item);
+    const destPath = path.join(publicPath, item);
+    
+    // Só copia se não existir ou se for diferente do que já existe
+    if (fs.statSync(srcPath).isDirectory()) {
+      // Para diretórios, copia tudo
+      if (fs.existsSync(destPath)) {
+        fs.rmSync(destPath, { recursive: true, force: true });
+      }
+      copyDir(srcPath, destPath);
+    } else {
+      // Para arquivos, sobrescreve
+      fs.copyFileSync(srcPath, destPath);
+    }
+  });
+  console.log('✅ Arquivos do build copiados para public!');
+} else {
+  console.log('ℹ️ Pasta dist não encontrada, pulando cópia do build...');
+}
+
 // Aqui você pode adicionar mais arquivos para copiar se precisar
 // Por exemplo, outros assets que devem estar em produção
 

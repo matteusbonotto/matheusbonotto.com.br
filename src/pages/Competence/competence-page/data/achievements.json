@@ -400,13 +400,16 @@
   {
     "id": "ach-1753557837533",
     "title": "Plenitude",
-    "description": "Alcance o nivel pleno em sua profissão.",
-    "status": "locked",
+    "description": "Alcance o nivel pleno em sua profissão por mérito.",
+    "status": "unlocked",
     "difficulty": 3,
     "category": "QA",
     "evidence": null,
-    "relatedSkills": [],
-    "image": "assets/achievements/unnamed13-1753579500863-563950872.png"
+    "relatedSkills": ["qa-root","qa-testing"],
+    "image": "assets/achievements/unnamed13-1753579500863-563950872.png",
+    "unlockedDate": "2025-08-29",
+    "updatedAt": "2025-08-29T15:30:37.297Z"
+
   },
   {
     "id": "ach-1753557918307",
