@@ -457,12 +457,44 @@ class SkillMappingApp {
                 // Desbloqueadas primeiro
                 if (a.status === 'unlocked' && b.status === 'locked') return -1;
                 if (a.status === 'locked' && b.status === 'unlocked') return 1;
-                return a.title.localeCompare(b.title); // Alfabética como critério secundário
+                
+                // Se ambas têm o mesmo status, ordena por data de desbloqueio (mais recente primeiro)
+                if (a.status === 'unlocked' && b.status === 'unlocked') {
+                    // Se ambas têm data, ordena pela mais recente
+                    if (a.unlockedDate && b.unlockedDate) {
+                        return new Date(b.unlockedDate) - new Date(a.unlockedDate);
+                    }
+                    // Se apenas A tem data, A vem primeiro
+                    if (a.unlockedDate && !b.unlockedDate) return -1;
+                    // Se apenas B tem data, B vem primeiro
+                    if (!a.unlockedDate && b.unlockedDate) return 1;
+                    // Se nenhuma tem data, ordena alfabeticamente
+                    return a.title.localeCompare(b.title);
+                }
+                
+                // Para conquistas bloqueadas, ordena apenas alfabeticamente
+                return a.title.localeCompare(b.title);
             } else {
                 // Bloqueadas primeiro
                 if (a.status === 'locked' && b.status === 'unlocked') return -1;
                 if (a.status === 'unlocked' && b.status === 'locked') return 1;
-                return a.title.localeCompare(b.title); // Alfabética como critério secundário
+                
+                // Se ambas têm o mesmo status, ordena por data de desbloqueio (mais recente primeiro)
+                if (a.status === 'unlocked' && b.status === 'unlocked') {
+                    // Se ambas têm data, ordena pela mais recente
+                    if (a.unlockedDate && b.unlockedDate) {
+                        return new Date(b.unlockedDate) - new Date(a.unlockedDate);
+                    }
+                    // Se apenas A tem data, A vem primeiro
+                    if (a.unlockedDate && !b.unlockedDate) return -1;
+                    // Se apenas B tem data, B vem primeiro
+                    if (!a.unlockedDate && b.unlockedDate) return 1;
+                    // Se nenhuma tem data, ordena alfabeticamente
+                    return a.title.localeCompare(b.title);
+                }
+                
+                // Para conquistas bloqueadas, ordena apenas alfabeticamente
+                return a.title.localeCompare(b.title);
             }
         });
 
