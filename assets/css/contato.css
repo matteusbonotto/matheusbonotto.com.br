@@ -1,0 +1,60 @@
+/* assets/css/contato.css */
+/* Estilos da página de Contato */
+
+.contact-section {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+}
+
+.card {
+  border: none;
+  border-radius: 1rem;
+}
+
+.form-control,
+.form-select {
+  border-radius: 0.5rem;
+  border: 1px solid #dee2e6;
+  padding: 0.75rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+.btn-primary {
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .contact-section {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+  
+  .card {
+    margin: 0 1rem;
+  }
+  
+  .form-control,
+  .form-select {
+    font-size: 16px; /* Prevenir zoom no iOS */
+  }
+  
+  .btn-primary {
+    width: 100%;
+    padding: 0.875rem;
+  }
+}
+

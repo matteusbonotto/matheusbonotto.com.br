@@ -1,27 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MB - Home</title>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matheus Bonotto - Portfólio Profissional</title>
+  
+  <!-- PWA Meta Tags -->
+  <meta name="description" content="Portfólio profissional de Matheus Bonotto - QA, Automação e Análise de Dados">
+  <meta name="theme-color" content="#212529">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Matheus Bonotto">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-TileColor" content="#212529">
+  <meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+  
+  <!-- Cache Prevention Meta Tags -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
+  <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+  
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/home.css">
+  
+  <!-- Configuração (deve ser carregado primeiro) -->
+  <script src="config.js"></script>
+  
+  <!-- Supabase UMD -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+  
+  <!-- Inicializar Supabase globalmente -->
+  <script>
+    // Aguardar Supabase UMD carregar e inicializar globalmente
+    (function() {
+      function initGlobalSupabase() {
+        if (typeof window.supabase === 'undefined') {
+          console.warn('⚠️ Aguardando Supabase UMD carregar...');
+          setTimeout(initGlobalSupabase, 100);
+          return;
+        }
+        
+        if (!window.CONFIG || !window.CONFIG.SUPABASE_URL || !window.CONFIG.SUPABASE_ANON_KEY) {
+          console.warn('⚠️ Aguardando CONFIG carregar...');
+          setTimeout(initGlobalSupabase, 100);
+          return;
+        }
+        
+        try {
+          // Tentar diferentes formas
+          let createClient = null;
+          if (window.supabase.createClient) {
+            createClient = window.supabase.createClient;
+          } else if (typeof window.supabase === 'function') {
+            createClient = window.supabase;
+          } else if (window.supabase.default && window.supabase.default.createClient) {
+            createClient = window.supabase.default.createClient;
+          }
+          
+          if (createClient) {
+            window.__supabaseClient = createClient(
+              window.CONFIG.SUPABASE_URL,
+              window.CONFIG.SUPABASE_ANON_KEY
+            );
+            console.log('✅ Supabase inicializado globalmente');
+          } else {
+            console.error('❌ Não foi possível encontrar createClient no Supabase UMD');
+            console.log('window.supabase:', window.supabase);
+          }
+        } catch (error) {
+          console.error('❌ Erro ao inicializar Supabase globalmente:', error);
+        }
+      }
+      
+      // Tentar inicializar imediatamente
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGlobalSupabase);
+      } else {
+        initGlobalSupabase();
+      }
+    })();
+  </script>
+</head>
+<body class="home-page">
+  <!-- Header simples com apenas o nome -->
+  <header class="header">
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container justify-content-center">
+        <a class="navbar-brand d-flex align-items-center gap-2 m-0" href="/">
+          <img src="assets/logo-branco.png" alt="Logo Matheus Bonotto" height="32">
+          <span>Matheus Bonotto</span>
+        </a>
+      </div>
+    </nav>
+  </header>
 
-    <!-- Cache Control -->
-    <meta
-      http-equiv="Cache-Control"
-      content="no-cache, no-store, must-revalidate"
-    />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
+  <!-- Menu fullscreen em colunas -->
+  <main class="fullscreen-menu">
+    <div class="menu-columns">
+      <div class="menu-column menu-historia" data-target="historia.html">
+        <div class="menu-column-inner">
+          <div class="menu-icon"><i class="bi bi-book"></i></div>
+          <div class="menu-title">História</div>
+          <div class="menu-description">
+            Minha trajetória, experiências e momentos que moldaram minha carreira em tecnologia e QA.
+          </div>
+          <div class="menu-title-vertical">História</div>
+        </div>
+      </div>
 
-    <!-- Bootstrap Icons -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+      <div class="menu-column menu-portfolio" data-target="portfolio.html">
+        <div class="menu-column-inner">
+          <div class="menu-icon"><i class="bi bi-kanban"></i></div>
+          <div class="menu-title">Portfólio</div>
+          <div class="menu-description">
+            Projetos relevantes, entregas e resultados práticos em clientes como Samsung, Americanas e fintechs.
+          </div>
+          <div class="menu-title-vertical">Portfólio</div>
+        </div>
+      </div>
+
+      <div class="menu-column menu-competencias" data-target="competencias.html">
+        <div class="menu-column-inner">
+          <div class="menu-icon"><i class="bi bi-bar-chart-line"></i></div>
+          <div class="menu-title">Competências</div>
+          <div class="menu-description">
+            Hard e soft skills em QA, automação, análise, metodologias ágeis e ferramentas do dia a dia.
+          </div>
+          <div class="menu-title-vertical">Competências</div>
+        </div>
+      </div>
+
+      <div class="menu-column menu-cv" data-target="cv.html">
+        <div class="menu-column-inner">
+          <div class="menu-icon"><i class="bi bi-file-earmark-text"></i></div>
+          <div class="menu-title">Currículo</div>
+          <div class="menu-description">
+            Versão completa do meu currículo, com informações detalhadas, idiomas, certificações e projetos.
+          </div>
+          <div class="menu-title-vertical">Currículo</div>
+        </div>
+      </div>
+
+      <div class="menu-column menu-contato" data-target="contato.html">
+        <div class="menu-column-inner">
+          <div class="menu-icon"><i class="bi bi-chat-dots"></i></div>
+          <div class="menu-title">Contato</div>
+          <div class="menu-description">
+            Canais para falar comigo, marcar conversas, entrevistas ou parcerias.
+          </div>
+          <div class="menu-title-vertical">Contato</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer bg-dark text-white py-3">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2025 Matheus Bonotto. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Splash de transição -->
+  <div id="splash-overlay"></div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Script do menu fullscreen -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const columns = document.querySelectorAll('.menu-column');
+      const splash = document.getElementById('splash-overlay');
+
+      columns.forEach((col) => {
+        col.addEventListener('click', () => {
+          const target = col.getAttribute('data-target');
+          if (!target) return;
+
+          const bgColor = getComputedStyle(col).backgroundColor;
+          splash.style.backgroundColor = bgColor;
+          splash.classList.add('show');
+
+          setTimeout(() => {
+            window.location.href = target;
+          }, 400);
+        });
+      });
+    });
+  </script>
+  
+  <!-- Cache Buster (deve ser carregado primeiro) -->
+  <script src="assets/js/cache-buster.js"></script>
+  
+  <!-- Menu Secreto Admin -->
+  <script src="assets/js/secret-menu.js"></script>
+</body>
 </html>
+

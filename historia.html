@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>História - Matheus Bonotto</title>
+  
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/historia.css">
+  
+  <!-- Configuração -->
+  <script src="config.js"></script>
+  
+  <!-- Supabase UMD -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+  
+  <!-- Inicializar Supabase globalmente -->
+  <script>
+    (function() {
+      function initGlobalSupabase() {
+        if (typeof window.supabase === 'undefined') {
+          setTimeout(initGlobalSupabase, 100);
+          return;
+        }
+        if (!window.CONFIG || !window.CONFIG.SUPABASE_URL || !window.CONFIG.SUPABASE_ANON_KEY) {
+          setTimeout(initGlobalSupabase, 100);
+          return;
+        }
+        try {
+          let createClient = null;
+          if (window.supabase.createClient) {
+            createClient = window.supabase.createClient;
+          } else if (typeof window.supabase === 'function') {
+            createClient = window.supabase;
+          } else if (window.supabase.default && window.supabase.default.createClient) {
+            createClient = window.supabase.default.createClient;
+          }
+          if (createClient) {
+            window.__supabaseClient = createClient(window.CONFIG.SUPABASE_URL, window.CONFIG.SUPABASE_ANON_KEY);
+            console.log('✅ Supabase inicializado globalmente');
+          }
+        } catch (error) {
+          console.error('❌ Erro ao inicializar Supabase globalmente:', error);
+        }
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGlobalSupabase);
+      } else {
+        initGlobalSupabase();
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div x-data="historiaTimeline()" x-init="loadData()">
+    <!-- Header Component -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-background"></div>
+      <div class="container text-center position-relative">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            <img src="assets/logo-branco.png" alt="Logo Matheus Bonotto" height="72">
+            Minha História
+          </h1>
+          <p class="hero-subtitle">Trajetória acadêmica e profissional</p>
+          <div class="hero-stats" x-show="!loading && summary">
+            <div class="stat-item">
+              <div class="stat-number" x-text="summary?.totalProfissional || 0"></div>
+              <div class="stat-label">Profissionais</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" x-text="summary?.totalAcademico || 0"></div>
+              <div class="stat-label">Acadêmicos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Legenda / Filtros -->
+     
+    <section class="timeline-section py-5">
+      
+      <div class="container">
+        <h2 class="h4 mb-3">Resumo Profissional</h2>
+        <p class="mb-4">Seja bem vindo! Aqui você pode acompanhar um pouco da minha trajetória profissional,  Aqui você pode acompanhar um pouco da minha trajetória profissional, ao longo desses anos tive muitas experiências, e cresci bastante como pessoa tambem. Vamos conferir?</p>
+        <div class="timeline-legend card shadow-sm mb-4">
+          <div class="card-body">
+            <h3 class="h5 mb-4">Legenda / Filtros</h3>
+            
+            <!-- Dropdowns -->
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Categoria Profissional</label>
+                <select class="form-select" x-model="filters.categoria" x-on:change="applyFilters()">
+                  <option value="TODOS">Todas as Categorias</option>
+                  <option value="QA">QA</option>
+                  <option value="DEV">DEV</option>
+                  <option value="INFRA">INFRA</option>
+                  <option value="DEVOPS">DEVOPS</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Período</label>
+                <select class="form-select" x-model="filters.periodo" x-on:change="applyFilters()">
+                  <option value="all">Todos os Períodos</option>
+                  <option value="1year">Último Ano</option>
+                  <option value="3years">Últimos 3 Anos</option>
+                  <option value="5years">Últimos 5 Anos</option>
+                </select>
+              </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <!-- Legendas Interativas -->
+            <div class="row g-3 align-items-start">
+              <div class="col-md-4">
+                <h2 class="h6 text-uppercase text-muted mb-2">Natureza</h2>
+                <div class="legend-group d-flex flex-wrap gap-3 align-items-center">
+                  <span 
+                    class="badge filter-badge filter-toggle" 
+                    x-bind:class="{ 'filter-active': isFilterActive('natureza', 'profissional') }"
+                    x-on:click="toggleFilterNatureza('profissional')"
+                    style="background-color: #7b1fa2; color: white; padding: 4px 8px;"
+                  >
+                    Profissional
+                  </span>
+                  <span 
+                    class="badge filter-badge filter-toggle" 
+                    x-bind:class="{ 'filter-active': isFilterActive('natureza', 'academico') }"
+                    x-on:click="toggleFilterNatureza('academico')"
+                    style="background-color: #ff9800; color: white; padding: 4px 8px;"
+                  >
+                    Acadêmico
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <h2 class="h6 text-uppercase text-muted mb-2">Tipo de vínculo / Nível</h2>
+                <div class="legend-group d-flex flex-wrap gap-3 align-items-center">
+                  <span 
+                    class="badge filter-badge filter-toggle" 
+                    x-bind:class="{ 'filter-active': isFilterActive('vinculo', 'CLT') }"
+                    x-on:click="toggleFilterVinculo('CLT')"
+                    style="background-color: #007bff; color: white; padding: 4px 8px;"
+                  >
+                    CLT
+                  </span>
+                  <span 
+                    class="badge filter-badge filter-toggle" 
+                    x-bind:class="{ 'filter-active': isFilterActive('vinculo', 'PJ') }"
+                    x-on:click="toggleFilterVinculo('PJ')"
+                    style="background-color: #28a745; color: white; padding: 4px 8px;"
+                  >
+                    PJ
+                  </span>
+                  <span 
+                    class="badge filter-badge filter-toggle" 
+                    x-bind:class="{ 'filter-active': isFilterActive('vinculo', 'Estágio') }"
+                    x-on:click="toggleFilterVinculo('Estágio')"
+                    style="background-color: #17a2b8; color: white; padding: 4px 8px;"
+                  >
+                    Estágio
+                  </span>
+                  <span 
+                    class="badge filter-badge filter-toggle" 
+                    x-bind:class="{ 'filter-active': isFilterActive('vinculo', 'Técnico') }"
+                    x-on:click="toggleFilterVinculo('Técnico')"
+                    style="background-color: #00bcd4; color: white; padding: 4px 8px;"
+                  >
+                    Técnico
+                  </span>
+                  <span 
+                    class="badge filter-badge filter-toggle" 
+                    x-bind:class="{ 'filter-active': isFilterActive('vinculo', 'Bacharel') }"
+                    x-on:click="toggleFilterVinculo('Bacharel')"
+                    style="background-color: #9c27b0; color: white; padding: 4px 8px;"
+                  >
+                    Bacharel
+                  </span>
+                  <span 
+                    class="badge filter-badge filter-toggle" 
+                    x-bind:class="{ 'filter-active': isFilterActive('vinculo', 'Lato Sensu') }"
+                    x-on:click="toggleFilterVinculo('Lato Sensu')"
+                    style="background-color: #e91e63; color: white; padding: 4px 8px;"
+                  >
+                    Lato Sensu
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <h2 class="h6 text-uppercase text-muted mb-2">Modalidade</h2>
+                <div class="legend-group d-flex flex-wrap gap-3 align-items-center">
+                  <span 
+                    class="badge filter-badge filter-toggle d-inline-flex align-items-center gap-1" 
+                    x-bind:class="{ 'filter-active': isFilterActive('modalidade', 'Presencial') }"
+                    x-on:click="toggleFilterModalidade('Presencial')"
+                    style="background-color: #4caf50; color: white; padding: 4px 8px;"
+                  >
+                    <i class="bi bi-building" style="font-size: 14px;"></i>
+                    Presencial
+                  </span>
+                  <span 
+                    class="badge filter-badge filter-toggle d-inline-flex align-items-center gap-1" 
+                    x-bind:class="{ 'filter-active': isFilterActive('modalidade', 'Remoto') }"
+                    x-on:click="toggleFilterModalidade('Remoto')"
+                    style="background-color: #3f51b5; color: white; padding: 4px 8px;"
+                  >
+                    <i class="bi bi-house" style="font-size: 14px;"></i>
+                    Remoto
+                  </span>
+                  <span 
+                    class="badge filter-badge filter-toggle d-inline-flex align-items-center gap-1" 
+                    x-bind:class="{ 'filter-active': isFilterActive('modalidade', 'Híbrido') }"
+                    x-on:click="toggleFilterModalidade('Híbrido')"
+                    style="background-color: #ffc107; color: #333; padding: 4px 8px;"
+                  >
+                    <i class="bi bi-arrow-left-right" style="font-size: 14px;"></i>
+                    Híbrido
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- Timeline -->
+        <section class="timeline-section">
+          <div class="container">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h3 class="h5 mb-4">Linha do Tempo</h3>
+                
+                <div x-show="loading" class="text-center py-5">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Carregando...</span>
+                  </div>
+                </div>
+    
+                <div x-show="!loading && groupedRows.length === 0" class="text-center py-5">
+                  <i class="bi bi-inbox fs-1 text-muted"></i>
+                  <p class="text-muted mt-3">Nenhum evento encontrado com os filtros selecionados.</p>
+                </div>
+    
+                <div id="d3-timeline" x-show="!loading && groupedRows.length > 0"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+    <!-- Resumo Profissional -->
+    <section class="summary-section py-4" x-show="profile || summary" x-cloak>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-12">
+            <div class="card shadow-sm professional-summary">
+              <div class="card-body">
+                <div class="row text-center gy-4" x-show="summary">
+                  <div class="col-md-4">
+                    <div class="summary-chart-container">
+                      <h5 class="mb-3">Experiências Profissionais</h5>
+                      <div id="chart-professional" style="width: 100%; height: 250px;"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="summary-chart-container">
+                      <h5 class="mb-3">Formações Acadêmicas</h5>
+                      <div id="chart-academic" style="width: 100%; height: 250px;"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="summary-chart-container">
+                      <h5 class="mb-3">Modalidades de Trabalho</h5>
+                      <div id="chart-modality" style="width: 100%; height: 250px;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Modal Detalhes -->
+    <div class="modal fade" id="eventModal" tabindex="-1" x-show="selectedEvent" x-cloak>
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content" x-show="selectedEvent">
+          <div class="modal-header border-bottom">
+            <!-- Header com logo e título -->
+            <div class="d-flex align-items-center gap-3 w-100 me-3">
+              <!-- Logo da Instituição -->
+              <div x-show="selectedEvent?.logo_url" class="flex-shrink-0">
+                <img 
+                  :src="selectedEvent?.logo_url" 
+                  :alt="selectedEvent?.instituicao"
+                  class="event-logo"
+                  style="width: 60px; height: 60px; object-fit: contain; border-radius: 8px; background: #f8f9fa; padding: 4px;"
+                >
+              </div>
+              <!-- Nome da Instituição e Título -->
+              <div class="flex-grow-1 min-w-0">
+                <h5 class="modal-title mb-1" style="font-size: 1.1rem; font-weight: 600;" x-text="selectedEvent?.instituicao"></h5>
+                <p class="mb-0 text-muted small" style="font-size: 0.9rem;" x-text="selectedEvent?.titulo || selectedEvent?.curso"></p>
+              </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+          
+          <div class="modal-body" x-show="selectedEvent" style="padding: 1.5rem;">
+            <!-- Informações Principais -->
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <div class="info-item">
+                  <i class="bi bi-calendar3 text-primary me-2"></i>
+                  <strong>Período:</strong>
+                  <span x-text="formatDateRange(selectedEvent?.data_inicio, selectedEvent?.data_fim, selectedEvent?.atual)"></span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-item">
+                  <i class="bi bi-geo-alt text-primary me-2"></i>
+                  <strong>Local:</strong>
+                  <span x-text="selectedEvent?.local || 'Não informado'"></span>
+                </div>
+              </div>
+              <div class="col-md-6" x-show="selectedEvent?.tipo_local">
+                <div class="info-item">
+                  <i 
+                    class="bi me-2" 
+                    :class="{
+                      'bi-building text-success': selectedEvent?.tipo_local === 'Presencial',
+                      'bi-house text-info': selectedEvent?.tipo_local === 'Remoto' || selectedEvent?.tipo_local === 'Home office',
+                      'bi-arrow-left-right text-warning': selectedEvent?.tipo_local === 'Híbrido' || selectedEvent?.tipo_local === 'Hibrido'
+                    }"
+                  ></i>
+                  <strong>Modalidade:</strong>
+                  <span x-text="selectedEvent?.tipo_local === 'Home office' ? 'Remoto' : selectedEvent?.tipo_local"></span>
+                </div>
+              </div>
+              <div class="col-md-6" x-show="selectedEvent?.regime">
+                <div class="info-item">
+                  <i class="bi bi-briefcase text-primary me-2"></i>
+                  <strong>Vínculo:</strong>
+                  <span x-text="selectedEvent?.regime"></span>
+                </div>
+              </div>
+              <div class="col-md-6" x-show="selectedEvent?.tipo === 'academico' && selectedEvent?.tipo_academico">
+                <div class="info-item">
+                  <i class="bi bi-mortarboard text-primary me-2"></i>
+                  <strong>Nível acadêmico:</strong>
+                  <span x-text="selectedEvent?.tipo_academico"></span>
+                </div>
+              </div>
+              <div class="col-md-6" x-show="selectedEvent?.categoria_profissional && selectedEvent?.categoria_profissional !== 'TODOS'">
+                <div class="info-item">
+                  <i class="bi bi-tag text-primary me-2"></i>
+                  <strong>Categoria:</strong>
+                  <span class="badge bg-primary" x-text="selectedEvent?.categoria_profissional"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Descrição -->
+            <div x-show="selectedEvent?.descricao" class="mb-4">
+              <h6 class="mb-2">
+                <i class="bi bi-file-text text-primary me-2"></i>
+                <span x-text="selectedEvent?.tipo === 'profissional' ? 'Atividades Realizadas' : 'Sobre o Curso'"></span>
+              </h6>
+              <p class="text-muted mb-0" style="line-height: 1.6;" x-text="selectedEvent?.descricao"></p>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="d-flex flex-wrap gap-2 mb-4" x-show="selectedEvent">
+              <!-- Botão Ver Imagens (Profissional) -->
+              <button 
+                x-show="hasImages()"
+                type="button" 
+                class="btn btn-info"
+                x-on:click="scrollToSection('imagens-section')"
+              >
+                <i class="bi bi-images me-2"></i>
+                Ver Imagens (<span x-text="selectedEvent && selectedEvent.imagens_urls ? selectedEvent.imagens_urls.length : 0"></span>)
+              </button>
+            </div>
+
+            <!-- Projetos Relacionados -->
+            <div id="projetos-section" x-show="selectedEventProjects && selectedEventProjects.length > 0" class="mb-4">
+              <hr class="my-4">
+              <h6 class="mb-3">
+                <i class="bi bi-folder2 text-primary me-2"></i>
+                Projetos Relacionados
+              </h6>
+              <div class="row g-3">
+                <template x-for="projeto in selectedEventProjects" :key="projeto.project_id">
+                  <div class="col-md-6">
+                    <div class="card h-100 border shadow-sm">
+                      <!-- Imagem do Projeto (se houver) -->
+                      <div x-show="projeto.project_imagem_url || projeto.project_imagem" class="project-image-container" style="height: 150px; overflow: hidden; background: #f8f9fa;">
+                        <img 
+                          :src="projeto.project_imagem_url || projeto.project_imagem" 
+                          :alt="projeto.project_nome"
+                          class="w-100 h-100"
+                          style="object-fit: cover; cursor: pointer;"
+                          @click="window.open(projeto.project_link || projeto.project_url || projeto.project_github || projeto.link_projeto || projeto.link_github, '_blank')"
+                          @error="$el.style.display='none'"
+                        >
+                      </div>
+                      
+                      <!-- Placeholder para imagem futura (quando não houver) -->
+                      <div x-show="!projeto.project_imagem_url && !projeto.project_imagem" class="project-image-placeholder" style="height: 150px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); display: flex; align-items: center; justify-content: center;">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <!-- Retângulo principal (representando imagem) -->
+                          <rect x="15" y="20" width="50" height="40" rx="4" fill="#dee2e6" stroke="#ced4da" stroke-width="2" stroke-dasharray="4 4" opacity="0.6"/>
+                          <!-- Montanha (ícone de imagem) -->
+                          <path d="M25 45 L35 35 L45 40 L50 30 L55 45 L55 55 L25 55 Z" fill="#ced4da" opacity="0.4"/>
+                          <!-- Sol (ícone de imagem) -->
+                          <circle cx="60" cy="30" r="6" fill="#ced4da" opacity="0.4"/>
+                          <!-- Linhas indicando "sem imagem" -->
+                          <line x1="20" y1="25" x2="60" y2="55" stroke="#adb5bd" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                          <line x1="60" y1="25" x2="20" y2="55" stroke="#adb5bd" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                          <!-- Texto "Sem imagem" -->
+                          <text x="40" y="70" font-family="Arial, sans-serif" font-size="10" fill="#adb5bd" text-anchor="middle" font-weight="500">Sem imagem</text>
+                        </svg>
+                      </div>
+                      
+                      <div class="card-body" style="padding: 0.75rem;">
+                        <h6 class="card-title mb-1" style="font-weight: 600; font-size: 0.95rem;" x-text="projeto.project_nome"></h6>
+                        <p class="card-text small text-muted mb-2" style="line-height: 1.4; font-size: 0.8rem;" x-text="projeto.project_descricao"></p>
+                        
+                        <!-- Tecnologias -->
+                        <div class="mb-2" x-show="projeto.project_tecnologias && Array.isArray(projeto.project_tecnologias) && projeto.project_tecnologias.length > 0">
+                          <div class="d-flex flex-wrap gap-1">
+                            <template x-for="(tech, techIndex) in projeto.project_tecnologias.slice(0, 5)" :key="techIndex">
+                              <span class="badge bg-primary" style="font-size: 0.65rem; padding: 0.2rem 0.4rem;">
+                                <i class="bi bi-code-slash me-1"></i>
+                                <span x-text="tech"></span>
+                              </span>
+                            </template>
+                            <span x-show="projeto.project_tecnologias.length > 5" class="badge bg-secondary" style="font-size: 0.65rem; padding: 0.2rem 0.4rem;">
+                              +<span x-text="projeto.project_tecnologias.length - 5"></span>
+                            </span>
+                          </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                          <small class="text-muted" style="font-size: 0.75rem;">
+                            <i class="bi bi-calendar3 me-1"></i>
+                            <span x-text="projeto.project_data"></span>
+                          </small>
+                          
+                          <!-- Botão Ver Projeto -->
+                          <a 
+                            x-show="projeto.project_link || projeto.project_url || projeto.project_github || projeto.link_projeto || projeto.link_github"
+                            :href="projeto.project_link || projeto.project_url || projeto.project_github || projeto.link_projeto || projeto.link_github"
+                            target="_blank"
+                            class="btn btn-sm btn-primary"
+                            style="font-size: 0.7rem; padding: 0.25rem 0.5rem;"
+                          >
+                            <i class="bi" :class="(projeto.project_github || projeto.link_github) ? 'bi-github' : 'bi-box-arrow-up-right'"></i>
+                            <span x-text="(projeto.project_github || projeto.link_github) ? 'Ver no GitHub' : 'Ver Projeto'"></span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+            
+            <!-- Galeria de Certificados (Acadêmico) -->
+            <div id="certificados-section" x-show="selectedEvent?.tipo === 'academico' && selectedEvent?.imagens_urls && selectedEvent?.imagens_urls.length > 0" class="mb-4">
+              <hr class="my-4">
+              <h6 class="mb-3">
+                <i class="bi bi-award text-success me-2"></i>
+                Certificados e Fotos
+              </h6>
+              <div class="row g-3">
+                <template x-for="(file, index) in selectedEvent?.imagens_urls" :key="index">
+                  <div class="col-md-4">
+                    <div class="card border shadow-sm file-card">
+                      <!-- PDF -->
+                      <div x-show="isPDF(file)" x-cloak>
+                        <div class="pdf-preview" style="height: 120px; background: #f8f9fa; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+                          <i class="bi bi-file-earmark-pdf-fill" style="font-size: 40px; color: #dc3545;"></i>
+                          <p class="mt-1 mb-0 small text-muted text-center px-2" style="font-size: 0.7rem; line-height: 1.2;" x-text="getFileName(file)"></p>
+                          <div class="pdf-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.05); opacity: 0; transition: opacity 0.2s;"></div>
+                        </div>
+                        <div class="card-body p-2 text-center">
+                          <a :href="file" target="_blank" class="btn btn-sm btn-danger w-100" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">
+                            <i class="bi bi-download me-1"></i>
+                            Abrir PDF
+                          </a>
+                        </div>
+                      </div>
+                      <!-- Imagem -->
+                      <div x-show="!isPDF(file)" x-cloak>
+                        <img 
+                          :src="file" 
+                          :alt="'Certificado ' + (index + 1)"
+                          class="card-img-top"
+                          style="height: 120px; object-fit: cover; cursor: pointer;"
+                          @click="window.open(file, '_blank')"
+                          @error="$el.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23f8f9fa%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-family=%22Arial%22 font-size=%2214%22%3EImagem não encontrada%3C/text%3E%3C/svg%3E'"
+                        >
+                        <div class="card-body p-2 text-center">
+                          <small class="text-muted" style="font-size: 0.7rem;">Certificado <span x-text="index + 1"></span></small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+            
+            <!-- Galeria de Imagens (Profissional) -->
+            <div id="imagens-section" x-show="selectedEvent?.tipo === 'profissional' && selectedEvent?.imagens_urls && selectedEvent?.imagens_urls.length > 0" class="mb-4">
+              <hr class="my-4">
+              <h6 class="mb-3">
+                <i class="bi bi-images text-info me-2"></i>
+                Imagens e Materiais
+              </h6>
+              <div class="row g-3">
+                <template x-for="(file, index) in selectedEvent?.imagens_urls" :key="index">
+                  <div class="col-md-4">
+                    <div class="card border shadow-sm file-card">
+                      <!-- PDF -->
+                      <div x-show="isPDF(file)" x-cloak>
+                        <div class="pdf-preview" style="height: 120px; background: #f8f9fa; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+                          <i class="bi bi-file-earmark-pdf-fill" style="font-size: 40px; color: #dc3545;"></i>
+                          <p class="mt-1 mb-0 small text-muted text-center px-2" style="font-size: 0.7rem; line-height: 1.2;" x-text="getFileName(file)"></p>
+                          <div class="pdf-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.05); opacity: 0; transition: opacity 0.2s;"></div>
+                        </div>
+                        <div class="card-body p-2 text-center">
+                          <a :href="file" target="_blank" class="btn btn-sm btn-danger w-100" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">
+                            <i class="bi bi-download me-1"></i>
+                            Abrir PDF
+                          </a>
+                        </div>
+                      </div>
+                      <!-- Imagem -->
+                      <div x-show="!isPDF(file)" x-cloak>
+                        <img 
+                          :src="file" 
+                          :alt="'Imagem ' + (index + 1)"
+                          class="card-img-top"
+                          style="height: 120px; object-fit: cover; cursor: pointer;"
+                          @click="window.open(file, '_blank')"
+                          @error="$el.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23f8f9fa%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-family=%22Arial%22 font-size=%2214%22%3EImagem não encontrada%3C/text%3E%3C/svg%3E'"
+                        >
+                        <div class="card-body p-2 text-center">
+                          <small class="text-muted" style="font-size: 0.7rem;">Imagem <span x-text="index + 1"></span></small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
+          
+          <div class="modal-footer border-top" style="padding: 1rem 1.5rem;">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              <i class="bi bi-x-lg me-2"></i>
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer Component -->
+    <div id="footer-placeholder"></div>
+  </div>
+
+  <!-- Mapa de logos das instituições (opcional, antes do D3) -->
+  <script src="assets/js/institution-logos.js"></script>
+
+  <!-- D3.js para o gráfico da timeline -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Scripts (deve carregar ANTES do Alpine.js) -->
+  <script type="module">
+    import('./assets/js/historia.js').then(() => {
+      console.log('✅ historiaTimeline carregado');
+      setTimeout(() => {
+        if (window.historiaTimeline) {
+          console.log('✅ historiaTimeline confirmado, carregando Alpine.js');
+          const script = document.createElement('script');
+          script.src = 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js';
+          script.defer = true;
+          document.body.appendChild(script);
+        } else {
+          console.error('❌ historiaTimeline não foi registrado!');
+        }
+      }, 50);
+    }).catch(err => {
+      console.error('❌ Erro ao carregar historia.js:', err);
+    });
+  </script>
+  
+  <!-- Components (deve carregar antes do Alpine.js) -->
+  <script src="assets/js/components.js"></script>
+  
+  <!-- Menu Secreto Admin -->
+  <script src="assets/js/secret-menu.js"></script>
+</body>
+</html>
+

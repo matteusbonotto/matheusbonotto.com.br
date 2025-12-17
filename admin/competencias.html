@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competências - Admin</title>
+  
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  
+  <!-- Configuração -->
+  <script src="../config.js"></script>
+</head>
+<body>
+  <div x-data="skillsCRUD()" x-init="initAdmin()">
+    <!-- Sidebar -->
+    <nav class="sidebar" x-show="sidebarOpen || window.innerWidth >= 992">
+      <div class="sidebar-header">
+        <h4>Admin Panel</h4>
+        <button class="btn-close btn-close-white d-lg-none" @click="sidebarOpen = false"></button>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+        <li><a href="perfil.html"><i class="bi bi-person"></i> Perfil</a></li>
+        <li><a href="projetos.html"><i class="bi bi-folder"></i> Projetos</a></li>
+        <li><a href="competencias.html" class="active"><i class="bi bi-star"></i> Competências</a></li>
+        <li><a href="conquistas.html"><i class="bi bi-trophy"></i> Conquistas</a></li>
+        <li><a href="historico.html"><i class="bi bi-clock-history"></i> Histórico</a></li>
+        <li><a href="mensagens.html"><i class="bi bi-envelope"></i> Mensagens</a></li>
+      </ul>
+      <div class="sidebar-footer">
+        <button class="btn btn-sm btn-danger w-100" @click="handleLogout()">
+          <i class="bi bi-box-arrow-right"></i> Sair
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <header class="admin-header">
+        <button class="btn btn-outline-primary d-lg-none" @click="sidebarOpen = !sidebarOpen">
+          <i class="bi bi-list"></i>
+        </button>
+        <h1>Gerenciar Competências</h1>
+      </header>
+
+      <div class="content p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <input 
+            type="text" 
+            class="form-control" 
+            style="max-width: 300px;"
+            x-model="searchQuery"
+            @input="filterSkills()"
+            placeholder="Buscar..."
+          >
+          <button class="btn btn-primary" @click="openModal('create')">
+            <i class="bi bi-plus-circle"></i> Nova Competência
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Nível</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template x-for="skill in filteredSkills" :key="skill.id">
+                    <tr>
+                      <td x-text="skill.nome"></td>
+                      <td>
+                        <span class="badge bg-secondary" x-text="skill.categoria?.toUpperCase()"></span>
+                      </td>
+                      <td>
+                        <div class="progress" style="height: 20px; width: 100px;">
+                          <div class="progress-bar" :style="'width: ' + skill.nivel + '%'" x-text="skill.nivel + '%'"></div>
+                        </div>
+                      </td>
+                      <td>
+                        <span :class="skill.desbloqueado ? 'badge bg-success' : 'badge bg-secondary'">
+                          <span x-text="skill.desbloqueado ? 'Desbloqueado' : 'Bloqueado'"></span>
+                        </span>
+                      </td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary" @click="editSkill(skill.id)">
+                          <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" @click="deleteSkill(skill.id)">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="skillModal" tabindex="-1" x-show="showModal" x-cloak>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" x-text="form.id ? 'Editar Competência' : 'Nova Competência'"></h5>
+            <button type="button" class="btn-close" @click="closeModal()"></button>
+          </div>
+          <form @submit.prevent="saveSkill()">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">Nome *</label>
+                <input type="text" class="form-control" x-model="form.nome" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Categoria *</label>
+                <select class="form-select" x-model="form.categoria" required>
+                  <option value="">Selecione...</option>
+                  <option value="qa">QA</option>
+                  <option value="dev">DEV</option>
+                  <option value="ux">UX</option>
+                  <option value="data">Data</option>
+                  <option value="devops">DevOps</option>
+                  <option value="infra">Infra</option>
+                  <option value="idiomas">Idiomas</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Nível (0-100)</label>
+                <input type="number" class="form-control" x-model="form.nivel" min="0" max="100" value="0">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Parent ID (Habilidade Pai)</label>
+                <select class="form-select" x-model="form.parent_id">
+                  <option value="">Nenhuma (Raiz)</option>
+                  <template x-for="skill in skills" :key="skill.id">
+                    <option :value="skill.id" x-text="skill.nome"></option>
+                  </template>
+                </select>
+                <small class="text-muted">Deixe vazio para criar uma habilidade raiz</small>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Ícone (Bootstrap Icons)</label>
+                <input type="text" class="form-control" x-model="form.icon" placeholder="bi-star ou bi-code-slash">
+                <small class="text-muted">Nome do ícone do Bootstrap Icons (sem o prefixo "bi-")</small>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Ordem</label>
+                <input type="number" class="form-control" x-model="form.ordem" value="0">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Descrição</label>
+                <textarea class="form-control" rows="3" x-model="form.descricao"></textarea>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" x-model="form.desbloqueado" id="desbloqueado">
+                <label class="form-check-label" for="desbloqueado">Desbloqueado</label>
+              </div>
+              <div x-show="error" class="alert alert-danger mt-3" x-text="error"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" @click="closeModal()">Cancelar</button>
+              <button type="submit" class="btn btn-primary" :disabled="loading">
+                <span x-show="!loading">Salvar</span>
+                <span x-show="loading">Salvando...</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script type="module" src="../assets/js/admin-competencias.js"></script>
+</body>
+</html>
+

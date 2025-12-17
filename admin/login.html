@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Admin</title>
+  
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  
+  <!-- Alpine.js x-cloak -->
+  <style>
+    [x-cloak] { display: none !important; }
+  </style>
+  
+  <!-- Configuração -->
+  <script src="../config.js"></script>
+  
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+  <div x-data="loginPage()" x-init="init()">
+    <!-- Tela de Login -->
+    <div class="login-screen">
+      <div class="login-container">
+        <div class="login-card">
+          <div class="text-center mb-4">
+            <i class="bi bi-shield-lock-fill text-primary" style="font-size: 4rem;"></i>
+            <h2 class="mt-3">God Mode</h2>
+            <p class="text-muted">Painel Administrativo</p>
+          </div>
+          
+          <div x-show="loginError" class="alert alert-danger" role="alert" x-cloak>
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            <span x-text="loginError"></span>
+          </div>
+          
+          <div x-show="isBlocked" class="alert alert-warning" role="alert" x-cloak>
+            <i class="bi bi-shield-exclamation me-2"></i>
+            <strong>Muitas tentativas falhadas!</strong><br>
+            <span x-text="`Aguarde ${blockedUntil > 0 ? Math.ceil(blockedUntil / 1000) : 0} segundos antes de tentar novamente.`"></span>
+          </div>
+          
+          <form @submit.prevent="login()">
+            <div class="mb-3">
+              <label for="email" class="form-label">
+                <i class="bi bi-envelope me-1"></i>
+                Email
+              </label>
+              <input 
+                type="email" 
+                class="form-control" 
+                id="email"
+                x-model="loginForm.email"
+                required
+                placeholder="seu@email.com"
+                autocomplete="email"
+                :disabled="loading"
+              >
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">
+                <i class="bi bi-lock me-1"></i>
+                Senha
+              </label>
+              <input 
+                type="password" 
+                class="form-control" 
+                id="password"
+                x-model="loginForm.password"
+                required
+                placeholder="Digite sua senha"
+                autocomplete="current-password"
+                :disabled="loading"
+              >
+            </div>
+
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="remember" x-model="rememberMe">
+              <label class="form-check-label" for="remember">
+                Lembrar-me
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" :disabled="loading || isBlocked">
+              <span x-show="loading" class="spinner-border spinner-border-sm me-2"></span>
+              <i x-show="!loading && !isBlocked" class="bi bi-box-arrow-in-right me-2"></i>
+              <i x-show="isBlocked" class="bi bi-lock me-2"></i>
+              <span x-show="!isBlocked">Entrar</span>
+              <span x-show="isBlocked">Bloqueado</span>
+            </button>
+            
+            <div x-show="failedAttempts > 0 && !isBlocked" class="mt-2 text-center">
+              <small class="text-muted">
+                <i class="bi bi-info-circle me-1"></i>
+                Tentativas falhadas: <span x-text="failedAttempts"></span>/5
+              </small>
+            </div>
+          </form>
+          
+          <div class="text-center mt-4">
+            <a href="../index.html" class="text-muted text-decoration-none">
+              <i class="bi bi-arrow-left me-1"></i>
+              Voltar ao site
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alpine.js (deve carregar antes do script inline) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Login Script -->
+  <script>
+    // Inicializar Supabase
+    (function() {
+      function initSupabase() {
+        if (typeof window.supabase === 'undefined' || !window.CONFIG) {
+          setTimeout(initSupabase, 100);
+          return;
+        }
+        
+        if (window.CONFIG.SUPABASE_URL && window.CONFIG.SUPABASE_ANON_KEY) {
+          window.__supabaseClient = window.supabase.createClient(
+            window.CONFIG.SUPABASE_URL,
+            window.CONFIG.SUPABASE_ANON_KEY
+          );
+          console.log('✅ Supabase inicializado');
+        }
+      }
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSupabase);
+      } else {
+        initSupabase();
+      }
+    })();
+
+    function loginPage() {
+      return {
+        loading: false,
+        loginError: null,
+        rememberMe: false,
+        failedAttempts: 0,
+        isBlocked: false,
+        blockedUntil: 0,
+        lastAttemptTime: null,
+        loginForm: {
+          email: '',
+          password: ''
+        },
+        
+        // Função para sanitizar email
+        sanitizeEmail(email) {
+          if (!email) return '';
+          // Remover espaços e converter para minúsculas
+          return email.trim().toLowerCase();
+        },
+        
+        // Função para validar email
+        validateEmail(email) {
+          if (!email) return false;
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return emailRegex.test(email) && email.length <= 255;
+        },
+        
+        // Função para verificar se está bloqueado
+        checkBlocked() {
+          const now = Date.now();
+          const storageKey = 'admin_login_blocked';
+          const attemptsKey = 'admin_login_attempts';
+          const lastAttemptKey = 'admin_login_last_attempt';
+          
+          // Recuperar dados do localStorage
+          const blockedUntil = parseInt(localStorage.getItem(storageKey) || '0');
+          const attempts = parseInt(localStorage.getItem(attemptsKey) || '0');
+          const lastAttempt = parseInt(localStorage.getItem(lastAttemptKey) || '0');
+          
+          // Se passou mais de 15 minutos desde a última tentativa, resetar contador
+          if (now - lastAttempt > 15 * 60 * 1000) {
+            localStorage.removeItem(attemptsKey);
+            localStorage.removeItem(storageKey);
+            this.failedAttempts = 0;
+            this.isBlocked = false;
+            return false;
+          }
+          
+          // Verificar se ainda está bloqueado
+          if (blockedUntil > now) {
+            this.isBlocked = true;
+            this.blockedUntil = blockedUntil - now;
+            this.failedAttempts = attempts;
+            
+            // Atualizar contador de bloqueio
+            const interval = setInterval(() => {
+              const remaining = parseInt(localStorage.getItem(storageKey) || '0') - Date.now();
+              if (remaining <= 0) {
+                this.isBlocked = false;
+                this.blockedUntil = 0;
+                localStorage.removeItem(storageKey);
+                clearInterval(interval);
+              } else {
+                this.blockedUntil = remaining;
+              }
+            }, 1000);
+            
+            return true;
+          }
+          
+          this.failedAttempts = attempts;
+          return false;
+        },
+        
+        // Função para registrar tentativa falhada
+        recordFailedAttempt() {
+          const attemptsKey = 'admin_login_attempts';
+          const lastAttemptKey = 'admin_login_last_attempt';
+          const storageKey = 'admin_login_blocked';
+          
+          const attempts = parseInt(localStorage.getItem(attemptsKey) || '0') + 1;
+          const now = Date.now();
+          
+          localStorage.setItem(attemptsKey, attempts.toString());
+          localStorage.setItem(lastAttemptKey, now.toString());
+          
+          this.failedAttempts = attempts;
+          this.lastAttemptTime = now;
+          
+          // Bloquear por 15 minutos após 5 tentativas falhadas
+          if (attempts >= 5) {
+            const blockUntil = now + (15 * 60 * 1000); // 15 minutos
+            localStorage.setItem(storageKey, blockUntil.toString());
+            this.isBlocked = true;
+            this.blockedUntil = blockUntil - now;
+            
+            // Log de segurança
+            console.warn('🚨 BLOQUEIO DE SEGURANÇA: Muitas tentativas falhadas de login');
+            console.warn('Tentativas:', attempts);
+            console.warn('Bloqueado até:', new Date(blockUntil).toLocaleString());
+          }
+        },
+        
+        // Função para limpar tentativas após login bem-sucedido
+        clearFailedAttempts() {
+          localStorage.removeItem('admin_login_attempts');
+          localStorage.removeItem('admin_login_last_attempt');
+          localStorage.removeItem('admin_login_blocked');
+          this.failedAttempts = 0;
+          this.isBlocked = false;
+        },
+        
+        async init() {
+          // Verificar se está bloqueado
+          if (this.checkBlocked()) {
+            return;
+          }
+          
+          // Aguardar Supabase inicializar
+          let attempts = 0;
+          while (!window.__supabaseClient && attempts < 50) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+            attempts++;
+          }
+          
+          if (!window.__supabaseClient) {
+            console.error('❌ Supabase não inicializado');
+            return;
+          }
+          
+          // Verificar se já está autenticado
+          const { data: { session }, error } = await window.__supabaseClient.auth.getSession();
+          
+          if (error) {
+            console.error('❌ Erro ao verificar sessão:', error);
+            return;
+          }
+          
+          if (session && session.user) {
+            // Verificar se a sessão não expirou (timeout de 1 hora)
+            const sessionAge = Date.now() - (session.expires_at * 1000);
+            const maxSessionAge = 60 * 60 * 1000; // 1 hora
+            
+            if (sessionAge > maxSessionAge) {
+              console.warn('⚠️ Sessão expirada, fazendo logout...');
+              await window.__supabaseClient.auth.signOut();
+              return;
+            }
+            
+            // Verificar email autorizado antes de redirecionar
+            const authorizedEmail = window.CONFIG?.ADMIN_EMAIL || 'matteusbonotto@gmail.com';
+            if (session.user.email !== authorizedEmail) {
+              await window.__supabaseClient.auth.signOut();
+              return;
+            }
+            
+            console.log('✅ Sessão existente encontrada, redirecionando...');
+            window.location.href = 'godmode.html';
+            return;
+          }
+        },
+        
+        async login() {
+          try {
+            // Verificar se está bloqueado
+            if (this.checkBlocked()) {
+              this.loginError = 'Muitas tentativas falhadas. Aguarde antes de tentar novamente.';
+              return;
+            }
+            
+            this.loading = true;
+            this.loginError = null;
+            
+            if (!window.__supabaseClient) {
+              throw new Error('Supabase não inicializado. Aguarde alguns segundos e tente novamente.');
+            }
+            
+            // Sanitizar e validar email
+            const sanitizedEmail = this.sanitizeEmail(this.loginForm.email);
+            if (!this.validateEmail(sanitizedEmail)) {
+              throw new Error('Por favor, informe um email válido.');
+            }
+            
+            // Validar senha (mínimo 8 caracteres)
+            if (!this.loginForm.password || this.loginForm.password.length < 8) {
+              throw new Error('A senha deve ter no mínimo 8 caracteres.');
+            }
+            
+            // Verificar origem da requisição (proteção básica contra CSRF)
+            const origin = window.location.origin;
+            if (!origin || origin.includes('localhost') === false && origin.includes('127.0.0.1') === false) {
+              // Em produção, validar domínio específico
+              console.warn('⚠️ Origem da requisição:', origin);
+            }
+            
+            // Delay após tentativas falhadas (proteção contra brute force)
+            if (this.failedAttempts > 0) {
+              const delay = Math.min(this.failedAttempts * 1000, 5000); // Máximo 5 segundos
+              await new Promise(resolve => setTimeout(resolve, delay));
+            }
+            
+            // Fazer login com email e senha
+            const { data, error } = await window.__supabaseClient.auth.signInWithPassword({
+              email: sanitizedEmail,
+              password: this.loginForm.password
+            });
+            
+            if (error) {
+              // Registrar tentativa falhada
+              this.recordFailedAttempt();
+              
+              // Mensagens de erro mais amigáveis (sem expor detalhes)
+              if (error.message.includes('Invalid login credentials') || 
+                  error.message.includes('invalid') ||
+                  error.status === 400) {
+                // Log de segurança (sem expor credenciais)
+                console.warn('🚨 Tentativa de login falhada:', {
+                  email: sanitizedEmail.substring(0, 3) + '***',
+                  timestamp: new Date().toISOString(),
+                  attempts: this.failedAttempts
+                });
+                
+                throw new Error('Email ou senha incorretos. Verifique suas credenciais.');
+              }
+              
+              if (error.message.includes('Email not confirmed') ||
+                  error.message.includes('not confirmed')) {
+                throw new Error('Email não confirmado. Verifique sua caixa de entrada e confirme seu email antes de fazer login.');
+              }
+              
+              // Não expor detalhes do erro
+              throw new Error('Erro ao fazer login. Tente novamente.');
+            }
+            
+            // Verificar se o login foi bem-sucedido
+            if (data && data.session && data.user) {
+              // VALIDAÇÃO DE SEGURANÇA: Verificar se o email está autorizado
+              const authorizedEmail = window.CONFIG?.ADMIN_EMAIL || 'matteusbonotto@gmail.com';
+              const userEmail = data.user.email?.toLowerCase();
+              
+              if (userEmail !== authorizedEmail.toLowerCase()) {
+                console.warn('🚨 Tentativa de login com email não autorizado:', userEmail);
+                // Registrar como tentativa falhada
+                this.recordFailedAttempt();
+                // Fazer logout imediatamente
+                await window.__supabaseClient.auth.signOut();
+                throw new Error('Acesso negado. Este email não está autorizado para acessar o painel admin.');
+              }
+              
+              // Limpar tentativas falhadas após login bem-sucedido
+              this.clearFailedAttempts();
+              
+              // Log de segurança (login bem-sucedido)
+              console.log('✅ Login realizado com sucesso!', {
+                email: userEmail,
+                timestamp: new Date().toISOString(),
+                sessionId: data.session.access_token.substring(0, 20) + '***'
+              });
+              
+              // Redirecionar para o painel
+              window.location.href = 'godmode.html';
+            } else {
+              this.recordFailedAttempt();
+              throw new Error('Erro ao fazer login. Tente novamente.');
+            }
+            
+          } catch (error) {
+            this.loginError = error.message || 'Erro ao fazer login';
+            console.error('Erro no login:', error);
+          } finally {
+            this.loading = false;
+          }
+        }
+      };
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato - Matheus Bonotto</title>
+  
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/contato.css">
+  
+  <!-- Configuração -->
+  <script src="config.js"></script>
+  
+  <!-- Supabase UMD -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+  
+  <!-- Inicializar Supabase globalmente -->
+  <script>
+    (function() {
+      function initGlobalSupabase() {
+        if (typeof window.supabase === 'undefined') {
+          setTimeout(initGlobalSupabase, 100);
+          return;
+        }
+        if (!window.CONFIG || !window.CONFIG.SUPABASE_URL || !window.CONFIG.SUPABASE_ANON_KEY) {
+          setTimeout(initGlobalSupabase, 100);
+          return;
+        }
+        try {
+          let createClient = null;
+          if (window.supabase.createClient) {
+            createClient = window.supabase.createClient;
+          } else if (typeof window.supabase === 'function') {
+            createClient = window.supabase;
+          } else if (window.supabase.default && window.supabase.default.createClient) {
+            createClient = window.supabase.default.createClient;
+          }
+          if (createClient) {
+            window.__supabaseClient = createClient(window.CONFIG.SUPABASE_URL, window.CONFIG.SUPABASE_ANON_KEY);
+            console.log('✅ Supabase inicializado globalmente');
+          }
+        } catch (error) {
+          console.error('❌ Erro ao inicializar Supabase globalmente:', error);
+        }
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGlobalSupabase);
+      } else {
+        initGlobalSupabase();
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div x-data="contactForm()">
+    <!-- Header Component -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-background"></div>
+      <div class="container text-center position-relative">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            <i class="bi bi-envelope-fill me-3"></i>
+            Contato
+          </h1>
+          <p class="hero-subtitle">Entre em contato comigo</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card shadow-lg">
+              <div class="card-body p-5">
+                <h2 class="text-center mb-4">Envie uma Mensagem</h2>
+                <p class="text-center text-muted mb-4">
+                  Preencha o formulário abaixo e eu retornarei o mais breve possível.
+                </p>
+                
+                <form @submit.prevent="submitForm()">
+                  <div class="mb-3">
+                    <label for="nome" class="form-label">Nome *</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      id="nome"
+                      x-model="form.nome"
+                      placeholder="Seu nome completo"
+                      required
+                    >
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email *</label>
+                    <input 
+                      type="email" 
+                      class="form-control" 
+                      id="email"
+                      x-model="form.email"
+                      placeholder="seu-email@exemplo.com"
+                      required
+                    >
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="assunto" class="form-label">Assunto</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      id="assunto"
+                      x-model="form.assunto"
+                      placeholder="Assunto da mensagem"
+                    >
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="mensagem" class="form-label">Mensagem *</label>
+                    <textarea 
+                      class="form-control" 
+                      id="mensagem"
+                      x-model="form.mensagem"
+                      rows="6"
+                      placeholder="Sua mensagem..."
+                      required
+                    ></textarea>
+                  </div>
+                  
+                  <div x-show="error" x-cloak class="alert alert-danger" role="alert">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    <span x-text="error"></span>
+                  </div>
+                  
+                  <div x-show="success" x-cloak class="alert alert-success" role="alert">
+                    <i class="bi bi-check-circle"></i>
+                    <span x-text="successMessage"></span>
+                  </div>
+                  
+                  <div class="text-center">
+                    <button 
+                      type="submit" 
+                      class="btn btn-primary btn-lg"
+                      :disabled="loading"
+                    >
+                      <span x-show="!loading">
+                        <i class="bi bi-send"></i> Enviar Mensagem
+                      </span>
+                      <span x-show="loading">
+                        <span class="spinner-border spinner-border-sm me-2"></span>
+                        Enviando...
+                      </span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-4 mt-5">
+      <div class="container text-center">
+        <p>&copy; 2025 Matheus Bonotto. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Scripts (deve carregar ANTES do Alpine.js) -->
+  <script type="module">
+    import('./assets/js/contato.js').then(() => {
+      console.log('✅ contactForm carregado');
+      setTimeout(() => {
+        if (window.contactForm) {
+          console.log('✅ contactForm confirmado, carregando Alpine.js');
+          const script = document.createElement('script');
+          script.src = 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js';
+          script.defer = true;
+          document.body.appendChild(script);
+        } else {
+          console.error('❌ contactForm não foi registrado!');
+        }
+      }, 50);
+    }).catch(err => {
+      console.error('❌ Erro ao carregar contato.js:', err);
+    });
+  </script>
+  
+  <!-- Components (deve carregar antes do Alpine.js) -->
+  <script src="assets/js/components.js"></script>
+  
+  <!-- Menu Secreto Admin -->
+  <script src="assets/js/secret-menu.js"></script>
+</body>
+</html>
+

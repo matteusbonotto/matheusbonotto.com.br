@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="color-scheme" content="light" />
+        <meta name="print-mode" content="exact" />
+        <title>Currículo - Matheus Bonotto</title>
+        
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+            rel="stylesheet" />
+
+        <!-- CSS global do site -->
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/home.css">
+
+        <!-- CSS único do currículo -->
+        <link rel="stylesheet" href="assets/css/cv.css">
+
+        <!-- Configuração do Supabase -->
+        <script src="config.js"></script>
+        <!-- Supabase UMD -->
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+        <!-- Inicialização global do Supabase -->
+        <script>
+            (function () {
+                async function initGlobalSupabase() {
+                    if (!window.CONFIG || !window.CONFIG.SUPABASE_URL || !window.CONFIG.SUPABASE_ANON_KEY) {
+                        console.warn('CONFIG do Supabase não encontrada. Verifique config.js');
+                        return;
+                    }
+
+                    try {
+                        let createClient = null;
+                        if (window.supabase && window.supabase.createClient) {
+                            createClient = window.supabase.createClient;
+                        } else if (typeof window.supabase === 'function') {
+                            createClient = window.supabase;
+                        } else if (window.supabase && window.supabase.default && window.supabase.default.createClient) {
+                            createClient = window.supabase.default.createClient;
+                        }
+
+                        if (createClient) {
+                            window.__supabaseClient = createClient(
+                                window.CONFIG.SUPABASE_URL,
+                                window.CONFIG.SUPABASE_ANON_KEY
+                            );
+                            console.log('✅ Supabase inicializado no cv.html');
+                        } else {
+                            console.error('❌ Não foi possível obter createClient do Supabase UMD.');
+                        }
+                    } catch (error) {
+                        console.error('❌ Erro ao inicializar Supabase no cv.html:', error);
+                    }
+                }
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initGlobalSupabase);
+                } else {
+                    initGlobalSupabase();
+                }
+            })();
+        </script>
+    </head>
+    <body>
+        <div class="site-wrapper">
+            <!-- Header do site -->
+            <!-- Header Component -->
+            <div id="header-placeholder"></div>
+
+            <main class="">
+                <!-- Hero do currículo com título e controles (padrão do site) -->
+                <section class="hero-section cv-hero">
+                  <div class="hero-background"></div>
+                  <div class="container text-center position-relative">
+                    <div class="hero-content">
+                      <h1 class="hero-title">
+                        <i class="bi bi-file-earmark-person me-3"></i>
+                        Currículo
+                      </h1>
+                      <p class="hero-subtitle">Visualize ou baixe meu currículo completo</p>
+                    </div>
+                    <div class="cv-hero-actions justify-content-center mt-4">
+                      <div class="controls-container">
+                        <!-- Seletor de idioma -->
+                        <div class="language-selector">
+                          <div class="dropdown">
+                            <button
+                              class="btn dropdown-toggle language-dropdown"
+                              type="button" id="languageDropdown"
+                              data-bs-toggle="dropdown" aria-expanded="false">
+                              <img id="currentLanguageFlag"
+                                src="https://flagcdn.com/16x12/br.png" alt="BR"
+                                class="flag-icon" />
+                              <span id="currentLanguageText">Português</span>
+                            </button>
+                            <ul class="dropdown-menu"
+                              aria-labelledby="languageDropdown">
+                              <li><a class="dropdown-item" href="#"
+                                  onclick="changeLanguage('pt-br')">
+                                  <img src="https://flagcdn.com/16x12/br.png"
+                                    alt="BR"
+                                    class="flag-icon" />Português</a></li>
+                              <li><a class="dropdown-item" href="#"
+                                  onclick="changeLanguage('en')">
+                                  <img src="https://flagcdn.com/16x12/us.png"
+                                    alt="US"
+                                    class="flag-icon" />English</a></li>
+                              <li><a class="dropdown-item" href="#"
+                                  onclick="changeLanguage('es')">
+                                  <img src="https://flagcdn.com/16x12/es.png"
+                                    alt="ES"
+                                    class="flag-icon" />Español</a></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <!-- Botão Imprimir -->
+                        <button class="btn print-button ms-2" onclick="printDocument()">
+                          <i class="bi bi-printer"></i> <span id="printText">Imprimir</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <!-- Container dinâmico para páginas -->
+                <div id="curriculum-container">
+                    <!-- Páginas serão criadas dinamicamente pelo JavaScript -->
+                    <div class="loading-message text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p>Carregando currículo...</p>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer do site -->
+            <!-- Footer Component -->
+            <div id="footer-placeholder"></div>
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- JavaScript personalizado -->
+        <script src="assets/js/cv/translate.js"></script>
+        <script src="assets/js/cv/script.js"></script>
+        
+        <!-- Components (deve carregar antes do Alpine.js) -->
+        <script src="assets/js/components.js"></script>
+        
+        <!-- Menu Secreto Admin -->
+        <script src="assets/js/secret-menu.js"></script>
+    </body>
+</html>

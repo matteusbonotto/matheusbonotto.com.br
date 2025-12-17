@@ -1,0 +1,866 @@
+/* assets/css/cv.css
+ * CSS ÚNICO DO CURRÍCULO (layout, mobile e impressão)
+ * Organizado em:
+ * 1) Controles (idiomas / imprimir)
+ * 2) Layout A4 e cabeçalhos/rodapés do currículo
+ * 3) Conteúdo (seções, experiência, formação, idiomas, projetos etc.)
+ * 4) Responsivo (mobile)
+ * 5) Impressão
+ */
+
+/* ========================================
+   1) HERO / CONTROLES (IDIOMAS / IMPRIMIR)
+   ======================================== */
+
+/* Hero section está no main.css global */
+/* Ajustes específicos para o hero do CV */
+.cv-hero {
+  padding-bottom: 2rem !important;
+}
+
+.cv-hero .hero-content {
+  margin-bottom: 1.5rem;
+}
+
+.cv-hero-actions {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  margin-top: 1.5rem;
+}
+
+.loading-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  font-size: 14px;
+  color: #666;
+  padding: 2rem;
+  text-align: center;
+  font-style: italic;
+}
+
+.controls-container {
+  position: static;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  width: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  z-index: 1;
+}
+
+.language-selector {
+  border-radius: 5px;
+}
+
+.language-dropdown {
+  background-color: #ffffff !important;
+  border: none;
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  min-width: 140px;
+  color: #764ba2;
+}
+
+.language-dropdown:hover {
+  background-color: #e2e6ea !important;
+  border-color: transparent;
+  color: #764ba2 !important;
+}
+
+.language-dropdown:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+  border-color: transparent;
+}
+
+.language-dropdown::after {
+  content: none;
+}
+
+.flag-icon {
+  width: 16px;
+  height: 12px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.dropdown-menu {
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  min-width: 140px;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  color: #333 !important;
+  text-decoration: none !important;
+  font-size: 12px;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: #f8f9fa;
+  color: #333 !important;
+}
+
+.print-button {
+  background-color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #764ba2;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.print-button:hover {
+  background-color: #e2e6ea;
+  color: #764ba2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.bi.bi-printer {
+  color: inherit;
+}
+
+
+/* ========================================
+   2) LAYOUT A4 / CABEÇALHOS / RODAPÉS
+   ======================================== */
+
+#curriculum-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.a4-page {
+  width: 21cm;
+  height: 37cm; /* altura estendida para caber mais conteúdo */
+  background: #ffffff;
+  margin: 20px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding: 2.5cm 2cm 2cm 2cm;
+  page-break-after: always;
+  box-sizing: border-box;
+}
+
+.a4-page:last-child {
+  page-break-after: avoid;
+}
+
+.page-header {
+  display: none; /* usamos apenas o person-header como cabeçalho visual */
+}
+
+.person-header {
+  position: absolute;
+  top: 2.2cm;
+  left: 2cm;
+  right: 2cm;
+  height: auto;
+}
+
+.person-header .name-title {
+  font-size: 18pt;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 0.2cm;
+  line-height: 1.2;
+}
+
+.person-header .occupation {
+  font-size: 12pt;
+  color: #666666;
+  line-height: 1.2;
+}
+
+.person-header .age {
+  font-size: 10pt;
+  color: #777777;
+}
+
+.person-header .contact-info {
+  font-size: 10pt;
+  color: #666666;
+  line-height: 1.3;
+}
+
+.person-header .contact-line {
+  display: block;
+  white-space: nowrap;
+  margin-bottom: -16px;
+}
+
+.person-header .contact-info a {
+  color: #0066cc;
+  text-decoration: none;
+  display: inline;
+  bottom: 0;
+  top: 0;
+}
+
+.person-header .contact-info a:hover {
+  text-decoration: underline;
+}
+
+.contact-info-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.qr-code-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+}
+
+.qr-code-header {
+  width: 100px;
+  object-fit: contain;
+}
+
+#page1 #curriculum-content-1 {
+  margin-top: 3.0cm;
+}
+
+.a4-page:not(#page1) .person-header {
+  display: none;
+}
+
+.page-footer {
+  position: absolute;
+  bottom: 0.5cm;
+  left: 2cm;
+  right: 2cm;
+  height: 1cm;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 8pt;
+  color: #666666;
+  border-top: 1px solid #eeeeee;
+  padding-top: 0.3cm;
+}
+
+.page-number {
+  font-weight: bold;
+}
+
+
+/* ========================================
+   3) CONTEÚDO DO CURRÍCULO
+   ======================================== */
+
+.curriculum-section {
+  margin-bottom: 1cm;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  page-break-before: auto;
+  break-before: auto;
+}
+
+.curriculum-section:last-child {
+  margin-bottom: 0;
+}
+
+.curriculum-section h2 {
+  font-size: 12pt;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 0.4cm;
+  padding-bottom: 0.2cm;
+  border-bottom: 1px solid #cccccc;
+  text-transform: uppercase;
+}
+
+.keywords-section {
+  font-size: 9pt;
+  color: #555555;
+  margin-top: 0.3cm;
+  font-style: italic;
+}
+
+.keywords-section strong {
+  font-weight: bold;
+  color: #333333;
+}
+
+.justified-text {
+  text-align: justify;
+}
+
+/* Experiência profissional */
+
+.experience-item {
+  margin-bottom: 0.8cm;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  page-break-before: auto;
+  break-before: auto;
+}
+
+.experience-header {
+  margin-bottom: 0.3cm;
+}
+
+.experience-title {
+  font-size: 11pt;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 0.2cm;
+}
+
+.experience-period {
+  font-size: 9pt;
+  color: #666666;
+  font-style: italic;
+  margin-bottom: 0.2cm;
+}
+
+.experience-details {
+  font-size: 9pt;
+  color: #555555;
+  margin-bottom: 0.3cm;
+}
+
+.experience-description {
+  font-size: 10pt;
+  line-height: 1.4;
+  text-align: justify;
+}
+
+/* Formação acadêmica */
+
+.education-item {
+  margin-bottom: 0.6cm;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  page-break-before: auto;
+  break-before: auto;
+}
+
+.education-header {
+  margin-bottom: 0.3cm;
+}
+
+.education-title {
+  font-size: 11pt;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 0.2cm;
+}
+
+.education-period {
+  font-size: 9pt;
+  color: #666666;
+  font-style: italic;
+  margin-bottom: 0.2cm;
+}
+
+.education-description {
+  font-size: 10pt;
+  margin-top: 0.2cm;
+  text-align: justify;
+}
+
+/* Idiomas */
+
+.language-item {
+  margin-bottom: 0.4cm;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  page-break-before: auto;
+  break-before: auto;
+}
+
+.language-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5cm;
+  margin-bottom: 0.2cm;
+}
+
+.language-title {
+  font-size: 10pt;
+  font-weight: bold;
+  color: #333333;
+}
+
+.language-level {
+  font-size: 9pt;
+  color: #666666;
+}
+
+/* Certificações */
+
+.certification-item {
+  margin-bottom: 0.4cm;
+  page-break-inside: avoid;
+}
+
+.certification-name {
+  font-size: 10pt;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 0.1cm;
+}
+
+.certification-details {
+  font-size: 9pt;
+  color: #666666;
+}
+
+/* Projetos */
+
+.project-item {
+  margin-bottom: 0.6cm;
+  page-break-inside: avoid;
+  display: block;
+  visibility: visible;
+}
+
+.project-header {
+  margin-bottom: 0.3cm;
+  display: block;
+  visibility: visible;
+}
+
+.project-title {
+  font-size: 10pt;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 0.2cm;
+  display: block;
+  visibility: visible;
+}
+
+.project-period {
+  font-size: 9pt;
+  color: #666666;
+  font-style: italic;
+  margin-bottom: 0.2cm;
+  display: block;
+  visibility: visible;
+}
+
+.project-technologies {
+  font-size: 9pt;
+  color: #0066cc;
+  font-weight: bold;
+  margin-bottom: 0.2cm;
+  display: block;
+  visibility: visible;
+}
+
+.project-description {
+  font-size: 10pt;
+  text-align: justify;
+  display: block;
+  visibility: visible;
+}
+
+
+/* ========================================
+   4) ESTILOS DE TELA (inclui responsivo)
+   ======================================== */
+
+@media screen {
+  body {
+    background: linear-gradient(to bottom, #b9b9b9, #6e6e6e);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .a4-page {
+    width: 100%;
+    margin: 10px;
+    padding: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .cv-hero {
+    padding: 1rem 0.75rem;
+  }
+
+  .cv-hero .container {
+    gap: 0.5rem;
+  }
+
+  .cv-hero-actions {
+    justify-content: space-between;
+  }
+
+  .language-dropdown,
+  .print-button {
+    flex: 1;
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+    height: 38px;
+  }
+
+  #curriculum-container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+  }
+
+  .a4-page {
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    min-height: 100vh;
+    overflow-x: hidden !important;
+  }
+
+  .person-header {
+    position: static !important;
+    margin-bottom: 2rem !important;
+    padding: 1rem !important;
+    text-align: center !important;
+  }
+
+  .person-header .row {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .person-header .col-5,
+  .person-header .col-7 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .qr-code-container,
+  .qr-code-header {
+    display: none !important;
+  }
+
+  .person-header .name-title {
+    font-size: 1.6rem !important;
+  }
+
+  .person-header .occupation {
+    font-size: 1.1rem !important;
+  }
+
+  .experience-item,
+  .education-item,
+  .project-item,
+  .language-item,
+  .certification-item {
+    margin-bottom: 1.2rem !important;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 1rem;
+  }
+
+  .page-header,
+  .page-footer {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cv-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .language-dropdown,
+  .print-button {
+    width: 100%;
+  }
+}
+
+
+/* ========================================
+   5) IMPRESSÃO
+   ======================================== */
+
+@media print {
+  /* Forçar reset de todos os estilos de tela */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    overflow: visible !important;
+    font-size: 10pt !important;
+    line-height: 1.3 !important;
+    width: 210mm !important;
+    height: auto !important;
+    max-width: 210mm !important;
+    min-width: 210mm !important;
+    overflow-x: hidden !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  /* Esconder elementos de navegação e controles */
+  .header,
+  .footer,
+  .cv-hero,
+  .controls-container,
+  .loading-message {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Container do currículo - sempre A4 */
+  #curriculum-container {
+    width: 210mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    display: block !important;
+    max-width: 210mm !important;
+    min-width: 210mm !important;
+    overflow: visible !important;
+  }
+
+  /* Páginas A4 - forçar layout desktop na impressão */
+  .a4-page {
+    width: 210mm !important;
+    min-height: 297mm !important;
+    max-width: 210mm !important;
+    min-width: 210mm !important;
+    margin: 0 !important;
+    padding: 15mm 20mm 15mm 20mm !important;
+    box-shadow: none !important;
+    page-break-after: always !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    background: #ffffff !important;
+    position: relative !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Garantir que não haja páginas em branco */
+  .a4-page:empty {
+    display: none !important;
+  }
+  
+  /* Garantir conteúdo visível */
+  .a4-page > * {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .a4-page:last-child {
+    page-break-after: avoid !important;
+  }
+
+  /* Page header - sempre visível na impressão */
+  .page-header {
+    position: absolute !important;
+    top: 5mm !important;
+    left: 20mm !important;
+    right: 20mm !important;
+    width: calc(100% - 40mm) !important;
+    font-size: 8pt !important;
+    color: #666666 !important;
+    text-align: center !important;
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  /* Person header - esconder por padrão, mostrar apenas na primeira página */
+  .person-header {
+    display: none !important;
+  }
+
+  #page1 .person-header {
+    display: block !important;
+    position: absolute !important;
+    top: 20mm !important;
+    left: 20mm !important;
+    right: 20mm !important;
+    width: calc(100% - 40mm) !important;
+    visibility: visible !important;
+  }
+
+  #page1 #curriculum-content-1 {
+    margin-top: 32mm !important;
+    padding-top: 5mm !important;
+  }
+
+  /* Page footer - sempre visível na impressão */
+  .page-footer {
+    position: absolute !important;
+    bottom: 5mm !important;
+    left: 20mm !important;
+    right: 20mm !important;
+    width: calc(100% - 40mm) !important;
+    height: 10mm !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    font-size: 8pt !important;
+    color: #666666 !important;
+    border-top: 1px solid #eeeeee !important;
+    padding-top: 2mm !important;
+    background: #ffffff !important;
+    visibility: visible !important;
+  }
+
+  .page-footer .page-number {
+    font-weight: bold !important;
+    color: #333333 !important;
+  }
+
+  /* Conteúdo do currículo - sempre visível */
+  .curriculum-section,
+  .experience-item,
+  .education-item,
+  .project-item,
+  .language-item,
+  .certification-item {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    orphans: 2 !important;
+    widows: 2 !important;
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  /* Forçar visibilidade de todos os elementos de conteúdo */
+  .curriculum-content,
+  .experience-header,
+  .experience-details,
+  .education-header,
+  .education-details,
+  .project-header,
+  .project-title,
+  .project-description,
+  .language-header,
+  .language-title,
+  .certification-name,
+  .certification-details {
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  /* QR Code - esconder na impressão */
+  .qr-code-container,
+  .qr-code-header {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Garantir que colunas funcionem na impressão */
+  .person-header .row {
+    display: flex !important;
+    flex-direction: row !important;
+  }
+  
+  /* Garantir que projetos apareçam na impressão */
+  .project-item {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 0.5cm !important;
+  }
+  
+  .project-header,
+  .project-title,
+  .project-period,
+  .project-technologies,
+  .project-description {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Prevenir páginas em branco */
+  .a4-page:empty {
+    display: none !important;
+  }
+  
+  /* Garantir que todas as seções apareçam */
+  .curriculum-section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    page-break-inside: avoid !important;
+  }
+  
+  .curriculum-section h2 {
+    display: block !important;
+    visibility: visible !important;
+    page-break-after: avoid !important;
+  }
+
+  .person-header .col-5,
+  .person-header .col-7 {
+    width: auto !important;
+    max-width: none !important;
+    flex: 0 0 auto !important;
+  }
+}

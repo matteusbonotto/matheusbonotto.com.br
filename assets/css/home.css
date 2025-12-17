@@ -1,0 +1,425 @@
+/* assets/css/home.css */
+/* Menu Fullscreen - Home */
+
+/* Reset e base */
+html,
+body {
+  height: 100%;
+}
+
+/* Em todas as páginas evitar apenas scroll horizontal */
+body {
+  overflow-x: hidden;
+}
+
+/* Apenas a home (index) não deve ter scroll vertical no desktop */
+body.home-page {
+  overflow: hidden;
+}
+
+/* No mobile, permitir scroll para ver o footer */
+@media screen and (max-width: 768px) {
+  body.home-page {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+/* Hero padrão utilizado nas demais páginas (história, portfólio, competências, currículo, contato) */
+.hero-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+}
+
+/* Header simplificado */
+.header {
+  position: relative;
+  z-index: 100;
+}
+
+.header .navbar {
+  padding: 1rem 0;
+}
+
+.header .navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white !important;
+  text-decoration: none;
+}
+
+/* Menu fullscreen */
+.fullscreen-menu {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 120px); /* Altura total menos header e footer */
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  z-index: 1; /* Z-index baixo para não sobrepor o footer */
+}
+
+.menu-columns {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: calc(100vh - 120px);
+}
+
+/* Coluna individual */
+.menu-column {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-column:last-child {
+  border-right: none;
+}
+
+.menu-column:hover {
+  flex: 2.5; /* Expande para 2.5x quando em hover */
+  z-index: 10;
+}
+
+/* Quando uma coluna está em hover, as outras diminuem */
+.menu-columns:hover .menu-column:not(:hover) {
+  flex: 0.4; /* Reduz para 0.4x quando outra está em hover */
+}
+
+/* Backgrounds coloridos para cada coluna */
+.menu-historia {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.menu-portfolio {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.menu-competencias {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.menu-cv {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.menu-contato {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+/* Conteúdo interno da coluna */
+.menu-column-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: white;
+  text-align: center;
+}
+
+/* Ícone - visível no estado inicial */
+.menu-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+}
+
+/* Quando outra coluna está em hover, esconde o ícone */
+.menu-columns:hover .menu-column:not(:hover) .menu-icon {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Título horizontal - visível no estado inicial */
+.menu-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+/* Quando outra coluna está em hover, esconde o título horizontal */
+.menu-columns:hover .menu-column:not(:hover) .menu-title {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Descrição - oculta no estado inicial */
+.menu-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 500px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Mostrar descrição apenas quando a coluna específica está em hover */
+.menu-column:hover .menu-description {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Quando outra coluna está em hover, manter descrição oculta */
+.menu-columns:hover .menu-column:not(:hover) .menu-description {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Título vertical - escondido no estado inicial */
+.menu-title-vertical {
+  position: absolute;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  opacity: 0;
+  transform: rotate(180deg) scale(0.8);
+  transition: all 0.3s ease;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+}
+
+/* Quando outra coluna está em hover, mostra título vertical */
+.menu-columns:hover .menu-column:not(:hover) .menu-title-vertical {
+  opacity: 1;
+  font-size: 1.2rem;
+  transform: rotate(180deg);
+}
+
+/* Splash overlay para transição */
+#splash-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+#splash-overlay.show {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: all;
+}
+
+/* Footer */
+.footer {
+  position: relative;
+  z-index: 100 !important; /* Z-index alto para ficar acima dos menus */
+  margin-top: 0;
+  width: 100%;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Garantir footer sempre visível, mesmo no hover */
+.menu-column:hover ~ .footer,
+.menu-columns:hover ~ .footer,
+.fullscreen-menu:hover ~ .footer {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 100 !important;
+}
+
+/* Garantir footer visível no mobile */
+@media screen and (max-width: 768px) {
+  .footer {
+    position: relative !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 100 !important;
+  }
+}
+
+/* Breakpoint intermediário (tablets e telas menores) - 768px a 1400px */
+@media screen and (min-width: 769px) and (max-width: 1400px) {
+  .menu-column-inner {
+    padding: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .menu-title {
+    text-align: center !important;
+    width: 100% !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100%;
+  }
+
+  .menu-description {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100%;
+  }
+
+  .menu-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  /* Garantir que o container flex está centralizado */
+  .menu-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Responsividade Mobile */
+@media screen and (max-width: 768px) {
+  body.home-page {
+    overflow-y: auto; /* Permitir scroll no mobile */
+  }
+
+  .fullscreen-menu {
+    min-height: auto; /* Altura automática no mobile */
+  }
+
+  .menu-columns {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .menu-column {
+    flex: 1;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: auto;
+    padding: 1.5rem 0;
+  }
+
+  .menu-column:last-child {
+    border-bottom: none;
+  }
+
+  /* Desabilitar hover effects no mobile */
+  .menu-column:hover {
+    flex: 1;
+  }
+
+  .menu-columns:hover .menu-column:not(:hover) {
+    flex: 1;
+  }
+
+  /* No mobile, sempre mostrar ícone, título horizontal e descrição */
+  .menu-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 1 !important; /* Sempre visível no mobile */
+    transform: translateY(0) !important;
+    display: block !important;
+  }
+
+  .menu-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+    opacity: 1 !important; /* Sempre visível no mobile */
+    transform: translateY(0) !important;
+    display: block !important;
+  }
+
+  .menu-description {
+    font-size: 0.95rem;
+    max-width: 90%;
+    opacity: 1 !important; /* Sempre visível no mobile */
+    transform: translateY(0) !important;
+    display: block !important;
+    line-height: 1.5;
+  }
+
+  /* Esconder título vertical no mobile */
+  .menu-title-vertical {
+    display: none !important;
+  }
+
+  /* Ajustar padding do conteúdo interno no mobile */
+  .menu-column-inner {
+    padding: 1.5rem;
+  }
+
+  /* Footer visível no mobile */
+  .footer {
+    position: relative;
+    z-index: 50;
+    margin-top: 0;
+    display: block !important;
+  }
+}
+
+/* Animações suaves */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-column {
+  animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.menu-column:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.menu-column:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.menu-column:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.menu-column:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.menu-column:nth-child(5) {
+  animation-delay: 0.5s;
+}
