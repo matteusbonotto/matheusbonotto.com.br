@@ -62,9 +62,9 @@ function homeMenu() {
         
         // Carregar estatísticas do Supabase
         const [projectsResult, skillsResult, achievementsResult] = await Promise.all([
-          supabase.from('projects').select('id', { count: 'exact', head: true }).eq('ativo', true),
-          supabase.from('skills_tree').select('id', { count: 'exact', head: true }),
-          supabase.from('achievements').select('id', { count: 'exact', head: true })
+          supabase.from('projects').select('id', { count: 'exact' }).eq('ativo', true).limit(0),
+          supabase.from('skills_tree').select('id', { count: 'exact' }).limit(0),
+          supabase.from('achievements').select('id', { count: 'exact' }).limit(0)
         ]);
         
         // Verificar erros

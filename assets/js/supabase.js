@@ -72,7 +72,13 @@ function initSupabase() {
   }
 
   try {
-    supabase = createClientFn(supabaseUrl, supabaseAnonKey);
+    supabase = createClientFn(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true
+      }
+    });
     // Armazenar globalmente para reutilizar
     window.__supabaseClient = supabase;
     console.log('🔌 Supabase inicializado:', {

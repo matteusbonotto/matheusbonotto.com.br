@@ -10,13 +10,38 @@
     }
     
     if (window.CONFIG.SUPABASE_URL && window.CONFIG.SUPABASE_ANON_KEY) {
-      window.__supabaseClient = window.supabase.createClient(
-        window.CONFIG.SUPABASE_URL,
-        window.CONFIG.SUPABASE_ANON_KEY
-      );
-      
+      try {
+        // Tentar diferentes formas de obter createClient
+        let createClient = null;
+        if (window.supabase.createClient && typeof window.supabase.createClient === 'function') {
+          createClient = window.supabase.createClient;
+        } else if (typeof window.supabase === 'function') {
+          createClient = window.supabase;
+        } else if (window.supabase.default && typeof window.supabase.default.createClient === 'function') {
+          createClient = window.supabase.default.createClient;
+        }
+        
+        if (createClient) {
+          window.__supabaseClient = createClient(
+            window.CONFIG.SUPABASE_URL,
+            window.CONFIG.SUPABASE_ANON_KEY,
+            {
+              auth: {
+                persistSession: true,
+                autoRefreshToken: true,
+                detectSessionInUrl: true
+              }
+            }
+          );
+          console.log('✅ Supabase inicializado no godmode');
+        } else {
+          console.error('❌ Não foi possível encontrar createClient no Supabase UMD');
+        }
+      } catch (error) {
+        console.error('❌ Erro ao inicializar Supabase no godmode:', error);
+      }
     } else {
-      
+      console.warn('⚠️ CONFIG do Supabase não encontrada');
     }
   }
   
@@ -406,12 +431,12 @@ function adminPanel() {
       try {
         if (!window.__supabaseClient) return;
         
-        // Carregar estatísticas
+        // Carregar estatísticas - usar select normal ao invés de head para evitar problemas de CORS
         const [profiles, professional, academic, projects] = await Promise.all([
-          window.__supabaseClient.from('profiles').select('id', { count: 'exact', head: true }),
-          window.__supabaseClient.from('professional_history').select('id', { count: 'exact', head: true }),
-          window.__supabaseClient.from('academic_history').select('id', { count: 'exact', head: true }),
-          window.__supabaseClient.from('projects').select('id', { count: 'exact', head: true }).eq('ativo', true)
+          window.__supabaseClient.from('profiles').select('id', { count: 'exact' }).limit(0),
+          window.__supabaseClient.from('professional_history').select('id', { count: 'exact' }).limit(0),
+          window.__supabaseClient.from('academic_history').select('id', { count: 'exact' }).limit(0),
+          window.__supabaseClient.from('projects').select('id', { count: 'exact' }).eq('ativo', true).limit(0)
         ]);
         
         this.stats = {
@@ -421,7 +446,7 @@ function adminPanel() {
           projects: projects.count || 0
         };
       } catch (error) {
-        
+        console.error('Erro ao carregar dashboard:', error);
       }
     },
     

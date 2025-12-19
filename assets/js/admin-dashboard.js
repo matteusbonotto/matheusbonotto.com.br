@@ -39,10 +39,10 @@ export function adminDashboard() {
         
         // Carregar estatísticas em paralelo
         const [projectsResult, skillsResult, achievementsResult, messagesResult] = await Promise.all([
-          supabase.from('projects').select('id', { count: 'exact', head: true }),
-          supabase.from('skills_tree').select('id', { count: 'exact', head: true }),
-          supabase.from('achievements').select('id', { count: 'exact', head: true }),
-          supabase.from('contact_messages').select('id', { count: 'exact', head: true }).eq('lida', false)
+          supabase.from('projects').select('id', { count: 'exact' }).limit(0),
+          supabase.from('skills_tree').select('id', { count: 'exact' }).limit(0),
+          supabase.from('achievements').select('id', { count: 'exact' }).limit(0),
+          supabase.from('contact_messages').select('id', { count: 'exact' }).eq('lida', false).limit(0)
         ]);
         
         this.stats = {
