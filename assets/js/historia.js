@@ -474,18 +474,20 @@ function historiaTimeline() {
           // Verifica se uma string contém a outra (para casos como "Realiza Software" vs "Realiza")
           const containsMatch = keyNormalized.includes(normalized) || normalized.includes(keyNormalized);
           
-          // Match especial para Senac e Realiza (palavras-chave específicas)
+          // Match especial para palavras-chave específicas
           const isSenacMatch = (normalized.includes('senac') && keyNormalized.includes('senac')) ||
                               (normalized.includes('servico nacional') && keyNormalized.includes('senac'));
           const isRealizaMatch = (normalized.includes('realiza') && keyNormalized.includes('realiza'));
+          const isAmericanasMatch = (normalized.includes('americanas') && keyNormalized.includes('americanas'));
+          const isSquidevMatch = (normalized.includes('squidev') && keyNormalized.includes('squidev'));
           
-          if (hasCommonWord || containsMatch || isSenacMatch || isRealizaMatch) {
+          if (hasCommonWord || containsMatch || isSenacMatch || isRealizaMatch || isAmericanasMatch || isSquidevMatch) {
             console.log(`✅ Logo encontrado (match parcial): "${instituicao}" → "${key}"`);
             return url;
           }
         }
         
-        // Fallback final: força match para Senac e Realiza se a palavra aparecer no nome
+        // Fallback final: força match para palavras-chave específicas
         if (normalized.includes('senac')) {
           console.log(`✅ Logo encontrado (fallback Senac): "${instituicao}"`);
           return window.INSTITUTION_LOGOS['Senac'] || window.INSTITUTION_LOGOS['SENAC'] || null;
@@ -493,6 +495,14 @@ function historiaTimeline() {
         if (normalized.includes('realiza')) {
           console.log(`✅ Logo encontrado (fallback Realiza): "${instituicao}"`);
           return window.INSTITUTION_LOGOS['Realiza Software'] || window.INSTITUTION_LOGOS['Realiza'] || null;
+        }
+        if (normalized.includes('americanas')) {
+          console.log(`✅ Logo encontrado (fallback Americanas): "${instituicao}"`);
+          return window.INSTITUTION_LOGOS['Americanas'] || window.INSTITUTION_LOGOS['Americanas S.A.'] || null;
+        }
+        if (normalized.includes('squidev')) {
+          console.log(`✅ Logo encontrado (fallback Squidev): "${instituicao}"`);
+          return window.INSTITUTION_LOGOS['Squidev'] || window.INSTITUTION_LOGOS['SQUIDEV'] || null;
         }
         
         console.log(`⚠️ Logo não encontrado para: "${instituicao}". Chaves disponíveis:`, Object.keys(window.INSTITUTION_LOGOS || {}).map(k => `"${k}" (${normalize(k)})`));
@@ -504,11 +514,15 @@ function historiaTimeline() {
       // Debug: mostra todas as instituições que estão vindo do banco
       const instituicoesUnicas = [...new Set(list.map(e => e.instituicao).filter(Boolean))];
       console.log('📋 Instituições únicas encontradas:', instituicoesUnicas);
+      console.log('📋 Logos disponíveis no mapa:', Object.keys(window.INSTITUTION_LOGOS || {}));
 
       list.forEach((e) => {
         const key = e.instituicao || "Outros";
         if (!rowsMap.has(key)) {
           const logoUrl = e.logo_url || findLogoUrl(key);
+          if (!logoUrl && key && key !== "Outros") {
+            console.warn('⚠️ Logo não encontrado para instituição:', key);
+          }
           
           rowsMap.set(key, {
             instituicao: key,
@@ -1158,22 +1172,54 @@ function historiaTimeline() {
         try {
           const supabase = getSupabase();
           if (supabase) {
-            const { data, error } = await supabase
+            console.log('🔍 Buscando feedbacks para:', evento.instituicao, 'ID:', evento.id);
+            
+            // Buscar por professional_history_id
+            const { data: dataById, error: errorById } = await supabase
               .from('feedbacks')
               .select('*')
               .eq('professional_history_id', evento.id)
               .eq('aprovado', true)
               .order('data_feedback', { ascending: false });
             
-            if (error) {
-              console.error('Erro ao carregar feedbacks relacionados:', error);
-            } else {
-              this.selectedEventFeedbacks = data || [];
+            let allFeedbacks = dataById || [];
+            console.log('✅ Feedbacks por ID:', allFeedbacks.length, allFeedbacks);
+            
+            // SEMPRE buscar também por nome da empresa (para garantir que pegue todos)
+            if (evento.instituicao) {
+              const { data: dataByEmpresa, error: errorByEmpresa } = await supabase
+                .from('feedbacks')
+                .select('*')
+                .ilike('empresa', `%${evento.instituicao}%`)
+                .eq('aprovado', true)
+                .order('data_feedback', { ascending: false });
+              
+              if (!errorByEmpresa && dataByEmpresa && dataByEmpresa.length > 0) {
+                console.log('✅ Feedbacks por empresa:', dataByEmpresa.length, dataByEmpresa);
+                
+                // Combinar e remover duplicatas por ID
+                const existingIds = new Set(allFeedbacks.map(f => f.id));
+                const uniqueFeedbacks = dataByEmpresa.filter(f => !existingIds.has(f.id));
+                allFeedbacks = [...allFeedbacks, ...uniqueFeedbacks];
+                console.log('✅ Total único de feedbacks:', allFeedbacks.length);
+              }
             }
+            
+            // Ordenar por data (mais recente primeiro)
+            this.selectedEventFeedbacks = allFeedbacks.sort((a, b) => {
+              const dateA = new Date(a.data_feedback || 0);
+              const dateB = new Date(b.data_feedback || 0);
+              return dateB - dateA;
+            });
+            
+            console.log('✅ Feedbacks finais no modal:', this.selectedEventFeedbacks.length);
           }
         } catch (error) {
-          console.error('Erro ao carregar feedbacks:', error);
+          console.error('❌ Erro ao carregar feedbacks:', error);
+          this.selectedEventFeedbacks = [];
         }
+      } else {
+        this.selectedEventFeedbacks = [];
       }
       
       // Buscar projetos relacionados com esta instituição

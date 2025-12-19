@@ -26,7 +26,18 @@ window.INSTITUTION_LOGOS = {
   'Crespo e Caires Advogados Associados': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzdV7LUqImJZrs5J96R00g1OlKATLndzKplg&s',
   'Vincit': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA88gm2cdGpPcP21JlPF6hJoXRoV4L9Zlwww&s',
   'VINCIT': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA88gm2cdGpPcP21JlPF6hJoXRoV4L9Zlwww&s',
+  
+  // Americanas - múltiplas variações
   'Americanas': 'https://play-lh.googleusercontent.com/0Ln-JnEAraVUZ8L5JLkTgSU57zUh5k9txjgyD48W_px5GiIEzE7PK7RkrZAT1B8hwo6v41Im3SPfJHOPyU4x1A=w240-h480-rw',
+  'Americanas S.A.': 'https://play-lh.googleusercontent.com/0Ln-JnEAraVUZ8L5JLkTgSU57zUh5k9txjgyD48W_px5GiIEzE7PK7RkrZAT1B8hwo6v41Im3SPfJHOPyU4x1A=w240-h480-rw',
+  'AMERICANAS': 'https://play-lh.googleusercontent.com/0Ln-JnEAraVUZ8L5JLkTgSU57zUh5k9txjgyD48W_px5GiIEzE7PK7RkrZAT1B8hwo6v41Im3SPfJHOPyU4x1A=w240-h480-rw',
+  'AMERICANAS S.A.': 'https://play-lh.googleusercontent.com/0Ln-JnEAraVUZ8L5JLkTgSU57zUh5k9txjgyD48W_px5GiIEzE7PK7RkrZAT1B8hwo6v41Im3SPfJHOPyU4x1A=w240-h480-rw',
+  
+  // Squidev - múltiplas variações
+  'Squidev': 'https://lh3.googleusercontent.com/p/AF1QipP3oREpM4pI9IzLusu2_skxTrE5I6fPeDuze2i1=s1360-w1360-h1020-rw',
+  'SQUIDEV': 'https://lh3.googleusercontent.com/p/AF1QipP3oREpM4pI9IzLusu2_skxTrE5I6fPeDuze2i1=s1360-w1360-h1020-rw',
+  'squidev': 'https://lh3.googleusercontent.com/p/AF1QipP3oREpM4pI9IzLusu2_skxTrE5I6fPeDuze2i1=s1360-w1360-h1020-rw',
+  
   'SiDi': 'https://media.licdn.com/dms/image/v2/D4D0BAQEpl8iPEufIuA/company-logo_200_200/company-logo_200_200/0/1738584184363/segueosidi_logo?e=2147483647&v=beta&t=Xz4bBR_nr71otammAj-sZZ1i9i3U-A389Y0myFbl6K8',
   'Sidi': 'https://media.licdn.com/dms/image/v2/D4D0BAQEpl8iPEufIuA/company-logo_200_200/company-logo_200_200/0/1738584184363/segueosidi_logo?e=2147483647&v=beta&t=Xz4bBR_nr71otammAj-sZZ1i9i3U-A389Y0myFbl6K8',
 };
