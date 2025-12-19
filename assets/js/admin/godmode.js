@@ -197,6 +197,27 @@ const TABLES_CONFIG = {
     getBadges: (item) => [
       { text: item.lida ? 'Lida' : 'Não lida', color: item.lida ? 'success' : 'warning' }
     ]
+  },
+  feedbacks: {
+    title: 'Feedbacks',
+    icon: 'bi-star',
+    fields: [
+      { name: 'nome', label: 'Nome', type: 'text', required: true },
+      { name: 'cargo', label: 'Cargo', type: 'text' },
+      { name: 'empresa', label: 'Empresa', type: 'text' },
+      { name: 'mensagem', label: 'Mensagem', type: 'textarea', required: true },
+      { name: 'imagem_url', label: 'URL da Foto', type: 'url' },
+      { name: 'professional_history_id', label: 'Histórico Profissional', type: 'select', options: [], foreignTable: 'professional_history', foreignLabel: 'instituicao' },
+      { name: 'fonte', label: 'Fonte', type: 'select', options: ['LinkedIn', 'Site'], default: 'LinkedIn' },
+      { name: 'aprovado', label: 'Aprovado', type: 'checkbox', default: false },
+      { name: 'data_feedback', label: 'Data do Feedback', type: 'date' },
+      { name: 'ordem', label: 'Ordem', type: 'number', default: 0 }
+    ],
+    getTitle: (item) => `${item.nome} - ${item.empresa || 'Sem empresa'}`,
+    getBadges: (item) => [
+      { text: item.fonte || 'LinkedIn', color: item.fonte === 'LinkedIn' ? 'primary' : 'info' },
+      { text: item.aprovado ? 'Aprovado' : 'Pendente', color: item.aprovado ? 'success' : 'warning' }
+    ]
   }
 };
 
@@ -445,6 +466,8 @@ function adminPanel() {
             query = query.or(`instituicao.ilike.${searchTerm},titulo.ilike.${searchTerm},curso.ilike.${searchTerm}`);
           } else if (tableName === 'projects') {
             query = query.or(`titulo.ilike.${searchTerm},descricao_curta.ilike.${searchTerm}`);
+          } else if (tableName === 'feedbacks') {
+            query = query.or(`nome.ilike.${searchTerm},empresa.ilike.${searchTerm},mensagem.ilike.${searchTerm}`);
           } else {
             query = query.or(`nome.ilike.${searchTerm},titulo.ilike.${searchTerm}`);
           }
@@ -454,10 +477,18 @@ function adminPanel() {
           query = query.eq('ativo', true);
         } else if (this.filters.status === 'inactive' && tableName === 'projects') {
           query = query.eq('ativo', false);
+        } else if (this.filters.status === 'approved' && tableName === 'feedbacks') {
+          query = query.eq('aprovado', true);
+        } else if (this.filters.status === 'pending' && tableName === 'feedbacks') {
+          query = query.eq('aprovado', false);
         }
         
-        // Ordenar
-        query = query.order('created_at', { ascending: false });
+        // Ordenar (ordem específica para feedbacks)
+        if (tableName === 'feedbacks') {
+          query = query.order('ordem', { ascending: true }).order('data_feedback', { ascending: false });
+        } else {
+          query = query.order('created_at', { ascending: false });
+        }
         
         const { data, error } = await query;
         
@@ -526,7 +557,8 @@ function adminPanel() {
         'languages': 'languages',
         'hard-skills': 'hard_skills',
         'soft-skills': 'soft_skills',
-        'messages': 'contact_messages'
+        'messages': 'contact_messages',
+        'feedbacks': 'feedbacks'
       };
       return mapping[this.activeSection] || 'profiles';
     },
@@ -542,7 +574,8 @@ function adminPanel() {
         'languages': 'Idiomas',
         'hard-skills': 'Hard Skills',
         'soft-skills': 'Soft Skills',
-        'messages': 'Mensagens de Contato'
+        'messages': 'Mensagens de Contato',
+        'feedbacks': 'Feedbacks'
       };
       return titles[this.activeSection] || 'Dashboard';
     },

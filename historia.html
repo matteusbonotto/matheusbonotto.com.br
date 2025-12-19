@@ -394,6 +394,73 @@
               </button>
             </div>
 
+            <!-- Feedbacks Relacionados (apenas para histórico profissional) -->
+            <div id="feedbacks-section" x-show="selectedEvent?.tipo === 'profissional' && selectedEventFeedbacks && selectedEventFeedbacks.length > 0" class="mb-4">
+              <hr class="my-4">
+              <h6 class="mb-3">
+                <i class="bi bi-star-fill text-warning me-2"></i>
+                Feedbacks
+              </h6>
+              <div class="row g-3">
+                <template x-for="feedback in selectedEventFeedbacks" :key="feedback.id">
+                  <div class="col-12">
+                    <div class="feedback-card" style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); border: 1px solid #e9ecef;">
+                      <!-- Avatar + Nome + Profissão/Empresa -->
+                      <div class="feedback-author">
+                        <div class="feedback-author-avatar">
+                          <template x-if="feedback.imagem_url">
+                            <img 
+                              :src="feedback.imagem_url" 
+                              :alt="feedback.nome"
+                              @error="$event.target.style.display='none'; $event.target.nextElementSibling.style.display='flex'"
+                            >
+                          </template>
+                          <div 
+                            x-show="!feedback.imagem_url"
+                            class="feedback-author-initials"
+                            :style="'background-color: ' + getAvatarColor(feedback.nome)"
+                            x-text="getInitials(feedback.nome)"
+                          ></div>
+                        </div>
+                        
+                        <div class="feedback-author-info">
+                          <h6 x-text="feedback.nome"></h6>
+                          <p class="feedback-author-role">
+                            <span x-show="feedback.cargo" x-text="feedback.cargo"></span>
+                            <template x-if="feedback.cargo && feedback.empresa">
+                              <span> - </span>
+                            </template>
+                            <span x-show="feedback.empresa" x-text="feedback.empresa"></span>
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <!-- Mensagem -->
+                      <div class="feedback-message-text">
+                        <p><span x-text="feedback.mensagem"></span></p>
+                      </div>
+                      
+                      <!-- Fonte - Data -->
+                      <div class="feedback-meta-footer">
+                        <div class="feedback-source-badge">
+                          <i 
+                            class="bi"
+                            :class="feedback.fonte === 'LinkedIn' ? 'bi-linkedin' : 'bi-globe'"
+                          ></i>
+                          <span x-text="feedback.fonte"></span>
+                        </div>
+                        <span>•</span>
+                        <div class="feedback-date-badge">
+                          <i class="bi bi-calendar3"></i>
+                          <span x-text="formatFeedbackDate(feedback.data_feedback)"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+            
             <!-- Projetos Relacionados -->
             <div id="projetos-section" x-show="selectedEventProjects && selectedEventProjects.length > 0" class="mb-4">
               <hr class="my-4">
@@ -574,6 +641,202 @@
               <i class="bi bi-x-lg me-2"></i>
               Fechar
             </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção de Feedbacks -->
+    <section class="feedbacks-section py-5 bg-light" x-show="!loading" x-cloak>
+      <div class="container">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h3 class="section-title-feedback text-center mb-4">
+              <i class="bi bi-star-fill me-2" style="color: var(--warning);"></i>
+              Feedbacks e Recomendações
+            </h3>
+            
+            <!-- Mensagem quando não há feedbacks -->
+            <div x-show="approvedFeedbacks.length === 0" class="text-center py-5">
+              <i class="bi bi-star fs-1 text-muted"></i>
+              <p class="text-muted mt-3">Ainda não há feedbacks publicados.</p>
+            </div>
+            
+            <!-- Slider de Feedbacks -->
+            <div class="feedbacks-slider-container position-relative" x-show="approvedFeedbacks.length > 0">
+              <div class="feedbacks-slider">
+                <div class="feedbacks-track" 
+                     :style="'transform: translateX(-' + (currentFeedbackIndex * 100) + '%)'">
+                  <template x-for="(feedback, index) in approvedFeedbacks" :key="feedback.id">
+                    <div class="feedback-slide">
+                      <div class="feedback-card">
+                        <!-- Avatar + Nome + Profissão/Empresa -->
+                        <div class="feedback-author">
+                          <div class="feedback-author-avatar">
+                            <template x-if="feedback.imagem_url">
+                              <img 
+                                :src="feedback.imagem_url" 
+                                :alt="feedback.nome"
+                                @error="$event.target.style.display='none'; $event.target.nextElementSibling.style.display='flex'"
+                              >
+                            </template>
+                            <div 
+                              x-show="!feedback.imagem_url"
+                              class="feedback-author-initials"
+                              :style="'background-color: ' + getAvatarColor(feedback.nome)"
+                              x-text="getInitials(feedback.nome)"
+                            ></div>
+                          </div>
+                          
+                          <div class="feedback-author-info">
+                            <h6 x-text="feedback.nome"></h6>
+                            <p class="feedback-author-role">
+                              <span x-show="feedback.cargo" x-text="feedback.cargo"></span>
+                              <template x-if="feedback.cargo && feedback.empresa">
+                                <span> - </span>
+                              </template>
+                              <span x-show="feedback.empresa" x-text="feedback.empresa"></span>
+                            </p>
+                          </div>
+                        </div>
+                        
+                        <!-- Mensagem -->
+                        <div class="feedback-message-text">
+                          <p><span x-text="feedback.mensagem"></span></p>
+                        </div>
+                        
+                        <!-- Fonte - Data -->
+                        <div class="feedback-meta-footer">
+                          <div class="feedback-source-badge">
+                            <i 
+                              class="bi"
+                              :class="feedback.fonte === 'LinkedIn' ? 'bi-linkedin' : 'bi-globe'"
+                            ></i>
+                            <span x-text="feedback.fonte"></span>
+                          </div>
+                          <span>•</span>
+                          <div class="feedback-date-badge">
+                            <i class="bi bi-calendar3"></i>
+                            <span x-text="formatFeedbackDate(feedback.data_feedback)"></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+              
+              <!-- Indicadores -->
+              <div x-show="approvedFeedbacks.length > 1" class="feedbacks-indicators">
+                <template x-for="(feedback, index) in approvedFeedbacks" :key="feedback.id">
+                  <button 
+                    class="feedbacks-indicator"
+                    :class="{ 'active': currentFeedbackIndex === index }"
+                    @click="currentFeedbackIndex = index; resetFeedbackAutoPlay()"
+                  ></button>
+                </template>
+              </div>
+            </div>
+            
+            <!-- Botão Dar Feedback -->
+            <div class="text-center mt-5">
+              <button 
+                class="btn btn-primary feedback-submit-btn"
+                type="button"
+                @click="openFeedbackModal()"
+                x-on:click.stop
+              >
+                <i class="bi bi-chat-quote me-2"></i>
+                Dar seu Feedback
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal de Novo Feedback -->
+    <div class="modal fade" id="feedbackModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="bi bi-chat-quote me-2"></i>
+              Deixe seu Feedback
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form @submit.prevent="submitFeedback()">
+              <div class="mb-3">
+                <label class="form-label">Nome Completo *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  x-model="newFeedback.nome"
+                  required
+                >
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Cargo</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  x-model="newFeedback.cargo"
+                  placeholder="Ex: Software QA Engineer"
+                >
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Empresa</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  x-model="newFeedback.empresa"
+                  placeholder="Ex: Nome da Empresa"
+                >
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Seu Feedback *</label>
+                <textarea 
+                  class="form-control" 
+                  rows="5"
+                  x-model="newFeedback.mensagem"
+                  required
+                  placeholder="Compartilhe sua experiência trabalhando com Matheus..."
+                ></textarea>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Foto de Perfil (URL - Opcional)</label>
+                <input 
+                  type="url" 
+                  class="form-control" 
+                  x-model="newFeedback.imagem_url"
+                  placeholder="https://exemplo.com/foto.jpg"
+                >
+              </div>
+              
+              <div class="alert alert-info">
+                <i class="bi bi-info-circle me-2"></i>
+                Seu feedback será revisado antes de ser publicado.
+              </div>
+              
+              <div class="d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Cancelar
+                </button>
+                <button type="submit" class="btn btn-primary" :disabled="submittingFeedback">
+                  <span x-show="!submittingFeedback">Enviar Feedback</span>
+                  <span x-show="submittingFeedback">
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+                    Enviando...
+                  </span>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

@@ -1,7 +1,38 @@
 // assets/js/historia.js
 // Componente Alpine.js para História/Timeline
 
-import { supabase } from './supabase.js';
+// Helper para obter cliente Supabase
+function getSupabase() {
+  // Prioridade 1: Cliente global já inicializado
+  if (window.__supabaseClient && typeof window.__supabaseClient.from === 'function') {
+    return window.__supabaseClient;
+  }
+  
+  // Prioridade 2: Criar cliente do Supabase UMD
+  if (window.supabase && window.CONFIG) {
+    try {
+      const createClient = window.supabase.createClient || window.supabase;
+      if (typeof createClient === 'function') {
+        window.__supabaseClient = createClient(
+          window.CONFIG.SUPABASE_URL,
+          window.CONFIG.SUPABASE_ANON_KEY
+        );
+        console.log('✅ Supabase cliente criado via getSupabase()');
+        return window.__supabaseClient;
+      }
+    } catch (error) {
+      console.error('❌ Erro ao criar cliente Supabase:', error);
+    }
+  }
+  
+  // Fallback: retornar null (será tratado no código)
+  console.warn('⚠️ Supabase não disponível. Verificando:', {
+    hasWindowSupabase: !!window.supabase,
+    hasConfig: !!window.CONFIG,
+    hasGlobalClient: !!window.__supabaseClient
+  });
+  return null;
+}
 
 function historiaTimeline() {
   return {
@@ -12,8 +43,21 @@ function historiaTimeline() {
     loading: true,
     selectedEvent: null,
     selectedEventProjects: [],
+    selectedEventFeedbacks: [],
     profile: null,
     summary: null,
+    approvedFeedbacks: [],
+    currentFeedbackIndex: 0,
+    feedbackAutoPlayInterval: null,
+    newFeedback: {
+      nome: '',
+      cargo: '',
+      empresa: '',
+      mensagem: '',
+      imagem_url: '',
+      fonte: 'Site'
+    },
+    submittingFeedback: false,
     filters: {
       categoria: 'TODOS',
       periodo: 'all',
@@ -28,9 +72,30 @@ function historiaTimeline() {
       try {
         this.loading = true;
         
+        // Aguardar um pouco para garantir que Supabase está inicializado
+        let supabase = getSupabase();
+        let attempts = 0;
+        while (!supabase && attempts < 10) {
+          await new Promise(resolve => setTimeout(resolve, 100));
+          supabase = getSupabase();
+          attempts++;
+        }
         
-        // Carregar perfil + histórico acadêmico e profissional
-        const [profileResult, academicResult, professionalResult] = await Promise.all([
+        if (!supabase) {
+          console.error('❌ Supabase não está disponível após tentativas');
+          console.error('Estado:', {
+            windowSupabase: !!window.supabase,
+            windowConfig: !!window.CONFIG,
+            windowClient: !!window.__supabaseClient
+          });
+          this.loading = false;
+          return;
+        }
+        
+        console.log('✅ Supabase disponível, carregando dados...');
+        
+        // Carregar perfil + histórico acadêmico e profissional + feedbacks
+        const [profileResult, academicResult, professionalResult, feedbacksResult] = await Promise.all([
           supabase
             .from('profiles')
             .select('*')
@@ -43,7 +108,13 @@ function historiaTimeline() {
           supabase
             .from('professional_history')
             .select('*')
-            .order('data_inicio', { ascending: false })
+            .order('data_inicio', { ascending: false }),
+          supabase
+            .from('feedbacks')
+            .select('*')
+            .eq('aprovado', true)
+            .order('ordem', { ascending: true })
+            .order('data_feedback', { ascending: false })
         ]);
         
         if (profileResult.error) {
@@ -54,10 +125,10 @@ function historiaTimeline() {
         
         // Verificar erros
         if (academicResult.error) {
-          
+          console.error('❌ Erro ao carregar histórico acadêmico:', academicResult.error);
         }
         if (professionalResult.error) {
-          
+          console.error('❌ Erro ao carregar histórico profissional:', professionalResult.error);
         }
         
         // Combinar e formatar eventos
@@ -76,6 +147,24 @@ function historiaTimeline() {
         this.events = [...academicEvents, ...professionalEvents]
           .sort((a, b) => new Date(b.data_inicio) - new Date(a.data_inicio));
         
+        console.log('✅ Eventos carregados:', {
+          academicos: academicEvents.length,
+          profissionais: professionalEvents.length,
+          total: this.events.length
+        });
+        
+        // Carregar feedbacks aprovados
+        if (feedbacksResult.error) {
+          console.error('❌ Erro ao carregar feedbacks:', feedbacksResult.error);
+        } else {
+          this.approvedFeedbacks = feedbacksResult.data || [];
+          console.log('✅ Feedbacks carregados:', this.approvedFeedbacks.length);
+          
+          // Iniciar auto-play se houver mais de 1 feedback
+          if (this.approvedFeedbacks.length > 1) {
+            this.startFeedbackAutoPlay();
+          }
+        }
         
         this.applyFilters();
         this.computeSummary();
@@ -169,7 +258,7 @@ function historiaTimeline() {
       });
 
       this.summary = summary;
-      ' : '(todos os eventos)');
+      console.log('✅ Resumo calculado:', summary);
       // Aguarda um pouco para garantir que o DOM esteja pronto
       setTimeout(() => {
         this.renderPieCharts();
@@ -358,14 +447,14 @@ function historiaTimeline() {
         
         // Tenta match exato primeiro
         if (window.INSTITUTION_LOGOS[instituicao]) {
-          : "${instituicao}"`);
+          console.log(`✅ Logo encontrado (match exato): "${instituicao}"`);
           return window.INSTITUTION_LOGOS[instituicao];
         }
         
         // Tenta match case-insensitive
         for (const [key, url] of Object.entries(window.INSTITUTION_LOGOS)) {
           if (normalize(key) === normalized) {
-            : "${instituicao}" → "${key}"`);
+            console.log(`✅ Logo encontrado (match case-insensitive): "${instituicao}" → "${key}"`);
             return url;
           }
         }
@@ -391,23 +480,22 @@ function historiaTimeline() {
           const isRealizaMatch = (normalized.includes('realiza') && keyNormalized.includes('realiza'));
           
           if (hasCommonWord || containsMatch || isSenacMatch || isRealizaMatch) {
-            : "${instituicao}" → "${key}"`);
+            console.log(`✅ Logo encontrado (match parcial): "${instituicao}" → "${key}"`);
             return url;
           }
         }
         
         // Fallback final: força match para Senac e Realiza se a palavra aparecer no nome
         if (normalized.includes('senac')) {
-          : "${instituicao}"`);
+          console.log(`✅ Logo encontrado (fallback Senac): "${instituicao}"`);
           return window.INSTITUTION_LOGOS['Senac'] || window.INSTITUTION_LOGOS['SENAC'] || null;
         }
         if (normalized.includes('realiza')) {
-          : "${instituicao}"`);
+          console.log(`✅ Logo encontrado (fallback Realiza): "${instituicao}"`);
           return window.INSTITUTION_LOGOS['Realiza Software'] || window.INSTITUTION_LOGOS['Realiza'] || null;
         }
         
-        `);
-        .map(k => `"${k}" (${normalize(k)})`));
+        console.log(`⚠️ Logo não encontrado para: "${instituicao}". Chaves disponíveis:`, Object.keys(window.INSTITUTION_LOGOS || {}).map(k => `"${k}" (${normalize(k)})`));
         return null;
       };
 
@@ -415,8 +503,7 @@ function historiaTimeline() {
       
       // Debug: mostra todas as instituições que estão vindo do banco
       const instituicoesUnicas = [...new Set(list.map(e => e.instituicao).filter(Boolean))];
-      
-      );
+      console.log('📋 Instituições únicas encontradas:', instituicoesUnicas);
 
       list.forEach((e) => {
         const key = e.instituicao || "Outros";
@@ -616,7 +703,7 @@ function historiaTimeline() {
               }
               
               imgElement.onload = () => {
-                ' : ''}`);
+                console.log(`✅ Logo carregado: ${d.logo_url}`);
                 // Se carregou, atualiza o SVG image
                 g.select('image').attr('href', d.logo_url);
               };
@@ -627,8 +714,7 @@ function historiaTimeline() {
                   
                   tryLoadImage(true);
                 } else {
-                  : ${d.logo_url} (instituição: ${d.instituicao})`);
-                  
+                  console.error(`❌ Erro ao carregar logo: ${d.logo_url} (instituição: ${d.instituicao})`);
                   createFallback();
                 }
               };
@@ -977,6 +1063,7 @@ function historiaTimeline() {
                                    e.tipo_academico;
             return this.filters.vinculo.includes(tipoNormalizado);
           }
+          // Se não tiver vínculo/tipo, não inclui (filtro ativo)
           return false;
         });
       }
@@ -998,6 +1085,13 @@ function historiaTimeline() {
       }
       
       this.filteredEvents = filtered;
+      
+      console.log('🔍 Filtros aplicados:', {
+        filtros: this.filters,
+        eventosAntes: this.events.length,
+        eventosDepois: filtered.length
+      });
+      
       // Recalcular resumo com eventos filtrados para manter consistência com o gráfico
       this.computeSummary(filtered);
       
@@ -1057,13 +1151,43 @@ function historiaTimeline() {
     async openDetails(evento) {
       this.selectedEvent = evento;
       this.selectedEventProjects = [];
+      this.selectedEventFeedbacks = [];
+      
+      // Buscar feedbacks relacionados (apenas para histórico profissional)
+      if (evento.tipo === 'profissional') {
+        try {
+          const supabase = getSupabase();
+          if (supabase) {
+            const { data, error } = await supabase
+              .from('feedbacks')
+              .select('*')
+              .eq('professional_history_id', evento.id)
+              .eq('aprovado', true)
+              .order('data_feedback', { ascending: false });
+            
+            if (error) {
+              console.error('Erro ao carregar feedbacks relacionados:', error);
+            } else {
+              this.selectedEventFeedbacks = data || [];
+            }
+          }
+        } catch (error) {
+          console.error('Erro ao carregar feedbacks:', error);
+        }
+      }
       
       // Buscar projetos relacionados com esta instituição
       try {
+        const supabase = getSupabase();
+        if (!supabase) {
+          console.error('❌ Supabase não está disponível para buscar projetos');
+          const modal = new bootstrap.Modal(document.getElementById('eventModal'));
+          modal.show();
+          return;
+        }
+        
         const institutionId = evento.id;
         const institutionType = evento.tipo; // 'academico' ou 'profissional'
-        
-        `);
         
         // Buscar diretamente na tabela projects usando foreign keys
         let query = supabase
@@ -1080,36 +1204,41 @@ function historiaTimeline() {
         const { data, error } = await query.order('ordem', { ascending: true }).order('data_projeto', { ascending: false });
         
         if (error) {
+          console.error('❌ Erro ao buscar projetos:', error);
           
-          
-          
-          // Tentar usar RPC como fallback
-          
-          const rpcResult = await supabase.rpc('get_projects_by_institution', {
-            p_institution_type: institutionType,
-            p_institution_id: institutionId
-          });
-          
-          if (rpcResult.error) {
+          // Tentar usar RPC como fallback (se existir)
+          try {
+            const rpcResult = await supabase.rpc('get_projects_by_institution', {
+              p_institution_type: institutionType,
+              p_institution_id: institutionId
+            });
             
-          } else {
-            this.selectedEventProjects = (rpcResult.data || []).map(p => ({
-              project_id: p.project_id,
-              project_nome: p.project_nome,
-              project_descricao: p.project_descricao,
-              project_data: p.project_data,
-              project_tecnologias: p.project_tecnologias,
-              project_link: p.project_link,
-              project_url: p.project_url,
-              project_github: p.project_github,
-              project_imagem_url: p.project_imagem_url,
-              project_imagem: p.project_imagem,
-              link_projeto: p.link_projeto,
-              link_github: p.link_github
-            }));
-            
+            if (rpcResult.error) {
+              console.error('❌ Erro ao buscar projetos via RPC:', rpcResult.error);
+              this.selectedEventProjects = [];
+            } else {
+              console.log('✅ Projetos encontrados via RPC:', rpcResult.data?.length || 0);
+              this.selectedEventProjects = (rpcResult.data || []).map(p => ({
+                project_id: p.project_id,
+                project_nome: p.project_nome,
+                project_descricao: p.project_descricao,
+                project_data: p.project_data,
+                project_tecnologias: p.project_tecnologias,
+                project_link: p.project_link,
+                project_url: p.project_url,
+                project_github: p.project_github,
+                project_imagem_url: p.project_imagem_url,
+                project_imagem: p.project_imagem,
+                link_projeto: p.link_projeto,
+                link_github: p.link_github
+              }));
+            }
+          } catch (rpcError) {
+            console.error('❌ Erro ao tentar RPC:', rpcError);
+            this.selectedEventProjects = [];
           }
         } else {
+          console.log('✅ Projetos encontrados:', data?.length || 0);
           // Mapear dados para o formato esperado
           this.selectedEventProjects = (data || []).map(p => ({
             project_id: p.id,
@@ -1125,7 +1254,6 @@ function historiaTimeline() {
             link_projeto: p.link_projeto,
             link_github: p.link_github
           }));
-          
         }
       } catch (error) {
         
@@ -1368,6 +1496,188 @@ function historiaTimeline() {
         'TODOS': 'secondary'
       };
       return colors[categoria] || 'secondary';
+    },
+    
+    // Funções do Slider de Feedbacks
+    nextFeedback() {
+      if (this.approvedFeedbacks.length === 0) return;
+      if (this.currentFeedbackIndex < this.approvedFeedbacks.length - 1) {
+        this.currentFeedbackIndex++;
+      } else {
+        // Volta ao início quando chega no final
+        this.currentFeedbackIndex = 0;
+      }
+      this.resetFeedbackAutoPlay();
+    },
+    
+    prevFeedback() {
+      if (this.approvedFeedbacks.length === 0) return;
+      if (this.currentFeedbackIndex > 0) {
+        this.currentFeedbackIndex--;
+      } else {
+        // Vai para o final quando está no início
+        this.currentFeedbackIndex = this.approvedFeedbacks.length - 1;
+      }
+      this.resetFeedbackAutoPlay();
+    },
+    
+    startFeedbackAutoPlay() {
+      // Limpar intervalo anterior se existir
+      if (this.feedbackAutoPlayInterval) {
+        clearInterval(this.feedbackAutoPlayInterval);
+      }
+      
+      // Iniciar novo intervalo de 10 segundos
+      this.feedbackAutoPlayInterval = setInterval(() => {
+        if (this.approvedFeedbacks.length > 1) {
+          if (this.currentFeedbackIndex < this.approvedFeedbacks.length - 1) {
+            this.currentFeedbackIndex++;
+          } else {
+            this.currentFeedbackIndex = 0; // Volta ao início
+          }
+        }
+      }, 10000); // 10 segundos
+    },
+    
+    stopFeedbackAutoPlay() {
+      if (this.feedbackAutoPlayInterval) {
+        clearInterval(this.feedbackAutoPlayInterval);
+        this.feedbackAutoPlayInterval = null;
+      }
+    },
+    
+    resetFeedbackAutoPlay() {
+      // Reinicia o auto-play após interação manual
+      this.stopFeedbackAutoPlay();
+      if (this.approvedFeedbacks.length > 1) {
+        this.startFeedbackAutoPlay();
+      }
+    },
+    
+    // Funções do Modal de Novo Feedback
+    openFeedbackModal() {
+      // Resetar formulário
+      this.newFeedback = {
+        nome: '',
+        cargo: '',
+        empresa: '',
+        mensagem: '',
+        imagem_url: '',
+        fonte: 'Site'
+      };
+      
+      // Verificar se Bootstrap está disponível
+      const modalElement = document.getElementById('feedbackModal');
+      if (!modalElement) {
+        console.error('❌ Modal feedbackModal não encontrado no DOM');
+        alert('Erro: Modal não encontrado. Verifique o console.');
+        return;
+      }
+      
+      // Verificar se Bootstrap.Modal está disponível
+      if (typeof bootstrap === 'undefined' || !bootstrap.Modal) {
+        console.error('❌ Bootstrap não está disponível');
+        alert('Erro: Bootstrap não está carregado. Verifique o console.');
+        return;
+      }
+      
+      try {
+        const modal = new bootstrap.Modal(modalElement);
+        modal.show();
+        console.log('✅ Modal de feedback aberto');
+      } catch (error) {
+        console.error('❌ Erro ao abrir modal:', error);
+        alert('Erro ao abrir modal. Verifique o console.');
+      }
+    },
+    
+    async submitFeedback() {
+      if (!this.newFeedback.nome || !this.newFeedback.mensagem) {
+        alert('Por favor, preencha nome e mensagem.');
+        return;
+      }
+      
+      this.submittingFeedback = true;
+      
+      try {
+        const supabase = getSupabase();
+        if (!supabase) {
+          throw new Error('Supabase não está disponível');
+        }
+        
+        const { data, error } = await supabase
+          .from('feedbacks')
+          .insert({
+            nome: this.newFeedback.nome,
+            cargo: this.newFeedback.cargo || null,
+            empresa: this.newFeedback.empresa || null,
+            mensagem: this.newFeedback.mensagem,
+            imagem_url: this.newFeedback.imagem_url || null,
+            fonte: 'Site',
+            aprovado: false, // Requer aprovação
+            data_feedback: new Date().toISOString().split('T')[0]
+          });
+        
+        if (error) throw error;
+        
+        alert('Obrigado pelo seu feedback! Ele será revisado antes de ser publicado.');
+        
+        // Fechar modal
+        const modalElement = document.getElementById('feedbackModal');
+        const modal = bootstrap.Modal.getInstance(modalElement);
+        if (modal) modal.hide();
+        
+        // Resetar formulário
+        this.newFeedback = {
+          nome: '',
+          cargo: '',
+          empresa: '',
+          mensagem: '',
+          imagem_url: '',
+          fonte: 'Site'
+        };
+      } catch (error) {
+        console.error('Erro ao enviar feedback:', error);
+        alert('Erro ao enviar feedback. Tente novamente.');
+      } finally {
+        this.submittingFeedback = false;
+      }
+    },
+    
+    // Helpers para Feedbacks
+    getInitials(nome) {
+      if (!nome) return '?';
+      const parts = nome.trim().split(' ');
+      if (parts.length === 1) return parts[0][0].toUpperCase();
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    },
+    
+    getAvatarColor(nome) {
+      // Gera uma cor baseada no nome (hash simples)
+      let hash = 0;
+      for (let i = 0; i < nome.length; i++) {
+        hash = nome.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      
+      const colors = [
+        '#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6',
+        '#1abc9c', '#34495e', '#e67e22', '#16a085', '#c0392b'
+      ];
+      
+      return colors[Math.abs(hash) % colors.length];
+    },
+    
+    formatFeedbackDate(dateString) {
+      if (!dateString) return '';
+      try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('pt-BR', { 
+          month: 'long', 
+          year: 'numeric' 
+        });
+      } catch {
+        return dateString;
+      }
     }
   };
 }

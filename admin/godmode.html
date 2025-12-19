@@ -95,6 +95,12 @@
               <span x-show="!sidebarCollapsed">Mensagens</span>
             </a>
           </li>
+          <li>
+            <a href="#" @click.prevent="changeSection('feedbacks')" :class="{ 'active': activeSection === 'feedbacks' }">
+              <i class="bi bi-star"></i>
+              <span x-show="!sidebarCollapsed">Feedbacks</span>
+            </a>
+          </li>
         </ul>
         
         <div class="sidebar-footer">
@@ -195,8 +201,10 @@
               <div class="col-md-3">
                 <select class="form-select" x-model="filters.status" @change="loadData()">
                   <option value="">Todos</option>
-                  <option value="active">Ativos</option>
-                  <option value="inactive">Inativos</option>
+                  <option value="active" x-show="activeSection === 'projects'">Ativos</option>
+                  <option value="inactive" x-show="activeSection === 'projects'">Inativos</option>
+                  <option value="approved" x-show="activeSection === 'feedbacks'">Aprovados</option>
+                  <option value="pending" x-show="activeSection === 'feedbacks'">Pendentes</option>
                 </select>
               </div>
               <div class="col-md-2">
