@@ -1,7 +1,7 @@
 // assets/js/home.js
 // Componente Alpine.js para Home
 
-import { supabase } from './supabase.js';
+import { getSupabaseClient } from './supabase.js';
 
 function homeMenu() {
   return {
@@ -55,7 +55,10 @@ function homeMenu() {
     
     async loadStats() {
       try {
-        
+        const supabase = getSupabaseClient();
+        if (!supabase) {
+          throw new Error('Supabase não está disponível');
+        }
         
         // Carregar estatísticas do Supabase
         const [projectsResult, skillsResult, achievementsResult] = await Promise.all([

@@ -2,7 +2,7 @@
 // Componente de Contato
 
 import { sendContactMessage } from './emailjs.js';
-import { supabase } from './supabase.js';
+import { getSupabaseClient } from './supabase.js';
 
 function contactForm() {
   return {
@@ -31,19 +31,23 @@ function contactForm() {
         }
         
         // Salvar no Supabase
-        const { error: dbError } = await supabase
+        const supabase = getSupabaseClient();
+        if (supabase) {
+          const { error: dbError } = await supabase
           .from('contact_messages')
-          .insert([{
-            nome: this.form.nome,
-            email: this.form.email,
-            assunto: this.form.assunto || null,
-            mensagem: this.form.mensagem,
-            lida: false
-          }]);
-        
-        if (dbError) {
+            .from('contact_messages')
+            .insert([{
+              nome: this.form.nome,
+              email: this.form.email,
+              assunto: this.form.assunto || null,
+              mensagem: this.form.mensagem,
+              lida: false
+            }]);
           
-          // Não falhar se apenas o banco der erro (email já foi enviado)
+          if (dbError) {
+            console.warn('Aviso: Erro ao salvar mensagem no banco:', dbError);
+            // Não falhar se apenas o banco der erro (email já foi enviado)
+          }
         }
         
         // Sucesso

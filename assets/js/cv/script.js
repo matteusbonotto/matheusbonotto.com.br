@@ -179,13 +179,27 @@ async function carregarDados() {
         .order("ordem", { ascending: true }),
     ]);
 
-    if (academicResult.error) 
-    if (professionalResult.error) 
-    if (languagesResult.error) 
-    if (certsResult.error) 
-    if (hardSkillsResult.error) 
-    if (softSkillsResult.error) 
-    if (projectsResult.error) 
+    if (academicResult.error) {
+      console.error('Erro ao carregar histórico acadêmico:', academicResult.error);
+    }
+    if (professionalResult.error) {
+      console.error('Erro ao carregar histórico profissional:', professionalResult.error);
+    }
+    if (languagesResult.error) {
+      console.error('Erro ao carregar idiomas:', languagesResult.error);
+    }
+    if (certsResult.error) {
+      console.error('Erro ao carregar certificações:', certsResult.error);
+    }
+    if (hardSkillsResult.error) {
+      console.error('Erro ao carregar hard skills:', hardSkillsResult.error);
+    }
+    if (softSkillsResult.error) {
+      console.error('Erro ao carregar soft skills:', softSkillsResult.error);
+    }
+    if (projectsResult.error) {
+      console.error('Erro ao carregar projetos:', projectsResult.error);
+    } 
 
     const academicHistory = academicResult.data || [];
     const professionalHistory = professionalResult.data || [];

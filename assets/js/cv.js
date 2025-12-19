@@ -1,7 +1,7 @@
 // assets/js/cv.js
 // Componente Alpine.js para CV
 
-import { supabase } from './supabase.js';
+import { getSupabaseClient } from './supabase.js';
 import { translateText } from './translate.js';
 
 function cvPage() {
@@ -21,6 +21,10 @@ function cvPage() {
       try {
         this.loading = true;
         
+        const supabase = getSupabaseClient();
+        if (!supabase) {
+          throw new Error('Supabase não está disponível');
+        }
         
         // Carregar perfil
         const { data: profileData, error: profileError } = await supabase
@@ -48,10 +52,18 @@ function cvPage() {
             supabase.from('certifications').select('*').eq('profile_id', profileId).order('ordem')
           ]);
           
-          if (hardSkillsResult.error) 
-          if (softSkillsResult.error) 
-          if (languagesResult.error) 
-          if (certsResult.error) 
+          if (hardSkillsResult.error) {
+            console.error('Erro ao carregar hard skills:', hardSkillsResult.error);
+          }
+          if (softSkillsResult.error) {
+            console.error('Erro ao carregar soft skills:', softSkillsResult.error);
+          }
+          if (languagesResult.error) {
+            console.error('Erro ao carregar idiomas:', languagesResult.error);
+          }
+          if (certsResult.error) {
+            console.error('Erro ao carregar certificações:', certsResult.error);
+          } 
           
           this.hardSkills = hardSkillsResult.data || [];
           this.softSkills = softSkillsResult.data || [];
@@ -65,8 +77,12 @@ function cvPage() {
           supabase.from('professional_history').select('*').order('data_inicio', { ascending: false })
         ]);
         
-        if (academicResult.error) 
-        if (professionalResult.error) 
+        if (academicResult.error) {
+          console.error('Erro ao carregar histórico acadêmico:', academicResult.error);
+        }
+        if (professionalResult.error) {
+          console.error('Erro ao carregar histórico profissional:', professionalResult.error);
+        } 
         
         this.academicHistory = academicResult.data || [];
         this.professionalHistory = professionalResult.data || [];

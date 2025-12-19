@@ -1,7 +1,7 @@
 // assets/js/portfolio.js
 // Componente Alpine.js para Portfólio
 
-import { supabase } from './supabase.js';
+import { getSupabaseClient } from './supabase.js';
 
 function portfolioGrid() {
   return {
@@ -16,6 +16,10 @@ function portfolioGrid() {
       try {
         this.loading = true;
         
+        const supabase = getSupabaseClient();
+        if (!supabase) {
+          throw new Error('Supabase não está disponível');
+        }
         
         // Carregar projetos com informações das instituições relacionadas
         const { data: projectsData, error: projectsError } = await supabase

@@ -314,7 +314,6 @@ async function translateObject(obj, targetLang, sourceLang = 'pt', depth = 0, pa
             return obj;
         }
         
-        }${obj.length > 50 ? '...' : ''}"`);
         updateProgressMessage(`Traduzindo: "${obj.substring(0, 50)}${obj.length > 50 ? '...' : ''}"`);
 
         const translated = await translateText(obj, targetLang, sourceLang);

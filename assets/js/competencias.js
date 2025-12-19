@@ -1,7 +1,7 @@
 // assets/js/competencias.js
 // Componente Alpine.js para Competências - Baseado no projeto de referência
 
-import { supabase } from './supabase.js';
+import { getSupabaseClient } from './supabase.js';
 
 function competenciasPage() {
   return {
@@ -40,6 +40,11 @@ function competenciasPage() {
       try {
         this.loading = true;
         
+        const supabase = getSupabaseClient();
+        if (!supabase) {
+          throw new Error('Supabase não está disponível');
+        }
+        
         const { data, error } = await supabase
           .from('skills_tree')
           .select('*')
@@ -62,6 +67,11 @@ function competenciasPage() {
       try {
         this.loadingAchievements = true;
         
+        const supabase = getSupabaseClient();
+        if (!supabase) {
+          throw new Error('Supabase não está disponível');
+        }
+        
         const { data, error } = await supabase
           .from('achievements')
           .select('*')
@@ -80,6 +90,11 @@ function competenciasPage() {
     
     async loadStats() {
       try {
+        const supabase = getSupabaseClient();
+        if (!supabase) {
+          throw new Error('Supabase não está disponível');
+        }
+        
         const [skillsResult, achievementsResult] = await Promise.all([
           supabase.from('skills_tree').select('*'),
           supabase.from('achievements').select('*')

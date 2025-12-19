@@ -51,11 +51,10 @@ function initSupabase() {
   }
   
   if (!createClientFn) {
-    
-    
+    console.warn('⚠️ Supabase UMD não encontrado. Verificando window.supabase...');
     
     if (window.supabase) {
-      );
+      console.warn('⚠️ window.supabase existe mas createClient não encontrado:', window.supabase);
     }
     // Criar mock para evitar quebrar
     supabase = {
@@ -100,27 +99,78 @@ function initSupabase() {
   }
 }
 
-// Inicializar Supabase
-// O script UMD está no <head>, então deve estar disponível
-supabase = initSupabase();
+// Inicializar Supabase quando o DOM estiver pronto
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    supabase = initSupabase();
+    ensureSupabaseReady();
+  });
+} else {
+  // DOM já está pronto
+  supabase = initSupabase();
+  ensureSupabaseReady();
+}
 
-// Se retornou mock (Supabase UMD não estava disponível), tentar novamente após um delay
-if (supabase && supabase.from) {
-  // Verificar se é mock testando se tem a propriedade auth corretamente
-  if (!supabase.auth || typeof supabase.auth.getSession !== 'function') {
-    // Provavelmente é mock, tentar novamente
+// Função para garantir que Supabase esteja pronto
+function ensureSupabaseReady() {
+  if (supabase && supabase.from) {
+    // Verificar se é mock testando se tem a propriedade auth corretamente
+    if (!supabase.auth || typeof supabase.auth.getSession !== 'function') {
+      // Provavelmente é mock, tentar novamente após delay
+      setTimeout(() => {
+        const retry = initSupabase();
+        if (retry && retry.auth && typeof retry.auth.getSession === 'function') {
+          supabase = retry;
+          window.__supabaseClient = retry;
+          console.log('✅ Supabase inicializado após retry');
+        } else {
+          // Tentar mais uma vez após 500ms
+          setTimeout(() => {
+            const finalRetry = initSupabase();
+            if (finalRetry && finalRetry.auth && typeof finalRetry.auth.getSession === 'function') {
+              supabase = finalRetry;
+              window.__supabaseClient = finalRetry;
+              console.log('✅ Supabase inicializado após retry final');
+            }
+          }, 500);
+        }
+      }, 200);
+    } else {
+      // Supabase está OK, garantir que está no global
+      window.__supabaseClient = supabase;
+    }
+  } else {
+    // Tentar inicializar após um pequeno delay
     setTimeout(() => {
-      const retry = initSupabase();
-      if (retry && retry.auth && typeof retry.auth.getSession === 'function') {
-        supabase = retry;
-        ');
+      supabase = initSupabase();
+      if (supabase && supabase.auth && typeof supabase.auth.getSession === 'function') {
+        window.__supabaseClient = supabase;
+        console.log('✅ Supabase inicializado via ensureSupabaseReady');
       }
-    }, 200);
+    }, 100);
   }
 }
 
-// Exportar
+// Exportar - usar getter para garantir que retorne o cliente atualizado
 export { supabase };
+
+// Função helper para obter supabase (garante que está inicializado)
+export function getSupabaseClient() {
+  // Verificar se já temos um cliente válido
+  if (window.__supabaseClient && typeof window.__supabaseClient.from === 'function') {
+    return window.__supabaseClient;
+  }
+  
+  // Tentar inicializar agora
+  const client = initSupabase();
+  if (client && client.from && client.auth) {
+    window.__supabaseClient = client;
+    return client;
+  }
+  
+  // Retornar o exportado (pode ser null se ainda não inicializou)
+  return supabase;
+}
 
 // Helper para verificar conexão
 export async function checkConnection() {
