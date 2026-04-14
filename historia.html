@@ -22,28 +22,22 @@
   <!-- Inicializar Supabase globalmente -->
   <script>
     (function() {
+      if (!window.CONFIG || !window.CONFIG.SUPABASE_URL) {
+        window.CONFIG = window.CONFIG || {};
+        window.CONFIG.SUPABASE_URL = window.CONFIG.SUPABASE_URL || 'https://rncpbkzszbbqqipkqcgs.supabase.co';
+        window.CONFIG.SUPABASE_ANON_KEY = window.CONFIG.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuY3Bia3pzemJicXFpcGtxY2dzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzOTQ2NDcsImV4cCI6MjA4MDk3MDY0N30.qeRXwovfdf4sRhhQtzsVGlbhR4zOmUpEl0ZB7lW5HX4';
+        window.CONFIG.ADMIN_EMAIL = window.CONFIG.ADMIN_EMAIL || 'contato@matheusbonotto.com.br';
+      }
       function initGlobalSupabase() {
-        if (typeof window.supabase === 'undefined') {
-          setTimeout(initGlobalSupabase, 100);
-          return;
-        }
-        if (!window.CONFIG || !window.CONFIG.SUPABASE_URL || !window.CONFIG.SUPABASE_ANON_KEY) {
-          setTimeout(initGlobalSupabase, 100);
-          return;
-        }
+        var sb = window.supabase;
+        var fn = sb && sb.createClient ? sb.createClient
+               : typeof sb === 'function' ? sb
+               : sb && sb.default && sb.default.createClient ? sb.default.createClient
+               : null;
+        if (!fn) { setTimeout(initGlobalSupabase, 50); return; }
         try {
-          let createClient = null;
-          if (window.supabase.createClient) {
-            createClient = window.supabase.createClient;
-          } else if (typeof window.supabase === 'function') {
-            createClient = window.supabase;
-          } else if (window.supabase.default && window.supabase.default.createClient) {
-            createClient = window.supabase.default.createClient;
-          }
-          if (createClient) {
-            window.__supabaseClient = createClient(window.CONFIG.SUPABASE_URL, window.CONFIG.SUPABASE_ANON_KEY);
-            console.log('✅ Supabase inicializado globalmente');
-          }
+          window.__supabaseClient = fn(window.CONFIG.SUPABASE_URL, window.CONFIG.SUPABASE_ANON_KEY);
+          console.log('✅ Supabase inicializado globalmente');
         } catch (error) {
           console.error('❌ Erro ao inicializar Supabase globalmente:', error);
         }

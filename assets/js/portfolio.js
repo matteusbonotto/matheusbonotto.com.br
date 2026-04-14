@@ -174,6 +174,21 @@ function portfolioGrid() {
     
     getCategoryCount(categoria) {
       return this.projects.filter(p => p.categoria === categoria).length;
+    },
+
+    projectPlaceholder() {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+        <rect width="400" height="300" fill="#f0f2f5"/>
+        <g transform="translate(200,135)">
+          <path d="M-58,-48 L-58,52 L58,52 L58,-28 L8,-28 L-10,-48 Z" fill="#d1d5db" stroke="#9ca3af" stroke-width="2" stroke-linejoin="round"/>
+          <rect x="-58" y="-28" width="116" height="80" rx="6" fill="#e5e7eb" stroke="#9ca3af" stroke-width="2"/>
+          <line x1="-38" y1="-4" x2="38" y2="-4" stroke="#9ca3af" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="-38" y1="14" x2="28" y2="14" stroke="#9ca3af" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="-38" y1="32" x2="18" y2="32" stroke="#9ca3af" stroke-width="3.5" stroke-linecap="round"/>
+        </g>
+        <text x="200" y="228" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#6b7280" font-weight="500">Sem imagem disponível</text>
+      </svg>`;
+      return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
     }
   };
 }

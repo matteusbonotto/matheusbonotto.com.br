@@ -218,3 +218,6 @@ export function projectsCRUD() {
   };
 }
 
+// Registrar globalmente para Alpine.js
+window.projectsCRUD = projectsCRUD;
+

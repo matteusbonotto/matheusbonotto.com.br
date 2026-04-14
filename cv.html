@@ -29,31 +29,28 @@
         <!-- Inicialização global do Supabase -->
         <script>
             (function () {
-                async function initGlobalSupabase() {
-                    if (!window.CONFIG || !window.CONFIG.SUPABASE_URL || !window.CONFIG.SUPABASE_ANON_KEY) {
-                        console.warn('CONFIG do Supabase não encontrada. Verifique config.js');
-                        return;
-                    }
+                // Fallback caso config.js não carregue
+                if (!window.CONFIG || !window.CONFIG.SUPABASE_URL) {
+                    window.CONFIG = window.CONFIG || {};
+                    window.CONFIG.SUPABASE_URL = window.CONFIG.SUPABASE_URL || 'https://rncpbkzszbbqqipkqcgs.supabase.co';
+                    window.CONFIG.SUPABASE_ANON_KEY = window.CONFIG.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuY3Bia3pzemJicXFpcGtxY2dzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzOTQ2NDcsImV4cCI6MjA4MDk3MDY0N30.qeRXwovfdf4sRhhQtzsVGlbhR4zOmUpEl0ZB7lW5HX4';
+                }
+
+                function initGlobalSupabase() {
+                    var sb = window.supabase;
+                    var fn = sb && sb.createClient ? sb.createClient
+                           : typeof sb === 'function' ? sb
+                           : sb && sb.default && sb.default.createClient ? sb.default.createClient
+                           : null;
+
+                    if (!fn) { setTimeout(initGlobalSupabase, 50); return; }
 
                     try {
-                        let createClient = null;
-                        if (window.supabase && window.supabase.createClient) {
-                            createClient = window.supabase.createClient;
-                        } else if (typeof window.supabase === 'function') {
-                            createClient = window.supabase;
-                        } else if (window.supabase && window.supabase.default && window.supabase.default.createClient) {
-                            createClient = window.supabase.default.createClient;
-                        }
-
-                        if (createClient) {
-                            window.__supabaseClient = createClient(
-                                window.CONFIG.SUPABASE_URL,
-                                window.CONFIG.SUPABASE_ANON_KEY
-                            );
-                            console.log('✅ Supabase inicializado no cv.html');
-                        } else {
-                            console.error('❌ Não foi possível obter createClient do Supabase UMD.');
-                        }
+                        window.__supabaseClient = fn(
+                            window.CONFIG.SUPABASE_URL,
+                            window.CONFIG.SUPABASE_ANON_KEY
+                        );
+                        console.log('✅ Supabase inicializado no cv.html');
                     } catch (error) {
                         console.error('❌ Erro ao inicializar Supabase no cv.html:', error);
                     }
@@ -150,9 +147,9 @@
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        <!-- JavaScript personalizado -->
-        <script src="assets/js/cv/translate.js"></script>
-        <script src="assets/js/cv/script.js"></script>
+        <!-- JavaScript personalizado (?v força bypass de cache do SW/navegador após deploy) -->
+        <script src="assets/js/cv/translate.js?v=20260214"></script>
+        <script src="assets/js/cv/script.js?v=20260215"></script>
         
         <!-- Components (deve carregar antes do Alpine.js) -->
         <script src="assets/js/components.js"></script>

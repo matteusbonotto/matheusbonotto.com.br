@@ -67,3 +67,6 @@ export function adminDashboard() {
   };
 }
 
+// Registrar globalmente para Alpine.js
+window.adminDashboard = adminDashboard;
+

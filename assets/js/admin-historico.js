@@ -4,6 +4,25 @@
 import { protectAdminRoute, logout } from '../auth.js';
 import { supabase } from '../supabase.js';
 
+function ordenarPorDataInicioDesc(rows) {
+  const t = (d) => {
+    if (!d) return 0;
+    const ms = new Date(d).getTime();
+    return Number.isNaN(ms) ? 0 : ms;
+  };
+  return (rows || [])
+    .slice()
+    .sort((a, b) => {
+      const db = t(b.data_inicio);
+      const da = t(a.data_inicio);
+      if (db !== da) return db - da;
+      const oa = Number(a.ordem) || 0;
+      const ob = Number(b.ordem) || 0;
+      if (oa !== ob) return oa - ob;
+      return String(a.id || '').localeCompare(String(b.id || ''));
+    });
+}
+
 export function historyCRUD() {
   return {
     sidebarOpen: false,
@@ -15,6 +34,7 @@ export function historyCRUD() {
     loading: false,
     error: null,
     searchQuery: '',
+    profileId: null,
     form: {
       id: null,
       instituicao: '',
@@ -34,7 +54,15 @@ export function historyCRUD() {
     async initAdmin() {
       const hasAccess = await protectAdminRoute();
       if (!hasAccess) return;
+      await this.loadProfileId();
       await this.loadHistory();
+    },
+
+    async loadProfileId() {
+      try {
+        const { data } = await supabase.from('profiles').select('id').limit(1).maybeSingle();
+        if (data) this.profileId = data.id;
+      } catch (e) {}
     },
     
     async loadHistory() {
@@ -44,8 +72,8 @@ export function historyCRUD() {
           supabase.from('professional_history').select('*').order('data_inicio', { ascending: false })
         ]);
         
-        this.academicHistory = academicResult.data || [];
-        this.professionalHistory = professionalResult.data || [];
+        this.academicHistory = ordenarPorDataInicioDesc(academicResult.data);
+        this.professionalHistory = ordenarPorDataInicioDesc(professionalResult.data);
         this.updateFilteredHistory();
       } catch (error) {
         
@@ -111,6 +139,7 @@ export function historyCRUD() {
         
         if (this.activeTab === 'academico') {
           delete data.titulo;
+          delete data.categoria_profissional;
         } else {
           delete data.curso;
         }
@@ -122,6 +151,7 @@ export function historyCRUD() {
             .eq('id', data.id);
           if (error) throw error;
         } else {
+          if (this.profileId) data.profile_id = this.profileId;
           const { error } = await supabase
             .from(table)
             .insert([data]);
@@ -194,4 +224,7 @@ export function historyCRUD() {
     }
   };
 }
+
+// Registrar globalmente para Alpine.js
+window.historyCRUD = historyCRUD;
 

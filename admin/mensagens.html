@@ -15,6 +15,36 @@
   
   <!-- Configuração -->
   <script src="../config.js"></script>
+  <!-- Supabase UMD -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+  <!-- Inicializar Supabase globalmente -->
+  <script>
+    (function() {
+      if (!window.CONFIG || !window.CONFIG.SUPABASE_URL) {
+        window.CONFIG = window.CONFIG || {};
+        window.CONFIG.SUPABASE_URL = window.CONFIG.SUPABASE_URL || 'https://rncpbkzszbbqqipkqcgs.supabase.co';
+        window.CONFIG.SUPABASE_ANON_KEY = window.CONFIG.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuY3Bia3pzemJicXFpcGtxY2dzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzOTQ2NDcsImV4cCI6MjA4MDk3MDY0N30.qeRXwovfdf4sRhhQtzsVGlbhR4zOmUpEl0ZB7lW5HX4';
+        window.CONFIG.ADMIN_EMAIL = window.CONFIG.ADMIN_EMAIL || 'contato@matheusbonotto.com.br';
+      }
+      function initAdminSupabase() {
+        var sb = window.supabase;
+        var fn = sb && sb.createClient ? sb.createClient
+               : typeof sb === 'function' ? sb
+               : sb && sb.default && sb.default.createClient ? sb.default.createClient
+               : null;
+        if (!fn) return setTimeout(initAdminSupabase, 50);
+        try {
+          window.__supabaseClient = fn(window.CONFIG.SUPABASE_URL, window.CONFIG.SUPABASE_ANON_KEY);
+          console.log('✅ Supabase Admin inicializado');
+        } catch(e) { console.error('❌ Supabase Admin erro:', e); }
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAdminSupabase);
+      } else {
+        initAdminSupabase();
+      }
+    })();
+  </script>
 </head>
 <body>
   <div x-data="messagesCRUD()" x-init="initAdmin()">
@@ -27,6 +57,7 @@
       <ul class="sidebar-menu">
         <li><a href="dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
         <li><a href="perfil.html"><i class="bi bi-person"></i> Perfil</a></li>
+        <li><a href="curriculo.html"><i class="bi bi-file-earmark-person"></i> Currículo</a></li>
         <li><a href="projetos.html"><i class="bi bi-folder"></i> Projetos</a></li>
         <li><a href="competencias.html"><i class="bi bi-star"></i> Competências</a></li>
         <li><a href="conquistas.html"><i class="bi bi-trophy"></i> Conquistas</a></li>

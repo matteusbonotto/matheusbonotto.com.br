@@ -162,8 +162,6 @@
   // Exportar funções globais para uso manual se necessário
   window.clearAppCache = clearAllCache;
   window.forceAppReload = forceReload;
-  
-  ');
 })();
 
 

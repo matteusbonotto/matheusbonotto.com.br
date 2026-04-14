@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currículo - Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <script src="../config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+  <script>
+    (function() {
+      if (!window.CONFIG || !window.CONFIG.SUPABASE_URL) {
+        window.CONFIG = window.CONFIG || {};
+        window.CONFIG.SUPABASE_URL = window.CONFIG.SUPABASE_URL || 'https://rncpbkzszbbqqipkqcgs.supabase.co';
+        window.CONFIG.SUPABASE_ANON_KEY = window.CONFIG.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuY3Bia3pzemJicXFpcGtxY2dzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzOTQ2NDcsImV4cCI6MjA4MDk3MDY0N30.qeRXwovfdf4sRhhQtzsVGlbhR4zOmUpEl0ZB7lW5HX4';
+        window.CONFIG.ADMIN_EMAIL = window.CONFIG.ADMIN_EMAIL || 'contato@matheusbonotto.com.br';
+      }
+      function initAdminSupabase() {
+        var sb = window.supabase;
+        var fn = sb && sb.createClient ? sb.createClient
+               : typeof sb === 'function' ? sb
+               : sb && sb.default && sb.default.createClient ? sb.default.createClient
+               : null;
+        if (!fn) return setTimeout(initAdminSupabase, 50);
+        try {
+          window.__supabaseClient = fn(window.CONFIG.SUPABASE_URL, window.CONFIG.SUPABASE_ANON_KEY);
+        } catch(e) { console.error(e); }
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAdminSupabase);
+      } else {
+        initAdminSupabase();
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div x-data="curriculumCRUD()" x-init="initAdmin()">
+    <nav class="sidebar" x-show="sidebarOpen || window.innerWidth >= 992">
+      <div class="sidebar-header">
+        <h4>Admin Panel</h4>
+        <button class="btn-close btn-close-white d-lg-none" @click="sidebarOpen = false"></button>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+        <li><a href="perfil.html"><i class="bi bi-person"></i> Perfil</a></li>
+        <li><a href="curriculo.html" class="active"><i class="bi bi-file-earmark-person"></i> Currículo</a></li>
+        <li><a href="projetos.html"><i class="bi bi-folder"></i> Projetos</a></li>
+        <li><a href="competencias.html"><i class="bi bi-star"></i> Competências</a></li>
+        <li><a href="conquistas.html"><i class="bi bi-trophy"></i> Conquistas</a></li>
+        <li><a href="historico.html"><i class="bi bi-clock-history"></i> Histórico</a></li>
+        <li><a href="mensagens.html"><i class="bi bi-envelope"></i> Mensagens</a></li>
+      </ul>
+      <div class="sidebar-footer">
+        <button class="btn btn-sm btn-danger w-100" @click="handleLogout()"><i class="bi bi-box-arrow-right"></i> Sair</button>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <header class="admin-header">
+        <button class="btn btn-outline-primary d-lg-none" @click="sidebarOpen = !sidebarOpen"><i class="bi bi-list"></i></button>
+        <h1 class="mb-0">Currículo (site)</h1>
+      </header>
+
+      <div class="content p-4">
+        <p class="text-muted mb-3">
+          Tudo que aparece em <strong>cv.html</strong> vem destas tabelas no Supabase. Edite aqui e atualize a página pública (Ctrl+Shift+R).
+        </p>
+
+        <div x-show="loading" class="text-center py-5">
+          <div class="spinner-border text-primary"></div>
+          <p class="mt-2">Carregando…</p>
+        </div>
+
+        <div x-show="!loading">
+          <div x-show="error && mainTab === 'dados'" class="alert alert-danger" x-text="error"></div>
+          <div x-show="success" class="alert alert-success" x-text="successMessage"></div>
+
+          <ul class="nav nav-pills flex-wrap gap-1 mb-4">
+            <li class="nav-item"><button type="button" class="nav-link" :class="{ 'active': mainTab === 'dados' }" @click="mainTab = 'dados'"><i class="bi bi-person-vcard"></i> Dados &amp; texto</button></li>
+            <li class="nav-item"><button type="button" class="nav-link" :class="{ 'active': mainTab === 'prof' }" @click="mainTab = 'prof'"><i class="bi bi-briefcase"></i> Experiência</button></li>
+            <li class="nav-item"><button type="button" class="nav-link" :class="{ 'active': mainTab === 'acad' }" @click="mainTab = 'acad'"><i class="bi bi-mortarboard"></i> Formação</button></li>
+            <li class="nav-item"><button type="button" class="nav-link" :class="{ 'active': mainTab === 'idiomas' }" @click="mainTab = 'idiomas'"><i class="bi bi-translate"></i> Idiomas</button></li>
+            <li class="nav-item"><button type="button" class="nav-link" :class="{ 'active': mainTab === 'certs' }" @click="mainTab = 'certs'"><i class="bi bi-award"></i> Certificações</button></li>
+            <li class="nav-item"><button type="button" class="nav-link" :class="{ 'active': mainTab === 'hard' }" @click="mainTab = 'hard'"><i class="bi bi-code-slash"></i> Hard skills</button></li>
+            <li class="nav-item"><button type="button" class="nav-link" :class="{ 'active': mainTab === 'soft' }" @click="mainTab = 'soft'"><i class="bi bi-heart"></i> Soft skills</button></li>
+            <li class="nav-item"><button type="button" class="nav-link" :class="{ 'active': mainTab === 'proj' }" @click="mainTab = 'proj'"><i class="bi bi-journal-text"></i> Blocos CV</button></li>
+          </ul>
+
+          <div class="mb-3">
+            <input type="search" class="form-control" style="max-width:320px" x-model="searchQuery" placeholder="Buscar nesta lista…" x-show="mainTab !== 'dados'">
+          </div>
+
+          <!-- Dados -->
+          <div x-show="mainTab === 'dados'" class="card">
+            <div class="card-header"><strong>Perfil exibido no currículo</strong> (tabela <code>profiles</code>)</div>
+            <div class="card-body">
+              <form @submit.prevent="saveProfile()">
+                <div class="row g-3">
+                  <div class="col-md-6"><label class="form-label">Nome completo *</label><input class="form-control" x-model="profileForm.nome_completo" required></div>
+                  <div class="col-md-3"><label class="form-label">Primeiro nome</label><input class="form-control" x-model="profileForm.primeiro_nome"></div>
+                  <div class="col-md-3"><label class="form-label">Sobrenome</label><input class="form-control" x-model="profileForm.sobrenome"></div>
+                  <div class="col-md-6"><label class="form-label">Ocupação / cargo</label><input class="form-control" x-model="profileForm.ocupacao" placeholder="Ex.: QA Engineer"></div>
+                  <div class="col-md-6"><label class="form-label">Data nascimento</label><input type="date" class="form-control" x-model="profileForm.data_nascimento"></div>
+                  <div class="col-12"><label class="form-label">Resumo (texto do CV) *</label><textarea class="form-control" rows="6" x-model="profileForm.descricao" required></textarea></div>
+                  <div class="col-12"><label class="form-label">Keywords</label><input class="form-control" x-model="profileForm.keywords"></div>
+                  <div class="col-md-6"><label class="form-label">E-mail</label><input type="email" class="form-control" x-model="profileForm.email"></div>
+                  <div class="col-md-6"><label class="form-label">Telefone</label><input class="form-control" x-model="profileForm.telefone"></div>
+                  <div class="col-md-6"><label class="form-label">Local</label><input class="form-control" x-model="profileForm.local"></div>
+                  <div class="col-md-6"><label class="form-label">País</label><input class="form-control" x-model="profileForm.pais"></div>
+                  <div class="col-md-6"><label class="form-label">GitHub</label><input type="url" class="form-control" x-model="profileForm.github_url"></div>
+                  <div class="col-md-6"><label class="form-label">LinkedIn</label><input type="url" class="form-control" x-model="profileForm.linkedin_url"></div>
+                  <div class="col-12"><label class="form-label">Link da apresentação (Canva)</label><input type="url" class="form-control" x-model="profileForm.apresentacao_url" placeholder="https://canva.link/..."></div>
+                  <div class="col-12"><label class="form-label">Avatar (URL)</label><input type="url" class="form-control" x-model="profileForm.avatar_url"></div>
+                </div>
+                <div class="mt-3">
+                  <button type="submit" class="btn btn-primary" :disabled="saving"><span x-show="!saving">Salvar dados do currículo</span><span x-show="saving">Salvando…</span></button>
+                  <a href="../cv.html" target="_blank" rel="noopener" class="btn btn-outline-secondary ms-2">Abrir cv.html</a>
+                </div>
+                <p class="text-danger mt-2 mb-0" x-show="error && mainTab === 'dados'" x-text="error"></p>
+              </form>
+            </div>
+          </div>
+
+          <!-- Profissional -->
+          <div x-show="mainTab === 'prof'">
+            <button class="btn btn-primary mb-3" @click="openHistoryModal('professional','create')"><i class="bi bi-plus-lg"></i> Nova experiência</button>
+            <div class="table-responsive card">
+              <table class="table table-hover mb-0">
+                <thead><tr><th>Empresa</th><th>Cargo</th><th>Período</th><th></th></tr></thead>
+                <tbody>
+                  <template x-for="row in filteredProfessional" :key="row.id">
+                    <tr>
+                      <td x-text="row.instituicao"></td>
+                      <td x-text="row.titulo"></td>
+                      <td><span x-text="formatDate(row.data_inicio)"></span> – <span x-text="row.atual ? 'Atual' : formatDate(row.data_fim)"></span></td>
+                      <td class="text-nowrap">
+                        <button class="btn btn-sm btn-outline-primary" @click="openHistoryModal('professional','edit', row.id)"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" @click="deleteHistory('professional', row.id)"><i class="bi bi-trash"></i></button>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Acadêmico -->
+          <div x-show="mainTab === 'acad'">
+            <button class="btn btn-primary mb-3" @click="openHistoryModal('academic','create')"><i class="bi bi-plus-lg"></i> Nova formação</button>
+            <div class="table-responsive card">
+              <table class="table table-hover mb-0">
+                <thead><tr><th>Instituição</th><th>Curso</th><th>Período</th><th></th></tr></thead>
+                <tbody>
+                  <template x-for="row in filteredAcademic" :key="row.id">
+                    <tr>
+                      <td x-text="row.instituicao"></td>
+                      <td x-text="row.curso"></td>
+                      <td><span x-text="formatDate(row.data_inicio)"></span> – <span x-text="row.atual ? 'Atual' : formatDate(row.data_fim)"></span></td>
+                      <td class="text-nowrap">
+                        <button class="btn btn-sm btn-outline-primary" @click="openHistoryModal('academic','edit', row.id)"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" @click="deleteHistory('academic', row.id)"><i class="bi bi-trash"></i></button>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Idiomas -->
+          <div x-show="mainTab === 'idiomas'">
+            <button class="btn btn-primary mb-3" @click="openLangModal('create')"><i class="bi bi-plus-lg"></i> Idioma</button>
+            <div class="table-responsive card">
+              <table class="table table-hover mb-0">
+                <thead><tr><th>Idioma</th><th>Nível</th><th>Instituição</th><th></th></tr></thead>
+                <tbody>
+                  <template x-for="row in filteredLanguages" :key="row.id">
+                    <tr>
+                      <td x-text="row.idioma"></td>
+                      <td x-text="row.nivel"></td>
+                      <td x-text="row.instituicao"></td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary" @click="openLangModal('edit', row.id)"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" @click="deleteLang(row.id)"><i class="bi bi-trash"></i></button>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Certificações -->
+          <div x-show="mainTab === 'certs'">
+            <button class="btn btn-primary mb-3" @click="openCertModal('create')"><i class="bi bi-plus-lg"></i> Certificação</button>
+            <div class="table-responsive card">
+              <table class="table table-hover mb-0">
+                <thead><tr><th>Nome</th><th>Instituição</th><th>Data</th><th></th></tr></thead>
+                <tbody>
+                  <template x-for="row in filteredCerts" :key="row.id">
+                    <tr>
+                      <td x-text="row.nome"></td>
+                      <td x-text="row.instituicao"></td>
+                      <td x-text="formatDate(row.data_certificacao)"></td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary" @click="openCertModal('edit', row.id)"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" @click="deleteCert(row.id)"><i class="bi bi-trash"></i></button>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Hard -->
+          <div x-show="mainTab === 'hard'">
+            <button class="btn btn-primary mb-3" @click="openHardModal('create')"><i class="bi bi-plus-lg"></i> Hard skill</button>
+            <div class="table-responsive card">
+              <table class="table table-hover mb-0">
+                <thead><tr><th>Nome</th><th>Categoria</th><th>Nível</th><th></th></tr></thead>
+                <tbody>
+                  <template x-for="row in filteredHard" :key="row.id">
+                    <tr>
+                      <td x-text="row.nome"></td>
+                      <td x-text="row.categoria"></td>
+                      <td x-text="row.nivel"></td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary" @click="openHardModal('edit', row.id)"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" @click="deleteHard(row.id)"><i class="bi bi-trash"></i></button>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Soft -->
+          <div x-show="mainTab === 'soft'">
+            <button class="btn btn-primary mb-3" @click="openSoftModal('create')"><i class="bi bi-plus-lg"></i> Soft skill</button>
+            <div class="table-responsive card">
+              <table class="table table-hover mb-0">
+                <thead><tr><th>Nome</th><th>Ordem</th><th></th></tr></thead>
+                <tbody>
+                  <template x-for="row in filteredSoft" :key="row.id">
+                    <tr>
+                      <td x-text="row.nome"></td>
+                      <td x-text="row.ordem"></td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary" @click="openSoftModal('edit', row.id)"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" @click="deleteSoft(row.id)"><i class="bi bi-trash"></i></button>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Projetos CV -->
+          <div x-show="mainTab === 'proj'">
+            <p class="small text-muted">Projetos com categoria <code>cv</code> — aparecem como seções extras no PDF/HTML do currículo.</p>
+            <button class="btn btn-primary mb-3" @click="openProjModal('create')"><i class="bi bi-plus-lg"></i> Bloco / projeto no CV</button>
+            <div class="table-responsive card">
+              <table class="table table-hover mb-0">
+                <thead><tr><th>Título</th><th>Resumo</th><th>Ordem</th><th>Ativo</th><th></th></tr></thead>
+                <tbody>
+                  <template x-for="row in filteredCvProjects" :key="row.id">
+                    <tr>
+                      <td x-text="row.titulo"></td>
+                      <td><span x-text="(row.descricao_curta || '').slice(0,80)"></span></td>
+                      <td x-text="row.ordem"></td>
+                      <td><span class="badge" :class="row.ativo ? 'bg-success' : 'bg-secondary'" x-text="row.ativo ? 'Sim' : 'Não'"></span></td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary" @click="openProjModal('edit', row.id)"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" @click="deleteProj(row.id)"><i class="bi bi-trash"></i></button>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal histórico -->
+    <div class="modal fade" id="curriculumHistoryModal" tabindex="-1">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" x-text="historyKind === 'professional' ? 'Experiência profissional' : 'Formação acadêmica'"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <form @submit.prevent="saveHistory()">
+            <div class="modal-body">
+              <div class="row g-2" x-show="historyKind === 'professional'">
+                <div class="col-md-6"><label class="form-label">Empresa *</label><input class="form-control" x-model="historyForm.instituicao" required></div>
+                <div class="col-md-6"><label class="form-label">Cargo *</label><input class="form-control" x-model="historyForm.titulo" required></div>
+                <div class="col-md-4"><label class="form-label">Regime</label>
+                  <select class="form-select" x-model="historyForm.regime"><option>CLT</option><option>PJ</option><option>Estágio</option></select>
+                </div>
+                <div class="col-md-4"><label class="form-label">Categoria</label>
+                  <select class="form-select" x-model="historyForm.categoria_profissional">
+                    <option>QA</option><option>DEV</option><option>INFRA</option><option>DEVOPS</option><option>TODOS</option>
+                  </select>
+                </div>
+                <div class="col-md-4"><label class="form-label">Modalidade</label>
+                  <select class="form-select" x-model="historyForm.tipo_local"><option>Presencial</option><option>Remoto</option><option>Híbrido</option></select>
+                </div>
+                <div class="col-md-6"><label class="form-label">Local</label><input class="form-control" x-model="historyForm.local"></div>
+              </div>
+              <div class="row g-2" x-show="historyKind === 'academic'">
+                <div class="col-md-6"><label class="form-label">Instituição *</label><input class="form-control" x-model="historyForm.instituicao" required></div>
+                <div class="col-md-6"><label class="form-label">Curso *</label><input class="form-control" x-model="historyForm.curso" required></div>
+                <div class="col-md-6"><label class="form-label">Tipo</label>
+                  <select class="form-select" x-model="historyForm.tipo_academico">
+                    <option>Técnico</option><option>Bacharel</option><option>Lato Sensu</option>
+                  </select>
+                </div>
+                <div class="col-md-6"><label class="form-label">Modalidade</label>
+                  <select class="form-select" x-model="historyForm.tipo_local_acad"><option>Presencial</option><option>Remoto</option><option>Híbrido</option></select>
+                </div>
+              </div>
+              <div class="row g-2 mt-1">
+                <div class="col-md-6"><label class="form-label">Início *</label><input type="date" class="form-control" x-model="historyForm.data_inicio" required></div>
+                <div class="col-md-6"><label class="form-label">Fim</label><input type="date" class="form-control" x-model="historyForm.data_fim"></div>
+                <div class="col-12"><div class="form-check"><input class="form-check-input" type="checkbox" x-model="historyForm.atual" id="hf_atual"><label class="form-check-label" for="hf_atual">Atual</label></div></div>
+                <div class="col-12"><label class="form-label">Descrição</label><textarea class="form-control" rows="4" x-model="historyForm.descricao"></textarea></div>
+                <div class="col-md-6"><label class="form-label">Ordem</label><input type="number" class="form-control" x-model="historyForm.ordem"></div>
+                <div class="col-12"><label class="form-label">Logo (URL)</label><input type="url" class="form-control" x-model="historyForm.logo_url"></div>
+                <div class="col-12">
+                  <label class="form-label">Imagens (URLs)</label>
+                  <div class="input-group mb-2">
+                    <input type="url" class="form-control" x-model="newImageUrl" placeholder="https://...">
+                    <button type="button" class="btn btn-outline-secondary" @click="addHistoryImage()">Adicionar</button>
+                  </div>
+                  <template x-for="(u, i) in historyForm.imagens_urls" :key="i">
+                    <div class="input-group mb-1">
+                      <input type="text" class="form-control form-control-sm" x-model="historyForm.imagens_urls[i]">
+                      <button type="button" class="btn btn-sm btn-outline-danger" @click="removeHistoryImage(i)"><i class="bi bi-x"></i></button>
+                    </div>
+                  </template>
+                </div>
+              </div>
+              <div class="alert alert-danger mt-2 mb-0" x-show="error" x-text="error"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+              <button type="submit" class="btn btn-primary" :disabled="saving">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Idioma -->
+    <div class="modal fade" id="curriculumLangModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form @submit.prevent="saveLang()">
+            <div class="modal-header"><h5 class="modal-title">Idioma</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+              <div class="mb-2"><label class="form-label">Idioma *</label><input class="form-control" x-model="langForm.idioma" required></div>
+              <div class="mb-2"><label class="form-label">Nível</label>
+                <select class="form-select" x-model="langForm.nivel">
+                  <option>Básico</option><option>Intermediário</option><option>Avançado</option><option>Fluente</option><option>Nativo</option>
+                </select>
+              </div>
+              <div class="form-check mb-2"><input class="form-check-input" type="checkbox" x-model="langForm.cursando" id="lg_c"><label class="form-check-label" for="lg_c">Cursando</label></div>
+              <div class="mb-2"><label class="form-label">Instituição / curso</label><input class="form-control" x-model="langForm.instituicao"></div>
+              <div class="mb-2"><label class="form-label">Ordem</label><input type="number" class="form-control" x-model="langForm.ordem"></div>
+              <div class="alert alert-danger" x-show="error" x-text="error"></div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button><button type="submit" class="btn btn-primary" :disabled="saving">Salvar</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert -->
+    <div class="modal fade" id="curriculumCertModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form @submit.prevent="saveCert()">
+            <div class="modal-header"><h5 class="modal-title">Certificação</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+              <div class="mb-2"><label class="form-label">Nome *</label><input class="form-control" x-model="certForm.nome" required></div>
+              <div class="mb-2"><label class="form-label">Instituição *</label><input class="form-control" x-model="certForm.instituicao" required></div>
+              <div class="mb-2"><label class="form-label">Data</label><input type="date" class="form-control" x-model="certForm.data_certificacao"></div>
+              <div class="mb-2"><label class="form-label">Validade</label><input class="form-control" x-model="certForm.validade"></div>
+              <div class="mb-2"><label class="form-label">URL certificado</label><input type="url" class="form-control" x-model="certForm.certificado_url"></div>
+              <div class="mb-2"><label class="form-label">Ordem</label><input type="number" class="form-control" x-model="certForm.ordem"></div>
+              <div class="alert alert-danger" x-show="error" x-text="error"></div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button><button type="submit" class="btn btn-primary" :disabled="saving">Salvar</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hard -->
+    <div class="modal fade" id="curriculumHardModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form @submit.prevent="saveHard()">
+            <div class="modal-header"><h5 class="modal-title">Hard skill</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+              <div class="mb-2"><label class="form-label">Nome *</label><input class="form-control" x-model="hardForm.nome" required></div>
+              <div class="mb-2"><label class="form-label">Categoria</label><input class="form-control" x-model="hardForm.categoria"></div>
+              <div class="mb-2"><label class="form-label">Nível 0–100</label><input type="number" min="0" max="100" class="form-control" x-model="hardForm.nivel"></div>
+              <div class="mb-2"><label class="form-label">Ordem</label><input type="number" class="form-control" x-model="hardForm.ordem"></div>
+              <div class="alert alert-danger" x-show="error" x-text="error"></div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button><button type="submit" class="btn btn-primary" :disabled="saving">Salvar</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Soft -->
+    <div class="modal fade" id="curriculumSoftModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form @submit.prevent="saveSoft()">
+            <div class="modal-header"><h5 class="modal-title">Soft skill</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+              <div class="mb-2"><label class="form-label">Nome *</label><input class="form-control" x-model="softForm.nome" required></div>
+              <div class="mb-2"><label class="form-label">Ordem</label><input type="number" class="form-control" x-model="softForm.ordem"></div>
+              <div class="alert alert-danger" x-show="error" x-text="error"></div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button><button type="submit" class="btn btn-primary" :disabled="saving">Salvar</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projeto CV -->
+    <div class="modal fade" id="curriculumProjModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <form @submit.prevent="saveProj()">
+            <div class="modal-header"><h5 class="modal-title">Projeto / bloco no CV</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+              <div class="mb-2"><label class="form-label">Título *</label><input class="form-control" x-model="projForm.titulo" required></div>
+              <div class="mb-2"><label class="form-label">Resumo</label><textarea class="form-control" rows="2" x-model="projForm.descricao_curta"></textarea></div>
+              <div class="mb-2"><label class="form-label">Descrição completa</label><textarea class="form-control" rows="4" x-model="projForm.descricao_completa"></textarea></div>
+              <div class="mb-2"><label class="form-label">Tecnologias (vírgula)</label><input class="form-control" x-model="projTecnologiasText" placeholder="Python, Selenium, …"></div>
+              <div class="row g-2">
+                <div class="col-md-6"><label class="form-label">Data</label><input type="date" class="form-control" x-model="projForm.data_projeto"></div>
+                <div class="col-md-6"><label class="form-label">Ordem</label><input type="number" class="form-control" x-model="projForm.ordem"></div>
+              </div>
+              <div class="form-check my-2"><input class="form-check-input" type="checkbox" x-model="projForm.ativo" id="pj_a"><label class="form-check-label" for="pj_a">Ativo</label></div>
+              <div class="mb-2"><label class="form-label">Imagem URL</label><input type="url" class="form-control" x-model="projForm.imagem_url"></div>
+              <div class="mb-2"><label class="form-label">Link projeto</label><input type="url" class="form-control" x-model="projForm.link_projeto"></div>
+              <div class="mb-2"><label class="form-label">GitHub</label><input type="url" class="form-control" x-model="projForm.link_github"></div>
+              <div class="alert alert-danger" x-show="error" x-text="error"></div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button><button type="submit" class="btn btn-primary" :disabled="saving">Salvar</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script type="module" src="../assets/js/admin-curriculo.js"></script>
+</body>
+</html>

@@ -124,3 +124,6 @@ export function messagesCRUD() {
   };
 }
 
+// Registrar globalmente para Alpine.js
+window.messagesCRUD = messagesCRUD;
+

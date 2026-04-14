@@ -26,7 +26,8 @@ export function profileCRUD() {
       linkedin_url: '',
       email: '',
       telefone: '',
-      avatar_url: ''
+      avatar_url: '',
+      apresentacao_url: ''
     },
     
     async initAdmin() {
@@ -101,4 +102,7 @@ export function profileCRUD() {
     }
   };
 }
+
+// Registrar globalmente para Alpine.js
+window.profileCRUD = profileCRUD;
 

@@ -2,7 +2,7 @@
 // Matheus Bonotto - Portfólio Profissional
 
 // Versão do cache - INCREMENTAR SEMPRE QUE FIZER DEPLOY
-const CACHE_VERSION = '2.0.0';
+const CACHE_VERSION = '2.0.2';
 const CACHE_NAME = `mabs-portfolio-v${CACHE_VERSION}`;
 const RUNTIME_CACHE = `mabs-runtime-v${CACHE_VERSION}`;
 

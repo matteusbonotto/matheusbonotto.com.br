@@ -109,29 +109,68 @@ function formatDateToBR(dateString) {
   return `${dia}/${mes}/${ano}`;
 }
 
+/** Unifica colunas legadas / alternativas do Supabase com o que o CV espera */
+function normalizarPerfil(profile) {
+  if (!profile) return profile;
+  return {
+    ...profile,
+    nome_completo:
+      profile.nome_completo || profile.nome || profile.nomeCompleto || "",
+    ocupacao: profile.ocupacao || profile.titulo || profile.cargo || "",
+    descricao: profile.descricao || profile.bio || profile.sobre || "",
+  };
+}
+
+/** Mais recente → mais antigo (por data de início); `ordem` só desempata */
+function ordenarHistorico(rows) {
+  const t = (d) => {
+    if (!d) return 0;
+    const ms = new Date(d).getTime();
+    return Number.isNaN(ms) ? 0 : ms;
+  };
+  return (rows || [])
+    .slice()
+    .sort((a, b) => {
+      const db = t(b.data_inicio);
+      const da = t(a.data_inicio);
+      if (db !== da) return db - da;
+      const oa = Number(a.ordem) || 0;
+      const ob = Number(b.ordem) || 0;
+      if (oa !== ob) return oa - ob;
+      return String(a.id || '').localeCompare(String(b.id || ''));
+    });
+}
+
 // Função para carregar dados a partir do Supabase
 async function carregarDados() {
   try {
     const supabase = await getSupabaseClient();
 
-    // Carrega perfil único
-    const { data: profile, error: profileError } = await supabase
+    // Se existir mais de um perfil, usa o mais recentemente atualizado (evita dados antigos)
+    const { data: profilesRows, error: profilesError } = await supabase
       .from("profiles")
-      .select("*")
-      .limit(1)
-      .maybeSingle();
+      .select("*");
 
-    if (profileError) {
-      throw profileError;
+    if (profilesError) {
+      throw profilesError;
     }
-
-    if (!profile) {
+    if (!profilesRows || profilesRows.length === 0) {
       throw new Error("Nenhum perfil encontrado na tabela 'profiles'.");
     }
 
-    const profileId = profile.id;
+    const profile = normalizarPerfil(
+      profilesRows.length === 1
+        ? profilesRows[0]
+        : profilesRows.reduce((a, b) => {
+            const ta = new Date(a.updated_at || a.created_at || 0).getTime();
+            const tb = new Date(b.updated_at || b.created_at || 0).getTime();
+            return tb >= ta ? b : a;
+          })
+    );
 
     // Carrega coleções relacionadas em paralelo
+    // Nota: filtro por profile_id removido pois é portfólio single-user;
+    // registros antigos podem não ter profile_id preenchido.
     const [
       academicResult,
       professionalResult,
@@ -144,32 +183,26 @@ async function carregarDados() {
       supabase
         .from("academic_history")
         .select("*")
-        .eq("profile_id", profileId)
         .order("data_inicio", { ascending: false }),
       supabase
         .from("professional_history")
         .select("*")
-        .eq("profile_id", profileId)
         .order("data_inicio", { ascending: false }),
       supabase
         .from("languages")
         .select("*")
-        .eq("profile_id", profileId)
         .order("ordem", { ascending: true }),
       supabase
         .from("certifications")
         .select("*")
-        .eq("profile_id", profileId)
-        .order("ordem", { ascending: true }),
+        .order("data_certificacao", { ascending: false }),
       supabase
         .from("hard_skills")
         .select("*")
-        .eq("profile_id", profileId)
         .order("ordem", { ascending: true }),
       supabase
         .from("soft_skills")
         .select("*")
-        .eq("profile_id", profileId)
         .order("ordem", { ascending: true }),
       supabase
         .from("projects")
@@ -201,8 +234,8 @@ async function carregarDados() {
       console.error('Erro ao carregar projetos:', projectsResult.error);
     } 
 
-    const academicHistory = academicResult.data || [];
-    const professionalHistory = professionalResult.data || [];
+    const academicHistory = ordenarHistorico(academicResult.data);
+    const professionalHistory = ordenarHistorico(professionalResult.data);
     const languages = languagesResult.data || [];
     const certifications = certsResult.data || [];
     const hardSkills = hardSkillsResult.data || [];
@@ -225,7 +258,11 @@ async function carregarDados() {
           : profile.dataNasc || "",
         github: profile.github_url || profile.github || "",
         linkedin: profile.linkedin_url || profile.linkedin || "",
-        apresentacao: profile.apresentacao || profile.apresentacao_url || "",
+        // apresentacao_url primeiro: campo antigo "apresentacao" costuma ficar com link velho
+        apresentacao:
+          profile.apresentacao_url ||
+          profile.apresentacao ||
+          "https://canva.link/w249l3neovffaj4",
         hardSkills: hardSkills.map((s) => s.nome || "").filter(Boolean),
         softSkills: softSkills.map((s) => s.nome || "").filter(Boolean),
       },
@@ -247,7 +284,7 @@ async function carregarDados() {
       historicoAcademico: academicHistory.map((acad) => ({
         curso: acad.curso || "",
         instituicao: acad.instituicao || "",
-        tipo: acad.tipo || "",
+        tipo: acad.tipo_academico || acad.tipo || "",
         inicio: acad.data_inicio
           ? formatDateToBR(acad.data_inicio)
           : acad.inicio || "",
