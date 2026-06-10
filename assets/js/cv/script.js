@@ -431,13 +431,12 @@ function createNewPage(pageNumber, isFirstPage = false) {
 
 // Função para calcular altura disponível na página
 function getAvailablePageHeight(isFirstPage = false) {
-  const pageHeight = 37.0; // ###################################   cm altura estendida para comportar mais texto
-  const headerHeight = 1.0; // cm altura do header (reduzido ainda mais)
-  const personHeaderHeight = isFirstPage ? 1.8 : 0; // cm altura do person-header (reduzido)
-  const footerHeight = 1.0; // cm altura do footer (reduzido ainda mais)
-  const margin = 0.2; // cm margem de segurança (reduzido para aproveitar mais espaço)
+  const pageHeight = 29.7;
+  const contentTop = 2.5 + (isFirstPage ? 3.0 : 0);
+  const footerReservedFromBottom = 2.0;
+  const safetyMargin = 0.4;
 
-  return pageHeight - headerHeight - personHeaderHeight - footerHeight - margin;
+  return pageHeight - contentTop - footerReservedFromBottom - safetyMargin;
 }
 
 // Função para estimar altura do conteúdo em cm
@@ -454,11 +453,13 @@ function managePagination(contentSections) {
   let currentPageHeight = 0;
 
   const availableHeight = getAvailablePageHeight(true);
-  // Usamos 90% da altura disponível para reduzir o risco do texto
-  // ultrapassar o limite físico da página na impressão.
-  const maxHeight = availableHeight * 0.9;
+  const firstPageMaxHeight = availableHeight;
+  const regularPageMaxHeight = getAvailablePageHeight(false);
 
   contentSections.forEach((section, index) => {
+    const currentMaxHeight =
+      currentPageNumber === 1 ? firstPageMaxHeight : regularPageMaxHeight;
+
     // Criar elemento temporário para medir altura
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = section;
@@ -472,7 +473,7 @@ function managePagination(contentSections) {
 
     // Se a seção é maior que o espaço disponível, ela deve ir para uma nova página
     // (mesmo que a página atual esteja vazia, para evitar corte)
-    if (sectionHeight > maxHeight) {
+    if (sectionHeight > currentMaxHeight) {
       // Se já tem conteúdo na página atual, finalizar ela primeiro
       if (currentPageContent.length > 0) {
         const currentPage = createNewPage(
@@ -506,7 +507,7 @@ function managePagination(contentSections) {
       currentPageContent = [];
       currentPageHeight = 0;
     } else if (
-      currentPageHeight + sectionHeight > maxHeight &&
+      currentPageHeight + sectionHeight > currentMaxHeight &&
       currentPageContent.length > 0
     ) {
       // Criar e finalizar página atual
@@ -532,7 +533,7 @@ function managePagination(contentSections) {
     }
 
     // Se é o último item, finalizar a página
-    if (index === contentSections.length - 1) {
+    if (index === contentSections.length - 1 && currentPageContent.length > 0) {
       const finalPage =
         currentPageNumber === 1
           ? createNewPage(currentPageNumber, true)
@@ -780,8 +781,26 @@ async function renderizarCurriculo() {
   totalPages = pages.length;
 }
 
+function waitForPrintAssets() {
+  const images = Array.from(document.querySelectorAll(".a4-page img"));
+  const pending = images
+    .filter((img) => !img.complete || img.naturalWidth === 0)
+    .map(
+      (img) =>
+        new Promise((resolve) => {
+          img.addEventListener("load", resolve, { once: true });
+          img.addEventListener("error", resolve, { once: true });
+        })
+    );
+
+  return Promise.race([
+    Promise.all(pending),
+    new Promise((resolve) => setTimeout(resolve, 2500)),
+  ]);
+}
+
 // Função para imprimir documento
-function printDocument() {
+async function printDocument() {
   // Adicionar classe para ocultar elementos específicos na impressão
   document.body.classList.add("printing");
 
@@ -798,104 +817,15 @@ function printDocument() {
     pages[pages.length - 1].style.pageBreakAfter = "avoid";
   }
 
-  // Otimizar para PDF
-  const optimizePrint = () => {
-    // Configurar meta viewport para impressão
-    let viewport = document.querySelector('meta[name="viewport"]');
-    const originalViewport = viewport ? viewport.content : null;
-
-    if (viewport) {
-      viewport.content =
-        "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
-    }
-
-    // Configurar estilos temporários para impressão
-    const printStyles = document.createElement("style");
-    printStyles.id = "temp-print-styles";
-    printStyles.textContent = `
-      @media print {
-        @page {
-          size: A4 portrait;
-          margin: 0;
-        }
-        
-        body {
-          font-size: 10pt !important;
-          line-height: 1.2 !important;
-          color: #000 !important;
-          background: white !important;
-        }
-        
-        .a4-page {
-          width: 210mm !important;
-          height: 297mm !important;
-          margin: 0 !important;
-          padding: 20mm !important;
-          box-shadow: none !important;
-          page-break-after: always !important;
-          background: white !important;
-        }
-        
-        .a4-page:last-child {
-          page-break-after: avoid !important;
-        }
-        
-        .controls-container {
-          display: none !important;
-        }
-        
-        .loading-message {
-          display: none !important;
-        }
-      }
-    `;
-    document.head.appendChild(printStyles);
-
-    // Aguardar renderização
-    setTimeout(() => {
-      // Configurar evento para detectar quando a impressão termina
-      const afterPrint = () => {
-        document.body.classList.remove("printing");
-
-        // Remover estilos temporários
-        const tempStyles = document.getElementById("temp-print-styles");
-        if (tempStyles) {
-          tempStyles.remove();
-        }
-
-        // Restaurar viewport original
-        if (viewport && originalViewport) {
-          viewport.content = originalViewport;
-        }
-
-        window.removeEventListener("afterprint", afterPrint);
-      };
-
-      window.addEventListener("afterprint", afterPrint);
-
-      // Iniciar impressão
-      window.print();
-
-      // Fallback para remover classe caso o evento não funcione
-      setTimeout(() => {
-        document.body.classList.remove("printing");
-
-        // Remover estilos temporários
-        const tempStyles = document.getElementById("temp-print-styles");
-        if (tempStyles) {
-          tempStyles.remove();
-        }
-
-        // Restaurar viewport original
-        if (viewport && originalViewport) {
-          viewport.content = originalViewport;
-        }
-      }, 5000);
-    }, 300);
+  const cleanup = () => {
+    document.body.classList.remove("printing");
+    window.removeEventListener("afterprint", cleanup);
   };
 
-  // Aguardar um pouco para garantir que os estilos sejam aplicados
-  setTimeout(optimizePrint, 100);
+  await waitForPrintAssets();
+  window.addEventListener("afterprint", cleanup);
+  window.print();
+  setTimeout(cleanup, 5000);
 }
 
 // Inicializar quando o DOM estiver carregado
