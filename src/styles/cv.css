@@ -1,0 +1,75 @@
+@import './base.css';
+
+/* Currículo como documento: mesa cinza, folhas A4 brancas com sombra, barra de ferramentas no topo.
+   As folhas são sempre brancas (como num editor), mesmo no tema escuro. */
+.pagina-cv { --mesa: #E8EAED; --barra: #F8F9FA; background: var(--mesa); }
+@media (prefers-color-scheme: dark) { .pagina-cv { --mesa: #1F1F22; --barra: #2A2A2E; } }
+
+.cv-barra { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 8px clamp(10px, 2vw, 20px); background: var(--barra); border-bottom: 1px solid var(--linha); }
+.cv-voltar { display: inline-flex; align-items: center; gap: 4px; padding: 4px; border-radius: 8px; flex: none; }
+.cv-voltar img { border-radius: 50%; background: #fff; }
+.cv-voltar .ic { width: 16px; height: 16px; order: -1; }
+.cv-voltar:hover { background: var(--superficie-2); }
+.cv-arquivo { flex: 1; min-width: 0; font-size: .92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cv-versoes { display: inline-flex; padding: 3px; border-radius: 10px; border: 1px solid var(--linha-forte); flex: none; }
+.cv-versoes button { padding: 6px 10px; border-radius: 7px; font-size: .8rem; color: var(--tinta-2); }
+.cv-versoes button[aria-pressed="true"] { background: var(--tinta); color: var(--bg); }
+@media (max-width: 719px) { .cv-barra { flex-wrap: wrap; } .cv-versoes { order: 10; width: 100%; justify-content: space-between; } .cv-arquivo { display: none; } }
+/* Palavras-chave para leitores automáticos (ATS/IA): na cor do papel e fora da impressão */
+.cv-palavras { color: #fff !important; font-size: 6pt; line-height: 1.1; margin-top: 2mm; user-select: none; }
+.cv-zoom { display: none; align-items: center; border: 1px solid var(--linha-forte); border-radius: 8px; overflow: hidden; }
+.cv-zoom button { min-width: 36px; height: 36px; padding: 0 8px; font-size: 1rem; }
+.cv-zoom button.mono { font-size: .78rem; min-width: 56px; border-inline: 1px solid var(--linha); }
+.cv-zoom button:hover { background: var(--superficie-2); }
+.cv-barra .nav-idiomas { display: flex; gap: 2px; }
+.cv-barra .nav-idiomas a { font-family: var(--mono); font-size: .75rem; padding: 7px 8px; border-radius: 8px; color: var(--tinta-2); }
+.cv-barra .nav-idiomas a[aria-current="true"] { background: var(--superficie-2); color: var(--tinta); }
+.cv-barra .btn span { display: none; }
+@media (min-width: 720px) { .cv-zoom { display: inline-flex; } .cv-barra .btn span { display: inline; } }
+
+.cv-mesa { padding: 16px 16px 48px; overflow-x: auto; }
+.cv-paginas { display: flex; flex-direction: column; align-items: center; gap: 16px; width: max-content; min-width: 100%; margin: 0 auto; }
+
+.folha {
+  position: relative; width: 210mm; min-height: 297mm; height: 297mm; padding: 16mm; background: #fff; color: #1c1c1e;
+  box-shadow: 0 1px 3px rgba(60,64,67,.3), 0 4px 8px 3px rgba(60,64,67,.15);
+  font-family: var(--fonte); font-size: 9.6pt; line-height: 1.45; overflow: hidden;
+}
+.folha.medindo { height: auto; }
+.js .folha[data-fluxo] { height: auto; }
+.folha-numero { position: absolute; bottom: 7mm; right: 16mm; font-family: var(--mono); font-size: 7.5pt; color: #8a8a90; }
+
+/* Conteúdo do documento */
+.folha-cabeca { margin: -8mm 0 3mm; padding-bottom: 1.5mm; font-size: 7.4pt; color: #8a8a90; border-bottom: .5pt solid #e3e3e6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cv-cabeca { display: grid; grid-template-columns: 5fr 7fr; gap: 6mm; align-items: center; padding-bottom: 4mm; margin-bottom: 1mm; border-bottom: 1.5pt solid #1c1c1e; }
+.cv-cabeca h1 { font-size: 24pt; font-weight: 800; font-stretch: 85%; letter-spacing: -.02em; line-height: 1; color: #0e0e10; }
+.cv-cargo { margin-top: 2mm; font-size: 11pt; font-weight: 600; color: #0E7C7B; }
+.cv-idade { margin-top: 1mm; font-size: 8.6pt; color: #6a6a70 !important; }
+.cv-cabeca-contato { display: flex; align-items: center; justify-content: flex-end; gap: 4mm; }
+.cv-qr { flex: none; width: 22mm; height: 22mm; display: block; }
+.cv-qr svg { width: 100%; height: 100%; }
+.cv-cabeca-contato ul { display: grid; gap: .8mm; font-size: 8.2pt; color: #3a3a40; }
+.cv-cabeca-contato li { display: flex; align-items: center; gap: 1.6mm; white-space: nowrap; }
+.cv-cabeca-contato .ic { width: 3.2mm; height: 3.2mm; color: #0E7C7B; }
+.cv-cabeca-contato a { color: inherit; text-decoration: none; }
+.cv-secao { margin: 5mm 0 2mm; padding-bottom: 1mm; font-family: var(--mono); font-size: 8pt; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: #0E7C7B; border-bottom: .6pt solid #d9d9dc; }
+.folha p { color: #2c2c30; }
+.folha p.cv-atomo + p.cv-atomo { margin-top: 1.4mm; }
+.cv-item-topo { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 4mm; margin-top: 3.2mm; }
+.cv-item-topo h3 { font-size: 10.4pt; font-weight: 700; color: #0e0e10; line-height: 1.3; }
+.cv-item-topo > span { font-family: var(--mono); font-size: 8pt; color: #5c5c62; padding-top: .6mm; white-space: nowrap; }
+.cv-meta { grid-column: 1 / -1; font-size: 8.4pt; color: #6a6a70 !important; margin: .4mm 0 1.2mm; }
+.cv-sub { margin-top: 2mm !important; font-weight: 700; color: #0e0e10 !important; }
+.cv-projeto a { color: #0E7C7B; text-decoration: none; }
+.folha strong { color: #0e0e10; }
+
+@media print {
+  @page { size: A4; margin: 0; }
+  .pagina-cv { background: #fff; }
+  .nao-imprimir, .cv-palavras { display: none !important; }
+  .cv-mesa { padding: 0; overflow: visible; }
+  .cv-paginas { display: block; gap: 0; width: auto; zoom: 1 !important; }
+  .folha { box-shadow: none; margin: 0; break-after: page; }
+  .folha:last-child { break-after: auto; }
+  a { color: inherit; }
+}

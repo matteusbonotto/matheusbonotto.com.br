@@ -1,0 +1,28 @@
+{
+  "name": "matheusbonotto",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/prerender.mjs && vite build",
+    "preview": "vite preview --port 4173",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:tudo": "npm test && npm run build && playwright test",
+    "sql": "bash scripts/sql.sh",
+    "deploy": "npm run test:tudo && firebase deploy --only hosting"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.27",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "cross-env": "^10.1.0",
+    "sharp": "^0.35.5",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  }
+}

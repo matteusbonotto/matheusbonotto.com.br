@@ -1,0 +1,411 @@
+{
+  "professional_history": {
+    "f24f938f": {
+      "en": {
+        "titulo": "Quality Assurance Tester",
+        "descricao": "Software quality work with manual testing, requirements analysis, test scenario design, documentation, evidence, business rule validation and support to agile teams, reducing risk before each delivery. Projects for Samsung."
+      },
+      "es": {
+        "titulo": "Quality Assurance Tester",
+        "descricao": "Calidad de software con pruebas manuales, análisis de requisitos, creación de escenarios, documentación, evidencias, validación de reglas de negocio y apoyo a equipos ágiles, reduciendo riesgos antes de cada entrega. Proyectos para Samsung."
+      }
+    },
+    "f5f53f4a": {
+      "en": {
+        "titulo": "Founder and Developer",
+        "descricao": "Founder and developer at Squidev, building tailor-made digital solutions that turn operational problems into simple, functional and scalable tools. I build interfaces, automations, landing pages, internal systems and web features focused on productivity, clarity, user experience and real business impact.\n\nMy work combines technical vision, process analysis and product thinking to deliver solutions that don't just work, they help people and companies sell better, organize workflows, cut manual work and professionalize their digital presence."
+      },
+      "es": {
+        "titulo": "Fundador y Desarrollador",
+        "descricao": "Fundador y desarrollador de Squidev, creando soluciones digitales a medida que convierten problemas operativos en herramientas simples, funcionales y escalables. Desarrollo interfaces, automatizaciones, landing pages, sistemas internos y recursos web con foco en productividad, claridad, experiencia de usuario y resultados reales para el negocio.\n\nMi trabajo combina visión técnica, análisis de procesos y pensamiento de producto para entregar soluciones que no solo funcionan: ayudan a personas y empresas a vender mejor, organizar flujos, reducir tareas manuales y profesionalizar su presencia digital."
+      }
+    },
+    "83d5192d": {
+      "en": {
+        "titulo": "Quality Assurance Technician",
+        "descricao": "Software quality in a large-scale agile environment, contributing to the stability and reliability of Americanas S.A.'s digital deliveries. I ran functional, exploratory and regression tests, analyzed business rules, documented evidence, identified defects and filed bugs in Jira.\n\nI also took part in test automation initiatives with Cypress and Robot Framework, raising technical quality and reducing risk before production. My focus was protecting the user experience, making deliveries more predictable and strengthening quality within the Scrum flow."
+      },
+      "es": {
+        "titulo": "Técnico de Aseguramiento de Calidad",
+        "descricao": "Calidad de software en un entorno ágil de gran escala, contribuyendo a la estabilidad y confiabilidad de las entregas digitales de Americanas S.A. Realicé pruebas funcionales, exploratorias y de regresión, con análisis de reglas de negocio, documentación de evidencias, identificación de fallas y registro de bugs en Jira.\n\nTambién participé en iniciativas de automatización con Cypress y Robot Framework, apoyando la evolución de la calidad técnica y la reducción de riesgos antes de producción. Mi foco fue proteger la experiencia del usuario, aumentar la previsibilidad de las entregas y fortalecer la calidad dentro del flujo Scrum."
+      }
+    },
+    "e0a751e6": {
+      "en": {
+        "titulo": "Technical Support Analyst",
+        "descricao": "Technical point of contact keeping internal operations running: on-site support for staff and troubleshooting of computers, printers, network, systems and infrastructure.\n\nI also organized the IT environment by controlling equipment, licenses, supplies and inventory, and by formatting and assembling machines, keeping the office's technology stable, organized and ready."
+      },
+      "es": {
+        "titulo": "Analista de Soporte Técnico",
+        "descricao": "Punto de apoyo técnico para garantizar la continuidad de la operación interna, con soporte presencial a los colaboradores y solución de problemas de computadoras, impresoras, red, sistemas e infraestructura.\n\nAdemás, organicé el entorno de TI mediante el control de equipos, licencias, materiales e inventario, y el formateo y armado de máquinas, manteniendo la estructura tecnológica estable, organizada y preparada."
+      }
+    },
+    "f96c568f": {
+      "pt": {
+        "titulo": "Quality Assurance"
+      },
+      "en": {
+        "titulo": "Quality Assurance",
+        "descricao": "Contract QA engineer through MB Labs for different projects and companies. My work covers manual testing, automation, business rule validation, integrations, critical flows and improving quality processes.\nAlong the way I contributed to digital products for Bankeiro, Trinus, Vinci Partners, Bullla and Cinemark LATAM, focused on anticipating risk, reducing rework and enabling safer, more stable releases.\n\n- Cinemark LATAM\nValidating a high-traffic platform, focused on critical user journeys such as authentication, navigation, ticket purchase, regression and integrations.\n\n- Bullla, Bankeiro, Trinus and Vinci Partners\nValidated financial systems, investment platforms and digital financial products, including corporate credit, benefits and earned-wage access. Testing covered sensitive flows involving transactions, business rules, permissions, authentication, integrations and user experience, always with a focus on security, stability and clarity.\n\nAt MB Labs my approach is guided by Shift-left Testing: joining from the start of each request to support understanding, anticipate risks and improve quality before the final validation stages.\n\nDay to day I use Gherkin, Robot Framework, Playwright and CTFL-based practices to structure tests clearly and in line with each delivery's context.\nI also build simple solutions with AI, prompt design, HTML, CSS, JavaScript, spreadsheets and dashboards to automate manual tasks, organize information and boost team productivity."
+      },
+      "es": {
+        "titulo": "Quality Assurance",
+        "descricao": "QA en modalidad contratista (PJ) a través de MB Labs para distintos proyectos y empresas. Mi trabajo incluye pruebas manuales, automatización, validación de reglas de negocio, integraciones, flujos críticos y mejora de los procesos de calidad.\nEn este camino contribuí en productos digitales de Bankeiro, Trinus, Vinci Partners, Bullla y Cinemark LATAM, con foco en anticipar riesgos, reducir retrabajo y lograr entregas más seguras y estables.\n\n- Cinemark LATAM\nValidación de una plataforma de alto tráfico, con foco en flujos críticos del usuario como autenticación, navegación, compra de entradas, regresión e integraciones.\n\n- Bullla, Bankeiro, Trinus y Vinci Partners\nValidación de sistemas financieros, plataformas de inversión y productos financieros digitales, incluyendo crédito corporativo, beneficios y adelanto salarial. Pruebas en flujos sensibles de transacciones, reglas de negocio, permisos, autenticación, integraciones y experiencia de usuario, siempre con foco en seguridad, estabilidad y claridad.\n\nEn MB Labs mi enfoque sigue prácticas de Shift-left Testing: participar desde el inicio de las demandas para apoyar el entendimiento, anticipar riesgos y mejorar la calidad antes de las etapas finales de validación.\n\nEn el día a día uso Gherkin, Robot Framework, Playwright y buenas prácticas basadas en CTFL para estructurar pruebas de forma clara y alineada al contexto de cada entrega.\nTambién desarrollo soluciones simples con IA, prompt design, HTML, CSS, JavaScript, planillas y dashboards para automatizar tareas manuales, organizar información y aumentar la productividad del equipo."
+      }
+    },
+    "969ea07b": {
+      "en": {
+        "titulo": "Software Developer (intern)",
+        "descricao": "Development of digital solutions, interfaces, automations and internal tools focused on solving practical problems, improving productivity and supporting operational workflows."
+      },
+      "es": {
+        "titulo": "Desarrollador de Software (pasantía)",
+        "descricao": "Desarrollo de soluciones digitales, interfaces, automatizaciones y herramientas internas con foco en resolver problemas prácticos, mejorar la productividad y apoyar flujos operativos."
+      }
+    }
+  },
+  "academic_history": {
+    "72d723ed": {
+      "en": {
+        "curso": "IT Technician",
+        "descricao": "Technical degree in IT focused on hardware, software and networks."
+      },
+      "es": {
+        "curso": "Técnico en Informática",
+        "descricao": "Formación técnica en informática con foco en hardware, software y redes."
+      }
+    },
+    "8804d32d": {
+      "en": {
+        "curso": "Software Testing (postgraduate specialization)",
+        "descricao": "Specialization in software quality, testing, defect prevention, technical documentation and good practices for delivering digital products."
+      },
+      "es": {
+        "curso": "Pruebas de Software (especialización de posgrado)",
+        "descricao": "Especialización en calidad de software, pruebas, prevención de fallas, documentación técnica y buenas prácticas aplicadas a la entrega de productos digitales."
+      }
+    },
+    "d132a8fb": {
+      "en": {
+        "curso": "B.Sc. in Information Systems",
+        "descricao": "Academic foundation in technology, logic, systems analysis, solution development and the fundamentals of working on digital products."
+      },
+      "es": {
+        "curso": "Licenciatura en Sistemas de Información",
+        "descricao": "Base académica en tecnología, lógica, análisis de sistemas, desarrollo de soluciones y fundamentos para trabajar en productos digitales."
+      }
+    }
+  },
+  "certifications": {
+    "90d9b2de": {
+      "en": {
+        "nome": "Postgraduate Specialization in Software Testing",
+        "validade": "Lifetime"
+      },
+      "es": {
+        "nome": "Especialización en Pruebas de Software",
+        "validade": "Vitalicia"
+      }
+    }
+  },
+  "languages": {
+    "fe43040c": {
+      "en": {
+        "idioma": "Portuguese",
+        "nivel": "Native"
+      },
+      "es": {
+        "idioma": "Portugués",
+        "nivel": "Nativo"
+      }
+    },
+    "bfc2e9cb": {
+      "en": {
+        "idioma": "English",
+        "nivel": "Intermediate"
+      },
+      "es": {
+        "idioma": "Inglés",
+        "nivel": "Intermedio"
+      }
+    },
+    "e35d0f7a": {
+      "en": {
+        "idioma": "Spanish",
+        "nivel": "Basic"
+      },
+      "es": {
+        "idioma": "Español",
+        "nivel": "Básico"
+      }
+    }
+  },
+  "soft_skills": {
+    "7c1c2d01": {
+      "en": {
+        "nome": "Technical problem solving"
+      },
+      "es": {
+        "nome": "Resolución de problemas técnicos"
+      }
+    },
+    "625eed30": {
+      "en": {
+        "nome": "Effective communication"
+      },
+      "es": {
+        "nome": "Comunicación efectiva"
+      }
+    },
+    "58c808c6": {
+      "en": {
+        "nome": "Teamwork"
+      },
+      "es": {
+        "nome": "Trabajo en equipo"
+      }
+    },
+    "46efd0ac": {
+      "en": {
+        "nome": "Analytical thinking"
+      },
+      "es": {
+        "nome": "Pensamiento analítico"
+      }
+    },
+    "5ccba7e7": {
+      "en": {
+        "nome": "Adaptability"
+      },
+      "es": {
+        "nome": "Adaptabilidad"
+      }
+    },
+    "797cdb7c": {
+      "en": {
+        "nome": "Results orientation"
+      },
+      "es": {
+        "nome": "Orientación a resultados"
+      }
+    },
+    "f3a9d588": {
+      "en": {
+        "nome": "Continuous learning"
+      },
+      "es": {
+        "nome": "Aprendizaje continuo"
+      }
+    },
+    "d44f2159": {
+      "pt": {
+        "nome": "Organização"
+      },
+      "en": {
+        "nome": "Organization"
+      },
+      "es": {
+        "nome": "Organización"
+      }
+    }
+  },
+  "hard_skills": {
+    "4d625fff": {
+      "en": {
+        "nome": "Test planning",
+        "categoria": "Software Quality"
+      },
+      "es": {
+        "nome": "Planificación de pruebas",
+        "categoria": "Calidad de Software"
+      }
+    },
+    "5b354d0b": {
+      "en": {
+        "nome": "Functional testing",
+        "categoria": "Software Quality"
+      },
+      "es": {
+        "nome": "Pruebas funcionales",
+        "categoria": "Calidad de Software"
+      }
+    },
+    "cadd0575": {
+      "en": {
+        "nome": "System testing",
+        "categoria": "Software Quality"
+      },
+      "es": {
+        "nome": "Pruebas de sistema",
+        "categoria": "Calidad de Software"
+      }
+    },
+    "e9eb8849": {
+      "en": {
+        "nome": "Regression testing",
+        "categoria": "Software Quality"
+      },
+      "es": {
+        "nome": "Pruebas de regresión",
+        "categoria": "Calidad de Software"
+      }
+    },
+    "263ecd12": {
+      "en": {
+        "nome": "Exploratory testing",
+        "categoria": "Software Quality"
+      },
+      "es": {
+        "nome": "Pruebas exploratorias",
+        "categoria": "Calidad de Software"
+      }
+    },
+    "1b275aa6": {
+      "en": {
+        "nome": "Test automation",
+        "categoria": "Test Automation"
+      },
+      "es": {
+        "nome": "Automatización de pruebas",
+        "categoria": "Automatización de Pruebas"
+      }
+    },
+    "08b4f0c6": {
+      "pt": {
+        "categoria": "Automação de Testes"
+      },
+      "en": {
+        "nome": "Cypress",
+        "categoria": "Test Automation"
+      },
+      "es": {
+        "nome": "Cypress",
+        "categoria": "Automatización de Pruebas"
+      }
+    },
+    "38ceb9b0": {
+      "en": {
+        "nome": "Robot Framework",
+        "categoria": "Test Automation"
+      },
+      "es": {
+        "nome": "Robot Framework",
+        "categoria": "Automatización de Pruebas"
+      }
+    },
+    "3cd41812": {
+      "pt": {
+        "categoria": "Desenvolvimento"
+      },
+      "en": {
+        "nome": "REST APIs",
+        "categoria": "Development"
+      },
+      "es": {
+        "nome": "APIs REST",
+        "categoria": "Desarrollo"
+      }
+    },
+    "ac62aa7c": {
+      "pt": {
+        "categoria": "Qualidade de Software"
+      },
+      "en": {
+        "nome": "Analytical skills",
+        "categoria": "Software Quality"
+      },
+      "es": {
+        "nome": "Capacidad analítica",
+        "categoria": "Calidad de Software"
+      }
+    },
+    "3d65afa4": {
+      "pt": {
+        "categoria": "Dados"
+      },
+      "en": {
+        "nome": "Advanced Excel",
+        "categoria": "Data"
+      },
+      "es": {
+        "nome": "Excel avanzado",
+        "categoria": "Datos"
+      }
+    },
+    "cd9d391a": {
+      "pt": {
+        "categoria": "Dados"
+      },
+      "en": {
+        "nome": "Power BI",
+        "categoria": "Data"
+      },
+      "es": {
+        "nome": "Power BI",
+        "categoria": "Datos"
+      }
+    },
+    "68ec40da": {
+      "pt": {
+        "categoria": "Gestão de Qualidade e Entregas"
+      },
+      "en": {
+        "nome": "Scrum",
+        "categoria": "Quality & Delivery Management"
+      },
+      "es": {
+        "nome": "Scrum",
+        "categoria": "Gestión de Calidad y Entregas"
+      }
+    },
+    "85ece5d1": {
+      "en": {
+        "nome": "Jira",
+        "categoria": "Quality & Delivery Management"
+      },
+      "es": {
+        "nome": "Jira",
+        "categoria": "Gestión de Calidad y Entregas"
+      }
+    },
+    "38fb0281": {
+      "pt": {
+        "categoria": "Gestão de Qualidade e Entregas"
+      },
+      "en": {
+        "nome": "Results-oriented",
+        "categoria": "Quality & Delivery Management"
+      },
+      "es": {
+        "nome": "Orientado a resultados",
+        "categoria": "Gestión de Calidad y Entregas"
+      }
+    }
+  },
+  "skills_tree": {
+    "9947427f": {
+      "en": {
+        "nome": "ADVANCED SPREADSHEETS"
+      },
+      "es": {
+        "nome": "PLANILLAS AVANZADAS"
+      }
+    },
+    "e40ce668": {
+      "en": {
+        "nome": "LANGUAGES"
+      },
+      "es": {
+        "nome": "IDIOMAS"
+      }
+    },
+    "6cd3f45d": {
+      "en": {
+        "nome": "ENGLISH"
+      },
+      "es": {
+        "nome": "INGLÉS"
+      }
+    }
+  }
+}

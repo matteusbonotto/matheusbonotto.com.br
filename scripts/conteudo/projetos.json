@@ -1,0 +1,546 @@
+{
+  "acb60cb0": {
+    "slug": "squidev",
+    "ordem": 9,
+    "en": {
+      "titulo": "Squidev",
+      "descricao_curta": "Company website for the Squidev brand",
+      "descricao_completa": "Company website built to represent the Squidev brand, presenting services, visual identity and digital presence with a focus on simplicity, clarity and professionalism."
+    },
+    "es": {
+      "titulo": "Squidev",
+      "descricao_curta": "Sitio institucional de la marca Squidev",
+      "descricao_completa": "Sitio institucional creado para representar la marca Squidev, presentando servicios, identidad visual y presencia digital, con foco en simplicidad, claridad y profesionalismo."
+    }
+  },
+  "ea09e2d6": {
+    "slug": "stark-hub",
+    "destaque": true,
+    "ordem": 2,
+    "papel": "Idealização, produto e desenvolvimento",
+    "pt": {
+      "descricao_curta": "Plataforma de governança, QA e produtividade construída sobre o fluxo real do Azure DevOps, será escalada para outros times do projeto."
+    },
+    "en": {
+      "titulo": "Stark Hub",
+      "papel": "Concept, product and development",
+      "descricao_curta": "Governance, QA and productivity platform built on top of the team's real Azure DevOps workflow, being rolled out to other teams in the project.",
+      "descricao_completa": "Stark Hub is an internal governance, QA and team productivity platform built from the real Azure DevOps workflow. It brings together information that used to be scattered across the Azure board, timesheets and Slack conversations, centralizing QA tracking, day-to-day work items, working hours and team governance.\n\nThe React frontend is a component-based rebuild of the stark-hub-script prototype, keeping login, authentication and side navigation, with each post-login module isolated in its own components.\n\nModules include Quality Board, My Items, Team Governance, Collaborators, Import Work Items and Settings. Quality Board gives an overview of work items in the QA flow, with filters, status charts by environment and country, and metrics per QA owner. My Items shows personal cards for developers, or assigned cards, QA owner and tested items for QAs, with integrated test results.\n\nTeam Governance centralizes hours vs. goal, cards without time entries, distribution by country and an executive report for management. Collaborators manages identity, avatar, roles (Dev, QA, Management) and the aliases used to match Azure data with test evidence. Import Work Items imports Azure DevOps work item hierarchies with a preview before confirmation.\n\nAccess levels are split by profile: developers see My Items, Hours and personal settings; QAs get everything developers have plus Quality Board and the QA mode of My Items; Management has full access, including Product, Governance, Collaborators, Import and global connections.\n\nSecurity was designed to protect sensitive data: Azure DevOps is always reached through the backend via Edge Functions, with no PAT hardcoded or exposed in the frontend bundle. Personal connections live in localStorage, isolated per user and browser, while Management's global settings live in Supabase protected by policies.",
+      "funcionalidades": [
+        "Quality Board with filters and status charts by environment and country",
+        "My Items with assigned cards, QA owner and test results",
+        "Team governance: hours vs. goal, cards without time entries and executive report",
+        "Collaborator management with roles, avatars and aliases",
+        "Azure DevOps work item hierarchy import with preview",
+        "Personal and global settings for Azure DevOps, pipelines, Slack and goals"
+      ],
+      "conquistas": [
+        "Centralized information previously spread across Azure DevOps, spreadsheets and Slack",
+        "Component-based React rebuild from the stark-hub-script prototype",
+        "Role-based access for Dev, QA and Management",
+        "Secure Azure DevOps integration through backend Edge Functions",
+        "Global settings protected in Supabase with policies"
+      ]
+    },
+    "es": {
+      "titulo": "Stark Hub",
+      "papel": "Idea, producto y desarrollo",
+      "descricao_curta": "Plataforma de gobernanza, QA y productividad construida sobre el flujo real de Azure DevOps, será escalada a otros equipos del proyecto.",
+      "descricao_completa": "Stark Hub es una plataforma interna de gobernanza, QA y productividad del equipo, construida a partir del flujo de trabajo real con Azure DevOps. Reúne en un solo lugar información que antes estaba dispersa entre el board de Azure, planillas de horas y conversaciones en Slack, centralizando el seguimiento de QA, los ítems del día a día, las horas de trabajo y la gobernanza del equipo.\n\nEl frontend en React es una reconstrucción por componentes del prototipo stark-hub-script, preservando login, autenticación y navegación lateral, con cada módulo posterior al login aislado en sus propios componentes.\n\nIncluye módulos como Quality Board, Mis Ítems, Gobernanza del Equipo, Colaboradores, Importar Work Items y Configuración. Quality Board ofrece una visión general de los work items en flujo de QA, con filtros, gráficos de estado por ambiente y país, y métricas por QA responsable. Mis Ítems muestra tarjetas personales para desarrolladores, o tarjetas asignadas, QA responsable e ítems probados para QAs, con resultados de prueba integrados.\n\nGobernanza del Equipo centraliza horas vs. meta, tarjetas sin registro de horas, distribución por país e informe ejecutivo para la gestión. Colaboradores organiza identidad, avatar, roles (Dev, QA y Gestión) y los alias usados para cruzar datos de Azure con evidencias de prueba. Importar Work Items permite importar jerarquías de Azure DevOps con vista previa antes de confirmar.\n\nLos niveles de acceso se separan por perfil: Devs acceden a Mis Ítems, Horas y configuración personal; QAs tienen todo lo de Dev más Quality Board y el modo QA de Mis Ítems; Gestión tiene acceso completo, incluyendo Producto, Gobernanza, Colaboradores, Importación y conexiones globales.\n\nLa seguridad se pensó para proteger datos sensibles: Azure DevOps siempre se accede desde el backend mediante Edge Functions, sin PAT hardcodeado ni expuesto en el bundle del frontend. Las conexiones personales quedan en localStorage, aisladas por usuario y navegador, y la configuración global de Gestión queda en Supabase protegida por policies.",
+      "funcionalidades": [
+        "Quality Board con filtros y gráficos de estado por ambiente y país",
+        "Mis Ítems con tarjetas asignadas, QA responsable y resultados de prueba",
+        "Gobernanza: horas vs. meta, tarjetas sin registro e informe ejecutivo",
+        "Gestión de colaboradores con roles, avatares y alias",
+        "Importación de jerarquías de work items de Azure DevOps con vista previa",
+        "Configuración personal y global para Azure DevOps, pipelines, Slack y metas"
+      ],
+      "conquistas": [
+        "Centralizó información antes dispersa entre Azure DevOps, planillas y Slack",
+        "Reconstrucción por componentes en React a partir del prototipo stark-hub-script",
+        "Acceso separado por perfiles Dev, QA y Gestión",
+        "Integración segura con Azure DevOps vía backend y Edge Functions",
+        "Configuración global protegida en Supabase con policies"
+      ]
+    }
+  },
+  "c8d1c981": {
+    "slug": "instrutora-jaqueline",
+    "ordem": 10,
+    "pt": {
+      "titulo": "Instrutora Jaqueline · site PWA",
+      "descricao_curta": "Site com cara de aplicativo para uma instrutora de direção divulgar aulas, pacotes e regiões de atendimento."
+    },
+    "en": {
+      "titulo": "Driving instructor Jaqueline · PWA site",
+      "descricao_curta": "App-like website for a driving instructor to present lessons, packages and service areas.",
+      "descricao_completa": "I built a PWA for Jaque, a driving instructor for licensed drivers, to present her services in a clear, professional and welcoming way. Built with HTML, CSS, JavaScript and PWA features, it delivers a mobile-optimized, app-like experience.\n\nThe client needed a simple, direct page to promote her lessons, explain what sets her apart, show packages and service areas, and make contact via WhatsApp easy. The focus was to convey confidence to people who are afraid of driving or want to get back behind the wheel safely."
+    },
+    "es": {
+      "titulo": "Instructora Jaqueline · sitio PWA",
+      "descricao_curta": "Sitio con apariencia de app para que una instructora de manejo presente clases, paquetes y zonas de atención.",
+      "descricao_completa": "Creé un sitio PWA para Jaque, instructora de manejo para personas con licencia, con el objetivo de presentar sus servicios de forma clara, profesional y cercana. Desarrollado con HTML, CSS, JavaScript y PWA, ofrece una experiencia optimizada para el celular y con apariencia de aplicación.\n\nLa clienta necesitaba una página simple y directa para promocionar sus clases, explicar sus diferenciales, mostrar paquetes y zonas de atención y facilitar el contacto por WhatsApp. El foco fue transmitir confianza a quienes tienen miedo de manejar o quieren volver a hacerlo con más seguridad."
+    }
+  },
+  "b690f0a9": {
+    "slug": "portfolio-antigo",
+    "ativo": false,
+    "ordem": 90,
+    "en": {
+      "titulo": "MatheusBonotto (v1)",
+      "descricao_curta": "Personal portfolio (previous version)",
+      "descricao_completa": "Previous version of this portfolio."
+    },
+    "es": {
+      "titulo": "MatheusBonotto (v1)",
+      "descricao_curta": "Portafolio personal (versión anterior)",
+      "descricao_completa": "Versión anterior de este portafolio."
+    }
+  },
+  "5ffced54": {
+    "slug": "achadubom",
+    "ordem": 13,
+    "en": {
+      "descricao_curta": "Web platform for listings and promotion",
+      "descricao_completa": "Web platform focused on promoting and organizing information, applying front-end development, page structure and user experience concepts."
+    },
+    "es": {
+      "descricao_curta": "Plataforma web de divulgación",
+      "descricao_completa": "Plataforma web enfocada en divulgar y organizar información, aplicando conceptos de desarrollo front-end, estructuración de páginas y experiencia de usuario."
+    }
+  },
+  "38ca4819": {
+    "slug": "ipvida",
+    "ordem": 12,
+    "pt": {
+      "titulo": "IPVida · portal da Igreja Presbiteriana Vida",
+      "descricao_curta": "Portal institucional da igreja, com agenda, ministérios e canais de contato.",
+      "descricao_completa": "Portal institucional da Igreja Presbiteriana Vida, organizado para apresentar a igreja, suas atividades e canais de contato de forma clara e acessível no celular."
+    },
+    "en": {
+      "titulo": "IPVida · Vida Presbyterian Church portal",
+      "descricao_curta": "Church website with schedule, ministries and contact channels.",
+      "descricao_completa": "Institutional portal for Vida Presbyterian Church, organized to present the church, its activities and contact channels in a clear, mobile-friendly way."
+    },
+    "es": {
+      "titulo": "IPVida · portal de la Iglesia Presbiteriana Vida",
+      "descricao_curta": "Portal institucional de la iglesia, con agenda, ministerios y canales de contacto.",
+      "descricao_completa": "Portal institucional de la Iglesia Presbiteriana Vida, organizado para presentar la iglesia, sus actividades y canales de contacto de forma clara y accesible en el celular."
+    }
+  },
+  "bad13036": {
+    "slug": "random-brother",
+    "ordem": 14,
+    "pt": {
+      "descricao_curta": "Sorteia grupos de 2 ou 3 pessoas para a igreja promover comunhão entre quem pouco conversa.",
+      "descricao_completa": "Ferramenta que forma grupos aleatórios de 2 ou 3 pessoas para que a igreja mantenha uma comunhão constante, incentivando membros que pouco conversam a orar e conviver juntos, dentro e fora da igreja."
+    },
+    "en": {
+      "descricao_curta": "Randomly pairs church members into groups of 2 or 3 to build fellowship.",
+      "descricao_completa": "Tool that forms random groups of 2 or 3 people so a church can keep fellowship going, encouraging members who rarely talk to pray and spend time together, inside and outside church."
+    },
+    "es": {
+      "descricao_curta": "Sortea grupos de 2 o 3 personas para fomentar la comunión en la iglesia.",
+      "descricao_completa": "Herramienta que forma grupos aleatorios de 2 o 3 personas para que la iglesia mantenga una comunión constante, animando a miembros que casi no conversan a orar y convivir juntos, dentro y fuera de la iglesia."
+    }
+  },
+  "f34a36a4": {
+    "slug": "evangeligo",
+    "destaque": true,
+    "ordem": 3,
+    "papel": "Produto completo: design, desenvolvimento, QA e marketing",
+    "pt": {
+      "titulo": "EvangeliGO",
+      "descricao_completa": "EvangeliGO é uma aplicação web progressiva (PWA) para quem quer cultivar hábitos cristãos com mais constância. Combina acompanhamento da rotina espiritual com elementos de gamificação, sequências, metas e quizzes bíblicos, para tornar a jornada envolvente e fácil de manter no dia a dia.\n\nProduto em produção, com domínio próprio, deploy contínuo, indexação no Google e campanhas de aquisição."
+    },
+    "en": {
+      "titulo": "EvangeliGO",
+      "papel": "End-to-end product: design, development, QA and marketing",
+      "descricao_curta": "PWA that turns building Christian habits into a gamified, motivating experience.",
+      "descricao_completa": "EvangeliGO is a progressive web app (PWA) for people who want to build Christian habits more consistently. It combines spiritual routine tracking with gamification, streaks, goals and Bible quizzes, to make the journey engaging and easy to keep up every day.\n\nLive product with its own domain, continuous deployment, Google indexing and acquisition campaigns."
+    },
+    "es": {
+      "titulo": "EvangeliGO",
+      "papel": "Producto completo: diseño, desarrollo, QA y marketing",
+      "descricao_curta": "PWA que convierte la construcción de hábitos cristianos en una experiencia gamificada y motivadora.",
+      "descricao_completa": "EvangeliGO es una aplicación web progresiva (PWA) para quienes desean cultivar hábitos cristianos con más constancia. Combina el seguimiento de la rutina espiritual con elementos de gamificación, rachas, metas y quizzes bíblicos, para que el camino sea atractivo y fácil de mantener cada día.\n\nProducto en producción, con dominio propio, despliegue continuo, indexación en Google y campañas de adquisición."
+    }
+  },
+  "aa63824d": {
+    "slug": "dashboard-produtos",
+    "ordem": 30,
+    "en": {
+      "titulo": "Product Dashboard",
+      "descricao_curta": "Product analysis with Power BI",
+      "descricao_completa": "Power BI dashboard for product analysis, organizing information visually to make key indicators easy to read. Built during my data analysis and Business Intelligence studies, practicing report building, visual elements and decision-support presentation.",
+      "funcionalidades": [
+        "Product data visualization",
+        "Indicators organized in a dashboard",
+        "Visual report structure",
+        "Support for product information analysis"
+      ],
+      "conquistas": [
+        "Built while studying Power BI",
+        "Reorganized into its own repository",
+        "Part of a Business Intelligence practice collection"
+      ]
+    },
+    "es": {
+      "titulo": "Dashboard de Productos",
+      "descricao_curta": "Análisis de productos con Power BI",
+      "descricao_completa": "Dashboard en Power BI para análisis de productos, organizando la información de forma visual para facilitar la lectura de los indicadores principales. Creado durante mis estudios de análisis de datos y Business Intelligence, practicando construcción de informes, elementos visuales y presentación para la toma de decisiones.",
+      "funcionalidades": [
+        "Visualización de datos de productos",
+        "Indicadores organizados en dashboard",
+        "Estructura visual del informe",
+        "Apoyo al análisis de información de productos"
+      ],
+      "conquistas": [
+        "Desarrollado durante estudios de Power BI",
+        "Reorganizado en repositorio propio",
+        "Parte de una colección de práctica de Business Intelligence"
+      ]
+    }
+  },
+  "c2bf2dba": {
+    "slug": "dashboard-perfil",
+    "ordem": 31,
+    "en": {
+      "titulo": "Profile Analysis Dashboard",
+      "descricao_curta": "Profile analysis with Power BI",
+      "descricao_completa": "Power BI dashboard for profile analysis, organizing data in a clear and objective visual way. Built during my data analysis and Business Intelligence studies, practicing information visualization, report structure and indicator reading.",
+      "funcionalidades": [
+        "Profile data visualization",
+        "Indicators organized in a dashboard",
+        "Visual report structure",
+        "Support for reading and interpreting information"
+      ],
+      "conquistas": [
+        "Built while studying Power BI",
+        "Reorganized into its own repository",
+        "Part of a Business Intelligence practice collection"
+      ]
+    },
+    "es": {
+      "titulo": "Dashboard de Análisis de Perfil",
+      "descricao_curta": "Análisis de perfil con Power BI",
+      "descricao_completa": "Dashboard en Power BI para análisis de perfil, organizando los datos de forma visual, clara y objetiva. Creado durante mis estudios de análisis de datos y Business Intelligence, practicando visualización de información, estructura de informes y lectura de indicadores.",
+      "funcionalidades": [
+        "Visualización de datos de perfil",
+        "Indicadores organizados en dashboard",
+        "Estructura visual del informe",
+        "Apoyo a la lectura e interpretación de información"
+      ],
+      "conquistas": [
+        "Desarrollado durante estudios de Power BI",
+        "Reorganizado en repositorio propio",
+        "Parte de una colección de práctica de Business Intelligence"
+      ]
+    }
+  },
+  "740d598b": {
+    "slug": "dashboard-sac",
+    "ordem": 32,
+    "en": {
+      "titulo": "Customer Service Dashboard",
+      "descricao_curta": "Customer service analysis with Power BI",
+      "descricao_completa": "Power BI dashboard for customer service (SAC) data, organizing support information in a clear and objective visual way. Built during my data analysis and Business Intelligence studies, practicing reports, indicators and visualizations for service monitoring.",
+      "funcionalidades": [
+        "Customer service data visualization",
+        "Support indicators",
+        "Visual report structure",
+        "Support for service analysis"
+      ],
+      "conquistas": [
+        "Built while studying Power BI",
+        "Reorganized into its own repository",
+        "Part of a Business Intelligence practice collection"
+      ]
+    },
+    "es": {
+      "titulo": "Dashboard de Atención al Cliente",
+      "descricao_curta": "Análisis de atención con Power BI",
+      "descricao_completa": "Dashboard en Power BI para datos de atención al cliente, organizando la información de forma visual, clara y objetiva. Creado durante mis estudios de análisis de datos y Business Intelligence, practicando informes, indicadores y visualizaciones para el seguimiento de la atención.",
+      "funcionalidades": [
+        "Visualización de datos de atención",
+        "Indicadores de atención al cliente",
+        "Estructura visual del informe",
+        "Apoyo al análisis de la atención"
+      ],
+      "conquistas": [
+        "Desarrollado durante estudios de Power BI",
+        "Reorganizado en repositorio propio",
+        "Parte de una colección de práctica de Business Intelligence"
+      ]
+    }
+  },
+  "a1909b6d": {
+    "slug": "dashboard-vendas",
+    "ordem": 33,
+    "en": {
+      "titulo": "Sales Dashboard",
+      "descricao_curta": "Sales analysis with Power BI",
+      "descricao_completa": "Power BI dashboard for sales analysis, organizing commercial data in a clear and objective visual way. Built during my data analysis and Business Intelligence studies, practicing reports, indicators, charts and presentation of commercial results.",
+      "funcionalidades": [
+        "Commercial data visualization",
+        "Sales indicators",
+        "Visual report structure",
+        "Support for commercial results analysis"
+      ],
+      "conquistas": [
+        "Built while studying Power BI",
+        "Reorganized into its own repository",
+        "Part of a Business Intelligence practice collection"
+      ]
+    },
+    "es": {
+      "titulo": "Dashboard de Ventas",
+      "descricao_curta": "Análisis comercial con Power BI",
+      "descricao_completa": "Dashboard en Power BI para análisis de ventas, organizando datos comerciales de forma visual, clara y objetiva. Creado durante mis estudios de análisis de datos y Business Intelligence, practicando informes, indicadores, gráficos y presentación de resultados comerciales.",
+      "funcionalidades": [
+        "Visualización de datos comerciales",
+        "Indicadores de ventas",
+        "Estructura visual del informe",
+        "Apoyo al análisis de resultados comerciales"
+      ],
+      "conquistas": [
+        "Desarrollado durante estudios de Power BI",
+        "Reorganizado en repositorio propio",
+        "Parte de una colección de práctica de Business Intelligence"
+      ]
+    }
+  },
+  "f3a7c8e1": {
+    "slug": "mb-copiloto-jira",
+    "destaque": true,
+    "ordem": 4,
+    "papel": "Ferramenta interna para o time da Bullla",
+    "pt": {
+      "titulo": "MB Copiloto para Jira"
+    },
+    "en": {
+      "titulo": "MB Copilot for Jira",
+      "papel": "Internal tool for the Bullla team",
+      "descricao_curta": "Tampermonkey sidebar that speeds up card management in Jira",
+      "descricao_completa": "Sidebar built with HTML, CSS and JavaScript, running through the Tampermonkey browser extension and integrated with Jira Cloud. It shows shortcuts, the user's cards and teammates' items, making the daily stand-up, task organization, status tracking and quick actions possible without leaving Jira's main screen.",
+      "funcionalidades": [
+        "Sidebar integrated with Jira Cloud via Tampermonkey",
+        "User's cards with filters, sorting and parent/child hierarchy",
+        "Team items view to support the daily stand-up",
+        "Quick edit of status, fields, dates and comments",
+        "Bulk actions to update cards",
+        "Batch import via CSV or JSON",
+        "Export visible cards to CSV",
+        "Visual highlight for blocking cards",
+        "Test mode to simulate actions without writing to Jira",
+        "Runs locally in the browser with no data sent to external servers"
+      ]
+    },
+    "es": {
+      "titulo": "MB Copiloto para Jira",
+      "papel": "Herramienta interna para el equipo de Bullla",
+      "descricao_curta": "Sidebar de Tampermonkey que agiliza la gestión de tarjetas en Jira",
+      "descricao_completa": "Sidebar desarrollada con HTML, CSS y JavaScript para usar con la extensión Tampermonkey, integrada a Jira Cloud. Muestra atajos, las tarjetas del usuario y los ítems del equipo, facilitando la daily, la organización de tareas, el seguimiento de estados y acciones rápidas sin salir de la pantalla principal de Jira.",
+      "funcionalidades": [
+        "Sidebar integrada a Jira Cloud vía Tampermonkey",
+        "Tarjetas del usuario con filtros, orden y jerarquía padre/hijo",
+        "Vista de ítems del equipo para apoyar la daily",
+        "Edición rápida de estado, campos, fechas y comentarios",
+        "Acciones masivas para actualizar tarjetas",
+        "Importación en lote vía CSV o JSON",
+        "Exportación de tarjetas visibles a CSV",
+        "Destaque visual de tarjetas bloqueantes",
+        "Modo prueba para simular acciones sin escribir en Jira",
+        "Ejecución local en el navegador sin enviar datos a servidores externos"
+      ]
+    }
+  },
+  "08686691": {
+    "slug": "workitem-assistant-cnk",
+    "ordem": 7,
+    "en": {
+      "descricao_curta": "Web app to generate bugs and work items",
+      "descricao_completa": "Web app that helps generate and organize bug reports and work items, making defect documentation and communication between technical teams easier."
+    },
+    "es": {
+      "descricao_curta": "Aplicación para generar bugs e ítems de trabajo",
+      "descricao_completa": "Aplicación web que ayuda a generar y organizar registros de bugs e ítems de trabajo, facilitando la documentación de fallas y la comunicación entre equipos técnicos."
+    }
+  },
+  "be4750ab": {
+    "slug": "playwright-automation",
+    "ordem": 8,
+    "pt": {
+      "descricao_curta": "Suíte de testes automatizados end-to-end com Playwright.",
+      "descricao_completa": "Projeto de automação de testes end-to-end com Playwright, criado para reduzir tarefas repetitivas, cobrir validações recorrentes e tornar a regressão mais rápida, organizada e confiável."
+    },
+    "en": {
+      "descricao_curta": "End-to-end automated test suite with Playwright.",
+      "descricao_completa": "End-to-end test automation project with Playwright, built to reduce repetitive work, cover recurring validations and make regression faster, more organized and more reliable."
+    },
+    "es": {
+      "descricao_curta": "Suite de pruebas automatizadas end-to-end con Playwright.",
+      "descricao_completa": "Proyecto de automatización de pruebas end-to-end con Playwright, creado para reducir tareas repetitivas, cubrir validaciones recurrentes y hacer la regresión más rápida, organizada y confiable."
+    }
+  },
+  "079d3358": {
+    "slug": "simulador-ctfl",
+    "destaque": true,
+    "ordem": 6,
+    "papel": "Ferramenta aberta para a comunidade de QA",
+    "en": {
+      "titulo": "CTFL Exam Simulator (ISTQB)",
+      "papel": "Open tool for the QA community",
+      "descricao_curta": "Practice simulator for the ISTQB CTFL v4.0 certification",
+      "descricao_completa": "Web app to help candidates prepare for the ISTQB CTFL v4.0 certification, simulating the real exam with a timer, questions categorized by cognitive level and performance tracking for practical, focused training."
+    },
+    "es": {
+      "titulo": "Simulador CTFL (ISTQB)",
+      "papel": "Herramienta abierta para la comunidad QA",
+      "descricao_curta": "Simulador para la certificación ISTQB CTFL v4.0",
+      "descricao_completa": "Aplicación web para ayudar a preparar la certificación ISTQB CTFL v4.0, simulando el examen real con temporizador, preguntas categorizadas por nivel cognitivo y control de desempeño para entrenar de forma práctica y objetiva."
+    }
+  },
+  "66dee650": {
+    "slug": "importaccount-trinus",
+    "ordem": 15,
+    "en": {
+      "descricao_curta": "Account import tool",
+      "descricao_completa": "Tool built to support internal account import and processing, reducing manual errors and increasing operational efficiency."
+    },
+    "es": {
+      "descricao_curta": "Herramienta de importación de cuentas",
+      "descricao_completa": "Herramienta desarrollada para apoyar procesos internos de importación y tratamiento de cuentas, reduciendo errores manuales y aumentando la eficiencia operativa."
+    }
+  },
+  "9e9ef73b": {
+    "slug": "fofuxa-fashion",
+    "ordem": 16,
+    "en": {
+      "descricao_curta": "Digital business card for a fashion brand",
+      "descricao_completa": "Web page to promote a fashion brand, working as a digital business card with contact information, custom visual identity and a mobile-first focus."
+    },
+    "es": {
+      "descricao_curta": "Tarjeta digital para una marca de moda",
+      "descricao_completa": "Página web para promocionar una marca de moda, funcionando como tarjeta digital con información de contacto, identidad visual personalizada y foco en el uso desde el celular."
+    }
+  },
+  "5862731b": {
+    "slug": "qa-cnk-issue-generator",
+    "destaque": true,
+    "ordem": 5,
+    "papel": "Padrão de abertura de bugs do time Cinemark (MB Labs)",
+    "en": {
+      "papel": "Bug-reporting standard for the Cinemark team (MB Labs)",
+      "descricao_curta": "Issue generator that standardizes bugs and incidents in the Cinemark project",
+      "descricao_completa": "Web app built to standardize how bugs, incidents and QA requests are opened in the Cinemark project, used at MB Labs. It organizes everything an issue needs, description, environment, evidence, business rules, reproduction steps and technical data, following a clear pattern. It makes communication between QA, PM, PO and engineers easier, reducing rework and improving problem analysis."
+    },
+    "es": {
+      "papel": "Estándar de apertura de bugs del equipo Cinemark (MB Labs)",
+      "descricao_curta": "Generador de issues que estandariza bugs e incidentes en el proyecto Cinemark",
+      "descricao_completa": "Aplicación web creada para estandarizar la apertura de bugs, incidentes y demandas de QA en el proyecto Cinemark, utilizada en MB Labs. Organiza todo lo que una issue necesita, descripción, ambiente, evidencias, reglas de negocio, pasos de reproducción y datos técnicos, siguiendo un patrón claro. Facilita la comunicación entre QA, PM, PO y el equipo técnico, reduciendo retrabajo y mejorando el análisis de los problemas."
+    }
+  },
+  "14cd90bb": {
+    "slug": "rodolfo-seifert",
+    "ordem": 17,
+    "en": {
+      "descricao_curta": "Landing page for a law firm",
+      "descricao_completa": "Institutional landing page that makes it easy for clients to reach a law firm, with an objective layout, clear information and direct communication channels."
+    },
+    "es": {
+      "descricao_curta": "Landing page institucional para un estudio jurídico",
+      "descricao_completa": "Landing page institucional creada para facilitar el contacto entre clientes y un estudio jurídico, con diseño objetivo, información clara e integración con canales de comunicación directa."
+    }
+  },
+  "e608d415": {
+    "slug": "taskassistant-americanas",
+    "ordem": 18,
+    "pt": {
+      "titulo": "TaskAssistant Americanas"
+    },
+    "en": {
+      "titulo": "TaskAssistant Americanas",
+      "descricao_curta": "Tool to format QA tasks",
+      "descricao_completa": "Web tool that helps QA teams format and standardize tasks, speeding up request creation, information organization and communication between technical areas."
+    },
+    "es": {
+      "titulo": "TaskAssistant Americanas",
+      "descricao_curta": "Herramienta para formatear tareas de QA",
+      "descricao_completa": "Herramienta web que ayuda a los equipos de QA a formatear y estandarizar tareas, agilizando la creación de demandas, la organización de información y la comunicación entre áreas técnicas."
+    }
+  },
+  "e3cf5ff7": {
+    "slug": "importproducts-americanas",
+    "ordem": 19,
+    "en": {
+      "descricao_curta": "Product import automation",
+      "descricao_completa": "Automation supporting the product import process, helping organize data and reducing manual effort in internal registration and validation flows."
+    },
+    "es": {
+      "descricao_curta": "Automatización para importación de productos",
+      "descricao_completa": "Automatización que apoya el proceso de importación de productos, ayudando a organizar datos y reduciendo el esfuerzo manual en flujos internos de registro y validación."
+    }
+  },
+  "6285c09f": {
+    "slug": "kabum-challenge",
+    "ordem": 11,
+    "pt": {
+      "descricao_curta": "Desafio técnico de automação de testes com Robot Framework.",
+      "descricao_completa": "Desafio técnico de automação de testes com Robot Framework e Python, cobrindo fluxos de e-commerce com cenários organizados, reutilizáveis e fáceis de manter."
+    },
+    "en": {
+      "descricao_curta": "Test automation technical challenge with Robot Framework.",
+      "descricao_completa": "Test automation technical challenge with Robot Framework and Python, covering e-commerce flows with organized, reusable and maintainable scenarios."
+    },
+    "es": {
+      "descricao_curta": "Desafío técnico de automatización de pruebas con Robot Framework.",
+      "descricao_completa": "Desafío técnico de automatización de pruebas con Robot Framework y Python, cubriendo flujos de e-commerce con escenarios organizados, reutilizables y fáciles de mantener."
+    }
+  },
+  "33db831d": {
+    "slug": "paraiso-bio",
+    "ordem": 20,
+    "pt": {
+      "titulo": "Paraíso Bio · portal"
+    },
+    "en": {
+      "titulo": "Paraíso Bio · portal",
+      "descricao_curta": "Company portal",
+      "descricao_completa": "Company portal presenting information, products and brand identity, with a responsive layout and a focus on professional digital presence."
+    },
+    "es": {
+      "titulo": "Paraíso Bio · portal",
+      "descricao_curta": "Portal institucional",
+      "descricao_completa": "Portal institucional que presenta información de la empresa, productos e identidad de marca, con diseño responsivo y foco en presencia digital profesional."
+    }
+  },
+  "0842aab5": {
+    "slug": "competence-page",
+    "ativo": false,
+    "ordem": 91,
+    "en": {
+      "descricao_curta": "Technical skills page",
+      "descricao_completa": "Page mapping technical and professional skills as a complement to a traditional résumé."
+    },
+    "es": {
+      "descricao_curta": "Página de competencias técnicas",
+      "descricao_completa": "Página que mapea competencias técnicas y profesionales como complemento al currículum tradicional."
+    }
+  },
+  "7ab2b305": {
+    "slug": "curriculo-repositorio",
+    "ativo": false,
+    "ordem": 92,
+    "en": {
+      "titulo": "Résumé",
+      "descricao_curta": "Résumé repository",
+      "descricao_completa": "Repository to maintain and version my résumé."
+    },
+    "es": {
+      "titulo": "Currículum",
+      "descricao_curta": "Repositorio del currículum",
+      "descricao_completa": "Repositorio para mantener y versionar mi currículum."
+    }
+  }
+}

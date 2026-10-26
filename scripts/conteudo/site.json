@@ -1,0 +1,174 @@
+{
+  "hero": {
+    "pt": {
+      "eyebrow": "QA Engineer · Campinas, Brasil · remoto",
+      "titulo": "Bugs encontrados antes do cliente.",
+      "subtitulo": "Testes manuais, automação e ferramentas que tornam a qualidade parte do processo, de fintechs à Cinemark LATAM.",
+      "cta_primario": "Ver projetos",
+      "cta_secundario": "Falar comigo"
+    },
+    "en": {
+      "eyebrow": "QA Engineer · Campinas, Brazil · remote",
+      "titulo": "Bugs caught before your customers do.",
+      "subtitulo": "Manual testing, automation and tools that make quality part of the process, from fintechs to Cinemark LATAM.",
+      "cta_primario": "See projects",
+      "cta_secundario": "Get in touch"
+    },
+    "es": {
+      "eyebrow": "QA Engineer · Campinas, Brasil · remoto",
+      "titulo": "Bugs encontrados antes que tu cliente.",
+      "subtitulo": "Pruebas manuales, automatización y herramientas que hacen de la calidad parte del proceso, de fintechs a Cinemark LATAM.",
+      "cta_primario": "Ver proyectos",
+      "cta_secundario": "Hablemos"
+    }
+  },
+  "manifesto": {
+    "pt": {
+      "frases": [
+        "Entro no começo da demanda, não no fim.",
+        "Cada regra de negócio vira um cenário testável.",
+        "O que se repete, eu automatizo.",
+        "Bug crítico não chega em produção."
+      ]
+    },
+    "en": {
+      "frases": [
+        "I join at the start of the work, not the end.",
+        "Every business rule becomes a testable scenario.",
+        "What repeats, I automate.",
+        "Critical bugs don't reach production."
+      ]
+    },
+    "es": {
+      "frases": [
+        "Entro al inicio de la demanda, no al final.",
+        "Cada regla de negocio se vuelve un escenario testeable.",
+        "Lo que se repite, lo automatizo.",
+        "Un bug crítico no llega a producción."
+      ]
+    }
+  },
+  "sobre": {
+    "pt": {
+      "texto": "Sou QA Engineer desde 2020, com passagens por Samsung (via SiDi), Americanas S.A. e, pela MB Labs, Cinemark LATAM, Bullla, Bankeiro, Trinus e Vinci Partners. Trabalho com Shift-left Testing em times Scrum e Kanban: escrevo cenários em Gherkin, automatizo com Playwright e Robot Framework e sigo as práticas do CTFL. Quando um processo do time é manual e repetitivo, construo a ferramenta que resolve, foi assim que nasceram o Stark Hub, o QA Toolbar e o MB Copiloto para Jira."
+    },
+    "en": {
+      "texto": "I've been a QA Engineer since 2020, working for Samsung (through SiDi), Americanas S.A. and, through MB Labs, Cinemark LATAM, Bullla, Bankeiro, Trinus and Vinci Partners. I practice Shift-left Testing in Scrum and Kanban teams: I write scenarios in Gherkin, automate with Playwright and Robot Framework, and follow CTFL practices. When a team process is manual and repetitive, I build the tool that fixes it, that's how Stark Hub, QA Toolbar and MB Copilot for Jira were born."
+    },
+    "es": {
+      "texto": "Soy QA Engineer desde 2020, con experiencia en Samsung (vía SiDi), Americanas S.A. y, a través de MB Labs, Cinemark LATAM, Bullla, Bankeiro, Trinus y Vinci Partners. Trabajo con Shift-left Testing en equipos Scrum y Kanban: escribo escenarios en Gherkin, automatizo con Playwright y Robot Framework y sigo las prácticas del CTFL. Cuando un proceso del equipo es manual y repetitivo, construyo la herramienta que lo resuelve, así nacieron Stark Hub, QA Toolbar y MB Copiloto para Jira."
+    }
+  },
+  "servicos": {
+    "pt": [
+      {
+        "titulo": "QA sob demanda",
+        "texto": "Testes funcionais, exploratórios e de regressão com cenários, evidências e bugs bem documentados no seu Jira ou Azure DevOps."
+      },
+      {
+        "titulo": "Automação de testes",
+        "texto": "Suítes end-to-end com Playwright ou Robot Framework, integradas ao pipeline, cobrindo os fluxos que mais dão prejuízo quando quebram."
+      },
+      {
+        "titulo": "Processo de qualidade",
+        "texto": "Estratégia de testes, critérios de aceite em Gherkin e priorização por risco para o time parar de descobrir bug em homologação."
+      },
+      {
+        "titulo": "Ferramentas sob medida",
+        "texto": "Extensões, painéis e automações com IA que eliminam trabalho manual do time, do protótipo à ferramenta em uso."
+      }
+    ],
+    "en": [
+      {
+        "titulo": "QA on demand",
+        "texto": "Functional, exploratory and regression testing with scenarios, evidence and well-documented bugs in your Jira or Azure DevOps."
+      },
+      {
+        "titulo": "Test automation",
+        "texto": "End-to-end suites with Playwright or Robot Framework, wired into your pipeline, covering the flows that cost the most when they break."
+      },
+      {
+        "titulo": "Quality process",
+        "texto": "Test strategy, Gherkin acceptance criteria and risk-based prioritization so your team stops finding bugs in staging."
+      },
+      {
+        "titulo": "Custom tools",
+        "texto": "Extensions, dashboards and AI-powered automations that remove manual work from your team, from prototype to tool in daily use."
+      }
+    ],
+    "es": [
+      {
+        "titulo": "QA bajo demanda",
+        "texto": "Pruebas funcionales, exploratorias y de regresión con escenarios, evidencias y bugs bien documentados en tu Jira o Azure DevOps."
+      },
+      {
+        "titulo": "Automatización de pruebas",
+        "texto": "Suites end-to-end con Playwright o Robot Framework, integradas al pipeline, cubriendo los flujos que más cuestan cuando fallan."
+      },
+      {
+        "titulo": "Proceso de calidad",
+        "texto": "Estrategia de pruebas, criterios de aceptación en Gherkin y priorización por riesgo para que el equipo deje de encontrar bugs en homologación."
+      },
+      {
+        "titulo": "Herramientas a medida",
+        "texto": "Extensiones, paneles y automatizaciones con IA que eliminan trabajo manual del equipo, del prototipo a la herramienta en uso."
+      }
+    ]
+  },
+  "valor_hora": {
+    "visivel": true,
+    "brl": null,
+    "usd": null,
+    "eur": null,
+    "pt": {
+      "nota": "Valor por hora para projetos freelance (PJ). Pacotes fechados e alocação mensal sob consulta."
+    },
+    "en": {
+      "nota": "Hourly rate for freelance/contract work. Fixed-scope packages and monthly allocation on request."
+    },
+    "es": {
+      "nota": "Tarifa por hora para proyectos freelance. Paquetes cerrados y asignación mensual a consultar."
+    }
+  },
+  "disponibilidade": {
+    "ativo": true,
+    "pt": {
+      "texto": "Disponível para freelance e vagas remotas"
+    },
+    "en": {
+      "texto": "Available for freelance and remote roles"
+    },
+    "es": {
+      "texto": "Disponible para freelance y vacantes remotas"
+    }
+  },
+  "contato": {
+    "email": "contato@matheusbonotto.com.br",
+    "whatsapp": "5519995910737",
+    "linkedin": "https://www.linkedin.com/in/matheusbonotto",
+    "github": "https://github.com/matteusbonotto"
+  },
+  "seo": {
+    "pt": {
+      "titulo": "Matheus Bonotto · QA Engineer | Testes manuais e automação (Playwright, Robot Framework)",
+      "descricao": "QA Engineer com 6 anos de experiência (Samsung, Americanas, Cinemark LATAM, fintechs). Testes manuais, automação com Playwright e Robot Framework, CTFL e Shift-left. Disponível para freelance e vagas remotas."
+    },
+    "en": {
+      "titulo": "Matheus Bonotto · QA Engineer | Manual testing & automation (Playwright, Robot Framework)",
+      "descricao": "QA Engineer with 6 years of experience (Samsung, Americanas, Cinemark LATAM, fintechs). Manual testing, Playwright and Robot Framework automation, CTFL and Shift-left. Available for freelance and remote roles."
+    },
+    "es": {
+      "titulo": "Matheus Bonotto · QA Engineer | Pruebas manuales y automatización (Playwright, Robot Framework)",
+      "descricao": "QA Engineer con 6 años de experiencia (Samsung, Americanas, Cinemark LATAM, fintechs). Pruebas manuales, automatización con Playwright y Robot Framework, CTFL y Shift-left. Disponible para freelance y vacantes remotas."
+    }
+  },
+  "clientes": [
+    "Samsung",
+    "Americanas",
+    "Cinemark LATAM",
+    "Bullla",
+    "Bankeiro",
+    "Trinus",
+    "Vinci Partners"
+  ]
+}

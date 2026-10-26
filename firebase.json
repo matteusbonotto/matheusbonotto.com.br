@@ -1,0 +1,27 @@
+{
+  "hosting": {
+    "public": "dist",
+    "cleanUrls": true,
+    "trailingSlash": true,
+    "ignore": ["firebase.json", "**/.*"],
+    "headers": [
+      { "source": "**/*.html", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
+      { "source": "/assets/**", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
+      { "source": "/media/**", "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }] },
+      { "source": "**", "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+      ] }
+    ],
+    "redirects": [
+      { "source": "/historia.html", "destination": "/trajetoria/", "type": 301 },
+      { "source": "/portfolio.html", "destination": "/projetos/", "type": 301 },
+      { "source": "/competencias.html", "destination": "/competencias/", "type": 301 },
+      { "source": "/cv.html", "destination": "/cv/", "type": 301 },
+      { "source": "/curriculo/**", "destination": "/cv/", "type": 301 },
+      { "source": "/contato.html", "destination": "/contato/", "type": 301 },
+      { "source": "/admin/login.html", "destination": "/admin/", "type": 301 }
+    ]
+  }
+}

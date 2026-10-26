@@ -1,0 +1,388 @@
+{
+  "achievements": {
+    "d2d12f9b": {
+      "en": {
+        "descricao": "Earn an English certificate at level A2"
+      },
+      "es": {
+        "descricao": "Obtén el certificado de INGLÉS nivel A2"
+      }
+    },
+    "55fddaa5": {
+      "en": {
+        "descricao": "Earn an English certificate at level B1"
+      },
+      "es": {
+        "descricao": "Obtén el certificado de INGLÉS nivel B1"
+      }
+    },
+    "fca790a9": {
+      "en": {
+        "descricao": "Earn an English certificate at level B2"
+      },
+      "es": {
+        "descricao": "Obtén el certificado de INGLÉS nivel B2"
+      }
+    },
+    "de23ce29": {
+      "en": {
+        "descricao": "Earn an English certificate at level C1"
+      },
+      "es": {
+        "descricao": "Obtén el certificado de INGLÉS nivel C1"
+      }
+    },
+    "9cf20950": {
+      "en": {
+        "descricao": "Earn an English certificate at level C2"
+      },
+      "es": {
+        "descricao": "Obtén el certificado de INGLÉS nivel C2"
+      }
+    },
+    "de9a7eea": {
+      "en": {
+        "descricao": "Earn an English certificate at level A1"
+      },
+      "es": {
+        "descricao": "Obtén el certificado de INGLÉS nivel A1"
+      }
+    },
+    "21e18cf6": {
+      "en": {
+        "descricao": "Run git checkout on an older branch, or use git checkout <commit-hash>"
+      },
+      "es": {
+        "descricao": "Haz un git checkout a una rama anterior, o usa git checkout <commit-hash>"
+      }
+    },
+    "939e31cb": {
+      "pt": {
+        "descricao": "Crie uma cobertura de testes sem documentação e sem história de usuário."
+      },
+      "en": {
+        "titulo": "Die Hard to Test",
+        "descricao": "Build test coverage with no documentation and no user story."
+      },
+      "es": {
+        "titulo": "Duro de probar",
+        "descricao": "Crea una cobertura de pruebas sin documentación ni historia de usuario."
+      }
+    },
+    "bc7acd02": {
+      "pt": {
+        "descricao": "Faça um trabalho internacional e receba em dólar ($)."
+      },
+      "en": {
+        "descricao": "Do international work and get paid in dollars ($)."
+      },
+      "es": {
+        "descricao": "Haz un trabajo internacional y cobra en dólares ($)."
+      }
+    },
+    "a9c7fc84": {
+      "en": {
+        "descricao": "Find bugs in a devbox"
+      },
+      "es": {
+        "descricao": "Encuentra bugs en un devbox"
+      }
+    },
+    "6a458711": {
+      "pt": {
+        "descricao": "Desenvolva um algoritmo ou projeto sem auxílio de IA ou de documentação. Prove seus conhecimentos e veja se aprendeu os padrões do chefão."
+      },
+      "en": {
+        "descricao": "Build an algorithm or project without AI or documentation. Prove your skills and see if you've learned the boss's patterns."
+      },
+      "es": {
+        "descricao": "Desarrolla un algoritmo o proyecto sin ayuda de IA ni documentación. Demuestra lo que sabes y comprueba si aprendiste los patrones del jefe final."
+      }
+    },
+    "e79eee26": {
+      "en": {
+        "descricao": "Report bugs found during regression testing."
+      },
+      "es": {
+        "descricao": "Reporta bugs encontrados en pruebas de regresión."
+      }
+    },
+    "85714a7e": {
+      "en": {
+        "descricao": "Earn the CTFL certification (Certified Tester Foundation Level 4.0)"
+      },
+      "es": {
+        "descricao": "Obtén la certificación CTFL (Certified Tester Foundation Level 4.0)"
+      }
+    },
+    "e378cd62": {
+      "pt": {
+        "descricao": "Faça um trabalho internacional e receba em euro (€)."
+      },
+      "en": {
+        "descricao": "Do international work and get paid in euros (€)."
+      },
+      "es": {
+        "descricao": "Haz un trabajo internacional y cobra en euros (€)."
+      }
+    },
+    "6575e6af": {
+      "pt": {
+        "titulo": "Nômade digital",
+        "descricao": "Trabalhe remotamente de 5 lugares diferentes do mundo."
+      },
+      "en": {
+        "titulo": "Digital nomad",
+        "descricao": "Work remotely from 5 different places in the world."
+      },
+      "es": {
+        "titulo": "Nómada digital",
+        "descricao": "Trabaja en remoto desde 5 lugares distintos del mundo."
+      }
+    },
+    "1f99b2d9": {
+      "pt": {
+        "descricao": "Alcance o domínio máximo em habilidades distintas."
+      },
+      "en": {
+        "titulo": "XP Overdose",
+        "descricao": "Reach maximum mastery in different skills."
+      },
+      "es": {
+        "titulo": "Sobredosis de XP",
+        "descricao": "Alcanza el dominio máximo en habilidades distintas."
+      }
+    },
+    "9406bc93": {
+      "en": {
+        "titulo": "Dream team!",
+        "descricao": "Win a hackathon with your team."
+      },
+      "es": {
+        "titulo": "¡Equipo de ensueño!",
+        "descricao": "Gana una hackathon con tu equipo."
+      }
+    },
+    "2a5a9ea3": {
+      "pt": {
+        "descricao": "Alcance o nível sênior na sua profissão."
+      },
+      "en": {
+        "titulo": "Imminent wisdom",
+        "descricao": "Reach senior level in your profession."
+      },
+      "es": {
+        "titulo": "Sabiduría inminente",
+        "descricao": "Alcanza el nivel senior en tu profesión."
+      }
+    },
+    "5a92501c": {
+      "pt": {
+        "descricao": "Faça um algoritmo ou projeto com auxílio de IA ou documentação."
+      },
+      "en": {
+        "titulo": "Cute coder",
+        "descricao": "Build an algorithm or project with help from AI or documentation."
+      },
+      "es": {
+        "titulo": "Código tierno",
+        "descricao": "Haz un algoritmo o proyecto con ayuda de IA o documentación."
+      }
+    },
+    "149830d1": {
+      "en": {
+        "descricao": "Build a backend server."
+      },
+      "es": {
+        "descricao": "Construye un servidor backend."
+      }
+    },
+    "2b4bb120": {
+      "en": {
+        "descricao": "Build a responsive frontend application."
+      },
+      "es": {
+        "descricao": "Desarrolla una aplicación frontend responsiva."
+      }
+    },
+    "50a9ec16": {
+      "pt": {
+        "descricao": "Desenvolva um dashboard em Power BI."
+      },
+      "en": {
+        "descricao": "Build a Power BI dashboard."
+      },
+      "es": {
+        "descricao": "Desarrolla un dashboard en Power BI."
+      }
+    },
+    "2d9cf579": {
+      "pt": {
+        "titulo": "HOLY SHEETS"
+      },
+      "en": {
+        "titulo": "HOLY SHEETS",
+        "descricao": "Take an Excel spreadsheet and rebuild it, adapting the formulas for Google Sheets."
+      },
+      "es": {
+        "titulo": "HOLY SHEETS",
+        "descricao": "Toma una planilla de Excel y rehazla adaptando las fórmulas a Google Sheets."
+      }
+    },
+    "89e641dc": {
+      "en": {
+        "titulo": "Master of Disdain",
+        "descricao": "Add files to .gitignore so they never reach the repository."
+      },
+      "es": {
+        "titulo": "El maestro del desprecio",
+        "descricao": "Agrega archivos al .gitignore para que no suban al repositorio."
+      }
+    },
+    "ba58ad27": {
+      "pt": {
+        "descricao": "Conclua o curso técnico de TI e comece sua carreira na área."
+      },
+      "en": {
+        "titulo": "To be or not to be, that is my profession.",
+        "descricao": "Finish an IT technical degree and start your career in the field."
+      },
+      "es": {
+        "titulo": "Ser o no ser, esa es mi profesión.",
+        "descricao": "Termina el curso técnico de TI y comienza tu carrera en el área."
+      }
+    },
+    "e1ee88c5": {
+      "pt": {
+        "titulo": "Bacharel de sistemas"
+      },
+      "en": {
+        "titulo": "Systems graduate",
+        "descricao": "Complete a bachelor's degree in Information Systems."
+      },
+      "es": {
+        "titulo": "Licenciado en sistemas",
+        "descricao": "Concluye la licenciatura en Sistemas de Información."
+      }
+    },
+    "9bde5a9a": {
+      "pt": {
+        "titulo": "Pós-graduado",
+        "descricao": "Conclua uma pós-graduação."
+      },
+      "en": {
+        "titulo": "Postgraduate",
+        "descricao": "Complete a postgraduate program."
+      },
+      "es": {
+        "titulo": "Posgrado",
+        "descricao": "Concluye un posgrado."
+      }
+    },
+    "b8e91803": {
+      "pt": {
+        "descricao": "Conquiste a posição júnior na sua profissão."
+      },
+      "en": {
+        "titulo": "Goo goo ga ga",
+        "descricao": "Land a junior position in your profession."
+      },
+      "es": {
+        "titulo": "Gugú tatá",
+        "descricao": "Consigue el puesto junior en tu profesión."
+      }
+    },
+    "6bd4b5e8": {
+      "en": {
+        "titulo": "Employee of the Month",
+        "descricao": "Receive at least 3 compliments from clients."
+      },
+      "es": {
+        "titulo": "Empleado del mes",
+        "descricao": "Recibe al menos 3 elogios de clientes."
+      }
+    },
+    "b4d85b64": {
+      "pt": {
+        "descricao": "Crie 10 identidades visuais diferentes."
+      },
+      "en": {
+        "titulo": "Identity crisis",
+        "descricao": "Create 10 different visual identities."
+      },
+      "es": {
+        "titulo": "Crisis de identidad",
+        "descricao": "Crea 10 identidades visuales diferentes."
+      }
+    },
+    "7c954490": {
+      "en": {
+        "titulo": "CRUD Almighty!",
+        "descricao": "Build a 100% working CRUD in any language."
+      },
+      "es": {
+        "titulo": "¡CRUD bendito!",
+        "descricao": "Crea un CRUD 100% funcional en cualquier lenguaje."
+      }
+    },
+    "50870ba4": {
+      "en": {
+        "titulo": "Treasure hunt",
+        "descricao": "As a freelancer, deliver a project for a client and get paid for it."
+      },
+      "es": {
+        "titulo": "Tesoro escondido",
+        "descricao": "Como freelancer, haz un proyecto para un cliente y cobra por ello."
+      }
+    },
+    "0188e031": {
+      "pt": {
+        "titulo": "Sexta-feira 13",
+        "descricao": "Trabalhe com JSON para alguma finalidade em programação."
+      },
+      "en": {
+        "titulo": "Friday the 13th",
+        "descricao": "Work with JSON for some programming purpose."
+      },
+      "es": {
+        "titulo": "Viernes 13",
+        "descricao": "Trabaja con JSON para algún propósito de programación."
+      }
+    },
+    "a906c979": {
+      "pt": {
+        "titulo": "Não vai subir ninguém"
+      },
+      "en": {
+        "titulo": "Nobody's shipping today",
+        "descricao": "Block a deploy because of a bug or problem you found."
+      },
+      "es": {
+        "titulo": "Hoy no sube nadie",
+        "descricao": "Impide un deploy por un bug o problema encontrado."
+      }
+    },
+    "44b423a3": {
+      "en": {
+        "descricao": "Achievement for work in software quality, testing, process improvement and defect prevention."
+      },
+      "es": {
+        "descricao": "Logro por el trabajo en calidad de software, pruebas, mejora de procesos y prevención de fallas."
+      }
+    },
+    "ccfbf819": {
+      "pt": {
+        "descricao": "Alcance o nível pleno na sua profissão por mérito."
+      },
+      "en": {
+        "titulo": "Fullness",
+        "descricao": "Reach mid-level in your profession on merit."
+      },
+      "es": {
+        "titulo": "Plenitud",
+        "descricao": "Alcanza el nivel semisenior en tu profesión por mérito."
+      }
+    }
+  },
+  "skills_tree": {}
+}

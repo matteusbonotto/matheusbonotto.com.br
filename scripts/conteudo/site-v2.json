@@ -1,0 +1,195 @@
+{
+  "sobre": {
+    "pt": {
+      "texto": "QA Engineer com 6 anos protegendo produtos em produção, de fintechs à Cinemark LATAM. Não espero o bug aparecer: entro cedo na demanda, questiono a regra de negócio e, quando um processo do time é repetitivo, construo a ferramenta que resolve. Comecei no suporte técnico, passei pelo desenvolvimento e encontrei no QA o ponto onde análise, criatividade e cuidado com quem usa o produto se encontram."
+    },
+    "en": {
+      "texto": "QA Engineer with 6 years protecting products in production, from fintechs to Cinemark LATAM. I don't wait for bugs to show up: I join early, question business rules and, when a team process is repetitive, I build the tool that fixes it. I started in IT support, moved through development and found in QA the place where analysis, creativity and care for the people using the product meet."
+    },
+    "es": {
+      "texto": "QA Engineer con 6 años protegiendo productos en producción, de fintechs a Cinemark LATAM. No espero a que aparezca el bug: entro temprano en la demanda, cuestiono la regla de negocio y, cuando un proceso del equipo es repetitivo, construyo la herramienta que lo resuelve. Empecé en soporte técnico, pasé por desarrollo y encontré en QA el punto donde se unen análisis, creatividad y cuidado por quien usa el producto."
+    }
+  },
+  "sobre_mim": {
+    "pt": {
+      "carreira": "Minha trajetória começou no suporte técnico, onde aprendi a ouvir usuários e resolver problemas com calma. Passei pelo desenvolvimento, me formei em Sistemas de Informação, me especializei em Teste de Software e, desde 2020, atuo em qualidade: Samsung (via SiDi), Americanas e, pela MB Labs, fintechs e a Cinemark LATAM. Em paralelo, fundei a Squidev para tirar ideias do papel.",
+      "pessoal": "Sou curioso, autodidata e exigente com o que entrego. Tenho facilidade para criar soluções novas e tomar a iniciativa sem esperar ordem, e gosto de trabalhar perto das pessoas: explicar riscos com clareza, ajudar quem está começando e deixar cada processo um pouco melhor do que encontrei.",
+      "missao": "Ajudar times a entregar software confiável, antecipando riscos e eliminando trabalho repetitivo com boas práticas, automação e ferramentas simples.",
+      "visao": "Ser referência em qualidade de software que une visão de produto, automação e IA, e transformar ideias em produtos com impacto real.",
+      "valores": [
+        "Honestidade: risco é dito como é",
+        "Responsabilidade com quem usa o produto",
+        "Colaboração acima do ego",
+        "Aprendizado contínuo",
+        "Simplicidade que resolve"
+      ]
+    },
+    "en": {
+      "carreira": "My path started in IT support, where I learned to listen to users and solve problems calmly. I moved through development, earned a degree in Information Systems, specialized in Software Testing and, since 2020, I've worked in quality: Samsung (through SiDi), Americanas and, through MB Labs, fintechs and Cinemark LATAM. Alongside that, I founded Squidev to turn ideas into products.",
+      "pessoal": "I'm curious, self-taught and demanding about what I deliver. I find it easy to create new solutions and take the initiative without waiting to be told, and I like working close to people: explaining risks clearly, helping those who are starting out and leaving every process a little better than I found it.",
+      "missao": "Help teams ship reliable software by anticipating risks and removing repetitive work with good practices, automation and simple tools.",
+      "visao": "Be a reference in software quality that combines product thinking, automation and AI, and turn ideas into products with real impact.",
+      "valores": [
+        "Honesty: risks are stated as they are",
+        "Responsibility to the people who use the product",
+        "Collaboration over ego",
+        "Continuous learning",
+        "Simplicity that solves"
+      ]
+    },
+    "es": {
+      "carreira": "Mi camino empezó en soporte técnico, donde aprendí a escuchar a los usuarios y resolver problemas con calma. Pasé por desarrollo, me gradué en Sistemas de Información, me especialicé en Pruebas de Software y, desde 2020, trabajo en calidad: Samsung (vía SiDi), Americanas y, a través de MB Labs, fintechs y Cinemark LATAM. En paralelo fundé Squidev para convertir ideas en productos.",
+      "pessoal": "Soy curioso, autodidacta y exigente con lo que entrego. Me resulta natural crear soluciones nuevas y tomar la iniciativa sin esperar órdenes, y me gusta trabajar cerca de las personas: explicar riesgos con claridad, ayudar a quien empieza y dejar cada proceso un poco mejor de lo que lo encontré.",
+      "missao": "Ayudar a los equipos a entregar software confiable, anticipando riesgos y eliminando trabajo repetitivo con buenas prácticas, automatización y herramientas simples.",
+      "visao": "Ser referencia en calidad de software que une visión de producto, automatización e IA, y convertir ideas en productos con impacto real.",
+      "valores": [
+        "Honestidad: el riesgo se dice como es",
+        "Responsabilidad con quien usa el producto",
+        "Colaboración por encima del ego",
+        "Aprendizaje continuo",
+        "Simplicidad que resuelve"
+      ]
+    }
+  },
+  "patrocinio": {
+    "projetos": [
+      "evangeligo"
+    ],
+    "pt": {
+      "titulo": "Patrocine um projeto independente",
+      "texto": "Alguns projetos meus são gratuitos e mantidos por conta própria. Um patrocínio paga servidores, domínio e novas funcionalidades, e sua marca aparece como apoiadora."
+    },
+    "en": {
+      "titulo": "Sponsor an independent project",
+      "texto": "Some of my projects are free and self-funded. A sponsorship pays for servers, domain and new features, and your brand appears as a supporter."
+    },
+    "es": {
+      "titulo": "Patrocina un proyecto independiente",
+      "texto": "Algunos de mis proyectos son gratuitos y los mantengo por mi cuenta. Un patrocinio paga servidores, dominio y nuevas funciones, y tu marca aparece como patrocinadora."
+    }
+  },
+  "valor_hora": {
+    "visivel": true,
+    "a_partir": true,
+    "brl": 40,
+    "usd": 30,
+    "eur": 30,
+    "clt_brl": 6000,
+    "horas_dia": 8,
+    "dias_mes": 21,
+    "pt": {
+      "nota": "Valores mínimos para PJ e freelancer. Para CLT, a pretensão mensal já considera os impostos descontados. Pacotes fechados sob consulta."
+    },
+    "en": {
+      "nota": "Minimum rates for contract and freelance work. For full-time employment (CLT, Brazil), the monthly figure already accounts for withheld taxes. Fixed-scope packages on request."
+    },
+    "es": {
+      "nota": "Valores mínimos para contrato y freelance. Para empleo formal (CLT, Brasil), el valor mensual ya considera los impuestos descontados. Paquetes cerrados a consultar."
+    }
+  },
+  "cv_variantes": {
+    "qa": {
+      "pt": {
+        "titulo": "QA Engineer",
+        "resumo": "QA Engineer com 6 anos em produtos de alto volume (Cinemark LATAM, Americanas, Samsung via SiDi) e fintechs (Bullla, Bankeiro, Trinus, Vinci Partners). Testes funcionais, exploratórios e de regressão, automação com Playwright e Robot Framework, Gherkin/BDD, Shift-left e práticas do CTFL. Crio ferramentas internas que viraram padrão de time."
+      },
+      "en": {
+        "titulo": "QA Engineer",
+        "resumo": "QA Engineer with 6 years on high-traffic products (Cinemark LATAM, Americanas, Samsung through SiDi) and fintechs (Bullla, Bankeiro, Trinus, Vinci Partners). Functional, exploratory and regression testing, Playwright and Robot Framework automation, Gherkin/BDD, Shift-left and CTFL practices. I build internal tools that became team standards."
+      },
+      "es": {
+        "titulo": "QA Engineer",
+        "resumo": "QA Engineer con 6 años en productos de alto tráfico (Cinemark LATAM, Americanas, Samsung vía SiDi) y fintechs (Bullla, Bankeiro, Trinus, Vinci Partners). Pruebas funcionales, exploratorias y de regresión, automatización con Playwright y Robot Framework, Gherkin/BDD, Shift-left y prácticas CTFL. Creo herramientas internas que se volvieron estándar del equipo."
+      }
+    },
+    "dev": {
+      "pt": {
+        "titulo": "Desenvolvedor Web",
+        "resumo": "Desenvolvedor web com olhar de QA: React, JavaScript, TypeScript, HTML/CSS, Node.js, Python e Supabase. Publiquei uma extensão na Chrome Web Store (QA Toolbar), um PWA gamificado (EvangeliGO) e sites para clientes pela Squidev, sempre com testes desde o primeiro dia."
+      },
+      "en": {
+        "titulo": "Web Developer",
+        "resumo": "Web developer with a QA mindset: React, JavaScript, TypeScript, HTML/CSS, Node.js, Python and Supabase. I shipped a Chrome Web Store extension (QA Toolbar), a gamified PWA (EvangeliGO) and client websites through Squidev, always tested from day one."
+      },
+      "es": {
+        "titulo": "Desarrollador Web",
+        "resumo": "Desarrollador web con mirada de QA: React, JavaScript, TypeScript, HTML/CSS, Node.js, Python y Supabase. Publiqué una extensión en la Chrome Web Store (QA Toolbar), una PWA gamificada (EvangeliGO) y sitios para clientes con Squidev, siempre con pruebas desde el primer día."
+      }
+    },
+    "freela": {
+      "pt": {
+        "titulo": "Freelancer · QA e desenvolvimento web",
+        "resumo": "Atendo empresas e profissionais com QA sob demanda, automação de testes, sites, landing pages, PWAs e ferramentas internas. Entrega com escopo claro, comunicação direta e testes incluídos."
+      },
+      "en": {
+        "titulo": "Freelancer · QA and web development",
+        "resumo": "I help companies and professionals with on-demand QA, test automation, websites, landing pages, PWAs and internal tools. Clear scope, direct communication and testing included."
+      },
+      "es": {
+        "titulo": "Freelancer · QA y desarrollo web",
+        "resumo": "Atiendo a empresas y profesionales con QA bajo demanda, automatización de pruebas, sitios, landing pages, PWAs y herramientas internas. Alcance claro, comunicación directa y pruebas incluidas."
+      }
+    },
+    "basico": {
+      "pt": {
+        "titulo": "Profissional de Tecnologia",
+        "resumo": "Profissional de tecnologia com experiência em suporte técnico, desenvolvimento e qualidade de software. Comunicativo, organizado e acostumado a trabalhar em equipe com metodologias ágeis."
+      },
+      "en": {
+        "titulo": "Technology Professional",
+        "resumo": "Technology professional with experience in IT support, development and software quality. Communicative, organized and used to working in agile teams."
+      },
+      "es": {
+        "titulo": "Profesional de Tecnología",
+        "resumo": "Profesional de tecnología con experiencia en soporte técnico, desarrollo y calidad de software. Comunicativo, organizado y acostumbrado a trabajar en equipo con metodologías ágiles."
+      }
+    }
+  },
+  "palavras_chave": [
+    "QA Engineer",
+    "Quality Assurance",
+    "Analista de QA",
+    "Analista de Testes",
+    "Software Tester",
+    "Test Automation",
+    "Automação de Testes",
+    "Playwright",
+    "Robot Framework",
+    "Cypress",
+    "Gherkin",
+    "BDD",
+    "Shift-left Testing",
+    "ISTQB",
+    "CTFL",
+    "Testes Manuais",
+    "Testes Funcionais",
+    "Testes de Regressão",
+    "Testes Exploratórios",
+    "Testes de API",
+    "REST",
+    "Jira",
+    "Zephyr",
+    "Azure DevOps",
+    "Scrum",
+    "Kanban",
+    "Agile",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Node.js",
+    "Python",
+    "HTML",
+    "CSS",
+    "Supabase",
+    "Power BI",
+    "SQL",
+    "Fintech",
+    "PIX",
+    "E-commerce",
+    "IA aplicada a QA",
+    "Prompt Engineering",
+    "Remote",
+    "Remoto",
+    "Campinas"
+  ]
+}
