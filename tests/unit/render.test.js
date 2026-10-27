@@ -4,8 +4,8 @@ import { CONTEUDO, SECOES } from '../../src/admin/esquema.js';
 import { TEXTOS } from '../../src/admin/textos.js';
 import { anosEmQA, localizar, prepararIdioma, textoSite } from '../../src/lib/dados.js';
 import { tradutor } from '../../src/i18n/ui.js';
-import { assinatura, PAGINAS, paginaCV, paginaHTML } from '../../src/render/documento.js';
-import { formatarValor, graficoCarreira } from '../../src/render/paginas.js';
+import { assinatura, conteudoCV, PAGINAS, paginaCV, paginaHTML } from '../../src/render/documento.js';
+import { detalheSkill, formatarValor, graficoCarreira } from '../../src/render/paginas.js';
 
 const bruto = JSON.parse(fs.readFileSync(new URL('../fixtures/dados.json', import.meta.url), 'utf8'));
 
@@ -75,5 +75,25 @@ describe('esquema do admin', () => {
       for (const k of Object.keys(SECOES)) expect(TEXTOS[l][k], `${l}.${k}`).toBeTruthy();
       for (const k of Object.keys(CONTEUDO)) expect(TEXTOS[l].c[k], `${l}.c.${k}`).toBeTruthy();
     }
+  });
+});
+
+describe('currículo e competências configuráveis', () => {
+  const d = prepararIdioma(bruto, 'pt');
+  const t = tradutor('pt');
+  it('versão do currículo esconde as seções desmarcadas e usa os projetos escolhidos', () => {
+    const base = { slug: 'teste', base: 'qa', nome: 'Teste', titulo: 'QA', resumo: 'Resumo de teste', secoes: ['resumo', 'projetos'], projetos: ['condonotto'], palavras_chave: [], mostrar_idade: false };
+    const html = conteudoCV({ ...d, cvs: [base] }, t, '', 'teste');
+    expect(html).toContain('Resumo de teste');
+    expect(html).toContain('Condonotto');
+    expect(html).not.toContain(t('trajetoria.experiencia'));
+    expect(html).not.toContain('cv-idade');
+  });
+  it('detalhe da habilidade mostra o caminho e os projetos onde foi usada', () => {
+    const pw = d.arvore.find(n => /playwright/i.test(n.nome));
+    const html = detalheSkill(pw, d.arvore, t, d.projetos);
+    expect(html).toContain('skill-caminho');
+    expect(html).toContain(t('comp.ondeUsei'));
+    expect(html).toContain('data-abrir-projeto="playwright-automation"');
   });
 });

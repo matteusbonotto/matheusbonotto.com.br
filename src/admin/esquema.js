@@ -72,7 +72,7 @@ export const SECOES = {
     icone: 'arvore', ordem: 'ordem', titulo: r => r.nome, sub: r => `${r.categoria} · ${r.nivel ?? 0}%`, chaves: ['visivel', 'bloqueado'], busca: ['nome', 'categoria'], arvore: true,
     campos: [
       { nome: 'nome', tipo: 'texto', obrigatorio: true, i18n: true },
-      { nome: 'categoria', tipo: 'select', opcoes: ['qa', 'dev', 'data', 'devops', 'idiomas', 'ux', 'vibe'] },
+      { nome: 'categoria', tipo: 'select', opcoes: ['qa', 'dev', 'data', 'devops', 'infra', 'idiomas', 'ux', 'vibe'] }, { nome: 'icon', tipo: 'texto' },
       { nome: 'parent_id', tipo: 'pai' }, { nome: 'nivel', tipo: 'nivel' },
       { nome: 'descricao', tipo: 'area', i18n: true }, { nome: 'ordem', tipo: 'numero' }, { nome: 'visivel', tipo: 'bool', padrao: true },
       { nome: 'bloqueado', tipo: 'bool' },
@@ -87,7 +87,7 @@ export const SECOES = {
     campos: [{ nome: 'nome', tipo: 'texto', obrigatorio: true, i18n: true }, { nome: 'ordem', tipo: 'numero' }, { nome: 'visivel', tipo: 'bool', padrao: true }],
   },
   languages: {
-    icone: 'globo', ordem: 'ordem', titulo: r => r.idioma, sub: r => r.nivel, chaves: ['visivel'], busca: ['idioma'],
+    icone: 'traduzir', ordem: 'ordem', titulo: r => r.idioma, sub: r => r.nivel, chaves: ['visivel'], busca: ['idioma'],
     campos: [
       { nome: 'idioma', tipo: 'texto', obrigatorio: true, i18n: true }, { nome: 'nivel', tipo: 'texto', i18n: true },
       { nome: 'cursando', tipo: 'bool' }, { nome: 'instituicao', tipo: 'texto' }, { nome: 'ordem', tipo: 'numero' }, { nome: 'visivel', tipo: 'bool', padrao: true },
@@ -96,10 +96,13 @@ export const SECOES = {
   cv_versions: {
     icone: 'arquivo', ordem: 'ordem', titulo: r => r.nome, sub: r => `${r.titulo || ''} · base ${String(r.base || '').toUpperCase()}`, chaves: ['visivel'], busca: ['nome', 'titulo', 'slug'],
     campos: [
-      { nome: 'nome', tipo: 'texto', obrigatorio: true, i18n: true }, { nome: 'slug', tipo: 'texto', obrigatorio: true, ajuda: 'slug' },
-      { nome: 'base', tipo: 'select', opcoes: ['qa', 'dev', 'freela', 'basico'], obrigatorio: true },
-      { nome: 'titulo', tipo: 'texto', i18n: true }, { nome: 'resumo', tipo: 'area', i18n: true, linhas: 6 },
-      { nome: 'ordem', tipo: 'numero' }, { nome: 'visivel', tipo: 'bool', padrao: true },
+      { nome: 'nome', tipo: 'texto', obrigatorio: true, i18n: true, ajuda: 'cvNome' }, { nome: 'slug', tipo: 'texto', obrigatorio: true, ajuda: 'cvSlug' },
+      { nome: 'base', tipo: 'select', opcoes: ['qa', 'dev', 'freela', 'basico'], obrigatorio: true, ajuda: 'cvBase' },
+      { nome: 'titulo', tipo: 'texto', i18n: true, ajuda: 'cvTitulo' }, { nome: 'resumo', tipo: 'area', i18n: true, linhas: 6, ajuda: 'cvResumo' },
+      { nome: 'secoes', tipo: 'multi', opcoes: ['resumo', 'servicos', 'experiencia', 'projetos', 'competencias', 'formacao', 'idiomas', 'palavras'], ajuda: 'cvSecoes' },
+      { nome: 'detalhe', tipo: 'select', opcoes: ['auto', 'completo', 'resumido', 'minimo'], ajuda: 'cvDetalhe' },
+      { nome: 'projetos', tipo: 'tags', ajuda: 'cvProjetos' }, { nome: 'palavras_chave', tipo: 'tags', ajuda: 'cvPalavras' },
+      { nome: 'mostrar_idade', tipo: 'bool', padrao: true }, { nome: 'ordem', tipo: 'numero' }, { nome: 'visivel', tipo: 'bool', padrao: true },
     ],
   },
   achievements: {

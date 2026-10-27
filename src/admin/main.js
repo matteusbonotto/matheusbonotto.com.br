@@ -268,10 +268,10 @@ function campo(c, valor, prefixo = '', tabela = '') {
     case 'url': return `<div class="campo">${lab}<input id="${id}" name="${nome}" type="url" inputmode="url" value="${esc(valor)}" placeholder="https://"></div>`;
     case 'email': return `<div class="campo">${lab}<input id="${id}" name="${nome}" type="email" value="${esc(valor)}"></div>`;
     case 'bool': return `<div class="campo campo-bool"><label class="chave"><input type="checkbox" id="${id}" name="${nome}" ${valor ? 'checked' : ''}><span>${rotulo(c.nome)}</span></label></div>`;
-    case 'select': return `<div class="campo">${lab}<select id="${id}" name="${nome}"><option value=""></option>${c.opcoes.map(o => `<option ${o === valor ? 'selected' : ''}>${esc(o)}</option>`).join('')}${valor && !c.opcoes.includes(valor) ? `<option selected>${esc(valor)}</option>` : ''}</select></div>`;
-    case 'multi': return `<fieldset class="campo"><legend>${rotulo(c.nome)}</legend><div class="opcoes">${c.opcoes.map(o => `<label class="chave"><input type="checkbox" name="${nome}" value="${o}" ${(valor || []).includes(o) ? 'checked' : ''}><span>${o}</span></label>`).join('')}</div></fieldset>`;
+    case 'select': return `<div class="campo">${lab}<select id="${id}" name="${nome}"><option value=""></option>${c.opcoes.map(o => `<option ${o === valor ? 'selected' : ''}>${esc(o)}</option>`).join('')}${valor && !c.opcoes.includes(valor) ? `<option selected>${esc(valor)}</option>` : ''}</select>${ajuda}</div>`;
+    case 'multi': return `<fieldset class="campo"><legend>${rotulo(c.nome)}</legend><div class="opcoes">${c.opcoes.map(o => `<label class="chave"><input type="checkbox" name="${nome}" value="${o}" ${(valor || []).includes(o) ? 'checked' : ''}><span>${o}</span></label>`).join('')}</div>${ajuda}</fieldset>`;
     case 'lista': return `<div class="campo">${lab}<textarea id="${id}" name="${nome}" rows="5" data-lista>${esc((valor || []).join('\n'))}</textarea><small>${tx('umPorLinha')}</small></div>`;
-    case 'tags': return `<div class="campo">${lab}<input id="${id}" name="${nome}" value="${esc((valor || []).join(', '))}" data-tags><small>${tx('separarVirgula')}</small></div>`;
+    case 'tags': return `<div class="campo">${lab}<input id="${id}" name="${nome}" value="${esc((valor || []).join(', '))}" data-tags><small>${c.ajuda ? `${tx(`ajuda_${c.ajuda}`)} · ` : ''}${tx('separarVirgula')}</small></div>`;
     case 'nivel': return `<div class="campo">${lab}<div class="nivel-campo"><input id="${id}" name="${nome}" type="range" min="0" max="100" step="5" value="${valor ?? 50}" oninput="this.nextElementSibling.value=this.value"><output>${valor ?? 50}</output></div></div>`;
     case 'pai': {
       const nos = (cache[tabela] || []).filter(n => n.id !== valor?.__proprio);

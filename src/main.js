@@ -97,18 +97,58 @@ function magneticos(raiz) {
       const r = el.getBoundingClientRect();
       gsap.to(el, { x: (e.clientX - r.left - r.width / 2) * 0.25, y: (e.clientY - r.top - r.height / 2) * 0.35, duration: 0.4, ease: 'power3' });
     });
-    el.addEventListener('pointerleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, .4)' }));
+    el.addEventListener('pointerleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: 'power3.out' }));
   }
 }
 magneticos(nav);
-// acesso discreto ao admin: clique direito no logo ou no nome e, em até 10 s, digitar "iddq" (o clássico iddqd também funciona)
-let armado = 0, digitado = '';
-document.addEventListener('contextmenu', e => { if (!e.target.closest('.nav-marca, .rodape-marca')) return; e.preventDefault(); armado = Date.now(); digitado = ''; });
-addEventListener('keydown', e => {
-  if (!armado || Date.now() - armado > 10000 || e.key.length !== 1) return;
-  digitado = (digitado + e.key.toLowerCase()).slice(-4);
-  if (digitado === 'iddq') location.href = '/admin/';
-});
+// acesso discreto ao admin: clique direito no logo abre um balão de cheat code; com o código certo
+// aparece o item "Admin" no menu (lembrado neste navegador), que leva à tela de login
+const CHEAT = 'iddqd';
+const linkAdmin = (animar = false) => {
+  const menu = $('.nav-links', nav);
+  if (!menu || $('.nav-admin', menu)) return;
+  const a = document.createElement('a');
+  a.href = '/admin/'; a.className = 'nav-admin'; a.innerHTML = `${icone('cadeado')}${t('nav.admin')}`;
+  $('.nav-cv', menu).before(a);
+  if (animar && !semMovimento) gsap.from(a, { opacity: 0, y: -8, duration: .6, ease: 'power2.out' });
+};
+try { if (localStorage.getItem('admin-liberado') === '1') linkAdmin(); } catch {}
+function balaoCheat(ancora) {
+  $('.cheat')?.remove();
+  const b = document.createElement('div');
+  b.className = 'cheat'; b.setAttribute('role', 'dialog'); b.setAttribute('aria-label', t('cheat.titulo'));
+  b.innerHTML = `<form class="cheat-form" novalidate><label for="cheat-codigo">${icone('codigo')}${t('cheat.titulo')}</label>
+    <input id="cheat-codigo" name="codigo" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${t('cheat.dica')}" aria-describedby="cheat-msg">
+    <p class="cheat-msg" id="cheat-msg" aria-live="assertive"></p></form>`;
+  document.body.append(b);
+  const r = ancora.getBoundingClientRect();
+  const esq = Math.max(12, Math.min(r.left, innerWidth - b.offsetWidth - 12));
+  b.style.left = `${esq}px`;
+  b.style.top = `${r.bottom + 12}px`;
+  // sem espaço embaixo (logo do rodapé): o balão abre para cima
+  if (r.bottom + 12 + b.offsetHeight > innerHeight) { b.style.top = `${r.top - b.offsetHeight - 12}px`; b.classList.add('acima'); }
+  b.style.setProperty('--seta', `${Math.max(16, r.left + r.width / 2 - esq)}px`);
+  const campo = $('input', b), msg = $('.cheat-msg', b);
+  const fechar = () => { removeEventListener('pointerdown', fora, true); removeEventListener('keydown', esc); b.classList.add('saindo'); setTimeout(() => b.remove(), semMovimento ? 0 : 250); };
+  const fora = e => { if (!b.contains(e.target)) fechar(); };
+  const esc = e => { if (e.key === 'Escape') fechar(); };
+  addEventListener('pointerdown', fora, true); addEventListener('keydown', esc);
+  campo.addEventListener('input', () => { b.classList.remove('erro'); msg.textContent = ''; });
+  $('form', b).addEventListener('submit', e => {
+    e.preventDefault();
+    if (campo.value.trim().toLowerCase() === CHEAT) {
+      b.classList.remove('erro'); b.classList.add('certo'); msg.textContent = t('cheat.ok');
+      try { localStorage.setItem('admin-liberado', '1'); } catch {}
+      linkAdmin(true);
+      setTimeout(fechar, 1100);
+    } else {
+      b.classList.remove('erro'); void b.offsetWidth; b.classList.add('erro');
+      msg.textContent = t('cheat.erro'); campo.select();
+    }
+  });
+  requestAnimationFrame(() => campo.focus());
+}
+document.addEventListener('contextmenu', e => { const m = e.target.closest('.nav-marca img, .rodape-marca img'); if (!m) return; e.preventDefault(); balaoCheat(m); });
 // idioma: escolha lembrada; no celular, a primeira visita pergunta o idioma antes da leitura
 document.addEventListener('click', e => { const a = e.target.closest('a[hreflang]'); if (a) { try { localStorage.setItem('idioma', a.hreflang); } catch {} } });
 (() => {
@@ -133,7 +173,8 @@ $('[data-tema]')?.addEventListener('click', () => {
   dispatchEvent(new Event('tema'));
 });
 const fundo = $('[data-particulas]');
-if (fundo) particulas(fundo, { semMovimento });
+// no toque a rede de partículas fica parada: o celular gasta a bateria e a rolagem com o que importa
+if (fundo) particulas(fundo, { semMovimento: semMovimento || !mouse });
 
 // ---------- Efeitos gerais ----------
 function dividirPalavras(raiz) {
@@ -249,7 +290,7 @@ document.addEventListener('click', e => {
   if (rc) { const x = dados.recomendacoes?.find(r => r.id === rc.dataset.abrirRec); if (x) abrirModal(detalheRecomendacao(x, t), null, true); return; }
   if (e.target.closest('[data-deixar-rec]')) { abrirModal(formularioRecomendacao(t), null, true); enviarRecomendacao($('[data-form-rec]', modal)); return; }
   const sk = e.target.closest('[data-abrir-skill]');
-  if (sk && !sk.closest('.arrastando-moveu')) { const n = dados.arvore?.find(x => x.id === sk.dataset.abrirSkill); if (n) abrirModal(detalheSkill(n, dados.arvore, t), null, true); return; }
+  if (sk && !sk.closest('.arrastando-moveu')) { const n = dados.arvore?.find(x => x.id === sk.dataset.abrirSkill); if (n) abrirModal(detalheSkill(n, dados.arvore, t, dados.projetos), null, true); return; }
   const vz = e.target.closest('a[data-visor]');
   if (vz) { e.preventDefault(); const todos = $$('a[data-visor]', vz.closest('ul') || vz.parentElement).map(a => ({ src: a.href, alt: $('img', a)?.alt || '' })); visor(todos, todos.findIndex(x => x.src === vz.href)); return; }
   const r = e.target.closest('[data-abrir-carreira]');
@@ -461,7 +502,7 @@ function heroEfeitos(raiz) {
   const desenhar = i => {
     const img = quadros[i];
     if (!img?.complete || !img.naturalWidth) return;
-    const w = canvas.clientWidth, h = canvas.clientHeight, dpr = Math.min(devicePixelRatio, 2);
+    const w = canvas.clientWidth, h = canvas.clientHeight, dpr = Math.min(devicePixelRatio, mouse ? 2 : 1.5);
     if (!w || !h) return;
     if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) { canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); }
     // Começa estendido (cobre a tela) e, até a metade do vídeo, vai se ajustando ao quadro inteiro e centralizado;
@@ -545,12 +586,16 @@ function manifestoEfeitos(raiz) {
   const desenhar = i => {
     const img = quadros[i];
     if (!img?.complete || !img.naturalWidth) return;
-    const dpr = Math.min(devicePixelRatio, 2), w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
+    const dpr = Math.min(devicePixelRatio, mouse ? 2 : 1.5), w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
     if (!w || !h) return;
     if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
-    const k = Math.max(w / img.naturalWidth, h / img.naturalHeight), dw = img.naturalWidth * k, dh = img.naturalHeight * k;
-    const fx = innerWidth <= 600 ? 0.5 : 0.66; // mesmo enquadramento do object-position do pôster
-    g.drawImage(img, (w - dw) * fx, (h - dh) / 2, dw, dh);
+    // no celular o vídeo aparece inteiro (sem corte); no desktop cobre a tela com o mesmo enquadramento do pôster
+    const inteiro = innerWidth <= 600;
+    // recorta 9% da direita e de baixo: some a marca d'água do canto inferior direito
+    const sw = img.naturalWidth * 0.91, sh = img.naturalHeight * 0.91;
+    const k = (inteiro ? Math.min : Math.max)(w / sw, h / sh), dw = sw * k, dh = sh * k;
+    g.clearRect(0, 0, w, h);
+    g.drawImage(img, 0, 0, sw, sh, (w - dw) * (inteiro ? 0.5 : 0.66), inteiro ? Math.round(56 * (w / canvas.clientWidth)) : (h - dh) * 0.5, dw, dh);
   };
   const quadros = carregarQuadros(canvas, () => { sec.classList.add('quadros'); requestAnimationFrame(() => desenhar(atual)); });
   const sq = ScrollTrigger.create({ trigger: sec, start: 'top bottom', end: 'bottom top', onUpdate: s => {

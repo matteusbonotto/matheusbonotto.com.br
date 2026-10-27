@@ -22,7 +22,7 @@ export const PAGINAS = {
   sobre: { corpo: sobre, seo: (d, t) => ({ titulo: t('seo.sobre.titulo'), descricao: t('seo.sobre.descricao') }), dados: () => ({}) },
   projetos: { corpo: projetos, seo: (d, t) => ({ titulo: t('seo.projetos.titulo'), descricao: t('seo.projetos.descricao') }), dados: d => ({ projetos: d.projetos, experiencias: d.experiencias.map(e => ({ id: e.id, instituicao: e.instituicao })) }) },
   trajetoria: { corpo: trajetoria, seo: (d, t) => ({ titulo: t('seo.trajetoria.titulo'), descricao: t('seo.trajetoria.descricao') }), dados: (d, t) => ({ trajetoria: itensTrajetoria(d, t), recomendacoes: d.recomendacoes, projetos: d.projetos, experiencias: d.experiencias.map(e => ({ id: e.id, instituicao: e.instituicao })) }) },
-  competencias: { corpo: competencias, seo: (d, t) => ({ titulo: t('seo.competencias.titulo'), descricao: t('seo.competencias.descricao') }), dados: d => ({ conquistas: d.conquistas, arvore: d.arvore }) },
+  competencias: { corpo: competencias, seo: (d, t) => ({ titulo: t('seo.competencias.titulo'), descricao: t('seo.competencias.descricao') }), dados: d => ({ conquistas: d.conquistas, arvore: d.arvore, projetos: d.projetos, experiencias: d.experiencias.map(e => ({ id: e.id, instituicao: e.instituicao })) }) },
   contato: { corpo: contato, seo: (d, t) => ({ titulo: t('seo.contato.titulo'), descricao: t('seo.contato.descricao') }), dados: () => ({}) },
 };
 
@@ -45,6 +45,9 @@ export function conteudoCV(d, t, qr = '', variante) {
   const lista = versoesCV(d, t);
   const vt = lista.find(x => x.slug === variante) || lista[0];
   const v = VARIANTES_CV.includes(vt.base) ? vt.base : 'qa';
+  // o que cada versão mostra (admin > Currículos); campos vazios seguem a base
+  const tem = s => !vt.secoes?.length || vt.secoes.includes(s);
+  const DETALHE = { completo: Infinity, resumido: 1, minimo: 0 };
   const s = textoSite(d.site, 'sobre', d.lang);
   const c = d.site.contato || {};
   const grupos = {};
@@ -63,35 +66,37 @@ export function conteudoCV(d, t, qr = '', variante) {
   // experiências: DEV primeiro na versão dev; descrições completas só onde fazem sentido
   let exps = [...d.experiencias];
   if (v === 'dev') exps.sort((a, b) => (b.categoria_profissional === 'DEV') - (a.categoria_profissional === 'DEV'));
-  const detalhe = e => (v === 'basico' ? 0 : v === 'qa' ? (e.categoria_profissional === 'QA' ? Infinity : 1) : v === 'dev' ? (e.categoria_profissional === 'DEV' ? Infinity : 1) : 2);
+  const detalhe = e => (DETALHE[vt.detalhe] ?? null) ?? (v === 'basico' ? 0 : v === 'qa' ? (e.categoria_profissional === 'QA' ? Infinity : 1) : v === 'dev' ? (e.categoria_profissional === 'DEV' ? Infinity : 1) : 2);
   const catsProj = { qa: ['qa'], dev: ['dev', 'vibe'], freela: ['dev', 'qa'], basico: [] }[v];
-  const projetos = d.projetos.filter(p => p.destaque || v === 'freela').filter(p => (p.categorias || [p.categoria]).some(x => catsProj.includes(x))).slice(0, v === 'freela' ? 8 : 6);
+  const escolhidos = (vt.projetos || []).map(s => d.projetos.find(p => p.slug === s)).filter(Boolean);
+  const projetos = escolhidos.length ? escolhidos : d.projetos.filter(p => p.destaque || v === 'freela').filter(p => (p.categorias || [p.categoria]).some(x => catsProj.includes(x))).slice(0, v === 'freela' ? 8 : 6);
+  const palavras = vt.palavras_chave?.length ? vt.palavras_chave : (d.site.palavras_chave || []);
   const servicos = textoSite(d.site, 'servicos', d.lang);
   return `<header class="cv-atomo cv-cabeca">
   <div class="cv-cabeca-nome">
     <h1>${SITE.nome}</h1>
     <p class="cv-cargo">${esc(vt.titulo || 'QA Engineer')}</p>
-    ${d.perfil.data_nascimento ? `<p class="cv-idade" data-nascimento="${esc(d.perfil.data_nascimento)}" data-modelo="${esc(t('cv.anos', { n: '{n}' }))}">(${t('cv.anos', { n: idadeEm(d.perfil.data_nascimento) })})</p>` : ''}
+    ${d.perfil.data_nascimento && vt.mostrar_idade !== false ? `<p class="cv-idade" data-nascimento="${esc(d.perfil.data_nascimento)}" data-modelo="${esc(t('cv.anos', { n: '{n}' }))}">(${t('cv.anos', { n: idadeEm(d.perfil.data_nascimento) })})</p>` : ''}
   </div>
   <div class="cv-cabeca-contato">
     <a class="cv-qr" href="${SITE.url + rota(d.lang, 'cv')}" aria-label="QR code">${qr}</a>
     <ul>${linhas.map(([ic, href, txt]) => `<li>${icone(ic)}${href ? `<a href="${esc(href)}">${esc(txt)}</a>` : esc(txt)}</li>`).join('')}</ul>
   </div>
 </header>
-${secao(t('cv.resumo'))}<p class="cv-atomo">${esc(vt.resumo || s.texto)}</p>
-${v === 'freela' && Array.isArray(servicos) ? `${secao(t('cv.servicos'))}${servicos.map(x => `<p class="cv-atomo"><strong>${esc(x.titulo)}:</strong> ${esc(x.texto)}</p>`).join('')}` : ''}
-${secao(t('trajetoria.experiencia'))}
-${exps.map(e => `<div class="cv-atomo cv-item-topo" ${detalhe(e) ? 'data-junto' : ''}><h3>${esc(e.titulo)} · ${esc(e.instituicao)}</h3><span>${esc(periodo(e.data_inicio, e.data_fim, e.atual, t))}</span><p class="cv-meta">${esc([e.regime, e.tipo_local, e.local].filter(Boolean).join(' · '))}</p></div>${paras(e.descricao, detalhe(e))}`).join('')}
-${projetos.length ? `${secao(t('cv.projetos'))}${projetos.map(x => `<p class="cv-atomo cv-projeto"><strong>${esc(x.titulo)}</strong>: ${esc(x.descricao_curta)}${x.link_projeto ? ` <a href="${esc(x.link_projeto)}">${esc(sem(x.link_projeto))}</a>` : ''}</p>`).join('')}` : ''}
-${secao(t('sobre.competencias'))}
+${tem('resumo') ? `${secao(t('cv.resumo'))}<p class="cv-atomo">${esc(vt.resumo || s.texto)}</p>` : ''}
+${tem('servicos') && v === 'freela' && Array.isArray(servicos) ? `${secao(t('cv.servicos'))}${servicos.map(x => `<p class="cv-atomo"><strong>${esc(x.titulo)}:</strong> ${esc(x.texto)}</p>`).join('')}` : ''}
+${tem('experiencia') ? `${secao(t('trajetoria.experiencia'))}
+${exps.map(e => `<div class="cv-atomo cv-item-topo" ${detalhe(e) ? 'data-junto' : ''}><h3>${esc(e.titulo)} · ${esc(e.instituicao)}</h3><span>${esc(periodo(e.data_inicio, e.data_fim, e.atual, t))}</span><p class="cv-meta">${esc([e.regime, e.tipo_local, e.local].filter(Boolean).join(' · '))}</p></div>${paras(e.descricao, detalhe(e))}`).join('')}` : ''}
+${tem('projetos') && projetos.length ? `${secao(t('cv.projetos'))}${projetos.map(x => `<p class="cv-atomo cv-projeto"><strong>${esc(x.titulo)}</strong>: ${esc(x.descricao_curta)}${x.link_projeto ? ` <a href="${esc(x.link_projeto)}">${esc(sem(x.link_projeto))}</a>` : ''}</p>`).join('')}` : ''}
+${tem('competencias') ? `${secao(t('sobre.competencias'))}
 ${Object.entries(grupos).map(([g, i]) => `<p class="cv-atomo"><strong>${esc(g)}:</strong> ${i.map(esc).join(', ')}</p>`).join('')}
-<p class="cv-atomo"><strong>${t('sobre.comportamentais')}:</strong> ${d.comportamentais.map(x => esc(x.nome)).join(', ')}</p>
-${secao(t('trajetoria.formacao'))}
+<p class="cv-atomo"><strong>${t('sobre.comportamentais')}:</strong> ${d.comportamentais.map(x => esc(x.nome)).join(', ')}</p>` : ''}
+${tem('formacao') ? `${secao(t('trajetoria.formacao'))}
 ${d.formacoes.map(f => `<div class="cv-atomo cv-item-topo"><h3>${esc(f.curso)} · ${esc(f.instituicao)}</h3><span>${esc(periodo(f.data_inicio, f.data_fim, f.atual, t))}</span></div>`).join('')}
-${d.certificacoes.map(x => `<p class="cv-atomo">${esc(x.nome)} · ${esc(x.instituicao)}${x.validade ? ` (${esc(x.validade)})` : ''}</p>`).join('')}
-${secao(t('sobre.idiomas'))}
-<p class="cv-atomo">${d.idiomas.map(i => `<strong>${esc(i.idioma)}</strong>: ${esc(i.nivel)}`).join(' · ')}</p>
-${(d.site.palavras_chave || []).length ? `<p class="cv-atomo cv-palavras">${(d.site.palavras_chave || []).map(esc).join(', ')}</p>` : ''}`;
+${d.certificacoes.map(x => `<p class="cv-atomo">${esc(x.nome)} · ${esc(x.instituicao)}${x.validade ? ` (${esc(x.validade)})` : ''}</p>`).join('')}` : ''}
+${tem('idiomas') ? `${secao(t('sobre.idiomas'))}
+<p class="cv-atomo">${d.idiomas.map(i => `<strong>${esc(i.idioma)}</strong>: ${esc(i.nivel)}`).join(' · ')}</p>` : ''}
+${tem('palavras') && palavras.length ? `<p class="cv-atomo cv-palavras">${palavras.map(esc).join(', ')}</p>` : ''}`;
 }
 
 export function paginaCV(d, bruto, qr = '') {

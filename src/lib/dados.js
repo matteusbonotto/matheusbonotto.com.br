@@ -3,7 +3,7 @@
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../config.js';
 
 const CONSULTAS = {
-  cvs: 'cv_versions?select=id,slug,nome,base,titulo,resumo,ordem,i18n&visivel=eq.true&order=ordem.asc',
+  cvs: 'cv_versions?select=id,slug,nome,base,titulo,resumo,ordem,i18n,secoes,detalhe,projetos,palavras_chave,mostrar_idade&visivel=eq.true&order=ordem.asc',
   perfil: 'profiles?select=nome_completo,data_nascimento,local,pais,email,telefone,linkedin_url,github_url&limit=1',
   projetos: 'projects?select=id,slug,titulo,papel,descricao_curta,descricao_completa,categoria,categorias,imagem_url,galeria,tecnologias,funcionalidades,conquistas,link_projeto,link_github,data_projeto,destaque,bloqueado,professional_history_id,ordem,i18n&ativo=eq.true&order=ordem.asc',
   experiencias: 'professional_history?select=id,instituicao,titulo,regime,local,tipo_local,descricao,data_inicio,data_fim,atual,categoria_profissional,logo_url,imagens_urls,bloqueado,i18n&order=data_inicio.desc',

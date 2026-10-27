@@ -1171,3 +1171,185 @@ img { transition: opacity .6s ease; }
 .arquivos a[data-visor]:hover .galeria-lupa, .arquivos a[data-visor]:focus-visible .galeria-lupa { opacity: 1; scale: 1; }
 .arquivos .galeria-lupa { top: 8px; right: 8px; width: 34px; height: 34px; }
 .arquivos li > .btn { aspect-ratio: auto; }
+
+/* ================= Competências: grade e lista simples ================= */
+[data-vista-alvo="arvore"] .habs { display: none; }
+[data-vista-alvo="arvore"]:not([data-vista="arvore"]) .habs { display: grid; gap: 28px; }
+.hab-area { --cor: var(--acento); }
+.hab-area button { text-align: left; color: inherit; }
+.skill-ic { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; color: var(--cor, var(--acento)); background: color-mix(in srgb, var(--cor, var(--acento)) 14%, transparent); border: 1px solid color-mix(in srgb, var(--cor, var(--acento)) 30%, transparent); }
+.skill-ic-p { width: 34px; height: 34px; border-radius: 10px; }
+.hab-area-topo { width: 100%; display: flex; align-items: center; gap: 14px; padding: 0 0 14px; border-bottom: 2px solid color-mix(in srgb, var(--cor) 40%, var(--linha)); margin-bottom: 14px; }
+.hab-area-txt { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.hab-area-txt .mono { font-size: .75rem; color: var(--cor); letter-spacing: .06em; text-transform: uppercase; }
+.hab-area-txt strong { font-size: 1.35rem; font-weight: 750; font-stretch: 85%; letter-spacing: -.01em; line-height: 1.15; }
+.hab-nv { flex: none; display: grid; justify-items: end; gap: 4px; width: 112px; }
+.hab-nv .nivel { width: 100%; }
+.hab-nv .nivel i { background: var(--cor, var(--acento)); }
+.hab-nv .mono { font-size: .72rem; color: var(--tinta-3); white-space: nowrap; }
+.hab { width: 100%; display: flex; align-items: center; gap: 10px; border-radius: 10px; transition: background-color .25s; }
+.hab:hover, .hab:focus-visible { background: color-mix(in srgb, var(--cor) 8%, transparent); }
+.hab-ramo-topo { padding: 8px; }
+.hab-ramo-topo strong { flex: 1; min-width: 0; font-size: 1rem; font-weight: 650; }
+.hab-folhas { display: grid; gap: 2px; padding: 4px 0 4px; }
+.hab-folhas .hab { padding: 7px 8px 7px 10px; }
+.hab-folha-ic { flex: none; display: grid; place-items: center; width: 26px; color: var(--cor); opacity: .85; }
+.hab-nome { flex: 1; min-width: 0; color: var(--tinta-2); font-size: .94rem; }
+/* grade: ramos em cartões */
+[data-vista="grade"] .hab-ramos { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+[data-vista="grade"] .hab-ramo { padding: 8px; border: 1px solid var(--linha); border-radius: var(--raio-g); background: var(--superficie); transition: border-color .3s, transform .4s var(--curva); }
+[data-vista="grade"] .hab-ramo:hover { border-color: color-mix(in srgb, var(--cor) 45%, var(--linha)); transform: translateY(-2px); }
+[data-vista="grade"] .hab-ramo-topo { border-bottom: 1px solid var(--linha); border-radius: 10px 10px 0 0; padding-bottom: 12px; margin-bottom: 4px; }
+/* lista: linhas contínuas com recuo para as habilidades do ramo */
+[data-vista="lista"] .hab-ramos { display: grid; }
+[data-vista="lista"] .hab-ramo { border-bottom: 1px solid var(--linha); padding: 4px 0; }
+[data-vista="lista"] .hab-folhas { margin-left: 25px; padding-left: 14px; border-left: 1px dashed color-mix(in srgb, var(--cor) 40%, var(--linha)); }
+@media (max-width: 600px) {
+  .hab-nv { width: 84px; }
+  .hab-area-txt strong { font-size: 1.15rem; }
+  .skill-ic { width: 42px; height: 42px; }
+  .skill-ic-p { width: 30px; height: 30px; }
+}
+
+/* detalhe da habilidade */
+.skill-detalhe { display: grid; gap: 18px; }
+.skill-cabeca { display: flex; align-items: center; gap: 16px; padding-right: 52px; }
+.skill-cabeca .skill-ic { width: 64px; height: 64px; border-radius: 18px; }
+.skill-caminho { font-size: .75rem; color: var(--cor); letter-spacing: .04em; }
+.skill-cabeca h2 { font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.3rem); margin-top: 4px; line-height: 1.1; }
+.skill-nivel-caixa { display: grid; gap: 10px; padding: 14px 16px; border-radius: 14px; background: color-mix(in srgb, var(--cor) 8%, var(--superficie)); border: 1px solid color-mix(in srgb, var(--cor) 25%, var(--linha)); }
+.skill-nivel-topo { display: flex; align-items: center; gap: 10px; }
+.skill-nivel-topo strong { flex: 1; }
+.skill-nivel-caixa .nivel i { background: var(--cor); }
+.estrelas { color: var(--cor); letter-spacing: 2px; }
+.skill-desc { color: var(--tinta-2); font-size: 1.02rem; line-height: 1.65; }
+.skill-subs { display: grid; gap: 6px; }
+.skill-subs button { width: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: 12px; row-gap: 6px; align-items: center; padding: 10px 12px; border: 1px solid var(--linha); border-radius: 12px; text-align: left; transition: border-color .25s, background-color .25s; }
+.skill-subs button:hover { border-color: color-mix(in srgb, var(--cor) 45%, var(--linha)); background: color-mix(in srgb, var(--cor) 6%, transparent); }
+.skill-subs .skill-ic { grid-row: span 2; }
+.skill-subs .mono { font-size: .72rem; color: var(--tinta-3); }
+.skill-subs .nivel { grid-column: 2 / -1; }
+.skill-subs .nivel i { background: var(--cor); }
+.skill-sub-nome { font-weight: 600; }
+.skill-detalhe .rotulo { margin-top: 6px; }
+
+/* ================= Balão do cheat code ================= */
+.cheat { position: fixed; z-index: 90; width: min(300px, calc(100vw - 24px)); padding: 14px; border-radius: 16px; background: var(--superficie); color: var(--tinta); border: 1.5px solid var(--linha-forte); box-shadow: 0 20px 50px -14px rgb(0 0 0 / .5); animation: cheat-entra .3s ease-out; transition: border-color .25s; }
+.cheat::before { content: ''; position: absolute; top: -8px; left: calc(var(--seta, 24px) - 7px); width: 14px; height: 14px; background: inherit; border: inherit; border-right: 0; border-bottom: 0; rotate: 45deg; border-radius: 3px 0 0 0; }
+.cheat-form { display: grid; gap: 8px; }
+.cheat label { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--tinta-2); }
+.cheat label .ic { width: 16px; height: 16px; color: var(--acento); }
+.cheat input { width: 100%; min-height: 44px; padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--linha-forte); background: var(--bg); color: var(--tinta); font-family: var(--mono); font-size: 1rem; letter-spacing: .12em; transition: border-color .25s, box-shadow .25s; }
+.cheat input::placeholder { letter-spacing: 0; font-size: .85rem; }
+.cheat input:focus { outline: none; border-color: var(--acento); box-shadow: 0 0 0 3px color-mix(in srgb, var(--acento) 22%, transparent); }
+.cheat-msg { min-height: 1.2em; font-size: .82rem; }
+.cheat.erro { border-color: #e5484d; animation: cheat-tremer .45s ease-in-out; }
+.cheat.erro input { border-color: #e5484d; box-shadow: 0 0 0 3px rgb(229 72 77 / .2); }
+.cheat.erro .cheat-msg { color: #e5484d; }
+.cheat.certo, .cheat.certo input { border-color: var(--ok); }
+.cheat.certo .cheat-msg { color: var(--ok); }
+.cheat.saindo { animation: cheat-sai .25s ease-in forwards; }
+@keyframes cheat-entra { from { opacity: 0; transform: translateY(-6px); } }
+@keyframes cheat-sai { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes cheat-tremer { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(7px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(3px); } }
+@media (prefers-reduced-motion: reduce) { .cheat, .cheat.erro, .cheat.saindo { animation: none; } }
+.nav-admin { display: inline-flex; align-items: center; gap: 6px; color: var(--acento) !important; }
+.nav-admin .ic { width: 16px; height: 16px; }
+.cheat.acima::before { top: auto; bottom: -8px; rotate: 225deg; }
+/* habilidades: nome em cima e barra de nível embaixo, sem espremer o texto */
+.hab, .hab-ramo-topo { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 10px; row-gap: 6px; align-items: center; }
+.hab .hab-nv, .hab-ramo-topo .hab-nv { grid-column: 2; width: 100%; display: flex; align-items: center; gap: 10px; }
+.hab .hab-nv .nivel { flex: 1; }
+.hab .hab-nv .mono { min-width: 7.5em; text-align: right; }
+.hab-folhas .hab { row-gap: 4px; padding-block: 8px; }
+[data-vista="lista"] .hab, [data-vista="lista"] .hab-ramo-topo { grid-template-columns: auto minmax(0, 1fr) minmax(140px, 260px); }
+[data-vista="lista"] .hab .hab-nv, [data-vista="lista"] .hab-ramo-topo .hab-nv { grid-column: 3; }
+@media (max-width: 600px) { [data-vista="lista"] .hab, [data-vista="lista"] .hab-ramo-topo { grid-template-columns: auto minmax(0, 1fr); } [data-vista="lista"] .hab .hab-nv, [data-vista="lista"] .hab-ramo-topo .hab-nv { grid-column: 2; } }
+.skill-detalhe .skill-caminho, .skill-detalhe .skill-desc { text-align: left; hyphens: manual; }
+.mini-projetos button:not(:has(img)) { grid-template-columns: minmax(0, 1fr); }
+
+/* ================= Celular: palma da mão (revisão 4) ================= */
+.nav-botao { flex: none; aspect-ratio: 1; padding: 0; }
+@media (max-width: 600px) {
+  :root { --secao: 40px; --margem: 18px; }
+  /* cabeçalho só com o logo; botões redondos */
+  .nav-marca span { display: none; }
+  .nav-botao, .tema-botao { width: 40px; height: 40px; min-width: 40px; border-radius: 50%; }
+  .nav.rolou { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  /* abertura: sem caixas atrás do aviso e da seta; só o degradê de baixo, mais escuro */
+  .js .hero.animado { height: 175svh; }
+  .hero-intro .status, .hero-rolar { background: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 4px 0; text-shadow: 0 1px 8px rgb(0 0 0 / .6); }
+  .sombra-v { background: linear-gradient(180deg, rgba(8,8,10,.35) 0%, rgba(8,8,10,0) 16%, rgba(8,8,10,0) 52%, rgba(8,8,10,.88) 100%); }
+  /* escritório: vídeo inteiro, sem zoom; menos rolagem por frase */
+  .manifesto { height: calc(var(--passos, 4) * 36svh + 100svh); }
+  .manifesto-video { transform: none; object-fit: contain; object-position: center; }
+  .manifesto-frases { font-size: 1.65rem; }
+  /* tipografia e respiros menores */
+  .pag-topo { padding: calc(var(--nav) + 16px) 0 12px; }
+  .pag-titulo { font-size: 2.3rem; }
+  h2[data-dividir], .cabecalho h2, .secao-topo h2 { font-size: 1.55rem; }
+  .titulo-secundario { font-size: 1.28rem; }
+  .cabecalho { margin-bottom: 12px; }
+  .rotulo { font-size: .7rem; }
+  body { font-size: .95rem; }
+  .numeros { padding-block: 24px; gap: 12px; }
+  .numero strong { font-size: 1.9rem; }
+  .clientes { padding: 20px 0; }
+  .vitrine-acoes { margin-top: 10px; }
+  .destaque { width: min(78vw, 290px); }
+  .destaque-corpo { padding: 12px 14px 14px; gap: 6px; }
+  .destaque-corpo h3 { font-size: 1.08rem; }
+  .btn { min-height: 44px; padding: 10px 18px; font-size: .92rem; }
+  .modal-caixa { padding: 14px var(--margem) 36px; }
+  .modal-cabeca h2 { font-size: 1.8rem; }
+  /* modal da trajetória: logo em cima, texto na largura toda */
+  .carreira-cabeca { flex-direction: column; align-items: flex-start; gap: 10px; padding-right: 52px; }
+  .carreira-cabeca h2 { font-size: 1.6rem; }
+  .modal-texto, .skill-desc { font-size: .95rem; }
+}
+@media (max-width: 600px) {
+  .manifesto { height: calc(var(--passos, 4) * 32svh + 100svh); }
+  .manifesto-video { object-position: center 30%; }
+}
+
+/* ================= Escala compacta de botões, filtros e campos ================= */
+.btn { min-height: 38px; padding: 8px 16px; font-size: .88rem; gap: 8px; }
+.btn-pequeno { min-height: 32px; padding: 6px 12px; font-size: .8rem; }
+.btn .ic { width: 16px; height: 16px; }
+.filtros button, .galeria-modos button { min-height: 34px; padding: 6px 13px; font-size: .82rem; gap: 6px; }
+.filtros button .mono { font-size: .7rem; }
+.vistas button { min-height: 34px; min-width: 34px; padding: 6px 10px; font-size: .82rem; }
+.vistas button .ic { width: 16px; height: 16px; }
+.busca input, input[type="search"], .campo input, .campo textarea, .campo select, .form input, .form textarea, .form select { min-height: 38px; padding: 8px 12px; font-size: .9rem; }
+.busca .ic { width: 16px; height: 16px; }
+.valor-grupo button { min-height: 32px; min-width: 38px; padding: 5px 10px; font-size: .8rem; }
+.rpg-acoes > button { padding: 5px 10px; font-size: .78rem; }
+.rpg-zoom button { width: 32px; min-height: 32px !important; }
+.caminho { min-height: 0; }
+.tema-botao, .nav-botao { width: 38px; height: 38px; min-width: 38px; }
+.nav-lingua summary { min-height: 38px; }
+.btn-icone { width: 38px; height: 38px; }
+@media (max-width: 600px) {
+  .btn { min-height: 36px; padding: 7px 14px; font-size: .85rem; }
+  .filtros button, .galeria-modos button { min-height: 32px; padding: 5px 11px; font-size: .8rem; }
+  .vistas button { min-height: 32px; min-width: 32px; padding: 5px 8px; }
+  .busca input, input[type="search"] { min-height: 34px; font-size: .85rem; }
+  .tema-botao, .nav-botao { width: 36px; height: 36px; min-width: 36px; }
+  .nav-lingua summary { min-height: 36px; }
+  .ler-mais, .expandir { min-height: 32px; }
+}
+/* currículo: baixar no canto direito da barra */
+.cv-barra [data-imprimir] { margin-left: auto; }
+/* pôster do escritório também esconde o canto inferior direito */
+@media (max-width: 600px) { .manifesto-poster { transform: scale(1.1); transform-origin: 0 0; } .manifesto-palco { overflow: hidden; } }
+.busca { min-height: 38px; padding: 0 12px; gap: 8px; }
+.busca input { min-height: 36px; padding: 0; font-size: .9rem; }
+@media (max-width: 600px) { .busca { min-height: 34px; } .busca input { min-height: 32px; font-size: .85rem; } }
+/* com os quadros carregados o pôster sai de trás (evita a emenda); no celular o vídeo fica logo abaixo do cabeçalho */
+.manifesto-poster { transition: opacity .4s; }
+.manifesto.quadros .manifesto-poster { opacity: 0; }
+@media (max-width: 600px) { .manifesto-poster { object-fit: cover; object-position: left top; top: var(--nav); height: calc(100vw * 9 / 16); transform: scale(1.1); transform-origin: 0 0; } }
+@media (max-width: 600px) {
+  .manifesto-texto { inset: calc(var(--nav) + 100vw * 9 / 16 * 0.97 + 20px) 0 auto; display: block; padding-bottom: 0; }
+  .manifesto-veu { background: linear-gradient(180deg, transparent 0, transparent calc(var(--nav) + 100vw * 9 / 16 * 0.8), #0b0b0d calc(var(--nav) + 100vw * 9 / 16 + 4px)); }
+}

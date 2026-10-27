@@ -168,3 +168,14 @@ input[type=range] { padding: 0; accent-color: var(--acento); }
 .opcoes .chave input[type=checkbox] { width: 20px; height: 20px; border-radius: 6px; }
 .opcoes .chave input[type=checkbox]::after { display: none; }
 .opcoes .chave input[type=checkbox]:checked { background: var(--acento) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center / 14px no-repeat; }
+
+/* login: tudo centralizado na caixa */
+.login-caixa { justify-items: center; text-align: center; }
+.login-caixa img { justify-self: center; }
+.login-caixa h1 { margin: 4px 0 2px; }
+.login-caixa > * { width: 100%; }
+.login-caixa > img { width: 64px; }
+.login-caixa label { text-align: left; }
+.login-caixa .botao { justify-content: center; }
+.login-msg { text-align: center; }
+.login-caixa .idiomas { display: flex; justify-content: center; }

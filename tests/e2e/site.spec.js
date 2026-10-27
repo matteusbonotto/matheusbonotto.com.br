@@ -124,7 +124,7 @@ test('trajetória: gráfico profissional + acadêmico e filtro', async ({ page }
 
 test('competências: árvore e conquistas', async ({ page }) => {
   await page.goto('/competencias/');
-  await expect(page.locator('.arvore')).toHaveCount(dados.arvore.filter(n => !n.parent_id).length);
+  await expect(page.locator('.hab-area')).toHaveCount(dados.arvore.filter(n => !n.parent_id).length);
   await expect(page.locator('.medalha-botao')).toHaveCount(dados.conquistas.length);
   await page.locator('.medalha-botao').first().click();
   await expect(page.locator('[data-modal] h2')).toBeVisible();
@@ -192,15 +192,18 @@ test('árvore de habilidades RPG: categorias, nós e detalhes', async ({ page })
   await expect(page.locator('[data-modal] h2')).toHaveText(qa.nome);
   await page.keyboard.press('Escape');
   await page.locator('[data-vistas="arvore"] [data-vista="grade"]').click();
-  await expect(page.locator('.arvore').first()).toBeVisible();
+  await expect(page.locator('.hab-area').first()).toBeVisible();
   await expect(page.locator('.rpg')).toBeHidden();
 });
 
-test('celular: nome do cabeçalho em uma linha e menu ocupando a tela', async ({ page, isMobile }) => {
+test('celular: cabeçalho só com o logo e menu ocupando a tela', async ({ page, isMobile }) => {
   test.skip(!isMobile);
   await page.goto('/');
-  const nome = page.locator('.nav-marca span');
-  expect((await nome.boundingBox()).height).toBeLessThan(30);
+  // no celular o cabeçalho mostra só o logo; o botão do menu é um círculo
+  await expect(page.locator('.nav-marca span')).toBeHidden();
+  await expect(page.locator('.nav-marca img')).toBeVisible();
+  const bm = await page.locator('[data-menu]').boundingBox();
+  expect(Math.abs(bm.width - bm.height)).toBeLessThan(2);
   await page.locator('[data-menu]').click();
   const painel = await page.locator('.nav-links').boundingBox();
   expect(painel.height).toBeGreaterThan(page.viewportSize().height * 0.9);
@@ -249,8 +252,9 @@ test('nenhum botão quebra linha ou vaza o texto', async ({ page }) => {
         if (!el.offsetParent || cs.visibility === 'hidden' || el.closest('[aria-hidden="true"], [hidden]')) continue;
         // só o texto conta (ícone ao lado do texto não é quebra de linha): cada nó de texto em uma única linha
         const nos = []; const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); while (w.nextNode()) if (w.currentNode.textContent.trim()) nos.push(w.currentNode);
-        const topos = new Set(nos.flatMap(n => { const r = document.createRange(); r.selectNodeContents(n); return [...r.getClientRects()].filter(x => x.width > 1).map(x => Math.round(x.bottom / 6)); }));
-        if (topos.size > 1 || el.scrollWidth > el.clientWidth + 2) out.push(`${el.className || el.tagName}: "${el.textContent.trim().slice(0, 30)}"`);
+        // cada nó de texto numa linha só (contadores menores ao lado do rótulo não contam como quebra)
+        const quebrou = nos.some(n => { const r = document.createRange(); r.selectNodeContents(n); return new Set([...r.getClientRects()].filter(x => x.width > 1).map(x => Math.round(x.bottom / 6))).size > 1; });
+        if (quebrou || el.scrollWidth > el.clientWidth + 2) out.push(`${el.className || el.tagName}: "${el.textContent.trim().slice(0, 30)}"`);
       }
       return out;
     });
@@ -290,7 +294,7 @@ test('prints na moldura do aparelho e calculadora recolhida só no celular', asy
   await expect(cel).toBeVisible();
   // a imagem começa abaixo da faixa da câmera
   const [moldura, img] = await Promise.all([cel.boundingBox(), cel.locator('img').boundingBox()]);
-  expect(img.y - moldura.y).toBeGreaterThan(20);
+  expect(img.y - moldura.y, JSON.stringify([moldura, img])).toBeGreaterThan(20);
   await page.goto('/contato/');
   await expect(page.locator('.valor-dobra')).toHaveJSProperty('open', !isMobile);
 });
@@ -326,4 +330,28 @@ test('tags: "+N" mostra as demais categorias sem abrir o projeto', async ({ page
   await expect(mesmo.locator('.selo-extra').first()).toBeVisible();
   await expect(mesmo.locator('[data-mais-selos]:visible')).toHaveCount(0);
   await expect(page.locator('[data-modal][open]')).toHaveCount(0);
+});
+
+test('cheat code: errado treme e avisa; certo libera o Admin no menu', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('.nav-marca img').click({ button: 'right' });
+  const balao = page.locator('.cheat');
+  await expect(balao).toBeVisible();
+  await balao.locator('input').fill('abc');
+  await balao.locator('input').press('Enter');
+  await expect(balao).toHaveClass(/erro/);
+  await expect(balao.locator('.cheat-msg')).toHaveText('Código errado. Tente de novo.');
+  await balao.locator('input').fill('iddqd');
+  await balao.locator('input').press('Enter');
+  await expect(page.locator('.nav-admin')).toHaveAttribute('href', '/admin/');
+  await page.goto('/en/');
+  await expect(page.locator('.nav-admin')).toHaveCount(1);
+});
+
+test('competências: grade e lista simples abrem o detalhe da habilidade', async ({ page }) => {
+  await page.goto('/competencias/');
+  await page.locator('[data-vistas="arvore"] [data-vista="lista"]').click();
+  await expect(page.locator('.hab-area').first()).toBeVisible();
+  await page.locator('.hab-area .hab').first().click();
+  await expect(page.locator('[data-modal] .skill-cabeca')).toBeVisible();
 });

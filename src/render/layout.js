@@ -15,7 +15,7 @@ export function navegacao(lang, t, pagina) {
   <a class="nav-marca" href="${rota(lang)}" aria-label="${t('nav.inicio')} · ${SITE.nome}">
     <img src="/media/logo-64.webp" srcset="/media/logo-128.webp 2x" alt="${t('nav.logo')}" width="34" height="34"><span>${SITE.nome}</span>
   </a>
-  <details class="nav-lingua" data-lingua><summary aria-label="${t('nav.idioma')}">${icone('globo')}<span>${lang.toUpperCase()}</span></summary>
+  <details class="nav-lingua" data-lingua><summary aria-label="${t('nav.idioma')}">${icone('traduzir')}<span>${lang.toUpperCase()}</span></summary>
     <div class="nav-lingua-lista">${SITE.idiomas.map(l => `<a href="${rota(l, pagina)}" hreflang="${l}" lang="${l}" data-idioma="${l}" ${l === lang ? 'aria-current="true"' : ''}>${NOMES_IDIOMA[l]}</a>`).join('')}</div></details>
   <nav class="nav-links" aria-label="${t('nav.menu')}" id="menu-principal">
     <a href="${rota(lang)}" class="nav-so-menu" ${pagina === '' ? 'aria-current="page"' : ''}>${t('nav.inicio')}</a>

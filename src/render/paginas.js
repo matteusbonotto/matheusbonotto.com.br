@@ -382,25 +382,39 @@ ${recomendacoes(d, t)}`;
 const nivelTexto = (n, t) => t('comp.niveis')[n >= 85 ? 4 : n >= 70 ? 3 : n >= 55 ? 2 : n >= 35 ? 1 : 0];
 const catComp = (c, t) => { try { return t(`comp.cat.${c}`); } catch { return c; } };
 
-function noArvore(no, filhos, t) {
-  const sub = filhos.get(no.id) || [];
-  return `<li><div class="no" ${no.descricao ? `title="${esc(no.descricao)}"` : ''}><span class="no-nome">${esc(no.nome)}</span>
-    <span class="nivel" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${no.nivel || 0}" aria-label="${esc(no.nome)}: ${nivelTexto(no.nivel || 0, t)}" style="--n:${no.nivel || 0}"><i></i></span>
-    <span class="mono no-tier">${nivelTexto(no.nivel || 0, t)}</span></div>
-    ${sub.length ? `<ul>${sub.map(f => noArvore(f, filhos, t)).join('')}</ul>` : ''}</li>`;
+// Grade e lista das habilidades: a área vira um cabeçalho e cada ramo um bloco com suas habilidades.
+const habNivel = (n, t) => `<span class="hab-nv"><span class="nivel" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${n.nivel || 0}" aria-label="${esc(n.nome)}: ${nivelTexto(n.nivel || 0, t)}" style="--n:${n.nivel || 0}"><i></i></span><span class="mono">${nivelTexto(n.nivel || 0, t)}</span></span>`;
+function habArea(r, filhos, t) {
+  const ramos = filhos.get(r.id) || [];
+  return `<section class="hab-area revelar" style="--cor:${CORES_ARVORE[r.categoria] || 'var(--acento)'}">
+  <button type="button" class="hab-area-topo" data-abrir-skill="${esc(r.id)}"><span class="skill-ic">${iconeNo(r, 24)}</span>
+    <span class="hab-area-txt"><strong>${esc(r.nome)}</strong></span>${habNivel(r, t)}</button>
+  <ul class="hab-ramos">${ramos.map(b => {
+    const folhas = (filhos.get(b.id) || []).sort((a, c) => (a.ordem || 0) - (c.ordem || 0));
+    return `<li class="hab-ramo">
+      <button type="button" class="hab hab-ramo-topo" data-abrir-skill="${esc(b.id)}"><span class="skill-ic skill-ic-p">${iconeNo(b, 18)}</span><strong>${esc(b.nome)}</strong>${habNivel(b, t)}</button>
+      ${folhas.length ? `<ul class="hab-folhas">${folhas.map(f => `<li><button type="button" class="hab" data-abrir-skill="${esc(f.id)}"><span class="hab-folha-ic">${iconeNo(f, 16)}</span><span class="hab-nome">${esc(f.nome)}</span>${habNivel(f, t)}</button></li>`).join('')}</ul>` : ''}
+    </li>`;
+  }).join('')}</ul>
+</section>`;
 }
 
 // Cor de cada árvore (categoria) e ícone de cada nó, escolhido pelo nome da habilidade.
-export const CORES_ARVORE = { qa: '#0E9F8E', dev: '#5B5BD6', data: '#16A34A', devops: '#D08A1E', idiomas: '#D6457A', ux: '#9B51E0', vibe: '#0EA5E9' };
+export const CORES_ARVORE = { qa: '#0E9F8E', dev: '#5B5BD6', data: '#16A34A', devops: '#D08A1E', infra: '#B45309', idiomas: '#D6457A', ux: '#9B51E0', vibe: '#0EA5E9' };
 const ICONES_SKILL = [
   [/QUALITY|QA$/, 'escudo'], [/MANUAL|FUNCTIONAL/, 'check'], [/EXPLORATORY/, 'busca'], [/REGRESSION/, 'repetir'], [/AUTOMATION|ROBOT/, 'robo'],
   [/PLAYWRIGHT|CYPRESS/, 'play'], [/GHERKIN|BDD/, 'arquivo'], [/METHODOLOG|ISO|CTFL|PRISMA/, 'medalha'], [/SHIFT/, 'esquerda'],
   [/DEVELOPMENT|FRONTEND|HTML|CSS|JAVASCRIPT|TYPESCRIPT|BOOTSTRAP|TAILWIND|REACT/, 'codigo'], [/BACKEND|NODE|PYTHON|SUPABASE/, 'servidor'],
   [/TAMPERMONKEY/, 'peca'], [/DATA|DASHBOARD|POWER BI|PLANILHA|SPREADSHEET/, 'grafico'], [/DEVOPS|AZURE/, 'infinito'],
-  [/AGILE|SCRUM|KANBAN|JIRA|ZEPHYR|TOOLS/, 'quadro'], [/IDIOMA|LANGUAGE|INGL|ENGLISH|ESPANHOL|READING|WRITING|LISTENING|CONVERSATION/, 'globo'],
+  [/AGILE|SCRUM|KANBAN|JIRA|ZEPHYR|TOOLS/, 'quadro'], [/READING|LEITURA|LECTURA/, 'livro'], [/WRITING|ESCRITA|ESCRITURA/, 'lapis'], [/LISTENING|ESCUTA|AUDITIVA/, 'ouvir'],
+  [/SPEAKING|CONVERSATION|CONVERSA/, 'fala'], [/IDIOMA|LANGUAGE|INGL|ENGLISH|ESPANHOL|SPANISH/, 'traduzir'],
   [/UX|UI/, 'pincel'], [/AI|IA |PROMPT|VIBE/, 'brilho'],
 ];
-const iconeSkill = nome => (ICONES_SKILL.find(([re]) => re.test(nome.toUpperCase())) || [, 'estrela'])[1];
+// o ícone escolhido no admin vale mais que o palpite pelo nome
+const iconeSkill = (nome, icon) => (icon && CAMINHOS[icon] ? icon : (ICONES_SKILL.find(([re]) => re.test(nome.toUpperCase())) || [, 'estrela'])[1]);
+const iconeNo = (n, tam = 24) => `<svg class="ic" viewBox="0 0 24 24" width="${tam}" height="${tam}" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${CAMINHOS[iconeSkill(n.nome, n.icon)]}</svg>`;
+const tierNo = nv => (nv >= 85 ? 4 : nv >= 70 ? 3 : nv >= 55 ? 2 : nv >= 35 ? 1 : 0);
+const estrelas = nv => `<span class="estrelas" aria-hidden="true">${'★'.repeat(tierNo(nv) + 1)}${'☆'.repeat(4 - tierNo(nv))}</span>`;
 
 // Árvore estilo RPG: nós circulares com ícone e anel de nível, ligados por galhos; layout "tidy" de cima para baixo.
 // Nós com filhos têm um botão +/− para recolher e expandir o ramo.
@@ -434,7 +448,7 @@ function arvoreRPG(raiz, filhos, t) {
       <circle class="rpg-trilha" r="${r + 6}"/>
       ${trancado ? '' : `<circle class="rpg-nivel" r="${r + 6}" stroke-dasharray="${((circ * nv) / 100).toFixed(1)} ${circ.toFixed(1)}" transform="rotate(-90)"/>`}
       <circle class="rpg-miolo" r="${r}"/>
-      <svg class="rpg-icone" x="${-tam / 2}" y="${-tam / 2}" width="${tam}" height="${tam}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${CAMINHOS[trancado ? 'cadeado' : iconeSkill(o.n.nome)]}</svg>
+      <svg class="rpg-icone" x="${-tam / 2}" y="${-tam / 2}" width="${tam}" height="${tam}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${CAMINHOS[trancado ? 'cadeado' : iconeSkill(o.n.nome, o.n.icon)]}</svg>
       <text class="rpg-nome" y="${r + 24}">${esc(o.n.nome.length > 19 ? o.n.nome.slice(0, 18) + '…' : o.n.nome)}</text>
       ${trancado ? '' : `<text class="rpg-tier" y="${r + 38}">${'★'.repeat(tier + 1)}${'☆'.repeat(4 - tier)}</text>`}
     </g>${o.temFilhos ? `<g class="rpg-alternar" transform="translate(${x + r * 0.78} ${o.y + r * 0.78})" data-alternar="${esc(o.n.id)}" data-pai-alt="${esc(o.pai || '')}" tabindex="0" role="button" aria-expanded="true" aria-label="${esc(t('comp.alternarNo', { nome: o.n.nome }))}"><circle r="11"/><text dy=".35em">−</text></g>` : ''}`;
@@ -442,15 +456,35 @@ function arvoreRPG(raiz, filhos, t) {
   return `<svg class="rpg-svg" viewBox="-20 0 ${larg + 40} ${alt}" width="${larg + 40}" height="${alt}" role="group" aria-label="${esc(raiz.nome)}" style="--cor:${CORES_ARVORE[raiz.categoria] || 'var(--acento)'}">${galhos}${circulos}</svg>`;
 }
 
-export function detalheSkill(n, todos, t) {
-  const sub = todos.filter(x => x.parent_id === n.id);
-  const nv = n.nivel || 0;
+const normalizar = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+// projetos em que a habilidade aparece (tecnologias, título ou descrição)
+function projetosDaSkill(n, projetos = []) {
+  const termos = [n.nome, n.i18n?.en?.nome].filter(Boolean).flatMap(x => normalizar(x).split(/\s+(?:e|and|y)\s+|\s*\/\s*|\s*\(\s*|\)\s*/)).map(x => x.trim()).filter(x => x.length > 2);
+  if (!termos.length) return [];
+  const casa = p => { const txt = normalizar([p.titulo, p.descricao_curta, ...(p.tecnologias || [])].join(' | ')); return termos.some(x => new RegExp(`(^|[^a-z0-9])${x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^a-z0-9])`).test(txt)); };
+  return projetos.filter(casa).slice(0, 6);
+}
+
+export function detalheSkill(n, todos, t, projetos = []) {
+  const sub = todos.filter(x => x.parent_id === n.id).sort((a, b) => (a.ordem || 0) - (b.ordem || 0));
+  const caminho = [];
+  for (let p = todos.find(x => x.id === n.parent_id); p; p = todos.find(x => x.id === p.parent_id)) caminho.unshift(p);
+  const nv = n.nivel || 0, cor = CORES_ARVORE[n.categoria] || 'var(--acento)';
+  const usados = projetosDaSkill(n, projetos);
   return `<button class="modal-fechar" type="button" data-fechar-modal aria-label="${t('projetos.fechar')}">${icone('fechar')}</button>
-<div class="skill-detalhe">
-  <p class="mono">${esc(catComp(n.categoria, t))}</p><h2 id="modal-titulo">${esc(n.nome)}</h2>
-  <p class="skill-nivel"><span class="nivel nivel-g" style="--n:${nv}"><i></i></span><span class="mono">${nivelTexto(nv, t)} · ${nv}%</span></p>
-  ${n.descricao ? `<p>${esc(n.descricao)}</p>` : ''}
-  ${sub.length ? `<h3 class="rotulo">${t('comp.subHabilidades')}</h3><ul class="lista-simples">${sub.map(s => `<li><button type="button" class="linha-abrir" data-abrir-skill="${esc(s.id)}">${esc(s.nome)}</button> <span class="mono">${nivelTexto(s.nivel || 0, t)}</span></li>`).join('')}</ul>` : ''}
+<div class="skill-detalhe" style="--cor:${cor}">
+  <header class="skill-cabeca">
+    <span class="skill-ic">${iconeNo(n, 30)}</span>
+    <div><p class="mono skill-caminho">${[catComp(n.categoria, t), ...caminho.map(c => c.nome)].map(esc).join(' <span aria-hidden="true">›</span> ')}</p>
+    <h2 id="modal-titulo">${esc(n.nome)}</h2></div>
+  </header>
+  <div class="skill-nivel-caixa">
+    <div class="skill-nivel-topo"><strong>${nivelTexto(nv, t)}</strong>${estrelas(nv)}<span class="mono">${nv}%</span></div>
+    <span class="nivel nivel-g" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${nv}" aria-label="${esc(n.nome)}: ${nivelTexto(nv, t)}" style="--n:${nv}"><i></i></span>
+  </div>
+  ${n.descricao ? `<p class="skill-desc">${esc(n.descricao)}</p>` : ''}
+  ${sub.length ? `<h3 class="rotulo">${t('comp.subHabilidades')}</h3><ul class="skill-subs">${sub.map(s => `<li><button type="button" data-abrir-skill="${esc(s.id)}"><span class="skill-ic skill-ic-p">${iconeNo(s, 18)}</span><span class="skill-sub-nome">${esc(s.nome)}</span><span class="mono">${nivelTexto(s.nivel || 0, t)}</span><span class="nivel" style="--n:${s.nivel || 0}"><i></i></span></button></li>`).join('')}</ul>` : ''}
+  ${usados.length ? `<h3 class="rotulo">${t('comp.ondeUsei')}</h3><ul class="mini-projetos">${usados.map(p => `<li><button type="button" data-abrir-projeto="${esc(p.slug)}">${p.imagem_url ? `<img class="${ehCena(p.imagem_url) ? 'capa-cena' : ''}" src="${esc(p.imagem_url)}" alt="" loading="lazy">` : ''}<span><strong>${esc(p.titulo)}</strong><span>${esc(p.descricao_curta)}</span></span></button></li>`).join('')}</ul>` : ''}
 </div>`;
 }
 
@@ -489,12 +523,7 @@ export function competencias(d, t) {
         <p class="dica-rpg mono">${t('comp.dicaZoom')}</p>
         ${raizes.map((r, i) => `<div class="rpg-palco" data-arrastar data-lenis-prevent data-palco="${esc(r.id)}" ${i ? 'hidden' : ''}>${arvoreRPG(r, filhos, t)}</div>`).join('')}
       </div>
-      <div class="arvore-grade">${raizes.map(r => `<article class="arvore revelar" data-inclinar>
-      <header><p class="mono">${esc(catComp(r.categoria, t))}</p><h3>${esc(r.nome)}</h3>
-        <span class="nivel nivel-g" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${r.nivel || 0}" aria-label="${esc(r.nome)}: ${nivelTexto(r.nivel || 0, t)}" style="--n:${r.nivel || 0}"><i></i></span>
-        <span class="mono no-tier">${nivelTexto(r.nivel || 0, t)} · ${r.nivel || 0}%</span></header>
-      ${(filhos.get(r.id) || []).length ? `<ul class="arvore-nos">${filhos.get(r.id).map(f => noArvore(f, filhos, t)).join('')}</ul>` : ''}
-    </article>`).join('')}</div>
+      <div class="habs">${raizes.map(r => habArea(r, filhos, t)).join('')}</div>
     </div>
   </section>
 
