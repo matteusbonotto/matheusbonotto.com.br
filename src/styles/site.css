@@ -473,6 +473,8 @@ details.linha-desc[open] summary { display: none; }
   .contato-texto { padding: calc(var(--nav) + 20px) var(--margem) 0; }
   .contato-texto .pag-titulo, .contato-texto > p { max-width: 42vw; }
 }
+.contato-rolar { display: none; }
+@media (min-width: 960px) { .contato-rolar { display: inline-flex; position: absolute; z-index: 2; left: 50%; bottom: 28px; translate: -50% 0; } }
 .contato-grade { display: grid; gap: 40px; padding-block: clamp(48px, 8svh, 96px) var(--secao); }
 .contato-lado { display: grid; gap: 20px; align-content: start; }
 .canais { display: grid; }

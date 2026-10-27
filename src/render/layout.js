@@ -50,7 +50,8 @@ export function rodape(lang, t) {
 // Canvas de partículas (rede de pontos ligada por linhas); o JS desenha e pausa fora da tela.
 export const particulas = (tom = 'escuro') => `<canvas class="particulas particulas-${tom}" data-particulas="${tom}" aria-hidden="true"></canvas>`;
 
-// Tela de abertura: cobre a página até os quadros do vídeo carregarem (mínimo de 3 s), uma vez por sessão.
+// Tela de abertura: cobre a página até o vídeo carregar (mínimo de 3 s). Páginas com vídeo (início e contato)
+// a mostram na primeira visita da sessão a cada uma; as demais, só se forem a primeira página aberta.
 // Automação (navigator.webdriver) não vê a abertura, para os testes não esperarem 3 s a cada página.
 const BEM_VINDO = { pt: 'Bem-vindo', en: 'Welcome', es: 'Bienvenido' };
 const splash = lang => `<div class="splash" data-splash role="status" aria-label="${BEM_VINDO[lang]}">
@@ -68,7 +69,7 @@ export function documento({ lang, pagina, titulo, descricao, jsonld, corpo, dado
 <html lang="${t('meta.lang')}" data-lang="${lang}">
 <head>
 ${head({ lang, t, titulo, descricao, pagina, jsonld, extra: preload })}
-<script>document.documentElement.classList.add('js');try{if(navigator.webdriver||sessionStorage.getItem('splash'))document.documentElement.classList.add('sem-splash')}catch(e){}</script>
+<script>document.documentElement.classList.add('js');try{if(navigator.webdriver||sessionStorage.getItem(${pagina === '' || pagina === 'contato' ? "'splash:'+location.pathname" : "'splash'"}))document.documentElement.classList.add('sem-splash')}catch(e){}</script>
 </head>
 <body data-pagina="${pagina || 'inicio'}">
 ${splash(lang)}

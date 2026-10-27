@@ -111,12 +111,32 @@ function desenhar() {
   detalhesVivos();
   aplicarZoom();
 }
+// troca de versão: as folhas esmaecem com um aviso de carregamento e a nova versão entra em seguida
+const mesa = main;
+let aviso = null, trocando = 0;
 botoesV.forEach(b => b.addEventListener('click', () => {
+  if (b.dataset.variante === variante && !trocando) return;
   variante = b.dataset.variante;
   const u = new URL(location.href);
   variante === primeira ? u.searchParams.delete('perfil') : u.searchParams.set('perfil', variante);
   history.replaceState(null, '', u);
-  desenhar();
+  botoesV.forEach(x => x.setAttribute('aria-pressed', x.dataset.variante === variante));
+  if (!aviso) {
+    aviso = document.createElement('div');
+    aviso.className = 'cv-carregando';
+    aviso.setAttribute('role', 'status');
+    aviso.innerHTML = `<span class="cv-girando" aria-hidden="true"></span>${t('cv.trocando')}`;
+    document.body.append(aviso);
+  }
+  mesa.classList.add('cv-trocando');
+  aviso.classList.add('ativo');
+  clearTimeout(trocando);
+  trocando = setTimeout(() => {
+    trocando = 0;
+    desenhar();
+    mesa.classList.remove('cv-trocando');
+    aviso.classList.remove('ativo');
+  }, 800);
 }));
 
 async function iniciar() {

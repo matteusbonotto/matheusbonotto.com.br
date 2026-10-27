@@ -1025,29 +1025,41 @@
     "dev",
     "vibe"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/zunido.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/zunido/capa.webp?v=mvr4mrro",
    "galeria": [
     {
+     "h": 900,
+     "w": 1440,
      "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/zunido/desktop-1.webp?v=mvqzz351",
      "dispositivo": "desktop"
     },
     {
+     "h": 900,
+     "w": 1440,
      "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/zunido/desktop-2.webp?v=mvqzz4bo",
      "dispositivo": "desktop"
     },
     {
+     "h": 900,
+     "w": 1440,
      "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/zunido/desktop-3.webp?v=mvqzz5ic",
      "dispositivo": "desktop"
     },
     {
+     "h": 1328,
+     "w": 780,
      "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/zunido/mobile-1.webp?v=mvqzzcmd",
      "dispositivo": "mobile"
     },
     {
+     "h": 1328,
+     "w": 780,
      "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/zunido/mobile-2.webp?v=mvqzze79",
      "dispositivo": "mobile"
     },
     {
+     "h": 1328,
+     "w": 780,
      "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/zunido/mobile-3.webp?v=mvqzzfmg",
      "dispositivo": "mobile"
     }
@@ -4756,6 +4768,26 @@
  ],
  "recomendacoes": [
   {
+   "id": "4fbd2af1-790c-4fa0-9dbe-d113b8081262",
+   "nome": "Natália Stein",
+   "cargo": "Agile Project Lead II",
+   "empresa": "MB Labs",
+   "mensagem": "Gostaria de formalizar por aqui o meu reconhecimento pelo excelente trabalho que você apresentou hoje à liderança Cinemark.\n\nHá uma semana, conversamos sobre o desafio de desenvolver uma ferramenta que auxiliasse a liderança na governança do projeto. O que você entregou hoje superou significativamente as minhas expectativas. A solução ficou fantástica e será fundamental para a nossa apuração de horas, acompanhamento do time e gestão geral do projeto.\n\nAlém de cumprir o objetivo principal com excelência, quero destacar a sua proatividade e visão sistêmica. Por iniciativa própria, você identificou oportunidades de melhoria e desenvolveu ferramentas para o time de Qualidade (QA). O impacto disso é enorme: você trouxe padronização, celeridade e total transparência para o fluxo de QA, um valor tão claro que a sua solução será escalada e compartilhada com outros times do projeto.\n\nParabéns pela dedicação, pela qualidade técnica da entrega e pela postura proativa. É um privilégio ter você no time e ver o nível de maturidade que você trouxe para o desafio apresentado.",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/pessoas/natalia-stein-4fbd2a.webp",
+   "fonte": "Feedz",
+   "data_feedback": "2026-07-02",
+   "professional_history_id": "f96c568f-d248-4f51-b5cd-3195e0971c06",
+   "ordem": 10,
+   "i18n": {
+    "en": {
+     "mensagem": "I'd like to formally recognize the excellent work you presented today to Cinemark's leadership.\n\nA week ago we talked about the challenge of building a tool to help leadership govern the project. What you delivered today far exceeded my expectations. The solution is fantastic and will be essential for our time tracking, team monitoring and overall project management.\n\nBeyond meeting the main goal with excellence, I want to highlight your proactivity and systemic vision. On your own initiative, you identified improvement opportunities and built tools for the Quality (QA) team. The impact is huge: you brought standardization, speed and full transparency to the QA flow, value so clear that your solution will be scaled and shared with other teams in the project.\n\nCongratulations on your dedication, the technical quality of the delivery and your proactive attitude. It's a privilege to have you on the team and to see the level of maturity you brought to this challenge."
+    },
+    "es": {
+     "mensagem": "Quisiera formalizar aquí mi reconocimiento por el excelente trabajo que presentaste hoy al liderazgo de Cinemark.\n\nHace una semana conversamos sobre el desafío de desarrollar una herramienta que ayudara al liderazgo en la gobernanza del proyecto. Lo que entregaste hoy superó ampliamente mis expectativas. La solución quedó fantástica y será fundamental para el registro de horas, el seguimiento del equipo y la gestión general del proyecto.\n\nAdemás de cumplir el objetivo principal con excelencia, quiero destacar tu proactividad y visión sistémica. Por iniciativa propia identificaste oportunidades de mejora y desarrollaste herramientas para el equipo de Calidad (QA). El impacto es enorme: trajiste estandarización, rapidez y total transparencia al flujo de QA, un valor tan claro que tu solución será escalada y compartida con otros equipos del proyecto.\n\nFelicitaciones por la dedicación, la calidad técnica de la entrega y la postura proactiva. Es un privilegio tenerte en el equipo y ver el nivel de madurez que aportaste al desafío."
+    }
+   }
+  },
+  {
    "id": "6d3a6e79-03b2-461b-b64f-247afce9f7f9",
    "nome": "Patricia Dantas",
    "cargo": "Product Owner (PSPO I)| Professional OKR Coach Certified (POCC) | Kanban System Design (KSD) I Analista de Negócios | Funcional | Sistemas | Agil",
@@ -4765,13 +4797,33 @@
    "fonte": "LinkedIn",
    "data_feedback": "2026-05-25",
    "professional_history_id": "f96c568f-d248-4f51-b5cd-3195e0971c06",
-   "ordem": 0,
+   "ordem": 20,
    "i18n": {
     "en": {
      "mensagem": "I had the opportunity to work with Matheus, known as Bonotto, and I can say he is an extremely competent and collaborative professional. He always contributes a lot to the team, communicates clearly and efficiently, and brings ideas that add real value day to day.\nHe also stands out for supporting leadership whenever needed, showing proactivity and commitment. Another strong point is how he uses AI to optimize processes and get work done faster and more efficiently.\nHe made a very important contribution to the Bullla project, adding a lot to the deliveries and to the team's initiatives.\nWithout a doubt, Bonotto makes a difference in the team and in the workplace."
     },
     "es": {
      "mensagem": "Tuve la oportunidad de trabajar con Matheus, conocido como Bonotto, y puedo decir que es un profesional extremadamente competente y colaborativo. Siempre aporta mucho al equipo, tiene una comunicación clara y eficiente y trae ideas que suman en el día a día.\nTambién se destaca por apoyar al liderazgo cuando es necesario, con proactividad y compromiso. Otro punto fuerte es cómo usa la IA para optimizar procesos y hacer que las demandas avancen con más agilidad y eficiencia.\nAdemás, tuvo una contribución muy importante en el proyecto de Bullla, aportando mucho a las entregas y a las iniciativas del equipo.\nSin duda, Bonotto marca la diferencia en el equipo y en el ambiente de trabajo."
+    }
+   }
+  },
+  {
+   "id": "39746a03-dc69-4a01-852d-41f79b9536e4",
+   "nome": "Priscila Roballo",
+   "cargo": "Agile Project Lead",
+   "empresa": "MB Labs",
+   "mensagem": "Bonotto você se destacou imensamente por ser um profissional completo e uma peça fundamental na nossa qualidade de entrega. Quero destacar três pilares que te fazem um profissional muito bom:\n\nIniciativa e Proatividade: Não espera o problema acontecer; antecipa cenários, propõe melhorias e age com muita autonomia.\nAutomação de Processos: Sua capacidade de automatizar processos tem otimizado o nosso tempo e elevado a maturidade técnica do time.\nCompromisso e Engajamento: É perceptível o quanto é dedicado e engajado no que propomos. Você abraça os desafios e executa todas as atividades solicitadas com excelência e pontualidade.\nGostaria de agradecer imensamente por esse período que esteve conosco aqui no projeto, obrigada pela dedicação diária e por sempre jogar junto com o time, Bonotto! Que orgulho ter você conosco.\n\nDesejo muito sucesso nos próximos ciclos! Espero ter a honra de trabalhar contigo novamente no futuro e saiba que poderá sempre contar comigo! Abraços",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/pessoas/priscila-roballo-39746a.webp",
+   "fonte": "Site",
+   "data_feedback": "2026-06-01",
+   "professional_history_id": "f96c568f-d248-4f51-b5cd-3195e0971c06",
+   "ordem": 30,
+   "i18n": {
+    "en": {
+     "mensagem": "Bonotto, you stood out immensely as a well-rounded professional and a key part of our delivery quality. I want to highlight three pillars that make you a great professional:\n\nInitiative and proactivity: you don't wait for problems to happen; you anticipate scenarios, propose improvements and act with a lot of autonomy.\nProcess automation: your ability to automate processes has saved us time and raised the team's technical maturity.\nCommitment and engagement: it's clear how dedicated and engaged you are. You embrace challenges and deliver every task with excellence and on time.\nThank you so much for your time with us on the project, for your daily dedication and for always playing as a team, Bonotto! We're proud to have had you with us.\n\nI wish you every success in your next cycles! I hope to have the honor of working with you again, and know you can always count on me."
+    },
+    "es": {
+     "mensagem": "Bonotto, te destacaste enormemente por ser un profesional completo y una pieza fundamental en nuestra calidad de entrega. Quiero destacar tres pilares que te hacen un muy buen profesional:\n\nIniciativa y proactividad: no esperas a que el problema ocurra; anticipas escenarios, propones mejoras y actúas con mucha autonomía.\nAutomatización de procesos: tu capacidad de automatizar procesos optimizó nuestro tiempo y elevó la madurez técnica del equipo.\nCompromiso y engagement: se nota lo dedicado y comprometido que eres. Abrazas los desafíos y ejecutas todas las actividades con excelencia y puntualidad.\n¡Muchas gracias por este tiempo con nosotros en el proyecto, por la dedicación diaria y por jugar siempre en equipo, Bonotto! Es un orgullo haberte tenido con nosotros.\n\n¡Te deseo mucho éxito en los próximos ciclos! Espero tener el honor de trabajar contigo nuevamente y sabes que siempre podrás contar conmigo."
     }
    }
   },
@@ -4785,7 +4837,7 @@
    "fonte": "LinkedIn",
    "data_feedback": "2026-05-25",
    "professional_history_id": "f96c568f-d248-4f51-b5cd-3195e0971c06",
-   "ordem": 0,
+   "ordem": 40,
    "i18n": {
     "en": {
      "mensagem": "Excellent professional! Proactive and responsible, he looks for different technologies to boost productivity and ease repetitive work, communicates well and is always helpful. It was a pleasure working with you."
@@ -4805,53 +4857,13 @@
    "fonte": "Feedz",
    "data_feedback": "2026-07-14",
    "professional_history_id": "f96c568f-d248-4f51-b5cd-3195e0971c06",
-   "ordem": 0,
+   "ordem": 50,
    "i18n": {
     "en": {
      "mensagem": "With Bonotto back on the team, we could use his knowledge to build tools that support every stage of the process, achieving a huge performance gain, on top of his collaborative approach in every activity of the quality process. He is a dedicated professional, highly motivated to help everyone."
     },
     "es": {
      "mensagem": "Con el regreso de Bonotto al equipo, fue posible aprovechar su conocimiento para desarrollar herramientas que ayudan en todas las etapas del proceso, logrando una enorme mejora de desempeño, además de su capacidad colaborativa en todas las actividades del proceso de calidad. Es un profesional dedicado y muy motivado para ayudar a todos."
-    }
-   }
-  },
-  {
-   "id": "39746a03-dc69-4a01-852d-41f79b9536e4",
-   "nome": "Priscila Roballo",
-   "cargo": "Agile Project Lead",
-   "empresa": "MB Labs",
-   "mensagem": "Bonotto você se destacou imensamente por ser um profissional completo e uma peça fundamental na nossa qualidade de entrega. Quero destacar três pilares que te fazem um profissional muito bom:\n\nIniciativa e Proatividade: Não espera o problema acontecer; antecipa cenários, propõe melhorias e age com muita autonomia.\nAutomação de Processos: Sua capacidade de automatizar processos tem otimizado o nosso tempo e elevado a maturidade técnica do time.\nCompromisso e Engajamento: É perceptível o quanto é dedicado e engajado no que propomos. Você abraça os desafios e executa todas as atividades solicitadas com excelência e pontualidade.\nGostaria de agradecer imensamente por esse período que esteve conosco aqui no projeto, obrigada pela dedicação diária e por sempre jogar junto com o time, Bonotto! Que orgulho ter você conosco.\n\nDesejo muito sucesso nos próximos ciclos! Espero ter a honra de trabalhar contigo novamente no futuro e saiba que poderá sempre contar comigo! Abraços",
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/pessoas/priscila-roballo-39746a.webp",
-   "fonte": "Site",
-   "data_feedback": "2026-06-01",
-   "professional_history_id": "f96c568f-d248-4f51-b5cd-3195e0971c06",
-   "ordem": 0,
-   "i18n": {
-    "en": {
-     "mensagem": "Bonotto, you stood out immensely as a well-rounded professional and a key part of our delivery quality. I want to highlight three pillars that make you a great professional:\n\nInitiative and proactivity: you don't wait for problems to happen; you anticipate scenarios, propose improvements and act with a lot of autonomy.\nProcess automation: your ability to automate processes has saved us time and raised the team's technical maturity.\nCommitment and engagement: it's clear how dedicated and engaged you are. You embrace challenges and deliver every task with excellence and on time.\nThank you so much for your time with us on the project, for your daily dedication and for always playing as a team, Bonotto! We're proud to have had you with us.\n\nI wish you every success in your next cycles! I hope to have the honor of working with you again, and know you can always count on me."
-    },
-    "es": {
-     "mensagem": "Bonotto, te destacaste enormemente por ser un profesional completo y una pieza fundamental en nuestra calidad de entrega. Quiero destacar tres pilares que te hacen un muy buen profesional:\n\nIniciativa y proactividad: no esperas a que el problema ocurra; anticipas escenarios, propones mejoras y actúas con mucha autonomía.\nAutomatización de procesos: tu capacidad de automatizar procesos optimizó nuestro tiempo y elevó la madurez técnica del equipo.\nCompromiso y engagement: se nota lo dedicado y comprometido que eres. Abrazas los desafíos y ejecutas todas las actividades con excelencia y puntualidad.\n¡Muchas gracias por este tiempo con nosotros en el proyecto, por la dedicación diaria y por jugar siempre en equipo, Bonotto! Es un orgullo haberte tenido con nosotros.\n\n¡Te deseo mucho éxito en los próximos ciclos! Espero tener el honor de trabajar contigo nuevamente y sabes que siempre podrás contar conmigo."
-    }
-   }
-  },
-  {
-   "id": "4fbd2af1-790c-4fa0-9dbe-d113b8081262",
-   "nome": "Natália Stein",
-   "cargo": "Agile Project Lead II",
-   "empresa": "MB Labs",
-   "mensagem": "Gostaria de formalizar por aqui o meu reconhecimento pelo excelente trabalho que você apresentou hoje à liderança Cinemark.\n\nHá uma semana, conversamos sobre o desafio de desenvolver uma ferramenta que auxiliasse a liderança na governança do projeto. O que você entregou hoje superou significativamente as minhas expectativas. A solução ficou fantástica e será fundamental para a nossa apuração de horas, acompanhamento do time e gestão geral do projeto.\n\nAlém de cumprir o objetivo principal com excelência, quero destacar a sua proatividade e visão sistêmica. Por iniciativa própria, você identificou oportunidades de melhoria e desenvolveu ferramentas para o time de Qualidade (QA). O impacto disso é enorme: você trouxe padronização, celeridade e total transparência para o fluxo de QA, um valor tão claro que a sua solução será escalada e compartilhada com outros times do projeto.\n\nParabéns pela dedicação, pela qualidade técnica da entrega e pela postura proativa. É um privilégio ter você no time e ver o nível de maturidade que você trouxe para o desafio apresentado.",
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/pessoas/natalia-stein-4fbd2a.webp",
-   "fonte": "Feedz",
-   "data_feedback": "2026-07-02",
-   "professional_history_id": "f96c568f-d248-4f51-b5cd-3195e0971c06",
-   "ordem": 0,
-   "i18n": {
-    "en": {
-     "mensagem": "I'd like to formally recognize the excellent work you presented today to Cinemark's leadership.\n\nA week ago we talked about the challenge of building a tool to help leadership govern the project. What you delivered today far exceeded my expectations. The solution is fantastic and will be essential for our time tracking, team monitoring and overall project management.\n\nBeyond meeting the main goal with excellence, I want to highlight your proactivity and systemic vision. On your own initiative, you identified improvement opportunities and built tools for the Quality (QA) team. The impact is huge: you brought standardization, speed and full transparency to the QA flow, value so clear that your solution will be scaled and shared with other teams in the project.\n\nCongratulations on your dedication, the technical quality of the delivery and your proactive attitude. It's a privilege to have you on the team and to see the level of maturity you brought to this challenge."
-    },
-    "es": {
-     "mensagem": "Quisiera formalizar aquí mi reconocimiento por el excelente trabajo que presentaste hoy al liderazgo de Cinemark.\n\nHace una semana conversamos sobre el desafío de desarrollar una herramienta que ayudara al liderazgo en la gobernanza del proyecto. Lo que entregaste hoy superó ampliamente mis expectativas. La solución quedó fantástica y será fundamental para el registro de horas, el seguimiento del equipo y la gestión general del proyecto.\n\nAdemás de cumplir el objetivo principal con excelencia, quiero destacar tu proactividad y visión sistémica. Por iniciativa propia identificaste oportunidades de mejora y desarrollaste herramientas para el equipo de Calidad (QA). El impacto es enorme: trajiste estandarización, rapidez y total transparencia al flujo de QA, un valor tan claro que tu solución será escalada y compartida con otros equipos del proyecto.\n\nFelicitaciones por la dedicación, la calidad técnica de la entrega y la postura proactiva. Es un privilegio tenerte en el equipo y ver el nivel de madurez que aportaste al desafío."
     }
    }
   },
@@ -4865,7 +4877,7 @@
    "fonte": "Site",
    "data_feedback": "2026-05-25",
    "professional_history_id": "f96c568f-d248-4f51-b5cd-3195e0971c06",
-   "ordem": 0,
+   "ordem": 60,
    "i18n": {
     "en": {
      "mensagem": "Just stopping by to thank you for your incredible work! It's great to have someone on the team who not only brings brilliant ideas but also works hard to make them happen. Congratulations on your attitude and daily commitment!"
@@ -4885,7 +4897,7 @@
    "fonte": "LinkedIn",
    "data_feedback": "2023-12-12",
    "professional_history_id": "83d5192d-7713-4302-a193-4ca7435e5776",
-   "ordem": 1,
+   "ordem": 70,
    "i18n": {
     "en": {
      "mensagem": "I worked with Matheus for almost two years on the same team, and during that time I saw his growth and how dedicated he is to the project. His analytical skills help the project a lot. He is skilled in test automation and is always looking for ways to improve the team's workflow. His potential is huge."
@@ -4905,7 +4917,7 @@
    "fonte": "LinkedIn",
    "data_feedback": "2023-05-15",
    "professional_history_id": "f24f938f-6732-47a7-992b-b524d6afc0c0",
-   "ordem": 2,
+   "ordem": 80,
    "i18n": {
     "en": {
      "mensagem": "Matheus, I'd like to share feedback on your work at SiDi. While we worked together, I was impressed by your dedication and commitment to delivering high-quality results. Your ability to run thorough tests, find defects and propose solutions was very useful, it even helped my own project directly. Your teamwork and willingness to help colleagues were greatly appreciated. It was a pleasure working with you at SiDi."
@@ -4925,7 +4937,7 @@
    "fonte": "LinkedIn",
    "data_feedback": "2023-05-15",
    "professional_history_id": "e0a751e6-a0f4-42da-9ca8-7f701eee9f1f",
-   "ordem": 3,
+   "ordem": 90,
    "i18n": {
     "en": {
      "mensagem": "I'd like to share my view of your performance at Crespo e Caires. While we worked together, I was truly impressed by your dedication, work ethic and technical skills. Your organization, teamwork and ability to face challenges were remarkable, and your professional attitude was exemplary. It was a pleasure having you on our team, and I am fully convinced any company would benefit greatly from you and your knowledge."
@@ -4945,7 +4957,7 @@
    "fonte": "LinkedIn",
    "data_feedback": "2026-06-09",
    "professional_history_id": "f96c568f-d248-4f51-b5cd-3195e0971c06",
-   "ordem": 4,
+   "ordem": 100,
    "i18n": {
     "en": {
      "mensagem": "From Feedz: Matheus, thank you so much for the kind words! It was great going through this process with you. I admit that at first I thought it would be just another \"quick help\", but in the end it turned into a really nice exchange: you brought good questions, and that made me revisit a lot of things I was already doing on autopilot. Seeing you come out understanding the environment better, knowing where to look when something goes wrong and, above all, with everything running nicely on your machine... that is what really matters. And patience was never a problem. Setting up a local environment is always a box of surprises, even more so with backend, IBK and BKO all together. You did great by not giving up on the errors and digging in to understand each one. As for the teaching: I'm glad it was clear, because sometimes it's hard to explain without sounding like a system manual, haha. That's it, congratulations on your dedication and on the QA work you've been doing. Count on me whenever you need. Cheers!"
@@ -4965,7 +4977,7 @@
    "fonte": "LinkedIn",
    "data_feedback": "2023-05-11",
    "professional_history_id": "83d5192d-7713-4302-a193-4ca7435e5776",
-   "ordem": 4,
+   "ordem": 110,
    "i18n": {
     "en": {
      "mensagem": "Matheus is very dedicated and always eager to learn more. He is attentive and patient when teaching, and was extremely important at the start of my career."
@@ -4985,7 +4997,7 @@
    "fonte": "LinkedIn",
    "data_feedback": "2023-05-11",
    "professional_history_id": "f24f938f-6732-47a7-992b-b524d6afc0c0",
-   "ordem": 5,
+   "ordem": 120,
    "i18n": {
     "en": {
      "mensagem": "Matheus has great interpersonal skills and adapts quickly to change. He also showed strong knowledge of Excel and programming languages such as Python and Java, and is able to work with agile methodologies in QA at every test level."
@@ -5005,7 +5017,7 @@
    "fonte": "LinkedIn",
    "data_feedback": "2023-05-10",
    "professional_history_id": "e0a751e6-a0f4-42da-9ca8-7f701eee9f1f",
-   "ordem": 6,
+   "ordem": 130,
    "i18n": {
     "en": {
      "mensagem": "I enthusiastically recommend Matheus Bonotto, even though we weren't on the same team. His proactivity, fast learning, ability to handle critical scenarios, broad knowledge of testing practices and critical mindset add value to any team. Exchanging knowledge and ideas with Matheus enriched our work together, and I'm sure he will bring significant benefits to any workplace."
@@ -5025,7 +5037,7 @@
    "fonte": "LinkedIn",
    "data_feedback": "2023-05-10",
    "professional_history_id": "f24f938f-6732-47a7-992b-b524d6afc0c0",
-   "ordem": 7,
+   "ordem": 140,
    "i18n": {
     "en": {
      "mensagem": "Matheus Bonotto comes highly recommended for his proactive nature, fast learning, ability to handle critical scenarios, broad knowledge of the Office suite and his critical, reflective approach. He is a valuable addition to any team and will certainly bring significant benefits to the workplace."
@@ -5045,7 +5057,7 @@
    "fonte": "LinkedIn",
    "data_feedback": "2023-05-10",
    "professional_history_id": "83d5192d-7713-4302-a193-4ca7435e5776",
-   "ordem": 8,
+   "ordem": 150,
    "i18n": {
     "en": {
      "mensagem": "Matheus is an exceptional QA. His thorough approach, communication skills and collaborative attitude make him a valuable member of the stores vertical here at the company. His passion for software quality and his ability to spot problems are impressive. He is a highly competent and reliable professional."
@@ -5065,7 +5077,7 @@
    "fonte": "LinkedIn",
    "data_feedback": "2023-05-10",
    "professional_history_id": "83d5192d-7713-4302-a193-4ca7435e5776",
-   "ordem": 9,
+   "ordem": 160,
    "i18n": {
     "en": {
      "mensagem": "A dedicated, careful and attentive professional, always willing to collaborate with the whole team to achieve the best results. Matheus grew a lot during the time I had the chance to work with him, and performed his work very well."

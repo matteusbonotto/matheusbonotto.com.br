@@ -1,6 +1,7 @@
 // Captura prints de uso (desktop e mobile, em 3 pontos da página) de cada projeto com site no ar
-// e grava em projects.galeria. Uso: node scripts/capturar-galerias.mjs [slug ...]
+// e grava em projects.galeria; no fim monta a capa em moldura (prints-projetos). Uso: node scripts/capturar-galerias.mjs [slug ...]
 import { chromium, devices } from '@playwright/test';
+import { execFileSync } from 'node:child_process';
 import sharp from 'sharp';
 import { adminClient, SUPABASE_URL } from './supabase-admin.mjs';
 
@@ -47,3 +48,6 @@ for (const p of alvos) {
   }
 }
 await b.close();
+// padrão: capa com os prints dentro do monitor e do celular (e w/h na galeria) sai junto
+const feitos = alvos.map(p => p.slug);
+if (feitos.length) execFileSync(process.execPath, ['scripts/prints-projetos.mjs', ...feitos], { stdio: 'inherit' });

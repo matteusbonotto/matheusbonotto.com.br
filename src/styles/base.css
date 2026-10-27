@@ -121,3 +121,10 @@ p { text-wrap: pretty; }
 @keyframes splash-sai { to { opacity: 0; visibility: hidden; transform: scale(1.04); } }
 @keyframes splash-some { to { opacity: 0; visibility: hidden; } }
 @media (prefers-reduced-motion: reduce) { .splash-anel::before, .splash-anel::after, .splash-caixa { animation: none; } }
+
+/* ---------- Skeleton ao trocar filtro ou vista ---------- */
+.esq-oculto { visibility: hidden; }
+.esq-camada { position: absolute; top: 0; left: 0; width: 0; height: 0; z-index: 5; pointer-events: none; }
+.esq-camada i { position: absolute; overflow: hidden; background: var(--superficie-2); border-radius: 16px; }
+.esq-camada i::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 20%, color-mix(in srgb, var(--superficie) 85%, transparent) 50%, transparent 80%); transform: translateX(-100%); animation: esq-brilho 1.1s ease-in-out infinite; }
+@keyframes esq-brilho { to { transform: translateX(100%); } }

@@ -1,4 +1,4 @@
-// Tira um print 1440x900 de um site e grava como imagem do projeto. Uso: node scripts/print-projeto.mjs <slug> <url>
+// Tira um print 1440x900 de um site e grava como imagem do projeto (prefira capturar-galerias, que já monta a capa em moldura). Uso: node scripts/print-projeto.mjs <slug> <url>
 import { chromium } from '@playwright/test';
 import sharp from 'sharp';
 import { adminClient, SUPABASE_URL } from './supabase-admin.mjs';

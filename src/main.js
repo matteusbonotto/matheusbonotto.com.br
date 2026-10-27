@@ -35,14 +35,16 @@ if (!semMovimento) {
 }
 
 // ---------- Tela de abertura ----------
-// Sai quando passaram 3 s e a página (com os quadros do vídeo) carregou; no máximo 8 s.
+// Sai quando passaram 3 s, a página (com os quadros do vídeo) carregou e o vídeo do topo pode tocar; no máximo 8 s.
 const telaAbertura = $('[data-splash]');
 if (telaAbertura && !document.documentElement.classList.contains('sem-splash')) {
   lenis?.stop();
   const tempo = new Promise(r => setTimeout(r, Math.max(0, 3000 - performance.now())));
   const carregou = new Promise(r => (document.readyState === 'complete' ? r() : addEventListener('load', r, { once: true })));
-  Promise.race([Promise.all([tempo, carregou]), new Promise(r => setTimeout(r, 8000))]).then(() => {
-    try { sessionStorage.setItem('splash', '1'); } catch {}
+  const video = $('.contato-video');
+  const videoPronto = new Promise(r => (!video || video.readyState >= 3 ? r() : video.addEventListener('canplay', r, { once: true })));
+  Promise.race([Promise.all([tempo, carregou, videoPronto]), new Promise(r => setTimeout(r, 8000))]).then(() => {
+    try { sessionStorage.setItem('splash', '1'); sessionStorage.setItem(`splash:${location.pathname}`, '1'); } catch {}
     telaAbertura.classList.add('saindo');
     lenis?.start();
     setTimeout(() => telaAbertura.remove(), 700);
@@ -663,11 +665,8 @@ function vistasEfeitos(raiz) {
     };
     botoes.forEach(b => b.addEventListener('click', () => {
       if (alvo.dataset.vista === b.dataset.vista) return;
-      const itens = $$(':scope > li:not([hidden]), :scope > [data-grupo]:not([hidden]) .cartao:not([hidden])', alvo).slice(0, 40);
-      if (semMovimento || !itens.length) return aplicar(b.dataset.vista);
-      const estado = Flip.getState(itens);
-      aplicar(b.dataset.vista);
-      Flip.from(estado, { duration: .6, ease: 'power2.inOut', nested: true, stagger: .01, onComplete: () => ScrollTrigger.refresh() });
+      const itens = $$(':scope > li:not([hidden]), :scope > [data-grupo]:not([hidden]) .cartao:not([hidden])', alvo);
+      comEsqueleto(itens, () => aplicar(b.dataset.vista));
     }));
     let salvo = null;
     try { salvo = localStorage.getItem(chave); } catch {}
@@ -722,6 +721,37 @@ function animarLayout(itens, mudar) {
   });
 }
 
+// Skeleton ao trocar filtro ou vista: a mudança é aplicada na hora, os itens ficam invisíveis (a página não muda
+// de altura) e blocos cintilantes ocupam o lugar exato de cada um; depois de 1,2 s o conteúdo entra.
+let esqueletoAtual = null;
+function comEsqueleto(itens, mudar) {
+  esqueletoAtual?.cancelar();
+  mudar();
+  const vis = itens.filter(el => el.offsetParent !== null && !el.hidden);
+  if (semMovimento || !vis.length) { ScrollTrigger.refresh(); return; }
+  const blocos = [...new Set(vis.map(el => el.parentElement))];
+  const sx = scrollX, sy = scrollY;
+  const camada = document.createElement('div');
+  camada.className = 'esq-camada';
+  camada.setAttribute('aria-hidden', 'true');
+  camada.innerHTML = vis.slice(0, 30).map(el => {
+    const r = el.getBoundingClientRect();
+    if (r.bottom < -300 || r.top > innerHeight + 600) return '';
+    const raio = getComputedStyle(el.firstElementChild || el).borderRadius;
+    return `<i style="top:${r.top + sy}px;left:${r.left + sx}px;width:${r.width}px;height:${r.height}px;border-radius:${raio}"></i>`;
+  }).join('');
+  blocos.forEach(b => { b.classList.add('esq-oculto'); b.setAttribute('aria-busy', 'true'); });
+  document.body.append(camada);
+  const fim = () => { camada.remove(); blocos.forEach(b => { b.classList.remove('esq-oculto'); b.removeAttribute('aria-busy'); }); };
+  const espera = setTimeout(() => {
+    esqueletoAtual = null;
+    fim();
+    gsap.fromTo(vis.slice(0, 40), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .45, stagger: .03, ease: 'power2.out', clearProps: 'transform,opacity' });
+    ScrollTrigger.refresh();
+  }, 1200);
+  esqueletoAtual = { cancelar: () => { clearTimeout(espera); fim(); } };
+}
+
 // ================= PROJETOS =================
 function projetosEfeitos(raiz) {
   const area = $('[data-projetos]', raiz);
@@ -745,7 +775,7 @@ function projetosEfeitos(raiz) {
     nenhum.hidden = total > 0;
     ScrollTrigger.refresh();
   };
-  const marcar = abasTeclado(botoes, b => { filtro = b.dataset.filtro; marcar(b); aplicar(); });
+  const marcar = abasTeclado(botoes, b => { filtro = b.dataset.filtro; marcar(b); comEsqueleto($$('.cartao', area), filtrarAgora); });
   let espera = 0;
   busca.addEventListener('input', () => { clearTimeout(espera); espera = setTimeout(aplicar, 160); });
   const inicial = location.hash.slice(1);
@@ -763,7 +793,7 @@ function trajetoriaEfeitos(raiz) {
     marcar(b);
     const f = b.dataset.filtroLinha;
     $$('.crono-linha, .crono-m-linha', area).forEach(g => g.classList.toggle('apagada', f !== 'todos' && g.dataset.tipo !== f));
-    animarLayout($$('.linha-item', area), () => $$('.linha-item', area).forEach(li => { li.hidden = f !== 'todos' && li.dataset.tipo !== f; li.classList.add('visivel'); }));
+    comEsqueleto($$('.linha-item', area), () => $$('.linha-item', area).forEach(li => { li.hidden = f !== 'todos' && li.dataset.tipo !== f; li.classList.add('visivel'); }));
   });
 }
 
@@ -775,7 +805,7 @@ function competenciasEfeitos(raiz) {
   const marcar = abasTeclado(botoes, b => {
     marcar(b);
     const f = b.dataset.filtroConq;
-    animarLayout($$('.medalhas > li', area), () => $$('.medalhas > li', area).forEach(li => { li.hidden = f !== 'todas' && !li.dataset.cats.split(' ').includes(f); li.classList.add('visivel'); }));
+    comEsqueleto($$('.medalhas > li', area), () => $$('.medalhas > li', area).forEach(li => { li.hidden = f !== 'todas' && !li.dataset.cats.split(' ').includes(f); li.classList.add('visivel'); }));
   });
 }
 

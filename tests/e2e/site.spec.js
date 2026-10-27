@@ -78,6 +78,7 @@ test('abertura: título escondido sobre o vídeo e visível depois da rolagem',a
 
 test('abertura no desktop: texto à esquerda e vídeo à direita nunca se encostam, em qualquer resolução', async ({ browser, isMobile }) => {
   test.skip(isMobile, 'no celular o texto fica abaixo do vídeo');
+  test.setTimeout(150000); // sete resoluções em sequência; com 4 workers passa de 60 s
   for (const [width, height] of [[960, 720], [1280, 720], [1366, 768], [1536, 864], [1920, 1080], [2560, 1440], [3440, 1440]]) {
     const ctx = await browser.newContext({ viewport: { width, height } });
     const page = await ctx.newPage();
@@ -403,4 +404,26 @@ test('certificados abrem na galeria em tela cheia e Esc fecha', async ({ page })
   await expect(visor.locator('.visor-img')).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(visor).toHaveCount(0);
+});
+
+test('filtros e troca de currículo mostram carregamento antes do conteúdo', async ({ page }) => {
+  // registra o carregamento quando ele aparece: com a máquina ocupada, consultar depois pode chegar tarde
+  const vigiar = () => page.evaluate(() => {
+    window.__carregou = false;
+    new MutationObserver(() => { if (document.querySelector('.esq-camada i, .cv-carregando.ativo')) window.__carregou = true; })
+      .observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
+  });
+  await page.goto('/projetos/');
+  await vigiar();
+  await page.locator('[data-filtro="design"]').click();
+  await expect.poll(() => page.evaluate(() => window.__carregou)).toBe(true);
+  await expect(page.locator('.esq-camada')).toHaveCount(0, { timeout: 4000 });
+  await expect(page.locator('[data-grupo="design"] .cartao').first()).toBeVisible();
+  await page.goto('/cv/');
+  await vigiar();
+  const outra = page.locator('[data-variante]').nth(1);
+  await outra.click();
+  await expect.poll(() => page.evaluate(() => window.__carregou)).toBe(true);
+  await expect(page.locator('.cv-carregando.ativo')).toHaveCount(0, { timeout: 4000 });
+  await expect(outra).toHaveAttribute('aria-pressed', 'true');
 });

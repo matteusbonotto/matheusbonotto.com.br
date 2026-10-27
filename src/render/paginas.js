@@ -630,6 +630,7 @@ export function contato(d, t) {
     <h1 id="contato-titulo" class="pag-titulo" data-dividir>${t('pag.contato.titulo')}</h1>
     <p>${t('pag.contato.sub')}</p>
   </div>
+  <a class="hero-rolar contato-rolar" href="#form-titulo">${icone('baixo')}${t('hero.rolar')}</a>
 </section>
 <div class="container contato-grade">
   <form class="form" data-form novalidate aria-labelledby="form-titulo">

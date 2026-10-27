@@ -27,6 +27,14 @@
 
 .cv-mesa { padding: 16px 16px 48px; overflow-x: auto; }
 .cv-paginas { display: flex; flex-direction: column; align-items: center; gap: 16px; width: max-content; min-width: 100%; margin: 0 auto; }
+/* troca de versão: folhas esmaecidas + aviso com anel girando */
+.cv-paginas { transition: opacity .3s, filter .3s; }
+.cv-trocando .cv-paginas { opacity: .35; filter: blur(2px); pointer-events: none; }
+.cv-carregando { position: fixed; left: 50%; top: 50%; z-index: 60; display: inline-flex; align-items: center; gap: 12px; padding: 12px 20px 12px 14px; border-radius: 999px; background: var(--superficie); color: var(--tinta); border: 1px solid var(--linha); box-shadow: 0 18px 40px -14px rgb(0 0 0 / .45); font-size: .9rem; font-weight: 600; opacity: 0; visibility: hidden; transform: translate(-50%, -40%); transition: opacity .25s, transform .25s, visibility .25s; }
+.cv-carregando.ativo { opacity: 1; visibility: visible; transform: translate(-50%, -50%); }
+.cv-girando { width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--superficie-2); border-top-color: var(--acento); animation: cv-gira .8s linear infinite; }
+@keyframes cv-gira { to { transform: rotate(1turn); } }
+@media print { .cv-carregando { display: none; } }
 
 .folha {
   --papel: #fff; position: relative; width: 210mm; min-height: 297mm; height: 297mm; padding: 16mm; background: var(--papel); color: #1c1c1e;
