@@ -109,30 +109,102 @@
     "dev",
     "vibe"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/capa.webp?v=mvq4lnqk",
    "galeria": [
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/qa-toolbar/desktop-1.webp?v=mvpnt18y",
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/desktop-00-landing.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/qa-toolbar/desktop-2.webp?v=mvpnt2s4",
+     "h": 840,
+     "w": 1407,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/desktop-01-tutorial-passo1.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/qa-toolbar/desktop-3.webp?v=mvpnt4fe",
+     "h": 840,
+     "w": 1407,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/desktop-02-menu-ferramentas.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/qa-toolbar/mobile-1.webp?v=mvpntfe7",
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/desktop-03-test-status.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 631,
+     "w": 1150,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/desktop-04-status-pass.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/desktop-05-marcadores-pass-fail.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/desktop-06-auto-preenchimento.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/desktop-07-multi-testador.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 631,
+     "w": 1150,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/desktop-08-tutorial-concluido.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/mobile-00-landing.webp",
      "dispositivo": "mobile"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/qa-toolbar/mobile-2.webp?v=mvpntgyx",
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/mobile-01-sandbox-toolbar.webp",
      "dispositivo": "mobile"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/qa-toolbar/mobile-3.webp?v=mvpntifo",
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/mobile-02-menu-ferramentas.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/mobile-03-test-status.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/mobile-04-status-fail.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/mobile-05-auto-preenchimento.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/mobile-06-menu-sandbox.webp",
      "dispositivo": "mobile"
     }
    ],
@@ -320,30 +392,84 @@
     "dev",
     "vibe"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/capa.webp?v=mvq4lqyg",
    "galeria": [
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/evangeligo/desktop-1.webp?v=mvpntxkk",
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/desktop-01-landing-hero.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/evangeligo/desktop-2.webp?v=mvpntyk3",
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/desktop-02-landing-como-funciona.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/evangeligo/desktop-3.webp?v=mvpntzmb",
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/desktop-03-landing-recursos.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/evangeligo/mobile-1.webp?v=mvpnuddb",
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/desktop-04-app-jornada-avatar.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/desktop-05-app-trilhas.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/desktop-06-app-biblia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/desktop-07-app-missoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/desktop-08-app-jogos-tour.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 630,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-01-app-jornada.webp",
      "dispositivo": "mobile"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/evangeligo/mobile-2.webp?v=mvpnueeb",
+     "h": 789,
+     "w": 630,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-02-app-trilhas.webp",
      "dispositivo": "mobile"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/evangeligo/mobile-3.webp?v=mvpnufh3",
+     "h": 789,
+     "w": 630,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-03-app-biblia.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 630,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-04-app-missoes.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 630,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-05-app-jogos.webp",
      "dispositivo": "mobile"
     }
    ],
@@ -476,14 +602,114 @@
     "dev",
     "vibe"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/capa.webp?v=mvq4lk1y",
    "galeria": [
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto.webp",
+     "h": 799,
+     "w": 1278,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/desktop-00-landing.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto-mobile.webp",
+     "h": 799,
+     "w": 1278,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/desktop-01-morador-inicio.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 799,
+     "w": 1278,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/desktop-02-encomendas.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 799,
+     "w": 1278,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/desktop-03-visitas.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 799,
+     "w": 1278,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/desktop-04-areas-comuns-mapa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 799,
+     "w": 1278,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/desktop-05-minha-casa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 799,
+     "w": 1278,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/desktop-06-enquetes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 799,
+     "w": 1278,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/desktop-07-sindico-visao-geral.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 799,
+     "w": 1278,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/desktop-08-sindico-ocorrencias.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 799,
+     "w": 1278,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/desktop-09-sindico-editor-mapa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/mobile-00-landing.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/mobile-01-morador-inicio.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/mobile-02-encomendas.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/mobile-03-areas-comuns.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/mobile-04-minha-casa.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/mobile-05-menu.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/mobile-06-sindico-visao-geral.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 799,
+     "w": 369,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/mobile-07-sindico-ocorrencias.webp",
      "dispositivo": "mobile"
     }
    ],
@@ -569,14 +795,78 @@
     "qa",
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/capa.webp?v=mvq4ltrl",
    "galeria": [
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/qa-cnk-issue-generator/desktop-1.webp?v=mvpnujxc",
+     "h": 799,
+     "w": 1278,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/desktop-01-inicio.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/qa-cnk-issue-generator/mobile-1.webp?v=mvpnunuv",
+     "h": 799,
+     "w": 1278,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/desktop-02-tipo-work-item.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/desktop-03-formulario.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/desktop-04-selecao-feature.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/desktop-05-validacao-campos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/desktop-06-work-item-gerado.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/desktop-07-fluxo-cliente.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/mobile-01-inicio.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/mobile-02-tipo-work-item.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/mobile-03-formulario.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/mobile-04-validacao-campos.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/mobile-05-work-item-gerado.webp",
      "dispositivo": "mobile"
     }
    ],
@@ -621,14 +911,66 @@
     "qa",
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/capa.webp?v=mvq4lwur",
    "galeria": [
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/simulador-ctfl/desktop-1.webp?v=mvpnurz4",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-01-inicio.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/simulador-ctfl/mobile-1.webp?v=mvpnuw05",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-02-questao.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-03-ultima-questao.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-04-resultado-gabarito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-05-historico.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-01-inicio.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-02-questao.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-03-paginacao.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-04-resultado.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-05-historico.webp",
      "dispositivo": "mobile"
     }
    ],
@@ -713,30 +1055,66 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev-acb60c.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/capa.webp?v=mvq4lzdo",
    "galeria": [
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/squidev/desktop-1.webp?v=mvpnv6hz",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-01-hero.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/squidev/desktop-2.webp?v=mvpnv80x",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-02-problema.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/squidev/desktop-3.webp?v=mvpnv9om",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-03-sobre.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/squidev/mobile-1.webp?v=mvpnvk19",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-04-como-ajudamos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-05-formulario.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-01-hero.webp",
      "dispositivo": "mobile"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/squidev/mobile-2.webp?v=mvpnvlmv",
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-02-problema.webp",
      "dispositivo": "mobile"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/squidev/mobile-3.webp?v=mvpnvn8b",
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-03-como-ajudamos.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-04-contato.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-05-formulario.webp",
      "dispositivo": "mobile"
     }
    ],
@@ -778,30 +1156,66 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/instrutora-jaquelina-site-pwa-c8d1c9.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/instrutora-jaqueline/capa.webp?v=mvq4m245",
    "galeria": [
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/instrutora-jaqueline/desktop-1.webp?v=mvpnvv5s",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/instrutora-jaqueline/desktop-01-hero.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/instrutora-jaqueline/desktop-2.webp?v=mvpnvwnv",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/instrutora-jaqueline/desktop-02-vantagens.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/instrutora-jaqueline/desktop-3.webp?v=mvpnvy7w",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/instrutora-jaqueline/desktop-03-como-funcionam.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/instrutora-jaqueline/mobile-1.webp?v=mvpnw7c9",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/instrutora-jaqueline/desktop-04-pacotes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/instrutora-jaqueline/desktop-05-contato.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/instrutora-jaqueline/mobile-01-hero.webp",
      "dispositivo": "mobile"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/instrutora-jaqueline/mobile-2.webp?v=mvpnw9l6",
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/instrutora-jaqueline/mobile-02-sobre.webp",
      "dispositivo": "mobile"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/instrutora-jaqueline/mobile-3.webp?v=mvpnwb5v",
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/instrutora-jaqueline/mobile-03-pacotes.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/instrutora-jaqueline/mobile-04-contato.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/instrutora-jaqueline/mobile-05-menu.webp",
      "dispositivo": "mobile"
     }
    ],
@@ -884,30 +1298,66 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/ipvida-portal-igreja-presbiteriana-vida-38ca48.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/ipvida/capa.webp?v=mvq4m4ha",
    "galeria": [
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/ipvida/desktop-1.webp?v=mvpnxgn5",
+     "h": 789,
+     "w": 1262,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/ipvida/desktop-01-hero.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/ipvida/desktop-2.webp?v=mvpnxi69",
+     "h": 789,
+     "w": 1262,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/ipvida/desktop-02-devocional.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/ipvida/desktop-3.webp?v=mvpnxjof",
+     "h": 789,
+     "w": 1262,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/ipvida/desktop-03-cultos.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/ipvida/mobile-1.webp?v=mvpny1lx",
+     "h": 789,
+     "w": 1262,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/ipvida/desktop-04-programacao.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1262,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/ipvida/desktop-05-o-que-cremos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/ipvida/mobile-01-hero.webp",
      "dispositivo": "mobile"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/ipvida/mobile-2.webp?v=mvpny326",
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/ipvida/mobile-02-devocional.webp",
      "dispositivo": "mobile"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/ipvida/mobile-3.webp?v=mvpny4jy",
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/ipvida/mobile-03-programacao.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/ipvida/mobile-04-noticias.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/ipvida/mobile-05-menu.webp",
      "dispositivo": "mobile"
     }
    ],
@@ -949,30 +1399,66 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom-5ffced.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/capa.webp?v=mvq4m728",
    "galeria": [
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/achadubom/desktop-1.webp?v=mvpnyb76",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-01-hero.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/achadubom/desktop-2.webp?v=mvpnycvi",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-02-produtos-em-alta.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/achadubom/desktop-3.webp?v=mvpnyeb1",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-03-busca.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/achadubom/mobile-1.webp?v=mvpnyjcc",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-04-resultado-busca.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-05-filtro-categorias.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-01-produtos-em-alta.webp",
      "dispositivo": "mobile"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/achadubom/mobile-2.webp?v=mvpnyks4",
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-02-lista-achadinhos.webp",
      "dispositivo": "mobile"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/achadubom/mobile-3.webp?v=mvpnyma2",
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-03-filtros.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-04-sobre.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-05-hero.webp",
      "dispositivo": "mobile"
     }
    ],
@@ -1093,14 +1579,24 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/fofuxa-fashion-9e9ef7.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/fofuxa-fashion/capa.webp?v=mvq4m87v",
    "galeria": [
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/fofuxa-fashion/desktop-1.webp?v=mvpnytw3",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/fofuxa-fashion/desktop-01-cartao.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/fofuxa-fashion/mobile-1.webp?v=mvpnyzes",
+     "h": 628,
+     "w": 330,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/fofuxa-fashion/desktop-02-cartao-detalhe.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/fofuxa-fashion/mobile-01-cartao.webp",
      "dispositivo": "mobile"
     }
    ],
@@ -1143,14 +1639,24 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/rodolfo-seifert-14cd90.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/rodolfo-seifert/capa.webp?v=mvq4m9ed",
    "galeria": [
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/rodolfo-seifert/desktop-1.webp?v=mvpnz73i",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/rodolfo-seifert/desktop-01-cartao.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/rodolfo-seifert/mobile-1.webp?v=mvpnzcmg",
+     "h": 628,
+     "w": 330,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/rodolfo-seifert/desktop-02-cartao-detalhe.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/rodolfo-seifert/mobile-01-cartao.webp",
      "dispositivo": "mobile"
     }
    ],
@@ -1194,18 +1700,48 @@
     "qa",
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/taskassistent-americanas-e608d4.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/taskassistant-americanas/capa.webp?v=mvq4mbem",
    "galeria": [
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/taskassistant-americanas/desktop-1.webp?v=mvpnzi43",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/taskassistant-americanas/desktop-01-formulario-vazio.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/taskassistant-americanas/mobile-1.webp?v=mvpnzm7a",
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/taskassistant-americanas/desktop-02-formulario-preenchido.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/taskassistant-americanas/desktop-03-task-gerada.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/taskassistant-americanas/mobile-01-formulario-vazio.webp",
      "dispositivo": "mobile"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/taskassistant-americanas/mobile-2.webp?v=mvpnznbp",
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/taskassistant-americanas/mobile-02-formulario-preenchido.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/taskassistant-americanas/mobile-03-passos-resultados.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/taskassistant-americanas/mobile-04-task-gerada.webp",
      "dispositivo": "mobile"
     }
    ],

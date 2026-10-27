@@ -745,6 +745,8 @@ function iniciar() {
   maisRecs(main);
   deslizes(main);
   valorEfeitos(main);
+  // no desktop a calculadora do contato já vem aberta; no celular fica recolhida
+  if (matchMedia('(min-width: 601px)').matches) $$('[data-dobra-desktop]', main).forEach(x => { x.open = true; });
   formulario(main);
   transicaoVideo($('.contato-hero', main), $('.contato-hero', main), false);
   inclinar(main);

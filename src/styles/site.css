@@ -1019,3 +1019,54 @@ details.linha-desc[open] summary { display: none; }
   .rodape-links { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 2px; margin-inline: calc(var(--margem) * -1); padding-inline: calc(var(--margem) - 10px); }
   .rodape-links a { flex: none; padding: 10px; font-size: .8rem; }
 }
+
+/* ================= Prints dos projetos em monitor e celular ================= */
+.capa-cena { object-fit: contain !important; object-position: center !important; padding: 3% 2%; }
+.mini-projetos img.capa-cena, .patrocinio-projetos img.capa-cena { padding: 0; }
+.galeria-item { align-self: flex-end; }
+.moldura { overflow: visible; background: none; box-shadow: none; border: 0; border-radius: 0; padding: 0; }
+.moldura img { border-radius: 4px; background: #0c0d10; }
+/* monitor: aro fino escuro, câmera, pescoço e base de alumínio */
+.moldura-desktop { position: relative; padding: 0 0 clamp(34px, 7%, 64px); }
+.moldura-desktop::before { content: none; }
+.moldura-desktop > img { position: relative; z-index: 1; padding: clamp(6px, 1.4%, 14px); border-radius: clamp(10px, 1.8%, 18px); background: #0c0d10; box-shadow: 0 0 0 2px #2c2f35, 0 22px 40px -18px rgb(0 0 0 / .55); }
+.moldura-desktop::after { content: ''; position: absolute; left: 50%; bottom: 0; translate: -50% 0; width: 34%; height: clamp(34px, 7%, 64px);
+  background: linear-gradient(#8e949c, #cfd4d9) 50% 0 / 42% calc(100% - 7px) no-repeat, linear-gradient(90deg, #b4b9bf, #e3e6e9 50%, #b4b9bf) 0 100% / 100% 7px no-repeat;
+  clip-path: polygon(29% 0, 71% 0, 75% calc(100% - 7px), 100% calc(100% - 7px), 100% 100%, 0 100%, 0 calc(100% - 7px), 25% calc(100% - 7px)); border-radius: 0 0 6px 6px; }
+/* celular: aro preto arredondado, ilha da câmera e botões laterais */
+.moldura-mobile { position: relative; padding: 9px; border-radius: 40px; background: #0c0d10; box-shadow: 0 0 0 2px #2c2f35, 0 24px 40px -18px rgb(0 0 0 / .55); }
+.moldura-mobile > img { border-radius: 31px; }
+.moldura-mobile::before { content: ''; position: absolute; z-index: 1; top: 17px; left: 50%; translate: -50% 0; width: 30%; height: 20px; border-radius: 99px; background: #000; }
+.moldura-mobile::after { content: ''; position: absolute; top: 22%; right: -4px; width: 3px; height: 14%; border-radius: 3px; background: #2c2f35; }
+.moldura-tablet { border-radius: 26px; }
+.moldura-tablet > img { border-radius: 18px; }
+.moldura-tablet::before { width: 8px; height: 8px; top: 11px; }
+.galeria-mobile:has(.moldura-tablet) { width: min(78vw, 420px); }
+.galeria-faixa { padding-top: 10px; padding-bottom: 28px; }
+
+/* filtros e alternador de vista na mesma linha */
+.linha-barra, .conq-barra { justify-content: space-between; flex-wrap: nowrap; margin: 0 0 16px; }
+.conq-barra { margin-top: 14px; }
+.linha-barra > .deslize-caixa, .conq-barra > .deslize-caixa, .linha-barra > .filtros, .conq-barra > .filtros { flex: 1 1 auto; min-width: 0; margin: 0; }
+.linha-barra > .vistas, .conq-barra > .vistas { flex: none; }
+@media (max-width: 600px) {
+  .linha-barra .vistas span, .conq-barra .vistas span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .linha-barra .vistas button, .conq-barra .vistas button { padding-inline: 10px; }
+}
+
+/* contato: calculadora recolhível */
+.valor-dobra { margin-top: 18px; }
+.valor-dobra > summary { list-style: none; display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 10px 14px; border: 1px solid var(--linha-forte); border-radius: 14px; cursor: pointer; font-weight: 600; }
+.valor-dobra > summary::-webkit-details-marker { display: none; }
+.valor-dobra > summary > span { flex: 1; }
+.valor-dobra > summary .ic:last-child { transition: rotate .3s var(--curva); }
+.valor-dobra[open] > summary .ic:last-child { rotate: 180deg; }
+.valor-dobra > .valor { margin-top: 10px; }
+.valor-dobra .valor-titulo, .valor-dobra #valor-titulo { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@media (min-width: 601px) { .valor-dobra > summary { display: none; } .valor-dobra > .valor { margin-top: 0; } .valor-dobra #valor-titulo { position: static; width: auto; height: auto; overflow: visible; clip-path: none; } }
+/* faixa de status do celular: a ilha da câmera fica nela e o print começa logo abaixo */
+.moldura-mobile { padding-top: 34px; background: #000; }
+.moldura-mobile > img { border-radius: 3px 3px 31px 31px; }
+.moldura-mobile::before { top: 10px; height: 18px; width: 28%; }
+.moldura-tablet { padding-top: 22px; }
+.moldura-tablet::before { top: 7px; height: 8px; width: 8px; }

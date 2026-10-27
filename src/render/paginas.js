@@ -6,8 +6,9 @@ import { CAMINHOS, esc, icone, iniciais, paragrafos, periodo } from './comum.js'
 
 export const CATS = ['qa', 'dev', 'vibe', 'data'];
 const catsProjeto = p => { const c = (p.categorias?.length ? p.categorias : [p.categoria]).map(x => String(x || '').toLowerCase()).filter(x => CATS.includes(x)); return c.length ? c : ['dev']; };
+export const ehCena = url => /\/capa\.webp/.test(url || '');
 const imgProjeto = (p, t, cls = '') => p.imagem_url
-  ? `<img class="${cls}" src="${esc(p.imagem_url)}" alt="${esc(t('projetos.print', { titulo: p.titulo }))}" loading="lazy" decoding="async" width="1600" height="1000">`
+  ? `<img class="${cls} ${ehCena(p.imagem_url) ? 'capa-cena' : ''}" src="${esc(p.imagem_url)}" alt="${esc(t('projetos.print', { titulo: p.titulo }))}" loading="lazy" decoding="async" width="1600" height="1000">`
   : `<div class="${cls} img-vazia" aria-hidden="true">${esc(iniciais(p.titulo))}</div>`;
 const selos = (p, t) => `<span class="selos">${catsProjeto(p).map(c => `<span class="selo selo-${c}">${t(`projetos.cat.${c}`)}</span>`).join('')}</span>`;
 
@@ -269,7 +270,7 @@ ${galeria.length ? `<div class="galeria" data-galeria>
     <button type="button" role="tab" aria-selected="true" data-modo="desktop">${t('projetos.desktop')}</button>
     <button type="button" role="tab" aria-selected="false" data-modo="mobile">${t('projetos.mobile')}</button></div>` : ''}
   <div class="galeria-janela"><ul class="galeria-faixa" data-galeria-faixa tabindex="0" aria-label="${t('projetos.galeria')}">${galeria.map((g, i) => `<li class="galeria-item galeria-${disp(g)}" data-dispositivo="${disp(g)}">
-    <figure class="moldura moldura-${disp(g)}"><img src="${esc(g.url)}" alt="${esc(g.legenda || `${t('projetos.print', { titulo: p.titulo })} (${i + 1})`)}" loading="lazy" decoding="async"></figure></li>`).join('')}</ul></div>
+    <figure class="moldura moldura-${disp(g)}${disp(g) === 'mobile' && g.w && g.h / g.w < 1.6 ? ' moldura-tablet' : ''}"><img src="${esc(g.url)}" ${g.w ? `width="${g.w}" height="${g.h}"` : ''} alt="${esc(g.legenda || `${t('projetos.print', { titulo: p.titulo })} (${i + 1})`)}" loading="lazy" decoding="async"></figure></li>`).join('')}</ul></div>
   <div class="galeria-controles">
     <button type="button" class="btn-icone" data-galeria-ant aria-label="${t('projetos.anterior')}">${icone('esquerda')}</button>
     <span class="mono" data-galeria-contador aria-live="polite"></span>
@@ -351,7 +352,7 @@ export function detalheCarreira(i, t, extras = {}) {
   ${i.sub ? `<p class="carreira-modo">${icone('local')}${esc(i.sub)}</p>` : ''}</div>
 </header>
 <div class="modal-texto carreira-texto">${paragrafos(i.desc)}</div>
-${projetos.length ? `<section class="modal-bloco"><h3 class="rotulo">${t('carreira.projetos')}</h3><ul class="mini-projetos">${projetos.map(p => `<li><button type="button" data-abrir-projeto="${esc(p.slug)}">${p.imagem_url ? `<img src="${esc(p.imagem_url)}" alt="" loading="lazy">` : ''}<span><strong>${esc(p.titulo)}</strong><span>${esc(p.descricao_curta)}</span></span></button></li>`).join('')}</ul></section>` : ''}
+${projetos.length ? `<section class="modal-bloco"><h3 class="rotulo">${t('carreira.projetos')}</h3><ul class="mini-projetos">${projetos.map(p => `<li><button type="button" data-abrir-projeto="${esc(p.slug)}">${p.imagem_url ? `<img class="${ehCena(p.imagem_url) ? 'capa-cena' : ''}" src="${esc(p.imagem_url)}" alt="" loading="lazy">` : ''}<span><strong>${esc(p.titulo)}</strong><span>${esc(p.descricao_curta)}</span></span></button></li>`).join('')}</ul></section>` : ''}
 ${recs.length ? `<section class="modal-bloco"><h3 class="rotulo">${t('carreira.recs')}</h3><ul class="mini-recs">${recs.map(r => `<li><button type="button" data-abrir-rec="${esc(r.id)}">${autor(r, t)}<span class="mini-rec-texto">${esc(r.mensagem.replace(/\s+/g, ' '))}</span></button></li>`).join('')}</ul></section>` : ''}
 ${arquivos.length ? `<section class="modal-bloco"><h3 class="rotulo">${t('carreira.arquivos')}</h3><ul class="arquivos">${arquivos.map((u, n) => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${/\.pdf($|\?)/i.test(u) ? `<span class="arquivo-pdf">${icone('arquivo')}PDF</span>` : `<img src="${esc(u)}" alt="${esc(`${i.org} (${n + 1})`)}" loading="lazy">`}</a></li>`).join('')}</ul></section>` : ''}`;
 }
@@ -385,8 +386,8 @@ export function trajetoria(d, t) {
   return `${cabecalhoPagina(t, 'trajetoria')}
 <div class="container trajetoria" data-trajetoria>
   ${graficoCarreira(d, t)}
-  <div class="filtros filtros-linha" role="tablist" aria-label="${t('trajetoria.rotulo')}">${filtros.map(([f, k], i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-filtro-linha="${f}">${t(k)}</button>`).join('')}</div>
-  <div class="linha-barra">${vistas('trajetoria', t, ['lista', 'grade'])}</div>
+  <div class="linha-barra"><div class="filtros filtros-linha" role="tablist" aria-label="${t('trajetoria.rotulo')}">${filtros.map(([f, k], i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-filtro-linha="${f}">${t(k)}</button>`).join('')}</div>
+  ${vistas('trajetoria', t, ['lista', 'grade'])}</div>
   <ol class="linha" data-vista-alvo="trajetoria" data-vista="lista">${itens.map(i => itemLinha(i, t)).join('')}</ol>
   ${cert ? `<h2 class="titulo-secundario certs-titulo">${t('trajetoria.certificacoes')}</h2><ul class="certs">${cert}</ul>` : ''}
 </div>
@@ -523,8 +524,8 @@ export function competencias(d, t) {
       <p class="mono">${t('comp.desbloqueadas', { n: feitas, total: conq.length })}</p></div>
       <div class="conq-progresso" role="progressbar" aria-valuemin="0" aria-valuemax="${conq.length}" aria-valuenow="${feitas}" aria-label="${t('comp.desbloqueadas', { n: feitas, total: conq.length })}" style="--p:${conq.length ? Math.round((feitas / conq.length) * 100) : 0}"><span>${conq.length ? Math.round((feitas / conq.length) * 100) : 0}%</span></div>
     </div>
-    <div class="filtros" role="tablist" aria-label="${t('comp.conquistas')}">${['todas', ...catsConq].map((c, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-filtro-conq="${esc(c)}">${c === 'todas' ? t('comp.todas') : esc(catComp(c, t))}</button>`).join('')}</div>
-    <div class="conq-barra">${vistas('conquistas', t)}</div>
+    <div class="conq-barra"><div class="filtros" role="tablist" aria-label="${t('comp.conquistas')}">${['todas', ...catsConq].map((c, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-filtro-conq="${esc(c)}">${c === 'todas' ? t('comp.todas') : esc(catComp(c, t))}</button>`).join('')}</div>
+    ${vistas('conquistas', t)}</div>
     <ul class="medalhas" data-vista-alvo="conquistas" data-vista="grade">${conq.map(c => `<li class="revelar" data-cats="${esc(String(c.categoria).split(',').map(x => x.trim()).join(' '))}">
       <button type="button" class="medalha-botao ${c.desbloqueado ? '' : 'bloqueada'} ${c.bloqueado ? 'trancado' : ''}" ${c.bloqueado ? 'aria-disabled="true"' : `data-abrir-conquista="${esc(c.id)}"`}>
         <span class="medalha">${c.imagem_url ? `<img src="${esc(c.imagem_url)}" alt="" width="96" height="96" loading="lazy">` : `<span>${esc(c.titulo.slice(0, 3))}</span>`}</span>
@@ -557,7 +558,7 @@ export function sobre(d, t) {
   ${pat.titulo ? `<section class="patrocinio revelar" aria-labelledby="pat-titulo">
     <div><h2 id="pat-titulo" class="titulo-secundario">${esc(pat.titulo)}</h2><p>${esc(pat.texto)}</p>
       <a class="btn btn-acento" href="${rota(d.lang, 'contato')}?assunto=patrocinio">${t('patrocinio.cta')} ${icone('seta')}</a></div>
-    ${apoiados.length ? `<ul class="patrocinio-projetos">${apoiados.map(p => `<li><a href="${esc(p.link_projeto || '#')}" target="_blank" rel="noopener">${p.imagem_url ? `<img src="${esc(p.imagem_url)}" alt="" loading="lazy">` : ''}<strong>${esc(p.titulo)}</strong><span>${esc(p.descricao_curta)}</span></a></li>`).join('')}</ul>` : ''}
+    ${apoiados.length ? `<ul class="patrocinio-projetos">${apoiados.map(p => `<li><a href="${esc(p.link_projeto || '#')}" target="_blank" rel="noopener">${p.imagem_url ? `<img class="${ehCena(p.imagem_url) ? 'capa-cena' : ''}" src="${esc(p.imagem_url)}" alt="" loading="lazy">` : ''}<strong>${esc(p.titulo)}</strong><span>${esc(p.descricao_curta)}</span></a></li>`).join('')}</ul>` : ''}
   </section>` : ''}
 </div>`;
 }
@@ -599,7 +600,7 @@ export function contato(d, t) {
     <h2 class="rotulo">${t('contato.canais')}</h2>
     <ul class="canais">${canais(d, t).map(([href, ic, txt]) => `<li><a href="${esc(href)}" ${href.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>${icone(ic)}<span>${esc(txt)}</span>${icone('seta')}</a></li>`).join('')}
       <li><a href="${rota(d.lang, 'cv')}">${icone('download')}<span>${t('contato.cv')}</span>${icone('seta')}</a></li></ul>
-    ${cartaoValor(d, t)}
+    <details class="valor-dobra" data-dobra-desktop><summary>${icone('grafico')}<span>${t('valor.titulo')}</span>${icone('baixo')}</summary>${cartaoValor(d, t)}</details>
   </div>
 </div>`;
 }

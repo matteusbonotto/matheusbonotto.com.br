@@ -278,3 +278,19 @@ test('currículo: versões vêm do banco e o admin lista os currículos', async 
   if (versoes.length) await expect(page.locator('[data-variante]')).toHaveCount(versoes.length);
   await expect(page.locator('.folha').first()).toBeVisible();
 });
+
+test('prints na moldura do aparelho e calculadora recolhida só no celular', async ({ page, isMobile }) => {
+  const comCena = dados.projetos.find(p => p.ativo !== false && (p.galeria || []).some(g => g.dispositivo === 'mobile'));
+  await page.goto(`/projetos/#projeto/${comCena.slug}`);
+  const modal = page.locator("[data-modal]");
+  await modal.locator('[data-modo="desktop"]').click();
+  await expect(modal.locator('.moldura-desktop img').first()).toBeVisible();
+  await modal.locator('[data-modo="mobile"]').click();
+  const cel = modal.locator('.moldura-mobile').first();
+  await expect(cel).toBeVisible();
+  // a imagem começa abaixo da faixa da câmera
+  const [moldura, img] = await Promise.all([cel.boundingBox(), cel.locator('img').boundingBox()]);
+  expect(img.y - moldura.y).toBeGreaterThan(20);
+  await page.goto('/contato/');
+  await expect(page.locator('.valor-dobra')).toHaveJSProperty('open', !isMobile);
+});
