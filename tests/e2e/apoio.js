@@ -15,6 +15,7 @@ export const URLS = ['/', '/sobre/', '/projetos/', '/trajetoria/', '/competencia
 
 export async function simularSupabase(page, { admin = false, perguntarIdioma = false } = {}) {
   const escritas = [];
+  let falhas = 0; // bloqueio do login: 3 senhas erradas
   // o aviso de idioma da primeira visita cobre o rodapé da tela; só o teste dele o vê
   if (!perguntarIdioma) await page.addInitScript(() => { try { localStorage.setItem('idioma', 'pt'); } catch {} });
   await page.route(/supabase\.co\/(rest|auth|storage)\/v1\//, async rota => {
@@ -24,12 +25,16 @@ export async function simularSupabase(page, { admin = false, perguntarIdioma = f
     const json = (body, status = 200) => rota.fulfill({ status, contentType: 'application/json', body: JSON.stringify(body) });
     if (servico === 'auth') {
       const user = { id: 'u1', email: 'matteusbonotto@gmail.com', aud: 'authenticated', role: 'authenticated' };
+      if (caminho.startsWith('token') && req.postDataJSON?.()?.password === 'senha-errada') return json({ error: 'invalid_grant', error_description: 'Invalid login credentials' }, 400);
       if (caminho.startsWith('token')) return json({ access_token: 'tok', refresh_token: 'ref', token_type: 'bearer', expires_in: 3600, expires_at: Math.floor(Date.now() / 1000) + 3600, user });
       if (caminho === 'user') return json(user);
       return json({});
     }
     if (servico === 'storage') return json({ Key: 'media/x.webp' });
     const tabela = caminho.split('?')[0];
+    if (tabela === 'rpc/login_bloqueado') return json(falhas >= 3);
+    if (tabela === 'rpc/registrar_falha_login') { falhas++; return json(Math.max(0, 3 - falhas)); }
+    if (tabela.startsWith('rpc/')) return json(null);
     if (req.method() !== 'GET' && req.method() !== 'HEAD') {
       escritas.push({ metodo: req.method(), tabela, corpo: req.postDataJSON?.() ?? null, url: req.url() });
       return rota.fulfill({ status: req.method() === 'POST' ? 201 : 204, body: '' });

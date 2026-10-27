@@ -76,3 +76,20 @@ test('admin: valor por hora é editável', async ({ page, isMobile }) => {
   const up = escritas.find(e => e.tabela === 'site_content');
   expect(up.corpo).toMatchObject({ key: 'valor_hora', value: { usd: 35 } });
 });
+
+test('login: 3 senhas erradas bloqueiam e mandam para a recuperação de senha', async ({ page }) => {
+  await simularSupabase(page, { admin: true });
+  await page.goto('/admin/');
+  const entrar = async () => {
+    await page.locator('input[name="email"]').fill('matteusbonotto@gmail.com');
+    await page.locator('input[name="senha"]').fill('senha-errada');
+    await page.locator('button[type="submit"]').click();
+  };
+  await entrar();
+  await expect(page.locator('.login-msg')).toContainText('Restam 2');
+  await entrar();
+  await expect(page.locator('.login-msg')).toContainText('Restam 1');
+  await entrar();
+  await expect(page.locator('.login-msg')).toContainText('bloqueada');
+  await expect(page.locator('input[name="senha"]')).toHaveCount(0);
+});

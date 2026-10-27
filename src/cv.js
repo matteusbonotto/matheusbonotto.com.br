@@ -16,6 +16,8 @@ const ALTURA_UTIL = (297 - 2 * 16 - 7) * MM; // folha A4 menos margens de 16 mm 
 function paginar() {
   const fluxo = caixa.querySelector('[data-fluxo]') || caixa.querySelector('.folha');
   const atomos = [...caixa.querySelectorAll('.cv-atomo')];
+  // palavras-chave invisíveis: fora da paginação, vão no rodapé da última folha sem ocupar espaço
+  const palavras = caixa.querySelector('.cv-palavras');
   // mede tudo numa folha única, sem zoom
   caixa.style.zoom = 1;
   const medir = () => {
@@ -50,6 +52,7 @@ function paginar() {
     if (plano.length === 1 || plano.at(-1).usado > ALTURA_UTIL * 0.3) break;
   }
   const folhas = plano.map(f => { const el = document.createElement('article'); el.className = 'folha'; f.itens.forEach(i => el.append(atomos[i])); return el; });
+  if (palavras) folhas.at(-1).append(palavras);
   folhas.forEach((f, i) => {
     const cab = document.createElement('p');
     cab.className = 'folha-cabeca';

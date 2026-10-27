@@ -3,25 +3,121 @@
     "public": "dist",
     "cleanUrls": true,
     "trailingSlash": true,
-    "ignore": ["firebase.json", "**/.*"],
+    "ignore": [
+      "firebase.json",
+      "**/.*"
+    ],
     "headers": [
-      { "source": "**/*.html", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
-      { "source": "/assets/**", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-      { "source": "/media/**", "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }] },
-      { "source": "**", "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
-      ] }
+      {
+        "source": "**/*.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "source": "/assets/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "/media/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=604800"
+          }
+        ]
+      },
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "Referrer-Policy",
+            "value": "strict-origin-when-cross-origin"
+          },
+          {
+            "key": "Permissions-Policy",
+            "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+          },
+          {
+            "key": "Strict-Transport-Security",
+            "value": "max-age=31536000; includeSubDomains"
+          },
+          {
+            "key": "X-Frame-Options",
+            "value": "DENY"
+          },
+          {
+            "key": "Cross-Origin-Opener-Policy",
+            "value": "same-origin"
+          },
+          {
+            "key": "Content-Security-Policy",
+            "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://rncpbkzszbbqqipkqcgs.supabase.co; media-src 'self' blob: https://rncpbkzszbbqqipkqcgs.supabase.co; connect-src 'self' https://rncpbkzszbbqqipkqcgs.supabase.co wss://rncpbkzszbbqqipkqcgs.supabase.co https://open.er-api.com; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+          }
+        ]
+      },
+      {
+        "source": "/admin/**",
+        "headers": [
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex, nofollow"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "no-store"
+          }
+        ]
+      }
     ],
     "redirects": [
-      { "source": "/historia.html", "destination": "/trajetoria/", "type": 301 },
-      { "source": "/portfolio.html", "destination": "/projetos/", "type": 301 },
-      { "source": "/competencias.html", "destination": "/competencias/", "type": 301 },
-      { "source": "/cv.html", "destination": "/cv/", "type": 301 },
-      { "source": "/curriculo/**", "destination": "/cv/", "type": 301 },
-      { "source": "/contato.html", "destination": "/contato/", "type": 301 },
-      { "source": "/admin/login.html", "destination": "/admin/", "type": 301 }
+      {
+        "source": "/historia.html",
+        "destination": "/trajetoria/",
+        "type": 301
+      },
+      {
+        "source": "/portfolio.html",
+        "destination": "/projetos/",
+        "type": 301
+      },
+      {
+        "source": "/competencias.html",
+        "destination": "/competencias/",
+        "type": 301
+      },
+      {
+        "source": "/cv.html",
+        "destination": "/cv/",
+        "type": 301
+      },
+      {
+        "source": "/curriculo/**",
+        "destination": "/cv/",
+        "type": 301
+      },
+      {
+        "source": "/contato.html",
+        "destination": "/contato/",
+        "type": 301
+      },
+      {
+        "source": "/admin/login.html",
+        "destination": "/admin/",
+        "type": 301
+      }
     ]
   }
 }

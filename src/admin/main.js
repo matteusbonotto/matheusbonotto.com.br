@@ -61,8 +61,17 @@ function telaLogin(modo = 'entrar', msg = '') {
     botao.disabled = true;
     try {
       if (modo === 'entrar') {
-        const { error } = await sb.auth.signInWithPassword({ email: f.email.trim(), password: f.senha });
-        if (error) return telaLogin('entrar', tx('erroLogin'));
+        // 3 senhas erradas bloqueiam a conta; só a recuperação de senha (link no e-mail) desbloqueia
+        const email = f.email.trim();
+        const { data: bloqueada } = await sb.rpc('login_bloqueado', { p_email: email });
+        if (bloqueada) return telaLogin('recuperar', tx('contaBloqueada'));
+        const { error } = await sb.auth.signInWithPassword({ email, password: f.senha });
+        if (error) {
+          const { data: restam } = await sb.rpc('registrar_falha_login', { p_email: email });
+          if (restam === 0) return telaLogin('recuperar', tx('contaBloqueada'));
+          return telaLogin('entrar', `${tx('erroLogin')} ${restam > 0 && restam < 3 ? tx('tentativasRestam', { n: restam }) : ''}`.trim());
+        }
+        await sb.rpc('login_sucesso');
         await iniciar();
       } else if (modo === 'recuperar') {
         await sb.auth.resetPasswordForEmail(f.email.trim(), { redirectTo: `${location.origin}/admin/` });
@@ -70,6 +79,7 @@ function telaLogin(modo = 'entrar', msg = '') {
       } else {
         const { error } = await sb.auth.updateUser({ password: f.senha });
         if (error) throw error;
+        await sb.rpc('desbloquear_login');
         history.replaceState(null, '', '/admin/');
         aviso(tx('senhaSalva'));
         await iniciar();
