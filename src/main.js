@@ -9,6 +9,7 @@ import { tradutor } from './i18n/ui.js';
 import { buscarTudo, prepararIdioma } from './lib/dados.js';
 import { particulas } from './lib/particulas.js';
 import { assinatura, PAGINAS } from './render/documento.js';
+import { icone } from './render/comum.js';
 import { detalheCarreira, detalheConquista, detalheProjeto, detalheRecomendacao, detalheSkill, formularioRecomendacao } from './render/paginas.js';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -38,6 +39,7 @@ const botaoMenu = $('[data-menu]');
 function menu(abrir) {
   nav.classList.toggle('aberta', abrir);
   botaoMenu.setAttribute('aria-expanded', abrir);
+  botaoMenu.innerHTML = icone(abrir ? 'fechar' : 'menu');
   botaoMenu.setAttribute('aria-label', abrir ? botaoMenu.dataset.rotuloFechar : botaoMenu.dataset.rotuloAbrir);
   document.body.style.overflow = abrir ? 'hidden' : '';
   abrir ? lenis?.stop() : lenis?.start();
@@ -98,14 +100,29 @@ function magneticos(raiz) {
   }
 }
 magneticos(nav);
-// acesso discreto ao admin: clique direito no logo e, em até 6 s, digitar "iddq" (o clássico iddqd também funciona)
+// acesso discreto ao admin: clique direito no logo ou no nome e, em até 10 s, digitar "iddq" (o clássico iddqd também funciona)
 let armado = 0, digitado = '';
-$('.nav-marca img')?.addEventListener('contextmenu', e => { e.preventDefault(); armado = Date.now(); digitado = ''; });
+document.addEventListener('contextmenu', e => { if (!e.target.closest('.nav-marca, .rodape-marca')) return; e.preventDefault(); armado = Date.now(); digitado = ''; });
 addEventListener('keydown', e => {
-  if (!armado || Date.now() - armado > 6000 || e.key.length !== 1) return;
+  if (!armado || Date.now() - armado > 10000 || e.key.length !== 1) return;
   digitado = (digitado + e.key.toLowerCase()).slice(-4);
   if (digitado === 'iddq') location.href = '/admin/';
 });
+// idioma: escolha lembrada; no celular, a primeira visita pergunta o idioma antes da leitura
+document.addEventListener('click', e => { const a = e.target.closest('a[hreflang]'); if (a) { try { localStorage.setItem('idioma', a.hreflang); } catch {} } });
+(() => {
+  let escolhido = null;
+  try { escolhido = localStorage.getItem('idioma'); } catch {}
+  if (escolhido || !matchMedia('(max-width: 1079px)').matches) return;
+  const aviso = document.createElement('div');
+  aviso.className = 'idioma-aviso'; aviso.setAttribute('role', 'dialog'); aviso.setAttribute('aria-label', 'Idioma · Language · Idioma');
+  aviso.innerHTML = `<p>Idioma · Language · Idioma</p><div>${$$('[data-idioma]').map(a => `<a href="${a.getAttribute('href')}" hreflang="${a.hreflang}" ${a.getAttribute('aria-current') ? 'aria-current="true"' : ''}>${a.textContent}</a>`).join('')}</div><button type="button" aria-label="${t('projetos.fechar')}">×</button>`;
+  $('button', aviso).addEventListener('click', () => { try { localStorage.setItem('idioma', lang); } catch {} aviso.remove(); });
+  document.body.append(aviso);
+})();
+// fecha o seletor de idioma ao tocar fora
+document.addEventListener('click', e => { const d = $('[data-lingua]'); if (d?.open && !d.contains(e.target)) d.open = false; });
+
 // tema claro/escuro (a escolha fica salva; sem escolha, segue o sistema)
 $('[data-tema]')?.addEventListener('click', () => {
   const atual = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -233,7 +250,7 @@ document.addEventListener('click', e => {
   if (e.target.closest('[data-fechar-modal]') || e.target === modal) modal.close();
 });
 // barras do gráfico também abrem com Enter/Espaço (são role="button")
-document.addEventListener('keydown', e => { const r = e.target.closest?.('g[data-abrir-carreira], g[data-abrir-skill]'); if (r && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); r.dispatchEvent(new MouseEvent('click', { bubbles: true })); } });
+document.addEventListener('keydown', e => { const r = e.target.closest?.('g[data-abrir-skill]'); if (r && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); r.dispatchEvent(new MouseEvent('click', { bubbles: true })); } });
 modal.addEventListener('close', () => {
   lenis?.start();
   if (location.hash.startsWith('#projeto/')) history.replaceState(null, '', location.pathname + location.search);
@@ -393,22 +410,6 @@ function transicaoVideo(gatilho, palco, comSaida) {
   limpar.push(() => ctx.revert());
 }
 
-function destaquesEfeitos(raiz) {
-  const trilho = $('[data-trilho]', raiz);
-  if (!trilho) return;
-  const faixa = $('[data-faixa]', trilho);
-  const mm = gsap.matchMedia();
-  mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
-    trilho.dataset.horizontal = '';
-    const distancia = () => Math.max(0, faixa.scrollWidth - innerWidth);
-    const medir = () => trilho.style.setProperty('--trilho-altura', `${distancia() + innerHeight}px`);
-    medir();
-    const tw = gsap.to(faixa, { x: () => -distancia(), ease: 'none', scrollTrigger: { trigger: trilho, start: 'top top', end: () => `+=${distancia()}`, scrub: 0.6, invalidateOnRefresh: true, onRefreshInit: medir } });
-    return () => { tw.scrollTrigger?.kill(); tw.kill(); delete trilho.dataset.horizontal; trilho.style.removeProperty('--trilho-altura'); gsap.set(faixa, { clearProps: 'x' }); };
-  });
-  limpar.push(() => mm.revert());
-}
-
 // ================= GRADE / LISTA / ÁRVORE =================
 function vistasEfeitos(raiz) {
   for (const grupo of $$('[data-vistas]', raiz)) {
@@ -503,7 +504,7 @@ function trajetoriaEfeitos(raiz) {
     marcar(b);
     const f = b.dataset.filtroLinha;
     $$('.linha-item', area).forEach(li => { li.hidden = f !== 'todos' && li.dataset.tipo !== f; li.classList.add('visivel'); });
-    $$('.g-barra', area).forEach(g => g.classList.toggle('apagada', f !== 'todos' && g.dataset.tipo !== f));
+    $$('.crono-linha', area).forEach(g => g.classList.toggle('apagada', f !== 'todos' && g.dataset.tipo !== f));
     ScrollTrigger.refresh();
   });
 }
@@ -658,10 +659,15 @@ function deslizes(raiz) {
       caixa.classList.toggle('tem-antes', el.scrollLeft > 8);
       if (sobra <= 8) caixa.classList.remove('com-dica');
     };
-    el.addEventListener('scroll', () => { caixa.classList.remove('com-dica'); medir(); }, { passive: true });
-    const ro = new ResizeObserver(() => { medir(); if (el.scrollWidth - el.clientWidth > 8 && !caixa.dataset.avisou) { caixa.dataset.avisou = '1'; caixa.classList.add('com-dica'); } });
+    el.addEventListener('scroll', medir, { passive: true });
+    const ro = new ResizeObserver(medir);
     ro.observe(el);
-    limpar.push(() => ro.disconnect());
+    // aparece por 3 s e volta a cada 10 s, enquanto ainda houver conteúdo escondido à direita
+    let fim = 0;
+    const mostrar = () => { if (!caixa.classList.contains('tem-mais')) return; caixa.classList.add('com-dica'); clearTimeout(fim); fim = setTimeout(() => caixa.classList.remove('com-dica'), 3000); };
+    const ciclo = setInterval(mostrar, 13000);
+    setTimeout(mostrar, 600);
+    limpar.push(() => { ro.disconnect(); clearInterval(ciclo); clearTimeout(fim); });
   }
 }
 
@@ -715,13 +721,22 @@ function recolhiveis(raiz) {
   }
 }
 
+// vitrine de destaques: no toque, pausa o letreiro por alguns segundos
+function vitrine(raiz) {
+  const v = $('.vitrine', raiz);
+  if (!v) return;
+  let pausa = 0;
+  v.addEventListener('touchstart', () => { v.classList.add('tocando'); clearTimeout(pausa); }, { passive: true });
+  v.addEventListener('touchend', () => { pausa = setTimeout(() => v.classList.remove('tocando'), 2500); }, { passive: true });
+}
+
 function iniciar() {
+  vitrine(main);
   recolhiveis(main);
   dividirPalavras(main);
   revelar(main);
   heroEfeitos(main);
   manifestoEfeitos(main);
-  destaquesEfeitos(main);
   projetosEfeitos(main);
   trajetoriaEfeitos(main);
   competenciasEfeitos(main);

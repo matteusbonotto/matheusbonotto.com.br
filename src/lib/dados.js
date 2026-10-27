@@ -3,6 +3,7 @@
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../config.js';
 
 const CONSULTAS = {
+  cvs: 'cv_versions?select=id,slug,nome,base,titulo,resumo,ordem,i18n&visivel=eq.true&order=ordem.asc',
   perfil: 'profiles?select=nome_completo,data_nascimento,local,pais,email,telefone,linkedin_url,github_url&limit=1',
   projetos: 'projects?select=id,slug,titulo,papel,descricao_curta,descricao_completa,categoria,categorias,imagem_url,galeria,tecnologias,funcionalidades,conquistas,link_projeto,link_github,data_projeto,destaque,bloqueado,professional_history_id,ordem,i18n&ativo=eq.true&order=ordem.asc',
   experiencias: 'professional_history?select=id,instituicao,titulo,regime,local,tipo_local,descricao,data_inicio,data_fim,atual,categoria_profissional,logo_url,imagens_urls,bloqueado,i18n&order=data_inicio.desc',
@@ -59,7 +60,7 @@ const trocar = (v, vars) => (typeof v === 'string' ? v.replace(/\{(anos|idade)\}
 export function prepararIdioma(d, lang) {
   const L = arr => arr.map(l => localizar(l, lang));
   return {
-    ...d, lang, site: trocar(d.site, variaveis(d)),
+    ...d, lang, site: trocar(d.site, variaveis(d)), cvs: trocar(L(d.cvs || []), variaveis(d)),
     projetos: L(d.projetos), experiencias: L(d.experiencias), formacoes: L(d.formacoes),
     certificacoes: L(d.certificacoes), competencias: L(d.competencias), comportamentais: L(d.comportamentais),
     idiomas: L(d.idiomas), recomendacoes: L(d.recomendacoes), arvore: L(d.arvore), conquistas: L(d.conquistas),

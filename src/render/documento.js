@@ -37,11 +37,14 @@ export function paginaHTML(pagina, d, bruto) {
 // Currículo: cada bloco "cv-atomo" é indivisível; o paginador (src/cv.js) distribui os blocos em folhas A4.
 // data-junto = manter com o próximo bloco (título de seção, cabeçalho de cargo).
 export const VARIANTES_CV = ['qa', 'dev', 'freela', 'basico'];
+// Versões cadastradas no admin (tabela cv_versions); sem nenhuma, cai nas 4 bases fixas.
+export const versoesCV = (d, t) => (d.cvs?.length ? d.cvs : VARIANTES_CV.map(b => ({ slug: b, base: b, nome: t(`cv.v.${b}`), ...textoSite({ x: d.site.cv_variantes?.[b] }, 'x', d.lang) })));
 
 // Currículo por versão (qa | dev | freela | basico): muda título, resumo, ordem e o quanto cada experiência é detalhada.
-export function conteudoCV(d, t, qr = '', variante = 'qa') {
-  const v = VARIANTES_CV.includes(variante) ? variante : 'qa';
-  const vt = textoSite({ x: d.site.cv_variantes?.[v] }, 'x', d.lang);
+export function conteudoCV(d, t, qr = '', variante) {
+  const lista = versoesCV(d, t);
+  const vt = lista.find(x => x.slug === variante) || lista[0];
+  const v = VARIANTES_CV.includes(vt.base) ? vt.base : 'qa';
   const s = textoSite(d.site, 'sobre', d.lang);
   const c = d.site.contato || {};
   const grupos = {};
@@ -102,7 +105,7 @@ ${head({ lang: d.lang, t, titulo: t('cv.titulo'), descricao: t('cv.descricao'), 
 <header class="cv-barra nao-imprimir" role="toolbar" aria-label="${t('cv.ferramentas')}">
   <a class="cv-voltar" href="${rota(d.lang)}" aria-label="${t('cv.voltar')}"><img src="/media/logo-64.webp" alt="" width="28" height="28">${icone('esquerda')}</a>
   <p class="cv-arquivo" title="${t('cv.arquivo')}">${t('cv.arquivo')}</p>
-  <div class="cv-versoes" role="group" aria-label="${t('cv.versao')}">${VARIANTES_CV.map((v, n) => `<button type="button" data-variante="${v}" aria-pressed="${n === 0}">${t(`cv.v.${v}`)}</button>`).join('')}</div>
+  <div class="cv-versoes" role="group" aria-label="${t('cv.versao')}">${versoesCV(d, t).map((v, n) => `<button type="button" data-variante="${esc(v.slug)}" aria-pressed="${n === 0}">${esc(v.nome)}</button>`).join('')}</div>
   <div class="cv-zoom" role="group" aria-label="Zoom">
     <button type="button" data-zoom="-1" aria-label="${t('cv.zoomMenos')}">−</button>
     <button type="button" data-zoom="0" class="mono" aria-label="${t('cv.ajustar')}" data-zoom-valor>100%</button>

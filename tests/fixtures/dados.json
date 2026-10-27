@@ -1,4 +1,90 @@
 {
+ "cvs": [
+  {
+   "id": "4729f101-6f1e-4df8-a866-7fa7ec85babf",
+   "slug": "qa",
+   "nome": "QA",
+   "base": "qa",
+   "titulo": "QA Engineer",
+   "resumo": "QA Engineer com {anos} anos em produtos de alto volume (Cinemark LATAM, Americanas, Samsung via SiDi) e fintechs (Bullla, Bankeiro, Trinus, Vinci Partners). Testes funcionais, exploratórios e de regressão, automação com Playwright e Robot Framework, Gherkin/BDD, Shift-left e práticas do CTFL. Crio ferramentas internas que viraram padrão de time.",
+   "ordem": 1,
+   "i18n": {
+    "en": {
+     "nome": "QA",
+     "resumo": "QA Engineer with {anos} years on high-traffic products (Cinemark LATAM, Americanas, Samsung through SiDi) and fintechs (Bullla, Bankeiro, Trinus, Vinci Partners). Functional, exploratory and regression testing, Playwright and Robot Framework automation, Gherkin/BDD, Shift-left and CTFL practices. I build internal tools that became team standards.",
+     "titulo": "QA Engineer"
+    },
+    "es": {
+     "nome": "QA",
+     "resumo": "QA Engineer con {anos} años en productos de alto tráfico (Cinemark LATAM, Americanas, Samsung vía SiDi) y fintechs (Bullla, Bankeiro, Trinus, Vinci Partners). Pruebas funcionales, exploratorias y de regresión, automatización con Playwright y Robot Framework, Gherkin/BDD, Shift-left y prácticas CTFL. Creo herramientas internas que se volvieron estándar del equipo.",
+     "titulo": "QA Engineer"
+    }
+   }
+  },
+  {
+   "id": "6d836716-e150-4b16-b704-622697d766de",
+   "slug": "dev",
+   "nome": "DEV",
+   "base": "dev",
+   "titulo": "Desenvolvedor Web",
+   "resumo": "Desenvolvedor web com olhar de QA: React, JavaScript, TypeScript, HTML/CSS, Node.js, Python e Supabase. Publiquei uma extensão na Chrome Web Store (QA Toolbar), um PWA gamificado (EvangeliGO) e sites para clientes pela Squidev, sempre com testes desde o primeiro dia.",
+   "ordem": 2,
+   "i18n": {
+    "en": {
+     "nome": "DEV",
+     "resumo": "Web developer with a QA mindset: React, JavaScript, TypeScript, HTML/CSS, Node.js, Python and Supabase. I shipped a Chrome Web Store extension (QA Toolbar), a gamified PWA (EvangeliGO) and client websites through Squidev, always tested from day one.",
+     "titulo": "Web Developer"
+    },
+    "es": {
+     "nome": "DEV",
+     "resumo": "Desarrollador web con mirada de QA: React, JavaScript, TypeScript, HTML/CSS, Node.js, Python y Supabase. Publiqué una extensión en la Chrome Web Store (QA Toolbar), una PWA gamificada (EvangeliGO) y sitios para clientes con Squidev, siempre con pruebas desde el primer día.",
+     "titulo": "Desarrollador Web"
+    }
+   }
+  },
+  {
+   "id": "bcb2e485-2360-48f9-8b62-dabc354e5bba",
+   "slug": "freela",
+   "nome": "Freelancer",
+   "base": "freela",
+   "titulo": "Freelancer · QA e desenvolvimento web",
+   "resumo": "Atendo empresas e profissionais com QA sob demanda, automação de testes, sites, landing pages, PWAs e ferramentas internas. Entrega com escopo claro, comunicação direta e testes incluídos.",
+   "ordem": 3,
+   "i18n": {
+    "en": {
+     "nome": "Freelancer",
+     "resumo": "I help companies and professionals with on-demand QA, test automation, websites, landing pages, PWAs and internal tools. Clear scope, direct communication and testing included.",
+     "titulo": "Freelancer · QA and web development"
+    },
+    "es": {
+     "nome": "Freelancer",
+     "resumo": "Atiendo a empresas y profesionales con QA bajo demanda, automatización de pruebas, sitios, landing pages, PWAs y herramientas internas. Alcance claro, comunicación directa y pruebas incluidas.",
+     "titulo": "Freelancer · QA y desarrollo web"
+    }
+   }
+  },
+  {
+   "id": "a002e00c-3459-4b23-b2fb-bc2851b494e5",
+   "slug": "basico",
+   "nome": "Básico",
+   "base": "basico",
+   "titulo": "Profissional de Tecnologia",
+   "resumo": "Profissional de tecnologia com experiência em suporte técnico, desenvolvimento e qualidade de software. Comunicativo, organizado e acostumado a trabalhar em equipe com metodologias ágeis.",
+   "ordem": 4,
+   "i18n": {
+    "en": {
+     "nome": "Basic",
+     "resumo": "Technology professional with experience in IT support, development and software quality. Communicative, organized and used to working in agile teams.",
+     "titulo": "Technology Professional"
+    },
+    "es": {
+     "nome": "Básico",
+     "resumo": "Profesional de tecnología con experiencia en soporte técnico, desarrollo y calidad de software. Comunicativo, organizado y acostumbrado a trabajar en equipo con metodologías ágiles.",
+     "titulo": "Profesional de Tecnología"
+    }
+   }
+  }
+ ],
  "perfil": {
   "nome_completo": "Matheus Bonotto",
   "data_nascimento": "1998-08-11",
@@ -299,97 +385,6 @@
    }
   },
   {
-   "id": "48e21f9e-67ab-45e4-94e4-b935893de4a3",
-   "slug": "condonotto",
-   "titulo": "Condonotto",
-   "papel": "Fundador: produto, desenvolvimento, QA e operação",
-   "descricao_curta": "App para condomínios que roda no navegador: encomendas pela foto, visitas, avisos, enquetes e mapa do condomínio.",
-   "descricao_completa": "O Condonotto nasceu do portal que fiz para o meu próprio condomínio e virou uma plataforma para vários condomínios. A portaria fotografa a etiqueta da encomenda e o app preenche nome e unidade; o morador recebe a notificação com a foto e assina na retirada. Visitantes se cadastram por um link, e síndico e administradora acompanham ocorrências, enquetes e documentos num só painel.\n\nÉ uma PWA (abre no navegador e fica na tela inicial, sem loja de aplicativos), em português, inglês e espanhol, com dados isolados por condomínio, verificação em duas etapas para a gestão, notificações por e-mail e push e assinatura mensal com período grátis.",
-   "categoria": "dev",
-   "categorias": [
-    "dev",
-    "vibe"
-   ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto.webp",
-   "galeria": [
-    {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto-mobile.webp",
-     "dispositivo": "mobile"
-    }
-   ],
-   "tecnologias": [
-    "React",
-    "TypeScript",
-    "Vite",
-    "PWA",
-    "Supabase",
-    "Stripe",
-    "Brevo",
-    "Web Push",
-    "Firebase Hosting",
-    "Playwright"
-   ],
-   "funcionalidades": [
-    "Encomendas registradas pela foto da etiqueta",
-    "Visitantes pré-cadastrados por link",
-    "Enquetes com um voto por unidade",
-    "Mapa do condomínio desenhável",
-    "Marca e cores de cada condomínio",
-    "Documentos com aviso de vencimento"
-   ],
-   "conquistas": [
-    "Em produção, com o primeiro condomínio usando no dia a dia",
-    "Isolamento de dados por condomínio testado com RLS"
-   ],
-   "link_projeto": "https://condonotto.web.app",
-   "link_github": null,
-   "data_projeto": null,
-   "destaque": false,
-   "bloqueado": false,
-   "professional_history_id": null,
-   "ordem": 4,
-   "i18n": {
-    "en": {
-     "papel": "Founder: product, development, QA and operations",
-     "conquistas": [
-      "Live, with the first building using it daily",
-      "Per-building data isolation tested with RLS"
-     ],
-     "descricao_curta": "Browser-based app for residential buildings: photo-logged parcels, visitors, notices, polls and a building map.",
-     "funcionalidades": [
-      "Parcels logged from a photo of the label",
-      "Visitors pre-registered through a link",
-      "Polls with one vote per unit",
-      "Drawable building map",
-      "Each building's own brand and colors",
-      "Documents with expiry alerts"
-     ],
-     "descricao_completa": "Condonotto started as the portal I built for my own condominium and grew into a multi-building platform. The front desk photographs the parcel label and the app fills in the name and unit; residents get a notification with the photo and sign on pickup. Visitors register through a link, and managers follow incidents, polls and documents in a single dashboard.\n\nIt is a PWA (opens in the browser and lives on the home screen, no app store), in Portuguese, English and Spanish, with data isolated per building, two-step verification for managers, e-mail and push notifications and a monthly subscription with a free trial."
-    },
-    "es": {
-     "papel": "Fundador: producto, desarrollo, QA y operación",
-     "conquistas": [
-      "En producción, con el primer condominio usándolo a diario",
-      "Aislamiento de datos por condominio probado con RLS"
-     ],
-     "descricao_curta": "App para condominios que funciona en el navegador: paquetes por foto, visitas, avisos, encuestas y mapa del condominio.",
-     "funcionalidades": [
-      "Paquetes registrados con la foto de la etiqueta",
-      "Visitas pre-registradas por enlace",
-      "Encuestas con un voto por unidad",
-      "Mapa del condominio dibujable",
-      "Marca y colores de cada condominio",
-      "Documentos con aviso de vencimiento"
-     ],
-     "descricao_completa": "Condonotto nació del portal que hice para mi propio condominio y se convirtió en una plataforma para varios condominios. La portería fotografía la etiqueta del paquete y la app completa el nombre y la unidad; el residente recibe la notificación con la foto y firma al retirarlo. Las visitas se registran por un enlace, y el administrador sigue incidencias, encuestas y documentos en un solo panel.\n\nEs una PWA (se abre en el navegador y queda en la pantalla de inicio, sin tienda de apps), en portugués, inglés y español, con datos aislados por condominio, verificación en dos pasos para la gestión, notificaciones por e-mail y push y suscripción mensual con período gratis."
-    }
-   }
-  },
-  {
    "id": "f3a7c8e1-9b62-4e35-8d10-6c2f04a7b981",
    "slug": "mb-copiloto-jira",
    "titulo": "MB Copiloto para Jira",
@@ -470,6 +465,99 @@
    }
   },
   {
+   "id": "48e21f9e-67ab-45e4-94e4-b935893de4a3",
+   "slug": "condonotto",
+   "titulo": "Condonotto",
+   "papel": "Fundador: produto, desenvolvimento, QA e operação",
+   "descricao_curta": "App para condomínios que roda no navegador: encomendas pela foto, visitas, avisos, enquetes e mapa do condomínio.",
+   "descricao_completa": "O Condonotto nasceu do portal que fiz para o meu próprio condomínio e virou uma plataforma para vários condomínios. A portaria fotografa a etiqueta da encomenda e o app preenche nome e unidade; o morador recebe a notificação com a foto e assina na retirada. Visitantes se cadastram por um link, e síndico e administradora acompanham ocorrências, enquetes e documentos num só painel.\n\nÉ uma PWA (abre no navegador e fica na tela inicial, sem loja de aplicativos), em português, inglês e espanhol, com dados isolados por condomínio, verificação em duas etapas para a gestão, notificações por e-mail e push e assinatura mensal com período grátis.",
+   "categoria": "dev",
+   "categorias": [
+    "dev",
+    "vibe"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto-mobile.webp",
+     "dispositivo": "mobile"
+    }
+   ],
+   "tecnologias": [
+    "React",
+    "TypeScript",
+    "Vite",
+    "PWA",
+    "Supabase",
+    "Stripe",
+    "Brevo",
+    "Web Push",
+    "Firebase Hosting",
+    "Playwright"
+   ],
+   "funcionalidades": [
+    "Encomendas registradas pela foto da etiqueta",
+    "Visitantes pré-cadastrados por link",
+    "Enquetes com um voto por unidade",
+    "Mapa do condomínio desenhável",
+    "Marca e cores de cada condomínio",
+    "Documentos com aviso de vencimento"
+   ],
+   "conquistas": [
+    "Em produção, com o primeiro condomínio usando no dia a dia",
+    "Isolamento de dados por condomínio testado com RLS"
+   ],
+   "link_projeto": "https://condonotto.web.app",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 4,
+   "i18n": {
+    "en": {
+     "papel": "Founder: product, development, QA and operations",
+     "titulo": "Condonotto",
+     "conquistas": [
+      "Live, with the first building using it daily",
+      "Per-building data isolation tested with RLS"
+     ],
+     "descricao_curta": "Browser-based app for residential buildings: photo-logged parcels, visitors, notices, polls and a building map.",
+     "funcionalidades": [
+      "Parcels logged from a photo of the label",
+      "Visitors pre-registered through a link",
+      "Polls with one vote per unit",
+      "Drawable building map",
+      "Each building's own brand and colors",
+      "Documents with expiry alerts"
+     ],
+     "descricao_completa": "Condonotto started as the portal I built for my own condominium and grew into a multi-building platform. The front desk photographs the parcel label and the app fills in the name and unit; residents get a notification with the photo and sign on pickup. Visitors register through a link, and managers follow incidents, polls and documents in a single dashboard.\n\nIt is a PWA (opens in the browser and lives on the home screen, no app store), in Portuguese, English and Spanish, with data isolated per building, two-step verification for managers, e-mail and push notifications and a monthly subscription with a free trial."
+    },
+    "es": {
+     "papel": "Fundador: producto, desarrollo, QA y operación",
+     "titulo": "Condonotto",
+     "conquistas": [
+      "En producción, con el primer condominio usándolo a diario",
+      "Aislamiento de datos por condominio probado con RLS"
+     ],
+     "descricao_curta": "App para condominios que funciona en el navegador: paquetes por foto, visitas, avisos, encuestas y mapa del condominio.",
+     "funcionalidades": [
+      "Paquetes registrados con la foto de la etiqueta",
+      "Visitas pre-registradas por enlace",
+      "Encuestas con un voto por unidad",
+      "Mapa del condominio dibujable",
+      "Marca y colores de cada condominio",
+      "Documentos con aviso de vencimiento"
+     ],
+     "descricao_completa": "Condonotto nació del portal que hice para mi propio condominio y se convirtió en una plataforma para varios condominios. La portería fotografía la etiqueta del paquete y la app completa el nombre y la unidad; el residente recibe la notificación con la foto y firma al retirarlo. Las visitas se registran por un enlace, y el administrador sigue incidencias, encuestas y documentos en un solo panel.\n\nEs una PWA (se abre en el navegador y queda en la pantalla de inicio, sin tienda de apps), en portugués, inglés y español, con datos aislados por condominio, verificación en dos pasos para la gestión, notificaciones por e-mail y push y suscripción mensual con período gratis."
+    }
+   }
+  },
+  {
    "id": "5862731b-a99a-4928-90bf-2990f76e9785",
    "slug": "qa-cnk-issue-generator",
    "titulo": "QA CNK Issue Generator",
@@ -509,11 +597,13 @@
    "i18n": {
     "en": {
      "papel": "Bug-reporting standard for the Cinemark team (MB Labs)",
+     "titulo": "QA CNK Issue Generator",
      "descricao_curta": "Issue generator that standardizes bugs and incidents in the Cinemark project",
      "descricao_completa": "Web app built to standardize how bugs, incidents and QA requests are opened in the Cinemark project, used at MB Labs. It organizes everything an issue needs, description, environment, evidence, business rules, reproduction steps and technical data, following a clear pattern. It makes communication between QA, PM, PO and engineers easier, reducing rework and improving problem analysis."
     },
     "es": {
      "papel": "Estándar de apertura de bugs del equipo Cinemark (MB Labs)",
+     "titulo": "QA CNK Issue Generator",
      "descricao_curta": "Generador de issues que estandariza bugs e incidentes en el proyecto Cinemark",
      "descricao_completa": "Aplicación web creada para estandarizar la apertura de bugs, incidentes y demandas de QA en el proyecto Cinemark, utilizada en MB Labs. Organiza todo lo que una issue necesita, descripción, ambiente, evidencias, reglas de negocio, pasos de reproducción y datos técnicos, siguiendo un patrón claro. Facilita la comunicación entre QA, PM, PO y el equipo técnico, reduciendo retrabajo y mejorando el análisis de los problemas."
     }
@@ -601,10 +691,12 @@
    "ordem": 8,
    "i18n": {
     "en": {
+     "titulo": "Playwright Automation",
      "descricao_curta": "End-to-end automated test suite with Playwright.",
      "descricao_completa": "End-to-end test automation project with Playwright, built to reduce repetitive work, cover recurring validations and make regression faster, more organized and more reliable."
     },
     "es": {
+     "titulo": "Playwright Automation",
      "descricao_curta": "Suite de pruebas automatizadas end-to-end con Playwright.",
      "descricao_completa": "Proyecto de automatización de pruebas end-to-end con Playwright, creado para reducir tareas repetitivas, cubrir validaciones recurrentes y hacer la regresión más rápida, organizada y confiable."
     }
@@ -770,10 +862,12 @@
    "ordem": 11,
    "i18n": {
     "en": {
+     "titulo": "KaBuM Challenge · Robot Automation",
      "descricao_curta": "Test automation technical challenge with Robot Framework.",
      "descricao_completa": "Test automation technical challenge with Robot Framework and Python, covering e-commerce flows with organized, reusable and maintainable scenarios."
     },
     "es": {
+     "titulo": "KaBuM Challenge · Robot Automation",
      "descricao_curta": "Desafío técnico de automatización de pruebas con Robot Framework.",
      "descricao_completa": "Desafío técnico de automatización de pruebas con Robot Framework y Python, cubriendo flujos de e-commerce con escenarios organizados, reutilizables y fáciles de mantener."
     }
@@ -898,10 +992,12 @@
    "ordem": 13,
    "i18n": {
     "en": {
+     "titulo": "Achadubom",
      "descricao_curta": "Web platform for listings and promotion",
      "descricao_completa": "Web platform focused on promoting and organizing information, applying front-end development, page structure and user experience concepts."
     },
     "es": {
+     "titulo": "Achadubom",
      "descricao_curta": "Plataforma web de divulgación",
      "descricao_completa": "Plataforma web enfocada en divulgar y organizar información, aplicando conceptos de desarrollo front-end, estructuración de páginas y experiencia de usuario."
     }
@@ -936,10 +1032,12 @@
    "ordem": 14,
    "i18n": {
     "en": {
+     "titulo": "Random Brother",
      "descricao_curta": "Randomly pairs church members into groups of 2 or 3 to build fellowship.",
      "descricao_completa": "Tool that forms random groups of 2 or 3 people so a church can keep fellowship going, encouraging members who rarely talk to pray and spend time together, inside and outside church."
     },
     "es": {
+     "titulo": "Random Brother",
      "descricao_curta": "Sortea grupos de 2 o 3 personas para fomentar la comunión en la iglesia.",
      "descricao_completa": "Herramienta que forma grupos aleatorios de 2 o 3 personas para que la iglesia mantenga una comunión constante, animando a miembros que casi no conversan a orar y convivir juntos, dentro y fuera de la iglesia."
     }
@@ -973,10 +1071,12 @@
    "ordem": 15,
    "i18n": {
     "en": {
+     "titulo": "ImportAccount Assistant · Trinus",
      "descricao_curta": "Account import tool",
      "descricao_completa": "Tool built to support internal account import and processing, reducing manual errors and increasing operational efficiency."
     },
     "es": {
+     "titulo": "ImportAccount Assistant · Trinus",
      "descricao_curta": "Herramienta de importación de cuentas",
      "descricao_completa": "Herramienta desarrollada para apoyar procesos internos de importación y tratamiento de cuentas, reduciendo errores manuales y aumentando la eficiencia operativa."
     }
@@ -1021,10 +1121,12 @@
    "ordem": 16,
    "i18n": {
     "en": {
+     "titulo": "Fofuxa Fashion",
      "descricao_curta": "Digital business card for a fashion brand",
      "descricao_completa": "Web page to promote a fashion brand, working as a digital business card with contact information, custom visual identity and a mobile-first focus."
     },
     "es": {
+     "titulo": "Fofuxa Fashion",
      "descricao_curta": "Tarjeta digital para una marca de moda",
      "descricao_completa": "Página web para promocionar una marca de moda, funcionando como tarjeta digital con información de contacto, identidad visual personalizada y foco en el uso desde el celular."
     }
@@ -1069,10 +1171,12 @@
    "ordem": 17,
    "i18n": {
     "en": {
+     "titulo": "Rodolfo Seifert",
      "descricao_curta": "Landing page for a law firm",
      "descricao_completa": "Institutional landing page that makes it easy for clients to reach a law firm, with an objective layout, clear information and direct communication channels."
     },
     "es": {
+     "titulo": "Rodolfo Seifert",
      "descricao_curta": "Landing page institucional para un estudio jurídico",
      "descricao_completa": "Landing page institucional creada para facilitar el contacto entre clientes y un estudio jurídico, con diseño objetivo, información clara e integración con canales de comunicación directa."
     }
@@ -1160,10 +1264,12 @@
    "ordem": 19,
    "i18n": {
     "en": {
+     "titulo": "ImportProducts Assistant · Americanas",
      "descricao_curta": "Product import automation",
      "descricao_completa": "Automation supporting the product import process, helping organize data and reducing manual effort in internal registration and validation flows."
     },
     "es": {
+     "titulo": "ImportProducts Assistant · Americanas",
      "descricao_curta": "Automatización para importación de productos",
      "descricao_completa": "Automatización que apoya el proceso de importación de productos, ayudando a organizar datos y reduciendo el esfuerzo manual en flujos internos de registro y validación."
     }
@@ -2346,6 +2452,26 @@
    }
   },
   {
+   "id": "3bf52b3a-f095-4304-a2b0-c4bb929120c1",
+   "nome": "Breno Augustus de Oliveira Bertapele",
+   "cargo": "Full Stack Developer | Node.js | TypeScript | JavaScript | Angular | React | GCP | AWS | MongoDB | MySQL | Redis",
+   "empresa": "MB Labs",
+   "mensagem": "De Feedz: Matheus, valeu mesmo pelas palavras! Foi top demais passar por esse processo contigo. Confesso que no começo achei que ia ser só mais um “ajuda rápida”, mas no fim acabou sendo uma troca bem legal, você trouxe dúvidas boas, e isso me fez revisar um monte de coisa que eu já fazia no automático. Ver que você saiu entendendo melhor o ambiente, sabendo onde olhar quando algo der errado e principalmente com tudo rodando bonitinho na sua máquina... isso é o que realmente importa. E olha, paciência nenhuma foi problema não, configurar ambiente local é sempre uma caixinha de surpresas, ainda mais com backend, IBK e BKO tudo junto. Você mandou bem em não desistir nos erros e ir atrás de entender cada um. E sobre a didática: fico feliz que tenha sido claro, porque às vezes é difícil explicar sem ficar parecendo manual de sistema kkkkk. É isso, parabéns pela dedicação e pelo trampo de QA que você vem fazendo. Conte comigo sempre que precisar. Abraço!",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/pessoas/breno-augustus-de-oliveira-bertapele-3bf52b.webp",
+   "fonte": "LinkedIn",
+   "data_feedback": "2026-06-09",
+   "professional_history_id": "f96c568f-d248-4f51-b5cd-3195e0971c06",
+   "ordem": 4,
+   "i18n": {
+    "en": {
+     "mensagem": "From Feedz: Matheus, thank you so much for the kind words! It was great going through this process with you. I admit that at first I thought it would be just another \"quick help\", but in the end it turned into a really nice exchange: you brought good questions, and that made me revisit a lot of things I was already doing on autopilot. Seeing you come out understanding the environment better, knowing where to look when something goes wrong and, above all, with everything running nicely on your machine... that is what really matters. And patience was never a problem. Setting up a local environment is always a box of surprises, even more so with backend, IBK and BKO all together. You did great by not giving up on the errors and digging in to understand each one. As for the teaching: I'm glad it was clear, because sometimes it's hard to explain without sounding like a system manual, haha. That's it, congratulations on your dedication and on the QA work you've been doing. Count on me whenever you need. Cheers!"
+    },
+    "es": {
+     "mensagem": "Desde Feedz: Matheus, ¡muchas gracias por tus palabras! Fue genial pasar por este proceso contigo. Confieso que al principio pensé que sería solo otra \"ayuda rápida\", pero al final terminó siendo un intercambio muy bueno: trajiste buenas preguntas y eso me hizo revisar un montón de cosas que ya hacía en automático. Ver que saliste entendiendo mejor el ambiente, sabiendo dónde mirar cuando algo falla y, sobre todo, con todo funcionando bien en tu máquina... eso es lo que realmente importa. Y la paciencia nunca fue un problema. Configurar un ambiente local siempre es una caja de sorpresas, más aún con backend, IBK y BKO todo junto. Hiciste muy bien en no rendirte ante los errores y en buscar entender cada uno. Y sobre la didáctica: me alegra que haya sido clara, porque a veces es difícil explicar sin parecer un manual de sistema, jaja. Eso es todo, felicitaciones por la dedicación y por el trabajo de QA que vienes haciendo. Cuenta conmigo cuando lo necesites. ¡Un abrazo!"
+    }
+   }
+  },
+  {
    "id": "f455d217-f742-4720-ad47-9fbd57dd5794",
    "nome": "Thales Zago de Souza",
    "cargo": "Architect - Master",
@@ -2477,115 +2603,16 @@
    "ordem": 0,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "86e4378d-6b2c-4121-a3b9-efc7d395ca58",
-   "nome": "PROMPT DESIGN",
-   "categoria": "vibe",
-   "nivel": 75,
-   "parent_id": "3dc6e62d-a251-4f41-9ace-9b27fef12ac8",
-   "descricao": "Prompts estruturados para análise, documentação e geração de cenários de teste.",
-   "ordem": 1,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "33801e6c-4b6e-4508-bf1f-374980aea4ed",
-   "nome": "JAVASCRIPT",
-   "categoria": "dev",
-   "nivel": 60,
-   "parent_id": "15edba76-1d54-451a-9015-cb3fdf4d9a7a",
-   "descricao": "Competência aplicada na rotina profissional para apoiar qualidade, organização e produtividade.",
-   "ordem": 1,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "89a1e014-2f19-4e56-80a2-dd8dd1de8338",
-   "nome": "POWER BI",
-   "categoria": "data",
-   "nivel": 75,
-   "parent_id": "3240e3a7-8bb7-4335-b0cd-7788d58584af",
-   "descricao": "Dashboards de vendas, produtos, SAC e perfil.",
-   "ordem": 1,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "ca399e31-a32d-446e-9b41-2745b64721bf",
-   "nome": "FUNCTIONAL TESTING",
-   "categoria": "qa",
-   "nivel": 85,
-   "parent_id": "24808f4b-c4f0-4210-a395-06a04378c722",
-   "descricao": "Testes funcionais para verificar se o software atende aos requisitos funcionais especificados.",
-   "ordem": 1,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "609aaa38-aea7-4057-b8a9-8e51803c29de",
-   "nome": "ROBOT FRAMEWORK",
-   "categoria": "qa",
-   "nivel": 75,
-   "parent_id": "2da6f75f-cab3-4230-96e9-74234e88f08f",
-   "descricao": "Automação de testes com foco em legibilidade, reaproveitamento e validação de fluxos.",
-   "ordem": 1,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "c02f5412-7225-4473-b129-1e23f26d0560",
-   "nome": "SHIFT-LEFT TESTING",
-   "categoria": "qa",
-   "nivel": 85,
-   "parent_id": "13fcf741-adc1-4d87-ab4e-3a5e6447838b",
-   "descricao": "Abordagem de antecipação de testes para identificar problemas mais cedo no ciclo de desenvolvimento.",
-   "ordem": 1,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "12ba4123-b940-4890-8887-faa801c5ff89",
-   "nome": "AGILE METHODOLOGIES",
-   "categoria": "devops",
-   "nivel": 85,
-   "parent_id": "a1244abc-87f6-4bc5-a7b9-665d4c6fd887",
-   "descricao": "Práticas ágeis como Scrum e Kanban para gestão de projetos de software.",
-   "ordem": 1,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "6cef32ce-61c7-4252-bf7b-af0c1fda7175",
-   "nome": "AZURE DEVOPS",
-   "categoria": "devops",
-   "nivel": 75,
-   "parent_id": "3a9d8009-fcfa-41f0-85a4-79a00208e943",
-   "descricao": "Acompanhamento de demandas, boards e fluxos de trabalho em ambientes corporativos.",
-   "ordem": 1,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "9342eadf-2254-4e15-8341-974db6c8a959",
-   "nome": "SCRUM",
-   "categoria": "devops",
-   "nivel": 85,
-   "parent_id": "12ba4123-b940-4890-8887-faa801c5ff89",
-   "descricao": "Metodologia Ágil Scrum para gestão de projetos.",
-   "ordem": 1,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "ISTQB CTFL",
+     "descricao": "Practices and vocabulary of the Certified Tester Foundation Level 4.0."
+    },
+    "es": {
+     "nome": "ISTQB CTFL",
+     "descricao": "Prácticas y vocabulario del Certified Tester Foundation Level 4.0."
+    }
+   }
   },
   {
    "id": "c4e90f54-4509-4dcb-a3bf-6c5514c548d1",
@@ -2597,7 +2624,16 @@
    "ordem": 1,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "QUALITY ASSURANCE",
+     "descricao": "Software quality assurance through processes, methodologies and testing techniques that make sure products meet requirements and user expectations."
+    },
+    "es": {
+     "nome": "QUALITY ASSURANCE",
+     "descricao": "Aseguramiento de la calidad del software mediante procesos, metodologías y técnicas de prueba que garantizan que los productos cumplan los requisitos y las expectativas de los usuarios."
+    }
+   }
   },
   {
    "id": "6cd3f45d-64f4-48ee-868e-7fc39c79175a",
@@ -2611,65 +2647,12 @@
    "bloqueado": false,
    "i18n": {
     "en": {
-     "nome": "ENGLISH"
+     "nome": "ENGLISH",
+     "descricao": "English proficiency to read documentation, communicate in international teams and consume technical content."
     },
     "es": {
-     "nome": "INGLÉS"
-    }
-   }
-  },
-  {
-   "id": "d3b8dedd-9ca4-4d79-89c9-cfd65f252c67",
-   "nome": "READING",
-   "categoria": "idiomas",
-   "nivel": 75,
-   "parent_id": "6cd3f45d-64f4-48ee-868e-7fc39c79175a",
-   "descricao": "Leitura e compreensão de textos em inglês.",
-   "ordem": 1,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "8762aae8-1e63-49ed-8770-b1c6ecdf6c8b",
-   "nome": "FRONTEND",
-   "categoria": "dev",
-   "nivel": 60,
-   "parent_id": "4c11a0cc-c7ae-471e-a442-1da3f4ce8070",
-   "descricao": "Desenvolvimento de interfaces de usuário.",
-   "ordem": 1,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "75c92ee9-51a2-4e48-bbe2-f9c814ca27b4",
-   "nome": "HTML",
-   "categoria": "dev",
-   "nivel": 60,
-   "parent_id": "8762aae8-1e63-49ed-8770-b1c6ecdf6c8b",
-   "descricao": "Competência aplicada na rotina profissional para apoiar qualidade, organização e produtividade.",
-   "ordem": 1,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "9947427f-9acd-470d-9ae0-b0ee6ad2a6ed",
-   "nome": "PLANILHAS AVANÇADAS",
-   "categoria": "data",
-   "nivel": 85,
-   "parent_id": "bd98bba5-390a-4d90-bdb4-d127e12338d3",
-   "descricao": "Domínio de Excel/Google Sheets para análise de dados, incluindo fórmulas avançadas, tabelas dinâmicas, gráficos e automação com macros.",
-   "ordem": 1,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {
-    "en": {
-     "nome": "ADVANCED SPREADSHEETS"
-    },
-    "es": {
-     "nome": "PLANILLAS AVANZADAS"
+     "nome": "INGLÉS",
+     "descricao": "Dominio del inglés para leer documentación, comunicarse en equipos internacionales y consumir contenido técnico."
     }
    }
   },
@@ -2683,139 +2666,289 @@
    "ordem": 1,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "MANUAL TESTING",
+     "descricao": "Manual testing techniques and practices, including planning, execution and documentation of test cases."
+    },
+    "es": {
+     "nome": "MANUAL TESTING",
+     "descricao": "Técnicas y prácticas de prueba manual, incluyendo planificación, ejecución y documentación de casos de prueba."
+    }
+   }
   },
   {
-   "id": "69925059-9dd1-4ee4-9821-855f71b5b406",
-   "nome": "LISTENING",
+   "id": "c02f5412-7225-4473-b129-1e23f26d0560",
+   "nome": "SHIFT-LEFT TESTING",
+   "categoria": "qa",
+   "nivel": 85,
+   "parent_id": "13fcf741-adc1-4d87-ab4e-3a5e6447838b",
+   "descricao": "Abordagem de antecipação de testes para identificar problemas mais cedo no ciclo de desenvolvimento.",
+   "ordem": 1,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "SHIFT-LEFT TESTING",
+     "descricao": "Testing moved earlier to catch problems sooner in the development cycle."
+    },
+    "es": {
+     "nome": "SHIFT-LEFT TESTING",
+     "descricao": "Enfoque que adelanta las pruebas para identificar problemas más temprano en el ciclo de desarrollo."
+    }
+   }
+  },
+  {
+   "id": "12ba4123-b940-4890-8887-faa801c5ff89",
+   "nome": "AGILE METHODOLOGIES",
+   "categoria": "devops",
+   "nivel": 85,
+   "parent_id": "a1244abc-87f6-4bc5-a7b9-665d4c6fd887",
+   "descricao": "Práticas ágeis como Scrum e Kanban para gestão de projetos de software.",
+   "ordem": 1,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "AGILE METHODOLOGIES",
+     "descricao": "Agile practices such as Scrum and Kanban for software project management."
+    },
+    "es": {
+     "nome": "AGILE METHODOLOGIES",
+     "descricao": "Prácticas ágiles como Scrum y Kanban para la gestión de proyectos de software."
+    }
+   }
+  },
+  {
+   "id": "8762aae8-1e63-49ed-8770-b1c6ecdf6c8b",
+   "nome": "FRONTEND",
+   "categoria": "dev",
+   "nivel": 60,
+   "parent_id": "4c11a0cc-c7ae-471e-a442-1da3f4ce8070",
+   "descricao": "Desenvolvimento de interfaces de usuário.",
+   "ordem": 1,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "FRONTEND",
+     "descricao": "User interface development."
+    },
+    "es": {
+     "nome": "FRONTEND",
+     "descricao": "Desarrollo de interfaces de usuario."
+    }
+   }
+  },
+  {
+   "id": "d3b8dedd-9ca4-4d79-89c9-cfd65f252c67",
+   "nome": "READING",
    "categoria": "idiomas",
    "nivel": 75,
    "parent_id": "6cd3f45d-64f4-48ee-868e-7fc39c79175a",
-   "descricao": "Compreensão auditiva do inglês.",
-   "ordem": 2,
+   "descricao": "Leitura e compreensão de textos em inglês.",
+   "ordem": 1,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "READING",
+     "descricao": "Reading and understanding texts in English."
+    },
+    "es": {
+     "nome": "LECTURA",
+     "descricao": "Lectura y comprensión de textos en inglés."
+    }
+   }
   },
   {
-   "id": "165acf6b-040b-4b48-a953-f58810067e65",
-   "nome": "GHERKIN (BDD)",
-   "categoria": "qa",
+   "id": "86e4378d-6b2c-4121-a3b9-efc7d395ca58",
+   "nome": "PROMPT DESIGN",
+   "categoria": "vibe",
    "nivel": 75,
-   "parent_id": "2da6f75f-cab3-4230-96e9-74234e88f08f",
-   "descricao": "Escrita de cenários claros para aproximar regra de negócio, desenvolvimento e qualidade.",
-   "ordem": 2,
+   "parent_id": "3dc6e62d-a251-4f41-9ace-9b27fef12ac8",
+   "descricao": "Prompts estruturados para análise, documentação e geração de cenários de teste.",
+   "ordem": 1,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "PROMPT DESIGN",
+     "descricao": "Structured prompts for analysis, documentation and test scenario generation."
+    },
+    "es": {
+     "nome": "PROMPT DESIGN",
+     "descricao": "Prompts estructurados para análisis, documentación y generación de escenarios de prueba."
+    }
+   }
   },
   {
-   "id": "5851d8dd-6aae-4ec7-9a07-82ed97e67da8",
-   "nome": "CSS",
+   "id": "75c92ee9-51a2-4e48-bbe2-f9c814ca27b4",
+   "nome": "HTML",
    "categoria": "dev",
    "nivel": 60,
    "parent_id": "8762aae8-1e63-49ed-8770-b1c6ecdf6c8b",
    "descricao": "Competência aplicada na rotina profissional para apoiar qualidade, organização e produtividade.",
-   "ordem": 2,
+   "ordem": 1,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "HTML",
+     "descricao": "Applied daily to support quality, organization and productivity."
+    },
+    "es": {
+     "nome": "HTML",
+     "descricao": "Competencia aplicada en la rutina profesional para apoyar la calidad, la organización y la productividad."
+    }
+   }
   },
   {
-   "id": "79ab1fa9-bdec-4ce9-aa0b-1e94cb4f8afb",
-   "nome": "AI-ASSISTED DEVELOPMENT",
-   "categoria": "vibe",
+   "id": "9342eadf-2254-4e15-8341-974db6c8a959",
+   "nome": "SCRUM",
+   "categoria": "devops",
+   "nivel": 85,
+   "parent_id": "12ba4123-b940-4890-8887-faa801c5ff89",
+   "descricao": "Metodologia Ágil Scrum para gestão de projetos.",
+   "ordem": 1,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "SCRUM",
+     "descricao": "Scrum agile methodology for project management."
+    },
+    "es": {
+     "nome": "SCRUM",
+     "descricao": "Metodología ágil Scrum para la gestión de proyectos."
+    }
+   }
+  },
+  {
+   "id": "6cef32ce-61c7-4252-bf7b-af0c1fda7175",
+   "nome": "AZURE DEVOPS",
+   "categoria": "devops",
    "nivel": 75,
-   "parent_id": "3dc6e62d-a251-4f41-9ace-9b27fef12ac8",
-   "descricao": "Produtos completos (extensão, SaaS, PWA) construídos com Claude Code.",
-   "ordem": 2,
+   "parent_id": "3a9d8009-fcfa-41f0-85a4-79a00208e943",
+   "descricao": "Acompanhamento de demandas, boards e fluxos de trabalho em ambientes corporativos.",
+   "ordem": 1,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "AZURE DEVOPS",
+     "descricao": "Tracking work items, boards and workflows in corporate environments."
+    },
+    "es": {
+     "nome": "AZURE DEVOPS",
+     "descricao": "Seguimiento de demandas, tableros y flujos de trabajo en entornos corporativos."
+    }
+   }
   },
   {
-   "id": "c1b351a7-c9a1-457e-86a3-006b8e005267",
-   "nome": "PRISMA",
+   "id": "609aaa38-aea7-4057-b8a9-8e51803c29de",
+   "nome": "ROBOT FRAMEWORK",
    "categoria": "qa",
    "nivel": 75,
-   "parent_id": "13fcf741-adc1-4d87-ab4e-3a5e6447838b",
-   "descricao": "Metodologia de priorização de testes baseada em riscos.",
-   "ordem": 2,
+   "parent_id": "2da6f75f-cab3-4230-96e9-74234e88f08f",
+   "descricao": "Automação de testes com foco em legibilidade, reaproveitamento e validação de fluxos.",
+   "ordem": 1,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "ROBOT FRAMEWORK",
+     "descricao": "Test automation focused on readability, reuse and flow validation."
+    },
+    "es": {
+     "nome": "ROBOT FRAMEWORK",
+     "descricao": "Automatización de pruebas con foco en legibilidad, reutilización y validación de flujos."
+    }
+   }
   },
   {
-   "id": "15edba76-1d54-451a-9015-cb3fdf4d9a7a",
-   "nome": "BACKEND",
-   "categoria": "dev",
-   "nivel": 60,
-   "parent_id": "4c11a0cc-c7ae-471e-a442-1da3f4ce8070",
-   "descricao": "Desenvolvimento de lógica de negócios e APIs.",
-   "ordem": 2,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "4c11a0cc-c7ae-471e-a442-1da3f4ce8070",
-   "nome": "DEVELOPMENT",
-   "categoria": "dev",
-   "nivel": 70,
-   "parent_id": null,
-   "descricao": "Conhecimentos em desenvolvimento de software.",
-   "ordem": 2,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "2da6f75f-cab3-4230-96e9-74234e88f08f",
-   "nome": "TEST AUTOMATION",
-   "categoria": "qa",
-   "nivel": 80,
-   "parent_id": "c4e90f54-4509-4dcb-a3bf-6c5514c548d1",
-   "descricao": "Automação de testes utilizando frameworks e ferramentas para execução automatizada de casos de teste.",
-   "ordem": 2,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "2d6671aa-edeb-415e-b67b-81faa988d812",
-   "nome": "NODE.JS",
+   "id": "33801e6c-4b6e-4508-bf1f-374980aea4ed",
+   "nome": "JAVASCRIPT",
    "categoria": "dev",
    "nivel": 60,
    "parent_id": "15edba76-1d54-451a-9015-cb3fdf4d9a7a",
-   "descricao": "Ambiente de execução JavaScript server-side.",
-   "ordem": 2,
+   "descricao": "Competência aplicada na rotina profissional para apoiar qualidade, organização e produtividade.",
+   "ordem": 1,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "JAVASCRIPT",
+     "descricao": "Applied daily to support quality, organization and productivity."
+    },
+    "es": {
+     "nome": "JAVASCRIPT",
+     "descricao": "Competencia aplicada en la rutina profesional para apoyar la calidad, la organización y la productividad."
+    }
+   }
   },
   {
-   "id": "d1dd86a2-30e7-4c0d-89d2-9f66e0afc390",
-   "nome": "ESPANHOL",
-   "categoria": "idiomas",
-   "nivel": 35,
-   "parent_id": "e40ce668-0d4d-4fad-aba6-c90313a9937a",
-   "descricao": "Nível básico.",
-   "ordem": 2,
+   "id": "ca399e31-a32d-446e-9b41-2745b64721bf",
+   "nome": "FUNCTIONAL TESTING",
+   "categoria": "qa",
+   "nivel": 85,
+   "parent_id": "24808f4b-c4f0-4210-a395-06a04378c722",
+   "descricao": "Testes funcionais para verificar se o software atende aos requisitos funcionais especificados.",
+   "ordem": 1,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "FUNCTIONAL TESTING",
+     "descricao": "Functional tests to verify that the software meets the specified functional requirements."
+    },
+    "es": {
+     "nome": "FUNCTIONAL TESTING",
+     "descricao": "Pruebas funcionales para verificar que el software cumple los requisitos funcionales especificados."
+    }
+   }
   },
   {
-   "id": "3240e3a7-8bb7-4335-b0cd-7788d58584af",
-   "nome": "DASHBOARDS",
+   "id": "9947427f-9acd-470d-9ae0-b0ee6ad2a6ed",
+   "nome": "PLANILHAS AVANÇADAS",
+   "categoria": "data",
+   "nivel": 85,
+   "parent_id": "bd98bba5-390a-4d90-bdb4-d127e12338d3",
+   "descricao": "Domínio de Excel/Google Sheets para análise de dados, incluindo fórmulas avançadas, tabelas dinâmicas, gráficos e automação com macros.",
+   "ordem": 1,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "ADVANCED SPREADSHEETS",
+     "descricao": "Excel/Google Sheets for data analysis, including advanced formulas, pivot tables, charts and macro automation."
+    },
+    "es": {
+     "nome": "PLANILLAS AVANZADAS",
+     "descricao": "Dominio de Excel/Google Sheets para análisis de datos, incluyendo fórmulas avanzadas, tablas dinámicas, gráficos y automatización con macros."
+    }
+   }
+  },
+  {
+   "id": "89a1e014-2f19-4e56-80a2-dd8dd1de8338",
+   "nome": "POWER BI",
    "categoria": "data",
    "nivel": 75,
-   "parent_id": "bd98bba5-390a-4d90-bdb4-d127e12338d3",
-   "descricao": "Criação de dashboards para monitoramento de métricas de qualidade e acompanhamento de projetos.",
-   "ordem": 2,
+   "parent_id": "3240e3a7-8bb7-4335-b0cd-7788d58584af",
+   "descricao": "Dashboards de vendas, produtos, SAC e perfil.",
+   "ordem": 1,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "POWER BI",
+     "descricao": "Sales, product, customer service and profile dashboards."
+    },
+    "es": {
+     "nome": "POWER BI",
+     "descricao": "Dashboards de ventas, productos, atención al cliente y perfil."
+    }
+   }
   },
   {
    "id": "547b7f5c-4955-4013-845b-c6104abeb795",
@@ -2827,7 +2960,79 @@
    "ordem": 2,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "JIRA",
+     "descricao": "Managing and tracking work items, bugs, stories and delivery flows."
+    },
+    "es": {
+     "nome": "JIRA",
+     "descricao": "Gestión y seguimiento de demandas, bugs, historias y flujos de entrega."
+    }
+   }
+  },
+  {
+   "id": "d1dd86a2-30e7-4c0d-89d2-9f66e0afc390",
+   "nome": "ESPANHOL",
+   "categoria": "idiomas",
+   "nivel": 35,
+   "parent_id": "e40ce668-0d4d-4fad-aba6-c90313a9937a",
+   "descricao": "Nível básico.",
+   "ordem": 2,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "SPANISH",
+     "descricao": "Basic level."
+    },
+    "es": {
+     "nome": "ESPAÑOL",
+     "descricao": "Nivel básico."
+    }
+   }
+  },
+  {
+   "id": "15edba76-1d54-451a-9015-cb3fdf4d9a7a",
+   "nome": "BACKEND",
+   "categoria": "dev",
+   "nivel": 60,
+   "parent_id": "4c11a0cc-c7ae-471e-a442-1da3f4ce8070",
+   "descricao": "Desenvolvimento de lógica de negócios e APIs.",
+   "ordem": 2,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "BACKEND",
+     "descricao": "Business logic and API development."
+    },
+    "es": {
+     "nome": "BACKEND",
+     "descricao": "Desarrollo de lógica de negocio y APIs."
+    }
+   }
+  },
+  {
+   "id": "3240e3a7-8bb7-4335-b0cd-7788d58584af",
+   "nome": "DASHBOARDS",
+   "categoria": "data",
+   "nivel": 75,
+   "parent_id": "bd98bba5-390a-4d90-bdb4-d127e12338d3",
+   "descricao": "Criação de dashboards para monitoramento de métricas de qualidade e acompanhamento de projetos.",
+   "ordem": 2,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "DASHBOARDS",
+     "descricao": "Dashboards for monitoring quality metrics and tracking projects."
+    },
+    "es": {
+     "nome": "DASHBOARDS",
+     "descricao": "Creación de dashboards para monitorear métricas de calidad y acompañar proyectos."
+    }
+   }
   },
   {
    "id": "3a9d8009-fcfa-41f0-85a4-79a00208e943",
@@ -2839,7 +3044,16 @@
    "ordem": 2,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "DEVOPS TOOLS",
+     "descricao": "Project and quality management tools such as Jira and Azure DevOps."
+    },
+    "es": {
+     "nome": "DEVOPS TOOLS",
+     "descricao": "Herramientas de gestión de proyectos y calidad como Jira y Azure DevOps."
+    }
+   }
   },
   {
    "id": "7fb6d0b9-46a9-4e0a-9d61-a33206e93fe9",
@@ -2851,7 +3065,163 @@
    "ordem": 2,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "KANBAN",
+     "descricao": "Kanban methodology for visual workflow management."
+    },
+    "es": {
+     "nome": "KANBAN",
+     "descricao": "Metodología Kanban para la gestión visual del flujo de trabajo."
+    }
+   }
+  },
+  {
+   "id": "5851d8dd-6aae-4ec7-9a07-82ed97e67da8",
+   "nome": "CSS",
+   "categoria": "dev",
+   "nivel": 60,
+   "parent_id": "8762aae8-1e63-49ed-8770-b1c6ecdf6c8b",
+   "descricao": "Competência aplicada na rotina profissional para apoiar qualidade, organização e produtividade.",
+   "ordem": 2,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "CSS",
+     "descricao": "Applied daily to support quality, organization and productivity."
+    },
+    "es": {
+     "nome": "CSS",
+     "descricao": "Competencia aplicada en la rutina profesional para apoyar la calidad, la organización y la productividad."
+    }
+   }
+  },
+  {
+   "id": "2d6671aa-edeb-415e-b67b-81faa988d812",
+   "nome": "NODE.JS",
+   "categoria": "dev",
+   "nivel": 60,
+   "parent_id": "15edba76-1d54-451a-9015-cb3fdf4d9a7a",
+   "descricao": "Ambiente de execução JavaScript server-side.",
+   "ordem": 2,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "NODE.JS",
+     "descricao": "Server-side JavaScript runtime."
+    },
+    "es": {
+     "nome": "NODE.JS",
+     "descricao": "Entorno de ejecución JavaScript del lado del servidor."
+    }
+   }
+  },
+  {
+   "id": "165acf6b-040b-4b48-a953-f58810067e65",
+   "nome": "GHERKIN (BDD)",
+   "categoria": "qa",
+   "nivel": 75,
+   "parent_id": "2da6f75f-cab3-4230-96e9-74234e88f08f",
+   "descricao": "Escrita de cenários claros para aproximar regra de negócio, desenvolvimento e qualidade.",
+   "ordem": 2,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "GHERKIN (BDD)",
+     "descricao": "Clear scenarios that bring business rules, development and quality closer together."
+    },
+    "es": {
+     "nome": "GHERKIN (BDD)",
+     "descricao": "Escritura de escenarios claros para acercar la regla de negocio, el desarrollo y la calidad."
+    }
+   }
+  },
+  {
+   "id": "79ab1fa9-bdec-4ce9-aa0b-1e94cb4f8afb",
+   "nome": "AI-ASSISTED DEVELOPMENT",
+   "categoria": "vibe",
+   "nivel": 75,
+   "parent_id": "3dc6e62d-a251-4f41-9ace-9b27fef12ac8",
+   "descricao": "Produtos completos (extensão, SaaS, PWA) construídos com Claude Code.",
+   "ordem": 2,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "AI-ASSISTED DEVELOPMENT",
+     "descricao": "Complete products (extension, SaaS, PWA) built with Claude Code."
+    },
+    "es": {
+     "nome": "AI-ASSISTED DEVELOPMENT",
+     "descricao": "Productos completos (extensión, SaaS, PWA) construidos con Claude Code."
+    }
+   }
+  },
+  {
+   "id": "69925059-9dd1-4ee4-9821-855f71b5b406",
+   "nome": "LISTENING",
+   "categoria": "idiomas",
+   "nivel": 75,
+   "parent_id": "6cd3f45d-64f4-48ee-868e-7fc39c79175a",
+   "descricao": "Compreensão auditiva do inglês.",
+   "ordem": 2,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "LISTENING",
+     "descricao": "Listening comprehension in English."
+    },
+    "es": {
+     "nome": "COMPRENSIÓN AUDITIVA",
+     "descricao": "Comprensión auditiva del inglés."
+    }
+   }
+  },
+  {
+   "id": "2da6f75f-cab3-4230-96e9-74234e88f08f",
+   "nome": "TEST AUTOMATION",
+   "categoria": "qa",
+   "nivel": 80,
+   "parent_id": "c4e90f54-4509-4dcb-a3bf-6c5514c548d1",
+   "descricao": "Automação de testes utilizando frameworks e ferramentas para execução automatizada de casos de teste.",
+   "ordem": 2,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "TEST AUTOMATION",
+     "descricao": "Test automation with frameworks and tools for automated execution of test cases."
+    },
+    "es": {
+     "nome": "TEST AUTOMATION",
+     "descricao": "Automatización de pruebas con frameworks y herramientas para la ejecución automatizada de casos de prueba."
+    }
+   }
+  },
+  {
+   "id": "c1b351a7-c9a1-457e-86a3-006b8e005267",
+   "nome": "PRISMA",
+   "categoria": "qa",
+   "nivel": 75,
+   "parent_id": "13fcf741-adc1-4d87-ab4e-3a5e6447838b",
+   "descricao": "Metodologia de priorização de testes baseada em riscos.",
+   "ordem": 2,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "PRISMA",
+     "descricao": "Risk-based test prioritization methodology."
+    },
+    "es": {
+     "nome": "PRISMA",
+     "descricao": "Metodología de priorización de pruebas basada en riesgos."
+    }
+   }
   },
   {
    "id": "71443b9e-bab7-4b1e-bf69-cd82bfa9cdbf",
@@ -2863,31 +3233,37 @@
    "ordem": 2,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "EXPLORATORY TESTING",
+     "descricao": "Exploratory testing to uncover bugs and unexpected behavior through free investigation."
+    },
+    "es": {
+     "nome": "EXPLORATORY TESTING",
+     "descricao": "Pruebas exploratorias para descubrir bugs y comportamientos inesperados mediante investigación libre."
+    }
+   }
   },
   {
-   "id": "13fcf741-adc1-4d87-ab4e-3a5e6447838b",
-   "nome": "TEST METHODOLOGIES",
-   "categoria": "qa",
-   "nivel": 85,
-   "parent_id": "c4e90f54-4509-4dcb-a3bf-6c5514c548d1",
-   "descricao": "Metodologias e abordagens avançadas de teste de software.",
-   "ordem": 3,
+   "id": "4c11a0cc-c7ae-471e-a442-1da3f4ce8070",
+   "nome": "DEVELOPMENT",
+   "categoria": "dev",
+   "nivel": 70,
+   "parent_id": null,
+   "descricao": "Conhecimentos em desenvolvimento de software.",
+   "ordem": 2,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "1b6e2833-aaa9-4137-ac86-c64c8f6f71a1",
-   "nome": "PLAYWRIGHT",
-   "categoria": "qa",
-   "nivel": 80,
-   "parent_id": "2da6f75f-cab3-4230-96e9-74234e88f08f",
-   "descricao": "Automação end-to-end com Playwright.",
-   "ordem": 3,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "DEVELOPMENT",
+     "descricao": "Software development knowledge."
+    },
+    "es": {
+     "nome": "DESARROLLO",
+     "descricao": "Conocimientos en desarrollo de software."
+    }
+   }
   },
   {
    "id": "3662975a-a4cd-4620-a679-27c0c9f9532a",
@@ -2899,19 +3275,37 @@
    "ordem": 3,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "REGRESSION TESTING",
+     "descricao": "Regression tests to make sure changes did not introduce new bugs in existing features."
+    },
+    "es": {
+     "nome": "REGRESSION TESTING",
+     "descricao": "Pruebas de regresión para garantizar que los cambios no introdujeron nuevos bugs en funcionalidades existentes."
+    }
+   }
   },
   {
-   "id": "ecca3001-1166-4994-a8c4-595ce1b5a5ad",
-   "nome": "CYPRESS",
+   "id": "13fcf741-adc1-4d87-ab4e-3a5e6447838b",
+   "nome": "TEST METHODOLOGIES",
    "categoria": "qa",
-   "nivel": 60,
-   "parent_id": "2da6f75f-cab3-4230-96e9-74234e88f08f",
-   "descricao": "Automação de testes web utilizando Cypress para testes end-to-end.",
+   "nivel": 85,
+   "parent_id": "c4e90f54-4509-4dcb-a3bf-6c5514c548d1",
+   "descricao": "Metodologias e abordagens avançadas de teste de software.",
    "ordem": 3,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "TEST METHODOLOGIES",
+     "descricao": "Advanced software testing methodologies and approaches."
+    },
+    "es": {
+     "nome": "TEST METHODOLOGIES",
+     "descricao": "Metodologías y enfoques avanzados de prueba de software."
+    }
+   }
   },
   {
    "id": "2e9d3ab8-92bc-403b-9fde-230a78598a17",
@@ -2923,55 +3317,16 @@
    "ordem": 3,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "5008e308-a376-493a-9d3d-595871b65f6d",
-   "nome": "BOOTSTRAP",
-   "categoria": "dev",
-   "nivel": 60,
-   "parent_id": "8762aae8-1e63-49ed-8770-b1c6ecdf6c8b",
-   "descricao": "Framework CSS para desenvolvimento responsivo.",
-   "ordem": 3,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "43372b05-fd56-4973-a0a8-cc94bd5ef58a",
-   "nome": "PYTHON",
-   "categoria": "dev",
-   "nivel": 60,
-   "parent_id": "15edba76-1d54-451a-9015-cb3fdf4d9a7a",
-   "descricao": "Linguagem de programação para backend e automações.",
-   "ordem": 3,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "bd98bba5-390a-4d90-bdb4-d127e12338d3",
-   "nome": "DATA ANALYSIS",
-   "categoria": "data",
-   "nivel": 75,
-   "parent_id": null,
-   "descricao": "Análise e visualização de dados para suporte à gestão da qualidade e tomada de decisões.",
-   "ordem": 3,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "45d17eca-9fe7-4fb5-80ca-956e396d1a3e",
-   "nome": "CONVERSATION",
-   "categoria": "idiomas",
-   "nivel": 50,
-   "parent_id": "6cd3f45d-64f4-48ee-868e-7fc39c79175a",
-   "descricao": "Habilidade de conversação em inglês.",
-   "ordem": 3,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "ISO/IEC/IEEE 29119",
+     "descricao": "Knowledge and application of the international standard for software testing processes."
+    },
+    "es": {
+     "nome": "ISO/IEC/IEEE 29119",
+     "descricao": "Conocimiento y aplicación del estándar internacional para procesos de prueba de software."
+    }
+   }
   },
   {
    "id": "f97d0970-9e19-4032-b86b-b3e79c592fc4",
@@ -2983,7 +3338,16 @@
    "ordem": 3,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "ZEPHYR",
+     "descricao": "Test case and cycle management integrated with Jira."
+    },
+    "es": {
+     "nome": "ZEPHYR",
+     "descricao": "Gestión de casos y ciclos de prueba integrada a Jira."
+    }
+   }
   },
   {
    "id": "fc76e42b-3b12-426a-bc8f-b5273992f3e3",
@@ -2995,19 +3359,142 @@
    "ordem": 3,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "AI APPLIED TO QA",
+     "descricao": "Scenario generation, requirement review and task automation with AI."
+    },
+    "es": {
+     "nome": "IA APLICADA A QA",
+     "descricao": "Generación de escenarios, revisión de requisitos y automatización de tareas con IA."
+    }
+   }
   },
   {
-   "id": "6bec3d07-7116-491d-8445-e9041ecb7031",
-   "nome": "TAILWIND CSS",
+   "id": "1b6e2833-aaa9-4137-ac86-c64c8f6f71a1",
+   "nome": "PLAYWRIGHT",
+   "categoria": "qa",
+   "nivel": 80,
+   "parent_id": "2da6f75f-cab3-4230-96e9-74234e88f08f",
+   "descricao": "Automação end-to-end com Playwright.",
+   "ordem": 3,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "PLAYWRIGHT",
+     "descricao": "End-to-end automation with Playwright."
+    },
+    "es": {
+     "nome": "PLAYWRIGHT",
+     "descricao": "Automatización end-to-end con Playwright."
+    }
+   }
+  },
+  {
+   "id": "ecca3001-1166-4994-a8c4-595ce1b5a5ad",
+   "nome": "CYPRESS",
+   "categoria": "qa",
+   "nivel": 60,
+   "parent_id": "2da6f75f-cab3-4230-96e9-74234e88f08f",
+   "descricao": "Automação de testes web utilizando Cypress para testes end-to-end.",
+   "ordem": 3,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "CYPRESS",
+     "descricao": "Web test automation with Cypress for end-to-end tests."
+    },
+    "es": {
+     "nome": "CYPRESS",
+     "descricao": "Automatización de pruebas web con Cypress para pruebas end-to-end."
+    }
+   }
+  },
+  {
+   "id": "5008e308-a376-493a-9d3d-595871b65f6d",
+   "nome": "BOOTSTRAP",
    "categoria": "dev",
    "nivel": 60,
    "parent_id": "8762aae8-1e63-49ed-8770-b1c6ecdf6c8b",
-   "descricao": "Competência aplicada na rotina profissional para apoiar qualidade, organização e produtividade.",
-   "ordem": 4,
+   "descricao": "Framework CSS para desenvolvimento responsivo.",
+   "ordem": 3,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "BOOTSTRAP",
+     "descricao": "CSS framework for responsive development."
+    },
+    "es": {
+     "nome": "BOOTSTRAP",
+     "descricao": "Framework CSS para desarrollo responsivo."
+    }
+   }
+  },
+  {
+   "id": "43372b05-fd56-4973-a0a8-cc94bd5ef58a",
+   "nome": "PYTHON",
+   "categoria": "dev",
+   "nivel": 60,
+   "parent_id": "15edba76-1d54-451a-9015-cb3fdf4d9a7a",
+   "descricao": "Linguagem de programação para backend e automações.",
+   "ordem": 3,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "PYTHON",
+     "descricao": "Programming language for backend and automations."
+    },
+    "es": {
+     "nome": "PYTHON",
+     "descricao": "Lenguaje de programación para backend y automatizaciones."
+    }
+   }
+  },
+  {
+   "id": "45d17eca-9fe7-4fb5-80ca-956e396d1a3e",
+   "nome": "CONVERSATION",
+   "categoria": "idiomas",
+   "nivel": 50,
+   "parent_id": "6cd3f45d-64f4-48ee-868e-7fc39c79175a",
+   "descricao": "Habilidade de conversação em inglês.",
+   "ordem": 3,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "CONVERSATION",
+     "descricao": "Speaking skills in English."
+    },
+    "es": {
+     "nome": "CONVERSACIÓN",
+     "descricao": "Habilidad de conversación en inglés."
+    }
+   }
+  },
+  {
+   "id": "bd98bba5-390a-4d90-bdb4-d127e12338d3",
+   "nome": "DATA ANALYSIS",
+   "categoria": "data",
+   "nivel": 75,
+   "parent_id": null,
+   "descricao": "Análise e visualização de dados para suporte à gestão da qualidade e tomada de decisões.",
+   "ordem": 3,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "DATA ANALYSIS",
+     "descricao": "Data analysis and visualization to support quality management and decision making."
+    },
+    "es": {
+     "nome": "DATA ANALYSIS",
+     "descricao": "Análisis y visualización de datos para apoyar la gestión de calidad y la toma de decisiones."
+    }
+   }
   },
   {
    "id": "38c0becc-5571-413c-bcbe-f80eeeb14670",
@@ -3019,7 +3506,16 @@
    "ordem": 4,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "WRITING",
+     "descricao": "Writing skills in English."
+    },
+    "es": {
+     "nome": "ESCRITURA",
+     "descricao": "Habilidad de escritura en inglés."
+    }
+   }
   },
   {
    "id": "a1244abc-87f6-4bc5-a7b9-665d4c6fd887",
@@ -3031,24 +3527,35 @@
    "ordem": 4,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "DEVOPS",
+     "descricao": "Culture and practices that combine software development and IT operations to improve collaboration and productivity."
+    },
+    "es": {
+     "nome": "DEVOPS",
+     "descricao": "Cultura y prácticas que combinan desarrollo de software y operaciones de TI para mejorar la colaboración y la productividad."
+    }
+   }
   },
   {
-   "id": "e40ce668-0d4d-4fad-aba6-c90313a9937a",
-   "nome": "IDIOMAS",
-   "categoria": "idiomas",
+   "id": "6bec3d07-7116-491d-8445-e9041ecb7031",
+   "nome": "TAILWIND CSS",
+   "categoria": "dev",
    "nivel": 60,
-   "parent_id": null,
-   "descricao": "Competências em idiomas estrangeiros essenciais para comunicação global e documentação técnica.",
-   "ordem": 5,
+   "parent_id": "8762aae8-1e63-49ed-8770-b1c6ecdf6c8b",
+   "descricao": "Competência aplicada na rotina profissional para apoiar qualidade, organização e produtividade.",
+   "ordem": 4,
    "icon": null,
    "bloqueado": false,
    "i18n": {
     "en": {
-     "nome": "LANGUAGES"
+     "nome": "TAILWIND CSS",
+     "descricao": "Applied daily to support quality, organization and productivity."
     },
     "es": {
-     "nome": "IDIOMAS"
+     "nome": "TAILWIND CSS",
+     "descricao": "Competencia aplicada en la rutina profesional para apoyar la calidad, la organización y la productividad."
     }
    }
   },
@@ -3062,7 +3569,37 @@
    "ordem": 5,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "TYPESCRIPT",
+     "descricao": "Typed superset of JavaScript for scalable development."
+    },
+    "es": {
+     "nome": "TYPESCRIPT",
+     "descricao": "Superset tipado de JavaScript para desarrollo escalable."
+    }
+   }
+  },
+  {
+   "id": "e40ce668-0d4d-4fad-aba6-c90313a9937a",
+   "nome": "IDIOMAS",
+   "categoria": "idiomas",
+   "nivel": 60,
+   "parent_id": null,
+   "descricao": "Competências em idiomas estrangeiros essenciais para comunicação global e documentação técnica.",
+   "ordem": 5,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "LANGUAGES",
+     "descricao": "Foreign language skills for global communication and technical documentation."
+    },
+    "es": {
+     "nome": "IDIOMAS",
+     "descricao": "Competencias en idiomas extranjeros para comunicación global y documentación técnica."
+    }
+   }
   },
   {
    "id": "4140f25f-99a4-4c24-86ca-1341e3b91bc7",
@@ -3074,7 +3611,16 @@
    "ordem": 6,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "UX/UI",
+     "descricao": "Knowledge of user experience and interface design."
+    },
+    "es": {
+     "nome": "UX/UI",
+     "descricao": "Conocimientos en experiencia de usuario y diseño de interfaz."
+    }
+   }
   },
   {
    "id": "3dc6e62d-a251-4f41-9ace-9b27fef12ac8",
@@ -3086,19 +3632,16 @@
    "ordem": 7,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
-  },
-  {
-   "id": "83a6e129-ce75-4a71-9dcf-74b80a4c2fe6",
-   "nome": "SUPABASE",
-   "categoria": "dev",
-   "nivel": 70,
-   "parent_id": "15edba76-1d54-451a-9015-cb3fdf4d9a7a",
-   "descricao": "Banco, autenticação, RLS e Edge Functions em produtos publicados.",
-   "ordem": 9,
-   "icon": null,
-   "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "AI / VIBE CODING",
+     "descricao": "AI-assisted development to build tools and automations."
+    },
+    "es": {
+     "nome": "AI / VIBE CODING",
+     "descricao": "Desarrollo asistido por IA para crear herramientas y automatizaciones."
+    }
+   }
   },
   {
    "id": "de4650c5-a2b1-4cd6-867f-8b96e65e08ed",
@@ -3110,7 +3653,37 @@
    "ordem": 9,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "REACT",
+     "descricao": "Interfaces of Stark Hub and EvangeliGO."
+    },
+    "es": {
+     "nome": "REACT",
+     "descricao": "Interfaces de Stark Hub y EvangeliGO."
+    }
+   }
+  },
+  {
+   "id": "83a6e129-ce75-4a71-9dcf-74b80a4c2fe6",
+   "nome": "SUPABASE",
+   "categoria": "dev",
+   "nivel": 70,
+   "parent_id": "15edba76-1d54-451a-9015-cb3fdf4d9a7a",
+   "descricao": "Banco, autenticação, RLS e Edge Functions em produtos publicados.",
+   "ordem": 9,
+   "icon": null,
+   "bloqueado": false,
+   "i18n": {
+    "en": {
+     "nome": "SUPABASE",
+     "descricao": "Database, authentication, RLS and Edge Functions in live products."
+    },
+    "es": {
+     "nome": "SUPABASE",
+     "descricao": "Base de datos, autenticación, RLS y Edge Functions en productos publicados."
+    }
+   }
   },
   {
    "id": "66d38db9-4ff9-4936-aa25-694961cca8bf",
@@ -3122,7 +3695,16 @@
    "ordem": 10,
    "icon": null,
    "bloqueado": false,
-   "i18n": {}
+   "i18n": {
+    "en": {
+     "nome": "TAMPERMONKEY",
+     "descricao": "Userscripts and extensions that automate a QA's day-to-day work."
+    },
+    "es": {
+     "nome": "TAMPERMONKEY",
+     "descricao": "Userscripts y extensiones que automatizan el día a día del QA."
+    }
+   }
   }
  ],
  "conquistas": [
@@ -3167,9 +3749,11 @@
    "ordem": 18,
    "i18n": {
     "en": {
+     "titulo": "A1",
      "descricao": "Earn an English certificate at level A1"
     },
     "es": {
+     "titulo": "A1",
      "descricao": "Obtén el certificado de INGLÉS nivel A1"
     }
    }
@@ -3217,9 +3801,11 @@
    "ordem": 24,
    "i18n": {
     "en": {
+     "titulo": "Pops-QA",
      "descricao": "Achievement for work in software quality, testing, process improvement and defect prevention."
     },
     "es": {
+     "titulo": "Pops-QA",
      "descricao": "Logro por el trabajo en calidad de software, pruebas, mejora de procesos y prevención de fallas."
     }
    }
@@ -3263,9 +3849,11 @@
    "ordem": 5,
    "i18n": {
     "en": {
+     "titulo": "My Back!",
      "descricao": "Build a backend server."
     },
     "es": {
+     "titulo": "My Back!",
      "descricao": "Construye un servidor backend."
     }
    }
@@ -3285,9 +3873,11 @@
    "ordem": 7,
    "i18n": {
     "en": {
+     "titulo": "Frontman",
      "descricao": "Build a responsive frontend application."
     },
     "es": {
+     "titulo": "Frontman",
      "descricao": "Desarrolla una aplicación frontend responsiva."
     }
    }
@@ -3331,9 +3921,11 @@
    "ordem": 1,
    "i18n": {
     "en": {
+     "titulo": "Go Go Power BI",
      "descricao": "Build a Power BI dashboard."
     },
     "es": {
+     "titulo": "Go Go Power BI",
      "descricao": "Desarrolla un dashboard en Power BI."
     }
    }
@@ -3569,9 +4161,11 @@
    "ordem": 2,
    "i18n": {
     "en": {
+     "titulo": "Crash \"Bug\" Coot",
      "descricao": "Find bugs in a devbox"
     },
     "es": {
+     "titulo": "Crash \"Bug\" Coot",
      "descricao": "Encuentra bugs en un devbox"
     }
    }
@@ -3591,9 +4185,11 @@
    "ordem": 4,
    "i18n": {
     "en": {
+     "titulo": "Code Souls",
      "descricao": "Build an algorithm or project without AI or documentation. Prove your skills and see if you've learned the boss's patterns."
     },
     "es": {
+     "titulo": "Code Souls",
      "descricao": "Desarrolla un algoritmo o proyecto sin ayuda de IA ni documentación. Demuestra lo que sabes y comprueba si aprendiste los patrones del jefe final."
     }
    }
@@ -3613,9 +4209,11 @@
    "ordem": 8,
    "i18n": {
     "en": {
+     "titulo": "Left 4 Test",
      "descricao": "Report bugs found during regression testing."
     },
     "es": {
+     "titulo": "Left 4 Test",
      "descricao": "Reporta bugs encontrados en pruebas de regresión."
     }
    }
@@ -3635,9 +4233,11 @@
    "ordem": 13,
    "i18n": {
     "en": {
+     "titulo": "Level UP 4x",
      "descricao": "Earn the CTFL certification (Certified Tester Foundation Level 4.0)"
     },
     "es": {
+     "titulo": "Level UP 4x",
      "descricao": "Obtén la certificación CTFL (Certified Tester Foundation Level 4.0)"
     }
    }
@@ -3657,9 +4257,11 @@
    "ordem": 15,
    "i18n": {
     "en": {
+     "titulo": "Moonwalker",
      "descricao": "Run git checkout on an older branch, or use git checkout <commit-hash>"
     },
     "es": {
+     "titulo": "Moonwalker",
      "descricao": "Haz un git checkout a una rama anterior, o usa git checkout <commit-hash>"
     }
    }
@@ -3729,9 +4331,11 @@
    "ordem": 19,
    "i18n": {
     "en": {
+     "titulo": "A2",
      "descricao": "Earn an English certificate at level A2"
     },
     "es": {
+     "titulo": "A2",
      "descricao": "Obtén el certificado de INGLÉS nivel A2"
     }
    }
@@ -3751,9 +4355,11 @@
    "ordem": 20,
    "i18n": {
     "en": {
+     "titulo": "B1",
      "descricao": "Earn an English certificate at level B1"
     },
     "es": {
+     "titulo": "B1",
      "descricao": "Obtén el certificado de INGLÉS nivel B1"
     }
    }
@@ -3773,9 +4379,11 @@
    "ordem": 21,
    "i18n": {
     "en": {
+     "titulo": "B2",
      "descricao": "Earn an English certificate at level B2"
     },
     "es": {
+     "titulo": "B2",
      "descricao": "Obtén el certificado de INGLÉS nivel B2"
     }
    }
@@ -3795,9 +4403,11 @@
    "ordem": 22,
    "i18n": {
     "en": {
+     "titulo": "C1",
      "descricao": "Earn an English certificate at level C1"
     },
     "es": {
+     "titulo": "C1",
      "descricao": "Obtén el certificado de INGLÉS nivel C1"
     }
    }
@@ -3817,9 +4427,11 @@
    "ordem": 23,
    "i18n": {
     "en": {
+     "titulo": "C2",
      "descricao": "Earn an English certificate at level C2"
     },
     "es": {
+     "titulo": "C2",
      "descricao": "Obtén el certificado de INGLÉS nivel C2"
     }
    }
@@ -3839,9 +4451,11 @@
    "ordem": 25,
    "i18n": {
     "en": {
+     "titulo": "American Boy",
      "descricao": "Do international work and get paid in dollars ($)."
     },
     "es": {
+     "titulo": "American Boy",
      "descricao": "Haz un trabajo internacional y cobra en dólares ($)."
     }
    }
@@ -3861,9 +4475,11 @@
    "ordem": 26,
    "i18n": {
     "en": {
+     "titulo": "Mama mia",
      "descricao": "Do international work and get paid in euros (€)."
     },
     "es": {
+     "titulo": "Mama mia",
      "descricao": "Haz un trabajo internacional y cobra en euros (€)."
     }
    }
@@ -4334,17 +4950,6 @@
     "descricao": "QA Engineer com {anos} anos de experiência (Samsung, Americanas, Cinemark LATAM, fintechs). Testes manuais, automação com Playwright e Robot Framework, CTFL e Shift-left. Disponível para freelance e vagas remotas."
    }
   },
-  "sobre": {
-   "en": {
-    "texto": "QA Engineer with {anos} years protecting products in production, from fintechs to Cinemark LATAM. I don't wait for bugs to show up: I join early, question business rules and, when a team process is repetitive, I build the tool that fixes it. I started in IT support, moved through development and found in QA the place where analysis, creativity and care for the people using the product meet."
-   },
-   "es": {
-    "texto": "QA Engineer con {anos} años protegiendo productos en producción, de fintechs a Cinemark LATAM. No espero a que aparezca el bug: entro temprano en la demanda, cuestiono la regla de negocio y, cuando un proceso del equipo es repetitivo, construyo la herramienta que lo resuelve. Empecé en soporte técnico, pasé por desarrollo y encontré en QA el punto donde se unen análisis, creatividad y cuidado por quien usa el producto."
-   },
-   "pt": {
-    "texto": "QA Engineer com {anos} anos protegendo produtos em produção, de fintechs à Cinemark LATAM. Não espero o bug aparecer: entro cedo na demanda, questiono a regra de negócio e, quando um processo do time é repetitivo, construo a ferramenta que resolve. Comecei no suporte técnico, passei pelo desenvolvimento e encontrei no QA o ponto onde análise, criatividade e cuidado com quem usa o produto se encontram."
-   }
-  },
   "patrocinio": {
    "en": {
     "texto": "Some of my projects are free and self-funded. A sponsorship pays for servers, domain and new features, and your brand appears as a supporter.",
@@ -4362,6 +4967,17 @@
     "evangeligo",
     "condonotto"
    ]
+  },
+  "sobre": {
+   "en": {
+    "texto": "I'm a Brazilian QA Engineer from Campinas, São Paulo, with {anos} years protecting products in production, from fintechs to Cinemark LATAM. I don't wait for bugs to show up: I join early, question business rules and, when a team process is repetitive, I build the tool that fixes it. I started in IT support, moved through development and found in QA the place where analysis, creativity and care for the people using the product meet."
+   },
+   "es": {
+    "texto": "Soy brasileño, de Campinas (São Paulo), y QA Engineer con {anos} años protegiendo productos en producción, de fintechs a Cinemark LATAM. No espero a que aparezca el bug: entro temprano en la demanda, cuestiono la regla de negocio y, cuando un proceso del equipo es repetitivo, construyo la herramienta que lo resuelve. Empecé en soporte técnico, pasé por desarrollo y encontré en QA el punto donde se unen análisis, creatividad y cuidado por quien usa el producto."
+   },
+   "pt": {
+    "texto": "Sou brasileiro, de Campinas-SP, e QA Engineer com {anos} anos protegendo produtos em produção, de fintechs à Cinemark LATAM. Não espero o bug aparecer: entro cedo na demanda, questiono a regra de negócio e, quando um processo do time é repetitivo, construo a ferramenta que resolve. Comecei no suporte técnico, passei pelo desenvolvimento e encontrei no QA o ponto onde análise, criatividade e cuidado com quem usa o produto se encontram."
+   }
   }
  }
 }

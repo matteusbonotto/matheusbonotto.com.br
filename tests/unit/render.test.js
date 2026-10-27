@@ -63,7 +63,7 @@ describe('páginas geradas', () => {
   it('o gráfico da carreira tem uma barra por experiência e formação', () => {
     const d = prepararIdioma(bruto, 'pt');
     const svg = graficoCarreira(d, tradutor('pt'));
-    expect(svg.match(/class="g-barra /g)).toHaveLength(d.experiencias.length + d.formacoes.length);
+    expect(svg.match(/class="crono-barra /g)).toHaveLength(d.experiencias.length + d.formacoes.length);
   });
   it('projeto em destaque nunca se repete na vitrine "Explore por área"', () => {
     const html = paginaHTML('', prepararIdioma(bruto, 'pt'), bruto);

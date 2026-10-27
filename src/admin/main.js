@@ -93,7 +93,7 @@ function ligarIdioma(redesenhar) {
 // ---------- estrutura ----------
 const MENU = [
   ['', [['painel', 'painel'], ['mensagens', 'mensagens'], ['conteudo', 'conteudo']]],
-  ['grupoConteudo', [['tabela/projects', 'projects'], ['tabela/feedbacks', 'feedbacks']]],
+  ['grupoConteudo', [['tabela/projects', 'projects'], ['tabela/feedbacks', 'feedbacks'], ['tabela/cv_versions', 'cv_versions']]],
   ['grupoCarreira', [['tabela/professional_history', 'professional_history'], ['tabela/academic_history', 'academic_history'], ['tabela/certifications', 'certifications']]],
   ['grupoCompetencias', [['tabela/skills_tree', 'skills_tree'], ['tabela/hard_skills', 'hard_skills'], ['tabela/soft_skills', 'soft_skills'], ['tabela/languages', 'languages'], ['tabela/achievements', 'achievements']]],
 ];
@@ -442,7 +442,6 @@ function resumoBloco(k, v) {
   if (k === 'valor_hora') return ['brl', 'usd', 'eur'].map(m => `${m.toUpperCase()} ${v[m] ?? '-'}`).join(' · ');
   if (k === 'clientes') return (v || []).map(c => c.nome || c).join(', ');
   if (k === 'palavras_chave') return (v || []).length + ' · ' + (v || []).slice(0, 6).join(', ');
-  if (k === 'cv_variantes') return Object.keys(v || {}).map(x => x.toUpperCase()).join(' · ');
   if (k === 'contato') return v.email || '';
   const pt = v.pt;
   if (Array.isArray(pt)) return pt.map(x => x.titulo).join(', ');
@@ -455,8 +454,6 @@ function editarBloco(k, v, depois) {
   if (k === 'servicos') {
     corpo = IDIOMAS.map(l => `<fieldset class="campo"><legend>${tx(l)}</legend><div data-servicos="${l}">${(v[l] || []).map(s => linhaServico(s)).join('')}</div>
       <button type="button" class="botao" data-add-servico="${l}">+ ${tx('adicionar')}</button></fieldset>`).join('');
-  } else if (k === 'cv_variantes') {
-    corpo = ['qa', 'dev', 'freela', 'basico'].map(vv => `<fieldset class="campo"><legend>${tx('variante')}: ${vv.toUpperCase()}</legend>${IDIOMAS.map(l => `<div class="grade-campos">${campo({ nome: 'titulo' }, v[vv]?.[l]?.titulo, `${vv}_${l}__`)}${campo({ nome: 'resumo', tipo: 'area', linhas: 4 }, v[vv]?.[l]?.resumo, `${vv}_${l}__`)}</div><p class="dica">${tx(l)}</p>`).join('')}</fieldset>`).join('');
   } else if (k === 'palavras_chave') {
     corpo = campo({ nome: 'palavras', tipo: 'tags' }, Array.isArray(v) ? v : []);
   } else if (k === 'clientes') {
@@ -470,8 +467,6 @@ function editarBloco(k, v, depois) {
     let novo;
     if (k === 'servicos') {
       novo = Object.fromEntries(IDIOMAS.map(l => [l, $$(`[data-servicos="${l}"] .servico`, form).map(s => ({ titulo: $('[data-s-titulo]', s).value.trim(), texto: $('[data-s-texto]', s).value.trim() })).filter(s => s.titulo)]));
-    } else if (k === 'cv_variantes') {
-      novo = Object.fromEntries(['qa', 'dev', 'freela', 'basico'].map(vv => [vv, Object.fromEntries(IDIOMAS.map(l => [l, { titulo: form.elements[`${vv}_${l}__titulo`].value.trim(), resumo: form.elements[`${vv}_${l}__resumo`].value.trim() }]))]));
     } else if (k === 'palavras_chave') {
       novo = lerCampo({ nome: 'palavras', tipo: 'tags' }, form);
     } else if (k === 'clientes') {

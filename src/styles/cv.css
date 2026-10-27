@@ -73,3 +73,8 @@
   .folha:last-child { break-after: auto; }
   a { color: inherit; }
 }
+
+/* compactação automática para não sobrar uma folha final quase vazia (src/cv.js) */
+.cv-paginas[data-compacto="1"] .cv-atomo { zoom: .96; }
+.cv-paginas[data-compacto="2"] .cv-atomo { zoom: .92; }
+.cv-paginas[data-compacto="3"] .cv-atomo { zoom: .88; }

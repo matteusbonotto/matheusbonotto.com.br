@@ -89,23 +89,26 @@ function numeros(d, t) {
 
 function destaques(d, t) {
   const dest = d.projetos.filter(p => p.destaque);
+  const cartao = (p, i, copia) => `<article class="destaque" ${copia ? 'aria-hidden="true" inert' : ''}>
+      <div class="destaque-midia">${imgProjeto(p, t)}</div>
+      <div class="destaque-corpo">
+        ${selos(p, t)}
+        <h3>${esc(p.titulo)}</h3>
+        <p class="destaque-desc">${esc(p.descricao_curta)}</p>
+        <button class="btn btn-linha btn-pequeno" type="button" data-abrir-projeto="${esc(p.slug)}">${t('projetos.detalhes')} ${icone('seta')}</button>
+      </div>
+    </article>`;
+  // duas faixas iguais: a animação anda metade do comprimento e recomeça sem emenda
   return `<section class="projetos" id="projetos" aria-labelledby="projetos-titulo">
   <div class="container cabecalho">
     <p class="rotulo">${t('projetos.rotulo')}</p>
     <h2 id="projetos-titulo" data-dividir>${t('projetos.titulo')}</h2>
   </div>
-  <div class="destaques-trilho" data-trilho>
-    <div class="destaques-faixa" data-faixa data-deslize>${dest.map((p, i) => `<article class="destaque" data-inclinar>
-      <div class="destaque-midia">${imgProjeto(p, t)}<span class="destaque-luz" aria-hidden="true"></span></div>
-      <div class="destaque-corpo">
-        <p class="mono destaque-num">${String(i + 1).padStart(2, '0')} / ${String(dest.length).padStart(2, '0')}</p>
-        ${selos(p, t)}
-        <h3>${esc(p.titulo)}</h3>
-        ${p.papel ? `<p class="destaque-papel">${esc(p.papel)}</p>` : ''}
-        <p>${esc(p.descricao_curta)}</p>
-        <button class="btn btn-linha btn-pequeno" type="button" data-abrir-projeto="${esc(p.slug)}">${t('projetos.detalhes')} ${icone('seta')}</button>
-      </div>
-    </article>`).join('')}</div>
+  <div class="vitrine" style="--itens:${dest.length}">
+    <div class="vitrine-trilho">
+      <div class="vitrine-faixa">${dest.map((p, i) => cartao(p, i, false)).join('')}</div>
+      <div class="vitrine-faixa" aria-hidden="true">${dest.map((p, i) => cartao(p, i, true)).join('')}</div>
+    </div>
   </div>
 </section>`;
 }
@@ -128,11 +131,10 @@ function explorar(d, t) {
     const total = d.projetos.filter(p => catsProjeto(p).includes(c)).length;
     const lista = porArea[c];
     const capa = lista.find(p => p.imagem_url);
-    return `<li class="revelar"><a class="area" href="${rota(d.lang, 'projetos')}#${c}" data-inclinar>
-      <span class="area-img">${capa ? imgProjeto(capa, t) : ''}</span>
-      <span class="area-info"><span class="mono">${t('projetos.qtd', { n: total })}</span><strong>${t(`projetos.cat.${c}`)}</strong><span>${t(`projetos.cat.${c}.desc`)}</span>
-        <span class="area-lista">${lista.map(p => `<span>${esc(p.titulo)}</span>`).join('')}</span></span>
-      ${icone('seta')}</a></li>`;
+    return `<li class="revelar"><a class="area" href="${rota(d.lang, 'projetos')}#${c}">
+      <span class="area-img">${capa ? imgProjeto(capa, t) : ''}<span class="area-qtd mono">${t('projetos.qtd', { n: total })}</span></span>
+      <span class="area-info"><strong>${t(`projetos.cat.${c}`)} ${icone('seta')}</strong><span class="area-desc">${t(`projetos.cat.${c}.desc`)}</span>
+        <span class="area-lista">${lista.map(p => `<span>${esc(p.titulo)}</span>`).join('')}</span></span></a></li>`;
   }).join('')}</ul>
 </section>`;
 }
@@ -179,7 +181,7 @@ function recomendacoes(d, t) {
   <div class="container">
     <div class="secao-topo"><div><p class="rotulo">${t('recs.rotulo')}</p><h2 id="recs-titulo" data-dividir>${t('recs.titulo')}</h2></div>
       <div class="recs-acoes">${vistas('recs', t)}<button type="button" class="btn btn-linha btn-pequeno" data-deixar-rec>${t('recs.deixar')}</button></div></div>
-    <ul class="recs-grade" data-vista-alvo="recs" data-vista="grade" data-recs>${[principal, ...r.filter(x => x !== principal)].map((x, i) => cartaoRec(x, t, i === 0, i >= VISIVEIS_RECS)).join('')}</ul>
+    <ul class="recs-grade" data-vista-alvo="recs" data-vista="grade" data-recs data-deslize>${[principal, ...r.filter(x => x !== principal)].map((x, i) => cartaoRec(x, t, i === 0, i >= VISIVEIS_RECS)).join('')}</ul>
     ${r.length > VISIVEIS_RECS ? `<div class="recs-mais"><button type="button" class="btn btn-linha" data-ver-mais-recs aria-expanded="false" data-menos="${esc(t('recs.verMenos'))}">${t('recs.verMais', { n: r.length - VISIVEIS_RECS })}</button></div>` : ''}
   </div>
 </section>`;
@@ -291,61 +293,47 @@ ${galeria.length ? `<div class="galeria" data-galeria>
 // ================= TRAJETÓRIA =================
 const catExp = (c, t) => { try { return c ? t(`trajetoria.cat.${c}`) : ''; } catch { return c; } };
 
-// Gráfico de progresso da carreira: uma linha por período, faixas Profissional e Acadêmico.
+// Gráfico de progresso da carreira (como no projeto original): logos à esquerda e, dentro de cada barra,
+// modalidade, vínculo, empresa, cargo, período e local. No celular a linha do tempo rola para o lado.
+const ICONE_LOCAL = { remoto: 'casa', hibrido: 'hibrido', presencial: 'predio' };
+const iconeLocal = s => ICONE_LOCAL[String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()] || 'predio';
 export function graficoCarreira(d, t, hoje = new Date()) {
   const itens = [
-    ...d.experiencias.map(e => ({ id: e.id, tipo: 'exp', titulo: e.titulo, org: e.instituicao, ini: e.data_inicio, fim: e.atual ? null : e.data_fim, cat: e.categoria_profissional, logo: e.logo_url, modo: [e.tipo_local, e.regime].filter(Boolean).join(' · ') })),
-    ...d.formacoes.map(f => ({ id: f.id, tipo: 'form', titulo: f.curso, org: f.instituicao, ini: f.data_inicio, fim: f.atual ? null : f.data_fim, cat: 'FORM', logo: f.logo_url, modo: [f.tipo_academico, f.tipo_local].filter(Boolean).join(' · ') })),
+    ...d.experiencias.map(e => ({ id: e.id, tipo: 'exp', titulo: e.titulo, org: e.instituicao, ini: e.data_inicio, fim: e.atual ? null : e.data_fim, cat: e.categoria_profissional, logo: e.logo_url, chip: e.regime, onde: e.tipo_local, local: e.local })),
+    ...d.formacoes.map(f => ({ id: f.id, tipo: 'form', titulo: f.curso, org: f.instituicao, ini: f.data_inicio, fim: f.atual ? null : f.data_fim, cat: 'FORM', logo: f.logo_url, chip: f.tipo_academico, onde: f.tipo_local, local: '' })),
   ].filter(i => i.ini);
   if (!itens.length) return '';
   const data = s => (s ? new Date(`${s}T00:00:00`) : hoje);
   const a0 = Math.min(...itens.map(i => data(i.ini).getFullYear()));
   const a1 = hoje.getFullYear() + 1;
   const ini = new Date(a0, 0, 1), fim = new Date(a1, 0, 1);
-  const L = 300, W = 1000, R = 16, LINHA = 54, CAB = 34, TOPO = 30;
-  const x = dt => L + ((dt - ini) / (fim - ini)) * (W - L - R);
-  const grupos = [['exp', t('carreira.profissional')], ['form', t('carreira.academico')]];
-  let y = TOPO, linhas = '';
-  for (const [tipo, nome] of grupos) {
-    const lista = itens.filter(i => i.tipo === tipo).sort((a, b) => data(a.ini) - data(b.ini));
-    if (!lista.length) continue;
-    linhas += `<text class="g-grupo" x="0" y="${y + 20}">${esc(nome.toUpperCase())}</text>`;
-    y += CAB;
-    for (const i of lista) {
-      const x0 = x(data(i.ini)), x1 = Math.max(x(data(i.fim)), x0 + 6);
-      const per = periodo(i.ini, i.fim, !i.fim, t);
-      linhas += `<g class="g-barra g-${i.tipo} g-cat-${esc(i.cat || 'x')}" data-tipo="${i.tipo}" data-abrir-carreira="${i.tipo}:${esc(i.id)}" tabindex="0" role="button" aria-label="${esc(`${i.titulo} · ${i.org}, ${per}`)}">
-        <title>${esc(`${i.titulo} · ${i.org} (${per})`)}</title>
-        <rect class="g-alvo" x="-4" y="${y - 2}" width="${W + 4}" height="${LINHA - 4}" rx="8"/>
-        <clipPath id="cl-${esc(i.id)}"><circle cx="16" cy="${y + 20}" r="16"/></clipPath>
-        <circle class="g-logo-fundo" cx="16" cy="${y + 20}" r="16"/>
-        ${i.logo ? `<image href="${esc(i.logo)}" x="0" y="${y + 4}" width="32" height="32" preserveAspectRatio="xMidYMid slice" clip-path="url(#cl-${esc(i.id)})"/>` : ''}
-        <text class="g-rotulo" x="42" y="${y + 13}">${esc(i.org.length > 30 ? i.org.slice(0, 29) + '…' : i.org)}</text><text class="g-sub" x="42" y="${y + 27}">${esc(i.titulo.length > 36 ? i.titulo.slice(0, 35) + '…' : i.titulo)}</text>
-        <text class="g-modo" x="42" y="${y + 40}">${esc(`${periodo(i.ini, i.fim, !i.fim, t)}${i.modo ? ' · ' + i.modo : ''}`)}</text>
-        <rect class="g-fundo" x="${L}" y="${y + 9}" width="${W - L - R}" height="18" rx="9"/>
-        <rect class="g-valor" x="${x0.toFixed(1)}" y="${y + 9}" width="${(x1 - x0).toFixed(1)}" height="18" rx="9"/>
-        ${!i.fim ? `<circle class="g-agora" cx="${x1.toFixed(1)}" cy="${y + 18}" r="5"/>` : ''}
-      </g>`;
-      y += LINHA;
-    }
-    y += 10;
-  }
+  const pct = dt => (((dt - ini) / (fim - ini)) * 100).toFixed(2);
   const anos = [];
-  for (let a = a0; a <= a1; a++) {
-    const xa = x(new Date(a, 0, 1)).toFixed(1);
-    anos.push(`<line class="g-grade" x1="${xa}" x2="${xa}" y1="${TOPO - 6}" y2="${y}"/><text class="g-ano" x="${xa}" y="16" text-anchor="middle">${a}</text>`);
-  }
-  const xh = x(hoje).toFixed(1);
+  for (let a = a0; a < a1; a++) anos.push(`<span class="crono-ano" style="--x:${pct(new Date(a, 0, 1))}%"><i>${a}</i></span>`);
+  const grupo = (tipo, nome) => {
+    const lista = itens.filter(i => i.tipo === tipo).sort((a, b) => data(a.ini) - data(b.ini));
+    if (!lista.length) return '';
+    return `<p class="crono-grupo mono">${esc(nome)}</p>${lista.map(i => {
+      const per = periodo(i.ini, i.fim, !i.fim, t);
+      const x0 = pct(data(i.ini)), w = Math.max(+pct(data(i.fim)) - x0, 0.5).toFixed(2);
+      return `<div class="crono-linha" data-tipo="${i.tipo}">
+        <span class="crono-logo logo-redondo" aria-hidden="true">${i.logo ? `<img src="${esc(i.logo)}" alt="" width="40" height="40" loading="lazy">` : `<span>${esc(iniciais(i.org))}</span>`}</span>
+        <div class="crono-trilho"><button type="button" class="crono-barra crono-${esc(i.cat || 'x')} ${i.fim ? '' : 'atual'}" style="--l:${x0}%;--w:${w}%" data-abrir-carreira="${i.tipo}:${esc(i.id)}" aria-label="${esc(`${i.titulo} · ${i.org}, ${per}`)}" title="${esc(`${i.org} · ${i.titulo} (${per})`)}">
+          <span class="crono-topo">${icone(iconeLocal(i.onde))}${i.chip ? `<span class="crono-chip">${esc(i.chip)}</span>` : ''}</span>
+          <strong>${esc(i.org)}</strong><span>${esc(i.titulo)}</span><span class="crono-per">${esc(per)}</span>${i.local ? `<span class="crono-local">${esc(i.local)}</span>` : ''}
+        </button></div>
+      </div>`;
+    }).join('')}`;
+  };
   return `<figure class="carreira revelar" data-carreira>
   <figcaption><h2 class="titulo-secundario">${t('carreira.titulo')}</h2><p>${t('carreira.legenda')}</p>
     <ul class="carreira-legenda">${[['QA', t('trajetoria.cat.QA')], ['DEV', t('trajetoria.cat.DEV')], ['INFRA', t('trajetoria.cat.INFRA')], ['FORM', t('carreira.academico')], ['agora', t('carreira.atual')]]
       .map(([k, n]) => `<li><span class="leg leg-${k}" aria-hidden="true"></span>${esc(n)}</li>`).join('')}</ul></figcaption>
-  <div class="carreira-rolagem" tabindex="0">
-    <svg class="carreira-svg" viewBox="0 0 ${W} ${y}" role="group" aria-label="${t('carreira.titulo')}">
-      ${anos.join('')}
-      <line class="g-hoje" x1="${xh}" x2="${xh}" y1="${TOPO - 6}" y2="${y}"/><text class="g-hoje-txt" x="${xh}" y="${y + 0}" dy="-4" text-anchor="end">${t('carreira.hoje')}</text>
-      ${linhas}
-    </svg>
+  <div class="carreira-rolagem" tabindex="0" data-deslize data-crono aria-label="${t('carreira.titulo')}">
+    <div class="crono" style="--anos:${a1 - a0}">
+      <div class="crono-eixo" aria-hidden="true">${anos.join('')}<span class="crono-hoje" style="--x:${pct(hoje)}%"><i>${t('carreira.hoje')}</i></span></div>
+      ${grupo('exp', t('carreira.profissional'))}${grupo('form', t('carreira.academico'))}
+    </div>
   </div>
 </figure>`;
 }

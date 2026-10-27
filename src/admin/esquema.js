@@ -93,6 +93,15 @@ export const SECOES = {
       { nome: 'cursando', tipo: 'bool' }, { nome: 'instituicao', tipo: 'texto' }, { nome: 'ordem', tipo: 'numero' }, { nome: 'visivel', tipo: 'bool', padrao: true },
     ],
   },
+  cv_versions: {
+    icone: 'arquivo', ordem: 'ordem', titulo: r => r.nome, sub: r => `${r.titulo || ''} · base ${String(r.base || '').toUpperCase()}`, chaves: ['visivel'], busca: ['nome', 'titulo', 'slug'],
+    campos: [
+      { nome: 'nome', tipo: 'texto', obrigatorio: true, i18n: true }, { nome: 'slug', tipo: 'texto', obrigatorio: true, ajuda: 'slug' },
+      { nome: 'base', tipo: 'select', opcoes: ['qa', 'dev', 'freela', 'basico'], obrigatorio: true },
+      { nome: 'titulo', tipo: 'texto', i18n: true }, { nome: 'resumo', tipo: 'area', i18n: true, linhas: 6 },
+      { nome: 'ordem', tipo: 'numero' }, { nome: 'visivel', tipo: 'bool', padrao: true },
+    ],
+  },
   achievements: {
     icone: 'trofeu', ordem: 'ordem', titulo: r => r.titulo, sub: r => r.categoria, imagem: r => r.imagem_url, chaves: ['desbloqueado', 'visivel', 'bloqueado'], busca: ['titulo', 'categoria'],
     campos: [
@@ -118,6 +127,5 @@ export const CONTEUDO = {
   clientes: [{ nome: 'itens', tipo: 'clientes' }],
   sobre_mim: [{ nome: 'carreira', tipo: 'area', i18n: true, linhas: 6 }, { nome: 'pessoal', tipo: 'area', i18n: true, linhas: 5 }, { nome: 'missao', tipo: 'area', i18n: true }, { nome: 'visao', tipo: 'area', i18n: true }, { nome: 'valores', tipo: 'lista', i18n: true }],
   patrocinio: [{ nome: 'projetos', tipo: 'tags', ajuda: 'slugs' }, { nome: 'titulo', i18n: true }, { nome: 'texto', tipo: 'area', i18n: true }],
-  cv_variantes: [{ nome: 'itens', tipo: 'variantes' }],
   palavras_chave: [{ nome: 'itens', tipo: 'palavras' }],
 };

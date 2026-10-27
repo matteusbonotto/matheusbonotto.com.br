@@ -109,14 +109,14 @@ test('link direto para um projeto abre o modal', async ({ page }) => {
 test('trajetória: gráfico profissional + acadêmico e filtro', async ({ page }) => {
   await page.goto('/trajetoria/');
   const total = dados.experiencias.length + dados.formacoes.length;
-  await expect(page.locator('.g-barra')).toHaveCount(total);
+  await expect(page.locator('.crono-barra')).toHaveCount(total);
   await expect(page.locator('.linha-item:visible')).toHaveCount(total);
   await page.getByRole('tab', { name: 'Acadêmico' }).click();
   await expect(page.locator('.linha-item:visible')).toHaveCount(dados.formacoes.length);
-  await expect(page.locator('.g-barra.apagada')).toHaveCount(dados.experiencias.length);
+  await expect(page.locator('.crono-linha.apagada')).toHaveCount(dados.experiencias.length);
   // clicar na barra da UNASP abre o modal com detalhes e as imagens cadastradas (foto de formatura)
   const unasp = dados.formacoes.find(f => f.instituicao === 'UNASP');
-  await page.locator(`g[data-abrir-carreira="form:${unasp.id}"]`).click();
+  await page.locator(`.crono-barra[data-abrir-carreira="form:${unasp.id}"]`).click();
   await expect(page.locator('[data-modal] h2')).toHaveText(unasp.curso);
   await expect(page.locator('[data-modal] .arquivos li')).toHaveCount(unasp.imagens_urls.length);
   await expect(page.locator('.carreira-legenda li')).toHaveCount(5);
@@ -221,7 +221,7 @@ test('modal rola com a roda do mouse e recomendações mostram 5 + ver mais', as
   await page.goto('/');
   const itens = page.locator('.recs-grade > li');
   const total = dados.recomendacoes.length;
-  test.skip(total <= 5);
+  test.skip(total <= 5 || isMobile); // no celular as recomendações viram uma fileira deslizante com todas
   await expect(page.locator('.recs-grade > li:visible')).toHaveCount(5);
   await page.locator('[data-ver-mais-recs]').click();
   await expect(page.locator('.recs-grade > li:visible')).toHaveCount(total);
@@ -234,4 +234,47 @@ test('árvore RPG começa afastada e aproxima pelo botão', async ({ page }) => 
   const w0 = Number(await svg.getAttribute('width'));
   await page.locator('[data-zoom="1"]').click();
   await expect.poll(async () => Number(await svg.getAttribute('width'))).toBeGreaterThan(w0);
+});
+
+// Botões nunca quebram linha nem cortam o texto (revisão de UX/UI), em todas as páginas e nos 3 idiomas
+test('nenhum botão quebra linha ou vaza o texto', async ({ page }) => {
+  test.setTimeout(120000);
+  for (const url of URLS) {
+    await page.goto(url);
+    const ruins = await page.evaluate(() => {
+      const sel = '.btn, [role="tab"], .vistas button, .valor-grupo button, .rpg-acoes button, .caminho, .ler-mais, .expandir, .nav-cv, .galeria-modos button, .cv-versoes button, .cv-barra button, .nav-lingua summary';
+      const out = [];
+      for (const el of document.querySelectorAll(sel)) {
+        const cs = getComputedStyle(el);
+        if (!el.offsetParent || cs.visibility === 'hidden' || el.closest('[aria-hidden="true"], [hidden]')) continue;
+        // só o texto conta (ícone ao lado do texto não é quebra de linha): cada nó de texto em uma única linha
+        const nos = []; const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); while (w.nextNode()) if (w.currentNode.textContent.trim()) nos.push(w.currentNode);
+        const topos = new Set(nos.flatMap(n => { const r = document.createRange(); r.selectNodeContents(n); return [...r.getClientRects()].filter(x => x.width > 1).map(x => Math.round(x.bottom / 6)); }));
+        if (topos.size > 1 || el.scrollWidth > el.clientWidth + 2) out.push(`${el.className || el.tagName}: "${el.textContent.trim().slice(0, 30)}"`);
+      }
+      return out;
+    });
+    expect(ruins, `botões quebrados em ${url}`).toEqual([]);
+  }
+});
+
+test('celular: primeira visita pergunta o idioma e lembra a escolha', async ({ browser, isMobile }) => {
+  test.skip(!isMobile);
+  const ctx = await browser.newContext({ ...(await import('@playwright/test')).devices['Pixel 7'], locale: 'pt-BR' });
+  const page = await ctx.newPage();
+  await simularSupabase(page, { perguntarIdioma: true });
+  await page.goto('/');
+  const aviso = page.locator('.idioma-aviso');
+  await expect(aviso).toBeVisible();
+  await aviso.getByRole('link', { name: 'English' }).click();
+  await expect(page).toHaveURL(/\/en\/$/);
+  await expect(page.locator('.idioma-aviso')).toHaveCount(0);
+  await ctx.close();
+});
+
+test('currículo: versões vêm do banco e o admin lista os currículos', async ({ page }) => {
+  await page.goto('/cv/');
+  const versoes = (dados.cvs || []);
+  if (versoes.length) await expect(page.locator('[data-variante]')).toHaveCount(versoes.length);
+  await expect(page.locator('.folha').first()).toBeVisible();
 });

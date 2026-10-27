@@ -22,7 +22,7 @@ test('admin: login, painel, idioma e mensagens', async ({ page, isMobile }) => {
   const erros = vigiarErros(page);
   await simularSupabase(page, { admin: true });
   await entrar(page);
-  await expect(page.locator('.cartoes-numeros li')).toHaveCount(11);
+  await expect(page.locator('.cartoes-numeros li')).toHaveCount(12);
   await semVazamento(page);
   await page.locator('.topo').getByRole('button', { name: 'EN', exact: true }).click();
   await expect(page.getByRole('heading', { name: /Dashboard/ })).toBeVisible();

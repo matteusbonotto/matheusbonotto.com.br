@@ -6,15 +6,17 @@ export const dados = JSON.parse(fs.readFileSync(new URL('../fixtures/dados.json'
 const TABELAS = {
   projects: dados.projetos, professional_history: dados.experiencias, academic_history: dados.formacoes, certifications: dados.certificacoes,
   hard_skills: dados.competencias, soft_skills: dados.comportamentais, languages: dados.idiomas, feedbacks: dados.recomendacoes,
-  skills_tree: dados.arvore, achievements: dados.conquistas, profiles: [dados.perfil],
+  skills_tree: dados.arvore, cv_versions: dados.cvs || [], achievements: dados.conquistas, profiles: [dados.perfil],
   site_content: Object.entries(dados.site).map(([key, value]) => ({ key, value })),
   contact_messages: [{ id: 'm1', nome: 'Recrutadora Teste', email: 'rh@empresa.com', assunto: 'vaga', mensagem: 'Olá, Matheus!', lida: false, created_at: '2026-10-26T12:00:00Z', idioma: 'pt' }],
   admins: [{ user_id: 'u1' }],
 };
 export const URLS = ['/', '/sobre/', '/projetos/', '/trajetoria/', '/competencias/', '/contato/', '/cv/'].flatMap(p => [p, `/en${p}`, `/es${p}`]);
 
-export async function simularSupabase(page, { admin = false } = {}) {
+export async function simularSupabase(page, { admin = false, perguntarIdioma = false } = {}) {
   const escritas = [];
+  // o aviso de idioma da primeira visita cobre o rodapé da tela; só o teste dele o vê
+  if (!perguntarIdioma) await page.addInitScript(() => { try { localStorage.setItem('idioma', 'pt'); } catch {} });
   await page.route(/supabase\.co\/(rest|auth|storage)\/v1\//, async rota => {
     const req = rota.request();
     const url = new URL(req.url());
@@ -56,7 +58,7 @@ export async function semVazamento(page) {
     const fora = [];
     for (const el of document.querySelectorAll('main *, header *, footer *')) {
       const cs = getComputedStyle(el);
-      if (cs.display === 'none' || cs.visibility === 'hidden' || el.closest('[aria-hidden="true"], .campo-isca, [hidden], dialog:not([open]), .letreiro, .destaques-trilho, .recs-trilho, .filtros, .galeria-faixa, .carreira-rolagem, .cv-mesa, .nav-links, .rpg-palco')) continue;
+      if (cs.display === 'none' || cs.visibility === 'hidden' || el.closest('[aria-hidden="true"], .campo-isca, [hidden], dialog:not([open]), .letreiro, .vitrine, .recs-grade, .rodape-links, .carreira-legenda, .filtros, .galeria-faixa, .carreira-rolagem, .cv-mesa, .nav-links, .rpg-palco')) continue;
       const b = el.getBoundingClientRect();
       if (b.width && (b.right > vw + 1 || b.left < -1)) fora.push(`${el.tagName.toLowerCase()}.${[...el.classList].join('.')} (${Math.round(b.left)}→${Math.round(b.right)})`);
     }

@@ -4,7 +4,7 @@ import './styles/cv.css';
 import QRCode from 'qrcode';
 import { tradutor } from './i18n/ui.js';
 import { buscarTudo, prepararIdioma } from './lib/dados.js';
-import { assinatura, conteudoCV, VARIANTES_CV } from './render/documento.js';
+import { assinatura, conteudoCV } from './render/documento.js';
 
 const main = document.querySelector('[data-main]');
 const caixa = document.querySelector('[data-paginas]');
@@ -18,28 +18,38 @@ function paginar() {
   const atomos = [...caixa.querySelectorAll('.cv-atomo')];
   // mede tudo numa folha única, sem zoom
   caixa.style.zoom = 1;
-  caixa.innerHTML = '';
-  const medida = document.createElement('article');
-  medida.className = 'folha medindo';
-  caixa.append(medida);
-  atomos.forEach(a => medida.append(a));
-  const alt = atomos.map(a => {
-    const cs = getComputedStyle(a);
-    return a.getBoundingClientRect().height + parseFloat(cs.marginTop) + parseFloat(cs.marginBottom);
-  });
-  medida.remove();
-
-  const folhas = [];
-  let atual = null, usado = 0;
-  const nova = () => { atual = document.createElement('article'); atual.className = 'folha'; folhas.push(atual); usado = 0; };
-  nova();
-  for (let i = 0; i < atomos.length; i++) {
-    // um bloco "junto" (título, cabeçalho de cargo) só fica na folha se o próximo couber com ele
-    const preciso = atomos[i].hasAttribute('data-junto') && i + 1 < atomos.length ? alt[i] + alt[i + 1] : alt[i];
-    if (usado > 0 && usado + preciso > ALTURA_UTIL) nova();
-    atual.append(atomos[i]);
-    usado += alt[i];
+  const medir = () => {
+    caixa.innerHTML = '';
+    const medida = document.createElement('article');
+    medida.className = 'folha medindo';
+    caixa.append(medida);
+    atomos.forEach(a => medida.append(a));
+    const alt = atomos.map(a => {
+      const cs = getComputedStyle(a);
+      return a.getBoundingClientRect().height + parseFloat(cs.marginTop) + parseFloat(cs.marginBottom);
+    });
+    medida.remove();
+    return alt;
+  };
+  // distribui os blocos; um bloco "junto" (título, cabeçalho de cargo) só fica na folha se o próximo couber com ele
+  const distribuir = alt => {
+    const plano = [{ itens: [], usado: 0 }];
+    for (let i = 0; i < atomos.length; i++) {
+      const preciso = atomos[i].hasAttribute('data-junto') && i + 1 < atomos.length ? alt[i] + alt[i + 1] : alt[i];
+      let f = plano.at(-1);
+      if (f.usado > 0 && f.usado + preciso > ALTURA_UTIL) { f = { itens: [], usado: 0 }; plano.push(f); }
+      f.itens.push(i); f.usado += alt[i];
+    }
+    return plano;
+  };
+  // sem folha final quase vazia: se a última ficaria com pouco conteúdo, compacta um pouco e tenta de novo
+  let plano;
+  for (const nivel of [0, 1, 2, 3]) {
+    caixa.dataset.compacto = nivel;
+    plano = distribuir(medir());
+    if (plano.length === 1 || plano.at(-1).usado > ALTURA_UTIL * 0.3) break;
   }
+  const folhas = plano.map(f => { const el = document.createElement('article'); el.className = 'folha'; f.itens.forEach(i => el.append(atomos[i])); return el; });
   folhas.forEach((f, i) => {
     const cab = document.createElement('p');
     cab.className = 'folha-cabeca';
@@ -87,9 +97,10 @@ async function detalhesVivos() {
 }
 
 let dados = null;
-let variante = new URLSearchParams(location.search).get('perfil');
-if (!VARIANTES_CV.includes(variante)) variante = 'qa';
 const botoesV = [...document.querySelectorAll('[data-variante]')];
+const primeira = botoesV[0]?.dataset.variante;
+let variante = new URLSearchParams(location.search).get('perfil');
+if (!botoesV.some(b => b.dataset.variante === variante)) variante = primeira;
 const arquivo = document.querySelector('.cv-arquivo');
 const nomeBase = arquivo?.textContent || '';
 function desenhar() {
@@ -103,7 +114,7 @@ function desenhar() {
 botoesV.forEach(b => b.addEventListener('click', () => {
   variante = b.dataset.variante;
   const u = new URL(location.href);
-  variante === 'qa' ? u.searchParams.delete('perfil') : u.searchParams.set('perfil', variante);
+  variante === primeira ? u.searchParams.delete('perfil') : u.searchParams.set('perfil', variante);
   history.replaceState(null, '', u);
   desenhar();
 }));
@@ -111,13 +122,13 @@ botoesV.forEach(b => b.addEventListener('click', () => {
 async function iniciar() {
   await document.fonts.ready;
   zoom = ajustar();
-  if (variante === 'qa') desenhar();
+  if (variante === primeira) desenhar();
 }
 iniciar();
 
 buscarTudo().then(bruto => {
   dados = prepararIdioma(bruto, lang);
-  if (assinatura(bruto) === main.dataset.assinatura && variante === 'qa') return;
+  if (assinatura(bruto) === main.dataset.assinatura && variante === primeira) return;
   main.dataset.assinatura = assinatura(bruto);
   desenhar();
-}).catch(() => { if (variante !== 'qa') desenhar(); });
+}).catch(() => { if (variante !== primeira) desenhar(); });

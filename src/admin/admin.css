@@ -130,3 +130,41 @@ input[type=range] { padding: 0; accent-color: var(--acento); }
 .aviso-erro { background: var(--acento); color: #fff; }
 .aviso.saindo { opacity: 0; transform: translate(-50%, 10px); }
 @keyframes aviso { from { opacity: 0; transform: translate(-50%, 10px); } }
+
+/* ================= Visual (mesma identidade do site) ================= */
+.botao.primario { background: var(--acento); border-color: var(--acento); color: #fff; }
+.botao.primario:hover { filter: brightness(1.08); border-color: var(--acento); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .botao.primario { color: #062b2a; } }
+.login { background: radial-gradient(60% 50% at 50% 0%, color-mix(in srgb, var(--acento) 16%, transparent), transparent 70%), var(--bg); }
+.login-caixa { gap: 12px; }
+.login-caixa button[type="submit"], .login-caixa .botao.primario { background: var(--acento); border-color: var(--acento); }
+.marca span { font-stretch: 85%; letter-spacing: -.01em; }
+.topo { box-shadow: 0 1px 0 var(--linha); }
+.lateral { background: color-mix(in srgb, var(--superficie) 70%, var(--bg)); }
+.lateral a { position: relative; color: var(--tinta-2); transition: background-color .2s, color .2s; }
+.lateral a:hover { color: var(--tinta); }
+.lateral a[aria-current="page"] { background: color-mix(in srgb, var(--acento) 16%, transparent); color: var(--tinta); font-weight: 600; }
+.lateral a[aria-current="page"]::before { content: ''; position: absolute; left: -12px; top: 8px; bottom: 8px; width: 3px; border-radius: 0 3px 3px 0; background: var(--acento); }
+/* painel */
+.cartoes-numeros a { position: relative; overflow: hidden; padding: 16px 16px 14px; transition: border-color .2s, transform .3s var(--curva); }
+.cartoes-numeros a::after { content: ''; position: absolute; inset: auto 0 0; height: 3px; background: var(--acento); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--curva); }
+.cartoes-numeros a:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--acento) 50%, transparent); }
+.cartoes-numeros a:hover::after { transform: none; }
+.cartoes-numeros strong { color: var(--tinta); }
+.cartoes-numeros li:first-child strong { color: var(--acento); }
+.pendencias li a:hover { color: var(--acento); }
+/* listas em cartões */
+.itens { display: grid; gap: 8px; }
+.itens li { border: 1px solid var(--linha); border-radius: var(--raio); padding: 10px 12px 10px calc(12px + var(--nivel, 0) * 18px); background: var(--superficie); transition: border-color .2s; }
+.itens li:hover { border-color: var(--linha-forte); }
+.itens img { border-radius: 8px; }
+/* chaves como interruptores */
+.chave { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: .82rem; color: var(--tinta-2); }
+.chave input[type=checkbox] { appearance: none; -webkit-appearance: none; position: relative; width: 34px; height: 20px; min-height: 20px; padding: 0; border-radius: 999px; border: 1px solid var(--linha-forte); background: var(--superficie-2); cursor: pointer; transition: background-color .2s, border-color .2s; flex: none; }
+.chave input[type=checkbox]::after { content: ''; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--tinta-2); transition: transform .25s var(--curva), background-color .2s; }
+.chave input[type=checkbox]:checked { background: var(--acento); border-color: var(--acento); }
+.chave input[type=checkbox]:checked::after { transform: translateX(14px); background: #fff; }
+.chave input[type=checkbox]:checked + span { color: var(--tinta); }
+.opcoes .chave input[type=checkbox] { width: 20px; height: 20px; border-radius: 6px; }
+.opcoes .chave input[type=checkbox]::after { display: none; }
+.opcoes .chave input[type=checkbox]:checked { background: var(--acento) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center / 14px no-repeat; }
