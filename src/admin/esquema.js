@@ -99,9 +99,9 @@ export const SECOES = {
       { nome: 'nome', tipo: 'texto', obrigatorio: true, i18n: true, ajuda: 'cvNome' }, { nome: 'slug', tipo: 'texto', obrigatorio: true, ajuda: 'cvSlug' },
       { nome: 'base', tipo: 'select', opcoes: ['qa', 'dev', 'freela', 'basico'], obrigatorio: true, ajuda: 'cvBase' },
       { nome: 'titulo', tipo: 'texto', i18n: true, ajuda: 'cvTitulo' }, { nome: 'resumo', tipo: 'area', i18n: true, linhas: 6, ajuda: 'cvResumo' },
-      { nome: 'secoes', tipo: 'multi', opcoes: ['resumo', 'servicos', 'experiencia', 'projetos', 'competencias', 'formacao', 'idiomas', 'palavras'], ajuda: 'cvSecoes' },
+      { nome: 'secoes', tipo: 'multi', opcoes: ['resumo', 'servicos', 'experiencia', 'projetos', 'competencias', 'formacao', 'idiomas'], ajuda: 'cvSecoes' },
       { nome: 'detalhe', tipo: 'select', opcoes: ['auto', 'completo', 'resumido', 'minimo'], ajuda: 'cvDetalhe' },
-      { nome: 'projetos', tipo: 'tags', ajuda: 'cvProjetos' }, { nome: 'palavras_chave', tipo: 'tags', ajuda: 'cvPalavras' },
+      { nome: 'projetos', tipo: 'tags', ajuda: 'cvProjetos' },
       { nome: 'mostrar_idade', tipo: 'bool', padrao: true }, { nome: 'ordem', tipo: 'numero' }, { nome: 'visivel', tipo: 'bool', padrao: true },
     ],
   },
@@ -130,5 +130,4 @@ export const CONTEUDO = {
   clientes: [{ nome: 'itens', tipo: 'clientes' }],
   sobre_mim: [{ nome: 'carreira', tipo: 'area', i18n: true, linhas: 6 }, { nome: 'pessoal', tipo: 'area', i18n: true, linhas: 5 }, { nome: 'missao', tipo: 'area', i18n: true }, { nome: 'visao', tipo: 'area', i18n: true }, { nome: 'valores', tipo: 'lista', i18n: true }],
   patrocinio: [{ nome: 'projetos', tipo: 'tags', ajuda: 'slugs' }, { nome: 'titulo', i18n: true }, { nome: 'texto', tipo: 'area', i18n: true }],
-  palavras_chave: [{ nome: 'itens', tipo: 'palavras' }],
 };

@@ -70,10 +70,6 @@ export function conteudoCV(d, t, qr = '', variante) {
   const catsProj = { qa: ['qa'], dev: ['dev', 'vibe'], freela: ['dev', 'qa'], basico: [] }[v];
   const escolhidos = (vt.projetos || []).map(s => d.projetos.find(p => p.slug === s)).filter(Boolean);
   const projetos = escolhidos.length ? escolhidos : d.projetos.filter(p => p.destaque || v === 'freela').filter(p => (p.categorias || [p.categoria]).some(x => catsProj.includes(x))).slice(0, v === 'freela' ? 8 : 6);
-  // palavras-chave para robôs de seleção (ATS/IA): da versão, as gerais ou, sem cadastro, montadas do perfil
-  const automaticas = () => [...new Set([...d.experiencias.map(e => e.titulo), ...d.competencias.map(c => c.nome), ...(d.arvore || []).map(n => n.nome),
-    ...d.projetos.flatMap(p => p.tecnologias || []), 'QA', 'Quality Assurance', 'Software Testing', 'Test Automation'].map(x => String(x || '').trim()).filter(Boolean))];
-  const palavras = vt.palavras_chave?.length ? vt.palavras_chave : d.site.palavras_chave?.length ? d.site.palavras_chave : automaticas();
   const servicos = textoSite(d.site, 'servicos', d.lang);
   return `<header class="cv-atomo cv-cabeca">
   <div class="cv-cabeca-nome">
@@ -98,8 +94,7 @@ ${tem('formacao') ? `${secao(t('trajetoria.formacao'))}
 ${d.formacoes.map(f => `<div class="cv-atomo cv-item-topo"><h3>${esc(f.curso)} · ${esc(f.instituicao)}</h3><span>${esc(periodo(f.data_inicio, f.data_fim, f.atual, t))}</span></div>`).join('')}
 ${d.certificacoes.map(x => `<p class="cv-atomo">${esc(x.nome)} · ${esc(x.instituicao)}${x.validade ? ` (${esc(x.validade)})` : ''}</p>`).join('')}` : ''}
 ${tem('idiomas') ? `${secao(t('sobre.idiomas'))}
-<p class="cv-atomo">${d.idiomas.map(i => `<strong>${esc(i.idioma)}</strong>: ${esc(i.nivel)}`).join(' · ')}</p>` : ''}
-${tem('palavras') && palavras.length ? `<p class="cv-palavras">${palavras.map(esc).join(', ')}</p>` : ''}`;
+<p class="cv-atomo">${d.idiomas.map(i => `<strong>${esc(i.idioma)}</strong>: ${esc(i.nivel)}`).join(' · ')}</p>` : ''}`;
 }
 
 export function paginaCV(d, bruto, qr = '') {

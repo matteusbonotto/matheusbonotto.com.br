@@ -255,7 +255,7 @@
    "destaque": true,
    "bloqueado": false,
    "professional_history_id": "f5f53f4a-8132-48c3-a871-8f066837c3bb",
-   "ordem": 1,
+   "ordem": 0,
    "i18n": {
     "en": {
      "papel": "Founder: product, extension, landing page, admin and backend",
@@ -303,25 +303,109 @@
    "titulo": "Stark Hub",
    "papel": "Idealização, produto e desenvolvimento",
    "descricao_curta": "Plataforma de governança, QA e produtividade construída sobre o fluxo real do Azure DevOps, será escalada para outros times do projeto.",
-   "descricao_completa": "Stark Hub é uma plataforma interna de governança, QA e produtividade da equipe, construída a partir do fluxo de trabalho real com Azure DevOps. A solução reúne em um só lugar informações que antes ficavam espalhadas entre o board do Azure, planilhas de horas e conversas no Slack, centralizando o acompanhamento de QA, itens do dia a dia, horas de trabalho e governança do time.\r\n\r\nO frontend em React é uma reconstrução componentizada do protótipo stark-hub-script, preservando login, autenticação e navegação lateral, com cada módulo pós-login isolado em componentes próprios.\r\n\r\nA plataforma conta com módulos como Quality Board, Meus Itens, Governança do Time, Colaboradores, Import Work Items e Configurações. O Quality Board oferece visão geral dos work items em fluxo de QA, com filtros, gráficos de status por ambiente e país, além de métricas por QA responsável. O módulo Meus Itens exibe cards pessoais para Devs ou cards atribuídos, QA responsável e itens testados para QAs, com resultados de teste integrados.\r\n\r\nA Governança do Time centraliza horas x meta, cards sem apontamento, distribuição por país e relatório executivo para gestão. O módulo de Colaboradores organiza identidade, avatar, papéis como Dev, QA e Gestão, além de aliases usados para cruzar dados do Azure com evidências de teste. O Import Work Items permite importar hierarquias de work items do Azure DevOps com pré-visualização antes da confirmação.\r\n\r\nOs níveis de acesso são separados por perfil. Devs acessam Meus Itens, Horas e Configurações pessoais. QAs acessam tudo do perfil Dev, além de Quality Board e modo QA de Meus Itens. Gestão possui acesso completo, incluindo Produto, Governança, Colaboradores, Import e Conexões globais.\r\n\r\nA segurança foi pensada para proteger dados sensíveis: o Azure DevOps é sempre acessado via backend por Edge Functions, sem PAT hardcoded ou exposto no bundle do frontend. Conexões pessoais de Devs e QAs ficam em localStorage, isoladas por usuário e navegador, enquanto configurações globais da Gestão ficam no Supabase protegidas por policy.\r\n\r\nProjeto desenvolvido por Matheus Bonotto, QA na mblabs.",
+   "descricao_completa": "Stark Hub é uma plataforma interna de governança, QA e produtividade da equipe, construída a partir do fluxo de trabalho real com Azure DevOps. A solução reúne em um só lugar informações que antes ficavam espalhadas entre o board do Azure, planilhas de horas e conversas no Slack, centralizando o acompanhamento de QA, itens do dia a dia, horas de trabalho e governança do time.\n\nO frontend em React é uma reconstrução componentizada do protótipo stark-hub-script, preservando login, autenticação e navegação lateral, com cada módulo pós-login isolado em componentes próprios.\n\nA plataforma conta com módulos como Quality Board, Meus Itens, Governança do Time, Colaboradores, Import Work Items e Configurações. O Quality Board oferece visão geral dos work items em fluxo de QA, com filtros, gráficos de status por ambiente e país, além de métricas por QA responsável. O módulo Meus Itens exibe cards pessoais para Devs ou cards atribuídos, QA responsável e itens testados para QAs, com resultados de teste integrados.\n\nA Governança do Time centraliza horas x meta, cards sem apontamento, distribuição por país e relatório executivo para gestão. O módulo de Colaboradores organiza identidade, avatar, papéis como Dev, QA e Gestão, além de aliases usados para cruzar dados do Azure com evidências de teste. O Import Work Items permite importar hierarquias de work items do Azure DevOps com pré-visualização antes da confirmação.\n\nOs níveis de acesso são separados por perfil. Devs acessam Meus Itens, Horas e Configurações pessoais. QAs acessam tudo do perfil Dev, além de Quality Board e modo QA de Meus Itens. Gestão possui acesso completo, incluindo Produto, Governança, Colaboradores, Import e Conexões globais.\n\nA segurança foi pensada para proteger dados sensíveis: o Azure DevOps é sempre acessado via backend por Edge Functions, sem PAT hardcoded ou exposto no bundle do frontend. Conexões pessoais de Devs e QAs ficam em localStorage, isoladas por usuário e navegador, enquanto configurações globais da Gestão ficam no Supabase protegidas por policy.\n\nProjeto desenvolvido por Matheus Bonotto, QA na mblabs.",
    "categoria": "qa",
    "categorias": [
     "qa",
     "dev",
     "vibe"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/capa.webp?v=mvq4zybg",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/capa.webp?v=mvqshbc5",
    "galeria": [
     {
-     "h": 550,
-     "w": 983,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-01-login.webp",
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-01-inicio.webp",
      "dispositivo": "desktop"
     },
     {
-     "h": 489,
-     "w": 288,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-01-login.webp",
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-02-monitoramento.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-03-daily.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-04-quality-board.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-05-novo-item.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-06-importar-itens.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-07-equipe.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1438,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-08-painel-executivo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 488,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-01-inicio.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 488,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-02-monitoramento.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 488,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-03-daily.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 488,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-04-quality-board.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 488,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-05-novo-item.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 488,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-06-importar-itens.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 488,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-07-equipe.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 488,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-08-painel-executivo.webp",
      "dispositivo": "mobile"
     }
    ],
@@ -350,12 +434,12 @@
     "Proteção de configurações globais no Supabase com policies"
    ],
    "link_projeto": "https://cnkautmblabs.github.io/stark-hub/login",
-   "link_github": "",
+   "link_github": null,
    "data_projeto": "2026-07-01",
    "destaque": true,
    "bloqueado": false,
    "professional_history_id": "f96c568f-d248-4f51-b5cd-3195e0971c06",
-   "ordem": 2,
+   "ordem": 1,
    "i18n": {
     "en": {
      "papel": "Concept, product and development",
@@ -507,15 +591,15 @@
     "google search console",
     "Google Ads"
    ],
-   "funcionalidades": null,
-   "conquistas": null,
+   "funcionalidades": [],
+   "conquistas": [],
    "link_projeto": "https://evangeligo.com.br",
    "link_github": null,
    "data_projeto": null,
    "destaque": true,
    "bloqueado": false,
    "professional_history_id": "f5f53f4a-8132-48c3-a871-8f066837c3bb",
-   "ordem": 3,
+   "ordem": 2,
    "i18n": {
     "en": {
      "papel": "End-to-end product: design, development, QA and marketing",
@@ -684,7 +768,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": null,
-   "ordem": 4,
+   "ordem": 3,
    "i18n": {
     "en": {
      "papel": "Founder: product, development, QA and operations",
@@ -721,6 +805,211 @@
       "Documentos con aviso de vencimiento"
      ],
      "descricao_completa": "Condonotto nació del portal que hice para mi propio condominio y se convirtió en una plataforma para varios condominios. La portería fotografía la etiqueta del paquete y la app completa el nombre y la unidad; el residente recibe la notificación con la foto y firma al retirarlo. Las visitas se registran por un enlace, y el administrador sigue incidencias, encuestas y documentos en un solo panel.\n\nEs una PWA (se abre en el navegador y queda en la pantalla de inicio, sin tienda de apps), en portugués, inglés y español, con datos aislados por condominio, verificación en dos pasos para la gestión, notificaciones por e-mail y push y suscripción mensual con período gratis."
+    }
+   }
+  },
+  {
+   "id": "acb60cb0-916c-4e75-88fc-c44d50ac37b3",
+   "slug": "squidev",
+   "titulo": "Squidev",
+   "papel": "",
+   "descricao_curta": "Site da Squidev, minha marca de soluções digitais: serviços, forma de trabalho e formulário de contato, leve e responsivo.",
+   "descricao_completa": "Site institucional criado para representar a marca Squidev, apresentando serviços, identidade visual e presença digital, com foco em simplicidade, clareza e profissionalismo.",
+   "categoria": "dev",
+   "categorias": [
+    "dev"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/capa.webp?v=mvq50kf6",
+   "galeria": [
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-01-hero.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-02-problema.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-03-sobre.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-04-como-ajudamos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-05-formulario.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-01-hero.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-02-problema.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-03-como-ajudamos.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-04-contato.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-05-formulario.webp",
+     "dispositivo": "mobile"
+    }
+   ],
+   "tecnologias": [
+    "HTML",
+    "CSS",
+    "JavaScript"
+   ],
+   "funcionalidades": [],
+   "conquistas": [],
+   "link_projeto": "https://squidev.com.br",
+   "link_github": "https://github.com/matteusbonotto/squidev",
+   "data_projeto": null,
+   "destaque": true,
+   "bloqueado": false,
+   "professional_history_id": "f5f53f4a-8132-48c3-a871-8f066837c3bb",
+   "ordem": 4,
+   "i18n": {
+    "en": {
+     "titulo": "Squidev",
+     "descricao_curta": "Website for Squidev, my digital solutions brand: services, how we work and a contact form, light and responsive.",
+     "descricao_completa": "Company website built to represent the Squidev brand, presenting services, visual identity and digital presence with a focus on simplicity, clarity and professionalism."
+    },
+    "es": {
+     "titulo": "Squidev",
+     "descricao_curta": "Sitio de Squidev, mi marca de soluciones digitales: servicios, forma de trabajo y formulario de contacto, liviano y responsivo.",
+     "descricao_completa": "Sitio institucional creado para representar la marca Squidev, presentando servicios, identidad visual y presencia digital, con foco en simplicidad, claridad y profesionalismo."
+    }
+   }
+  },
+  {
+   "id": "079d3358-ecdb-43b4-a891-ce233198599b",
+   "slug": "simulador-ctfl",
+   "titulo": "Simulador CTFL (ISTQB)",
+   "papel": "Ferramenta aberta para a comunidade de QA",
+   "descricao_curta": "Simulado do exame ISTQB CTFL 4.0 com cronômetro, questões por nível cognitivo, gabarito comentado e histórico de tentativas.",
+   "descricao_completa": "Aplicação web criada para auxiliar na preparação para a certificação ISTQB CTFL v4.0, simulando o exame real com temporizador, questões categorizadas por nível cognitivo e controle de desempenho, ajudando candidatos a treinar de forma prática e objetiva.",
+   "categoria": "qa",
+   "categorias": [
+    "qa",
+    "dev"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/capa.webp?v=mvq50fml",
+   "galeria": [
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-01-inicio.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-02-questao.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-03-ultima-questao.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-04-resultado-gabarito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-05-historico.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-01-inicio.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-02-questao.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-03-paginacao.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-04-resultado.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-05-historico.webp",
+     "dispositivo": "mobile"
+    }
+   ],
+   "tecnologias": [
+    "HTML",
+    "CSS",
+    "JavaScript"
+   ],
+   "funcionalidades": [],
+   "conquistas": [],
+   "link_projeto": "https://matteusbonotto.github.io/qa-simulador-ctfl/",
+   "link_github": "https://github.com/matteusbonotto/simulador-ctfl",
+   "data_projeto": null,
+   "destaque": true,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 5,
+   "i18n": {
+    "en": {
+     "papel": "Open tool for the QA community",
+     "titulo": "CTFL Exam Simulator (ISTQB)",
+     "descricao_curta": "ISTQB CTFL 4.0 mock exam with a timer, questions by cognitive level, answer key and attempt history.",
+     "descricao_completa": "Web app to help candidates prepare for the ISTQB CTFL v4.0 certification, simulating the real exam with a timer, questions categorized by cognitive level and performance tracking for practical, focused training."
+    },
+    "es": {
+     "papel": "Herramienta abierta para la comunidad QA",
+     "titulo": "Simulador CTFL (ISTQB)",
+     "descricao_curta": "Simulacro del examen ISTQB CTFL 4.0 con cronómetro, preguntas por nivel cognitivo, respuestas comentadas e historial de intentos.",
+     "descricao_completa": "Aplicación web para ayudar a preparar la certificación ISTQB CTFL v4.0, simulando el examen real con temporizador, preguntas categorizadas por nivel cognitivo y control de desempeño para entrenar de forma práctica y objetiva."
     }
    }
   },
@@ -768,10 +1057,10 @@
    "link_projeto": null,
    "link_github": "https://github.com/matteusbonotto/mb-copiloro-para-jira",
    "data_projeto": "2026-05-29",
-   "destaque": true,
+   "destaque": false,
    "bloqueado": false,
    "professional_history_id": "f96c568f-d248-4f51-b5cd-3195e0971c06",
-   "ordem": 4,
+   "ordem": 50,
    "i18n": {
     "en": {
      "papel": "Internal tool for the Bullla team",
@@ -908,10 +1197,10 @@
    "link_projeto": "https://matteusbonotto.github.io/qa-cnk-issue-generator/",
    "link_github": "https://github.com/matteusbonotto/qa-cnk-issue-generator",
    "data_projeto": "2025-07-11",
-   "destaque": true,
+   "destaque": false,
    "bloqueado": false,
    "professional_history_id": "f96c568f-d248-4f51-b5cd-3195e0971c06",
-   "ordem": 5,
+   "ordem": 60,
    "i18n": {
     "en": {
      "papel": "Bug-reporting standard for the Cinemark team (MB Labs)",
@@ -924,110 +1213,6 @@
      "titulo": "QA CNK Issue Generator",
      "descricao_curta": "Formulario que estandariza bugs e incidentes del proyecto Cinemark: entorno, pasos, evidencias y regla de negocio en un mismo formato para QA, PO y devs.",
      "descricao_completa": "Aplicación web creada para estandarizar la apertura de bugs, incidentes y demandas de QA en el proyecto Cinemark, utilizada en MB Labs. Organiza todo lo que una issue necesita, descripción, ambiente, evidencias, reglas de negocio, pasos de reproducción y datos técnicos, siguiendo un patrón claro. Facilita la comunicación entre QA, PM, PO y el equipo técnico, reduciendo retrabajo y mejorando el análisis de los problemas."
-    }
-   }
-  },
-  {
-   "id": "079d3358-ecdb-43b4-a891-ce233198599b",
-   "slug": "simulador-ctfl",
-   "titulo": "Simulador CTFL (ISTQB)",
-   "papel": "Ferramenta aberta para a comunidade de QA",
-   "descricao_curta": "Simulado do exame ISTQB CTFL 4.0 com cronômetro, questões por nível cognitivo, gabarito comentado e histórico de tentativas.",
-   "descricao_completa": "Aplicação web criada para auxiliar na preparação para a certificação ISTQB CTFL v4.0, simulando o exame real com temporizador, questões categorizadas por nível cognitivo e controle de desempenho, ajudando candidatos a treinar de forma prática e objetiva.",
-   "categoria": "qa",
-   "categorias": [
-    "qa",
-    "dev"
-   ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/capa.webp?v=mvq50fml",
-   "galeria": [
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-01-inicio.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-02-questao.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-03-ultima-questao.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-04-resultado-gabarito.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-05-historico.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-01-inicio.webp",
-     "dispositivo": "mobile"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-02-questao.webp",
-     "dispositivo": "mobile"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-03-paginacao.webp",
-     "dispositivo": "mobile"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-04-resultado.webp",
-     "dispositivo": "mobile"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-05-historico.webp",
-     "dispositivo": "mobile"
-    }
-   ],
-   "tecnologias": [
-    "HTML",
-    "CSS",
-    "JavaScript"
-   ],
-   "funcionalidades": null,
-   "conquistas": null,
-   "link_projeto": "https://matteusbonotto.github.io/qa-simulador-ctfl/",
-   "link_github": "https://github.com/matteusbonotto/simulador-ctfl",
-   "data_projeto": null,
-   "destaque": true,
-   "bloqueado": false,
-   "professional_history_id": null,
-   "ordem": 6,
-   "i18n": {
-    "en": {
-     "papel": "Open tool for the QA community",
-     "titulo": "CTFL Exam Simulator (ISTQB)",
-     "descricao_curta": "ISTQB CTFL 4.0 mock exam with a timer, questions by cognitive level, answer key and attempt history.",
-     "descricao_completa": "Web app to help candidates prepare for the ISTQB CTFL v4.0 certification, simulating the real exam with a timer, questions categorized by cognitive level and performance tracking for practical, focused training."
-    },
-    "es": {
-     "papel": "Herramienta abierta para la comunidad QA",
-     "titulo": "Simulador CTFL (ISTQB)",
-     "descricao_curta": "Simulacro del examen ISTQB CTFL 4.0 con cronómetro, preguntas por nivel cognitivo, respuestas comentadas e historial de intentos.",
-     "descricao_completa": "Aplicación web para ayudar a preparar la certificación ISTQB CTFL v4.0, simulando el examen real con temporizador, preguntas categorizadas por nivel cognitivo y control de desempeño para entrenar de forma práctica y objetiva."
     }
    }
   },
@@ -1058,7 +1243,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": null,
-   "ordem": 8,
+   "ordem": 90,
    "i18n": {
     "en": {
      "titulo": "Playwright Automation",
@@ -1069,107 +1254,6 @@
      "titulo": "Playwright Automation",
      "descricao_curta": "Suite end-to-end con Playwright que automatiza las validaciones repetidas de la regresión y hace cada ciclo de prueba más rápido y confiable.",
      "descricao_completa": "Proyecto de automatización de pruebas end-to-end con Playwright, creado para reducir tareas repetitivas, cubrir validaciones recurrentes y hacer la regresión más rápida, organizada y confiable."
-    }
-   }
-  },
-  {
-   "id": "acb60cb0-916c-4e75-88fc-c44d50ac37b3",
-   "slug": "squidev",
-   "titulo": "Squidev",
-   "papel": null,
-   "descricao_curta": "Site da Squidev, minha marca de soluções digitais: serviços, forma de trabalho e formulário de contato, leve e responsivo.",
-   "descricao_completa": "Site institucional criado para representar a marca Squidev, apresentando serviços, identidade visual e presença digital, com foco em simplicidade, clareza e profissionalismo.",
-   "categoria": "dev",
-   "categorias": [
-    "dev"
-   ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/capa.webp?v=mvq50kf6",
-   "galeria": [
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-01-hero.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-02-problema.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-03-sobre.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-04-como-ajudamos.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/desktop-05-formulario.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-01-hero.webp",
-     "dispositivo": "mobile"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-02-problema.webp",
-     "dispositivo": "mobile"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-03-como-ajudamos.webp",
-     "dispositivo": "mobile"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-04-contato.webp",
-     "dispositivo": "mobile"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/mobile-05-formulario.webp",
-     "dispositivo": "mobile"
-    }
-   ],
-   "tecnologias": [
-    "HTML",
-    "CSS",
-    "JavaScript"
-   ],
-   "funcionalidades": null,
-   "conquistas": null,
-   "link_projeto": "https://squidev.com.br",
-   "link_github": "https://github.com/matteusbonotto/squidev",
-   "data_projeto": null,
-   "destaque": false,
-   "bloqueado": false,
-   "professional_history_id": "f5f53f4a-8132-48c3-a871-8f066837c3bb",
-   "ordem": 9,
-   "i18n": {
-    "en": {
-     "titulo": "Squidev",
-     "descricao_curta": "Website for Squidev, my digital solutions brand: services, how we work and a contact form, light and responsive.",
-     "descricao_completa": "Company website built to represent the Squidev brand, presenting services, visual identity and digital presence with a focus on simplicity, clarity and professionalism."
-    },
-    "es": {
-     "titulo": "Squidev",
-     "descricao_curta": "Sitio de Squidev, mi marca de soluciones digitales: servicios, forma de trabajo y formulario de contacto, liviano y responsivo.",
-     "descricao_completa": "Sitio institucional creado para representar la marca Squidev, presentando servicios, identidad visual y presencia digital, con foco en simplicidad, claridad y profesionalismo."
     }
    }
   },
@@ -1261,7 +1345,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": "f5f53f4a-8132-48c3-a871-8f066837c3bb",
-   "ordem": 10,
+   "ordem": 110,
    "i18n": {
     "en": {
      "titulo": "Driving instructor Jaqueline, PWA site",
@@ -1308,7 +1392,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": null,
-   "ordem": 11,
+   "ordem": 120,
    "i18n": {
     "en": {
      "titulo": "KaBuM Challenge · Robot Automation",
@@ -1409,7 +1493,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": "f5f53f4a-8132-48c3-a871-8f066837c3bb",
-   "ordem": 12,
+   "ordem": 130,
    "i18n": {
     "en": {
      "titulo": "IPVida, Vida Presbyterian Church portal",
@@ -1510,7 +1594,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": "f5f53f4a-8132-48c3-a871-8f066837c3bb",
-   "ordem": 13,
+   "ordem": 140,
    "i18n": {
     "en": {
      "titulo": "Achadubom",
@@ -1557,7 +1641,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": null,
-   "ordem": 14,
+   "ordem": 150,
    "i18n": {
     "en": {
      "titulo": "Random Brother",
@@ -1603,7 +1687,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": "f96c568f-d248-4f51-b5cd-3195e0971c06",
-   "ordem": 15,
+   "ordem": 160,
    "i18n": {
     "en": {
      "titulo": "ImportAccount Assistant · Trinus",
@@ -1663,7 +1747,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": "f5f53f4a-8132-48c3-a871-8f066837c3bb",
-   "ordem": 16,
+   "ordem": 170,
    "i18n": {
     "en": {
      "titulo": "Fofuxa Fashion",
@@ -1723,7 +1807,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": "f5f53f4a-8132-48c3-a871-8f066837c3bb",
-   "ordem": 17,
+   "ordem": 180,
    "i18n": {
     "en": {
      "titulo": "Rodolfo Seifert",
@@ -1807,7 +1891,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": "83d5192d-7713-4302-a193-4ca7435e5776",
-   "ordem": 18,
+   "ordem": 190,
    "i18n": {
     "en": {
      "titulo": "TaskAssistant Americanas",
@@ -1853,7 +1937,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": "83d5192d-7713-4302-a193-4ca7435e5776",
-   "ordem": 19,
+   "ordem": 200,
    "i18n": {
     "en": {
      "titulo": "ImportProducts Assistant · Americanas",
@@ -1930,7 +2014,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": "f5f53f4a-8132-48c3-a871-8f066837c3bb",
-   "ordem": 20,
+   "ordem": 210,
    "i18n": {
     "en": {
      "titulo": "Paraíso Bio, portal",
@@ -1988,7 +2072,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": null,
-   "ordem": 30,
+   "ordem": 220,
    "i18n": {
     "en": {
      "titulo": "Product Dashboard",
@@ -2068,7 +2152,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": null,
-   "ordem": 31,
+   "ordem": 230,
    "i18n": {
     "en": {
      "titulo": "Profile Analysis Dashboard",
@@ -2148,7 +2232,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": null,
-   "ordem": 32,
+   "ordem": 240,
    "i18n": {
     "en": {
      "titulo": "Customer Service Dashboard",
@@ -2228,7 +2312,7 @@
    "destaque": false,
    "bloqueado": false,
    "professional_history_id": null,
-   "ordem": 33,
+   "ordem": 250,
    "i18n": {
     "en": {
      "titulo": "Sales Dashboard",

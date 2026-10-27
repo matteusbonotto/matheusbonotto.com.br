@@ -94,10 +94,14 @@ main, .rodape { position: relative; z-index: 1; }
 .status-ponto { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 0 var(--ok); animation: pulso 2s infinite; flex: none; }
 @keyframes pulso { 70% { box-shadow: 0 0 0 8px transparent; } }
 @media (max-height: 700px) and (max-width: 959px) { .hero-sub { display: none; } }
+/* Desktop: palco com as mesmas bordas dos dois lados (até 1720px, centralizado em telas largas); texto na coluna
+   da esquerda, vídeo na da direita e um vão garantido entre eles. Medidas em cqw (largura do palco, sem a barra
+   de rolagem) para os dois lados usarem a mesma referência; o .container não entra aqui porque estreita só o texto. */
 @media (min-width: 960px) {
-  .hero-midia { top: calc(50% + var(--nav) / 2); left: auto; right: var(--margem); width: 50vw; translate: 0 -50%; }
-  .hero-conteudo { inset: 0; display: flex; align-items: center; padding-top: var(--nav); }
-  .hero-texto { width: calc(50vw - 2 * var(--margem) - 32px); max-width: 600px; }
+  .hero-palco { container-type: inline-size; --borda: max(var(--margem), (100cqw - 1720px) / 2); --vao: clamp(40px, 4cqw, 80px); }
+  .hero-midia { --palco: calc(100cqw - 2 * var(--borda)); top: calc(50% + var(--nav) / 2); left: auto; right: var(--borda); width: calc(var(--palco) * .56); translate: 0 -50%; }
+  .hero-conteudo { --palco: calc(100cqw - 2 * var(--borda)); inset: 0; display: flex; align-items: center; padding-top: var(--nav); max-width: none; padding-inline: var(--borda); }
+  .hero-texto { width: min(640px, var(--palco) * .44 - var(--vao)); }
   .hero-texto .status { display: inline-flex; margin-bottom: 18px; }
   .hero-titulo { font-size: clamp(2.6rem, min(1rem + 4.2vw, 10svh), 5.6rem); }
 }

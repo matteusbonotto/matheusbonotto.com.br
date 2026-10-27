@@ -64,6 +64,28 @@ test('abertura: título escondido sobre o vídeo e visível depois da rolagem', 
   await expect(page.locator('.caminhos')).toBeInViewport();
 });
 
+test('abertura no desktop: texto à esquerda e vídeo à direita nunca se encostam, em qualquer resolução', async ({ browser, isMobile }) => {
+  test.skip(isMobile, 'no celular o texto fica abaixo do vídeo');
+  for (const [width, height] of [[960, 720], [1280, 720], [1366, 768], [1536, 864], [1920, 1080], [2560, 1440], [3440, 1440]]) {
+    const ctx = await browser.newContext({ viewport: { width, height } });
+    const page = await ctx.newPage();
+    await simularSupabase(page);
+    await page.goto('/');
+    await expect(page.locator('.hero.quadros')).toHaveCount(1);
+    await page.evaluate(() => scrollTo(0, document.querySelector('[data-hero]').offsetHeight - innerHeight));
+    await expect(page.locator('.hero-titulo')).toHaveCSS('opacity', '1', { timeout: 5000 });
+    await page.waitForTimeout(800); // o scrub do vídeo termina de encolher
+    const r = await page.evaluate(() => {
+      const m = document.querySelector('[data-hero-midia]').getBoundingClientRect();
+      const t = [...document.querySelectorAll('.hero-texto *')].map(e => e.getBoundingClientRect()).filter(q => q.width && q.height);
+      return { textoDir: Math.max(...t.map(q => q.right)), midiaEsq: m.left, base: Math.max(...t.map(q => q.bottom)) };
+    });
+    expect(r.midiaEsq - r.textoDir, `${width}x${height}: vão entre texto e vídeo`).toBeGreaterThanOrEqual(32);
+    expect(r.base, `${width}x${height}: texto cabe na tela`).toBeLessThanOrEqual(height);
+    await ctx.close();
+  }
+});
+
 test('com movimento reduzido tudo aparece sem animação', async ({ browser }) => {
   const ctx = await browser.newContext({ reducedMotion: 'reduce' });
   const page = await ctx.newPage();
@@ -359,16 +381,6 @@ test('competências: grade e lista simples abrem o detalhe da habilidade', async
   await expect(page.locator('[data-modal] .skill-cabeca')).toBeVisible();
 });
 
-test('currículo: palavras-chave para robôs de triagem, na cor da folha e selecionáveis', async ({ page }) => {
-  await page.goto('/cv/');
-  const kw = page.locator('.folha:last-of-type .cv-palavras');
-  await expect(kw).toHaveCount(1);
-  const [cor, fundo, selecao] = await kw.evaluate(el => [getComputedStyle(el).color, getComputedStyle(el.closest('.folha')).backgroundColor, getComputedStyle(el).userSelect]);
-  expect(cor).toBe(fundo);
-  expect(selecao).not.toBe('none');
-  await page.emulateMedia({ media: 'print' });
-  await expect(kw).not.toHaveCSS('display', 'none');
-});
 
 test('certificados abrem na galeria em tela cheia e Esc fecha', async ({ page }) => {
   test.skip(!dados.certificacoes.some(c => c.certificado_url));

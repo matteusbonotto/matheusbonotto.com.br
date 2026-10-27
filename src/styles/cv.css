@@ -15,11 +15,6 @@
 .cv-versoes button { padding: 6px 10px; border-radius: 7px; font-size: .8rem; color: var(--tinta-2); }
 .cv-versoes button[aria-pressed="true"] { background: var(--tinta); color: var(--bg); }
 @media (max-width: 719px) { .cv-barra { flex-wrap: wrap; } .cv-versoes { order: 10; width: 100%; justify-content: space-between; } .cv-arquivo { display: none; } }
-/* Palavras-chave para leitores automáticos (ATS/IA): na cor do papel e fora da impressão */
-/* palavras-chave na cor do papel (mesma variável do fundo da folha): robôs de triagem leem e copiar/colar pega,
-   mas o olho não vê; ficam no rodapé da última folha */
-.cv-palavras, .folha p.cv-palavras { position: absolute; left: 14mm; right: 14mm; bottom: 9mm; margin: 0; color: var(--papel, #fff) !important; font-size: 4pt; line-height: 1.05; overflow: hidden; max-height: 12mm; }
-.cv-palavras::selection { color: var(--papel, #fff); background: var(--papel, #fff); }
 .cv-zoom { display: none; align-items: center; border: 1px solid var(--linha-forte); border-radius: 8px; overflow: hidden; }
 .cv-zoom button { min-width: 36px; height: 36px; padding: 0 8px; font-size: 1rem; }
 .cv-zoom button.mono { font-size: .78rem; min-width: 56px; border-inline: 1px solid var(--linha); }
