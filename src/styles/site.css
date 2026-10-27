@@ -1353,3 +1353,63 @@ img { transition: opacity .6s ease; }
   .manifesto-texto { inset: calc(var(--nav) + 100vw * 9 / 16 * 0.97 + 20px) 0 auto; display: block; padding-bottom: 0; }
   .manifesto-veu { background: linear-gradient(180deg, transparent 0, transparent calc(var(--nav) + 100vw * 9 / 16 * 0.8), #0b0b0d calc(var(--nav) + 100vw * 9 / 16 + 4px)); }
 }
+
+/* ================= Modais: altura do conteúdo, fechar sem roubar coluna, visual por tipo ================= */
+/* o <dialog> modal tem inset 0: com height auto ele esticava até o fim da tela; fit-content mede o conteúdo */
+@media (min-width: 960px) { .modal { height: fit-content; } }
+/* o botão de fechar fica preso no canto sem ocupar uma coluna (antes o float empurrava o conteúdo e sobrava espaço à direita) */
+.modal-fechar { float: none; position: sticky; top: 14px; margin: 0 0 -44px auto; box-shadow: 0 6px 18px -6px rgb(0 0 0 / .35); transition: transform .3s var(--curva), background-color .2s; }
+.modal-fechar:hover { transform: rotate(90deg); }
+.modal-fechar:focus-visible { outline: 2px solid var(--acento); outline-offset: 3px; }
+.modal-fechar:focus:not(:focus-visible) { outline: none; }
+.modal-cabeca, .carreira-cabeca, .skill-cabeca, .rec-modal .autor, .conquista-detalhe > div:not(.medalha) > :first-child, .form-rec > h2 { padding-right: 56px; }
+.modal-cabeca { border-bottom: 1px solid var(--linha); padding-bottom: 18px; margin-bottom: 4px; }
+.modal-caixa { padding-top: 22px; }
+@media (min-width: 960px) { .modal-caixa { padding: 28px 44px 44px; } .modal.modal-estreito .modal-caixa { padding: 28px 36px 36px; } }
+
+/* recomendação: autor em destaque e texto como citação */
+.rec-modal { gap: 16px; }
+.rec-modal .autor { padding-bottom: 16px; border-bottom: 1px solid var(--linha); }
+.rec-modal .autor img, .rec-modal .autor .autor-ini { width: 56px; height: 56px; }
+.rec-modal blockquote { position: relative; padding-left: 22px; border-left: 3px solid var(--acento); font-size: 1rem; }
+.rec-modal blockquote::before { content: '\201C'; position: absolute; left: 14px; top: -22px; font-size: 4rem; line-height: 1; color: color-mix(in srgb, var(--acento) 30%, transparent); font-family: Georgia, serif; pointer-events: none; }
+.rec-modal .fonte { margin-left: auto; }
+
+/* conquista: medalha + texto alinhados, evidências como botões numa linha */
+.conquista-detalhe { align-items: start; }
+.conquista-detalhe .arquivos { display: flex; flex-wrap: wrap; gap: 8px; grid-template-columns: none; margin-top: 14px; }
+.conquista-detalhe .arquivos li:has(> a[data-visor]) { width: 140px; }
+.conquista-detalhe .arquivos a.btn { aspect-ratio: auto; display: inline-flex; flex-direction: row; white-space: nowrap; border-radius: 999px; overflow: visible; }
+.conquista-status { display: inline-flex; padding: 4px 10px; border-radius: 999px; background: color-mix(in srgb, var(--acento) 10%, transparent); }
+@media (max-width: 719px) { .conquista-detalhe { justify-items: center; text-align: center; } .conquista-detalhe .arquivos { justify-content: center; } .conquista-detalhe > div:not(.medalha) > :first-child { padding-right: 0; } }
+
+/* celular: o modal ocupa a tela, com cabeçalho mais enxuto */
+@media (max-width: 959px) {
+  .modal-caixa { padding: 16px var(--margem) 32px; }
+  .modal-fechar { width: 40px; height: 40px; margin-bottom: -40px; top: 10px; }
+}
+
+/* ================= Trajetória no celular: painel de BI mobile ================= */
+.crono-movel { display: none; }
+@media (max-width: 600px) {
+  .carreira-rolagem { display: none; }
+  .crono-movel { display: grid; gap: 10px; }
+  .crono-kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .crono-kpi { display: grid; gap: 2px; padding: 10px 12px; border-radius: 12px; background: var(--superficie); border: 1px solid var(--linha); border-left: 4px solid var(--cor); }
+  .crono-kpi strong { font-size: 1.15rem; font-weight: 750; font-stretch: 85%; }
+  .crono-kpi span { font-size: .75rem; color: var(--tinta-3); }
+  .crono-m-eixo { display: flex; justify-content: space-between; font-size: .7rem; color: var(--tinta-3); padding: 6px 0 0 44px; }
+  .crono-movel .crono-grupo { margin: 6px 0 0; }
+  .crono-m-lista { display: grid; }
+  .crono-m-linha { width: 100%; display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; column-gap: 12px; row-gap: 6px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--linha); text-align: left; color: inherit; transition: opacity .3s; }
+  .crono-m-linha .crono-logo { grid-row: span 3; align-self: start; width: 32px; height: 32px; }
+  .crono-m-txt { display: grid; min-width: 0; }
+  .crono-m-txt strong { font-size: .92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .crono-m-txt span { font-size: .8rem; color: var(--tinta-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .crono-m-dur { font-size: .75rem; color: var(--tinta-2); align-self: start; padding-top: 2px; }
+  .crono-m-trilho { grid-column: 2 / -1; position: relative; height: 8px; border-radius: 99px; background: color-mix(in srgb, var(--tinta) 7%, transparent); }
+  .crono-m-trilho i { position: absolute; top: 0; bottom: 0; left: var(--l); width: var(--w); min-width: 6px; border-radius: 99px; background: var(--cor); }
+  .crono-m-trilho i.atual { box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor) 25%, transparent); }
+  .crono-m-per { grid-column: 2 / -1; font-size: .72rem; color: var(--tinta-3); }
+  .crono-m-linha.apagada { opacity: .25; }
+}

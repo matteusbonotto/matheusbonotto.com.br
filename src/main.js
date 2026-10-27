@@ -733,7 +733,7 @@ function trajetoriaEfeitos(raiz) {
   const marcar = abasTeclado(botoes, b => {
     marcar(b);
     const f = b.dataset.filtroLinha;
-    $$('.crono-linha', area).forEach(g => g.classList.toggle('apagada', f !== 'todos' && g.dataset.tipo !== f));
+    $$('.crono-linha, .crono-m-linha', area).forEach(g => g.classList.toggle('apagada', f !== 'todos' && g.dataset.tipo !== f));
     animarLayout($$('.linha-item', area), () => $$('.linha-item', area).forEach(li => { li.hidden = f !== 'todos' && li.dataset.tipo !== f; li.classList.add('visivel'); }));
   });
 }

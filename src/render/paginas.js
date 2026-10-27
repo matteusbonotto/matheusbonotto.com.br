@@ -310,6 +310,34 @@ export function graficoCarreira(d, t, hoje = new Date()) {
       </div>`;
     }).join('')}`;
   };
+  // celular (como um painel mobile de BI): indicadores de tempo por área e, abaixo, uma linha por período
+  // com a barra de intervalo na largura toda, do mais recente ao mais antigo, sem rolagem lateral
+  const meses = i => Math.max(1, Math.round((data(i.fim) - data(i.ini)) / 2629800000));
+  const U = { pt: ['a', 'm'], en: ['y', 'mo'], es: ['a', 'm'] }[d.lang] || ['a', 'm'];
+  const dur = m => [Math.floor(m / 12) && `${Math.floor(m / 12)}${U[0]}`, m % 12 && `${m % 12}${U[1]}`].filter(Boolean).join(' ');
+  const somaCat = {};
+  for (const i of itens) somaCat[i.cat] = (somaCat[i.cat] || 0) + meses(i);
+  const kpis = ['QA', 'DEV', 'INFRA', 'FORM'].filter(k => somaCat[k]).map(k => `<li class="crono-kpi crono-${k}"><strong>${dur(somaCat[k])}</strong><span>${k === 'FORM' ? t('carreira.academico') : t(`trajetoria.cat.${k}`)}</span></li>`).join('');
+  const linhaMovel = i => {
+    const per = periodo(i.ini, i.fim, !i.fim, t);
+    const x0 = pct(data(i.ini)), w = Math.max(+pct(data(i.fim)) - x0, 1.2).toFixed(2);
+    return `<li><button type="button" class="crono-m-linha" data-tipo="${i.tipo}" data-abrir-carreira="${i.tipo}:${esc(i.id)}">
+      <span class="crono-logo logo-redondo" aria-hidden="true">${i.logo ? `<img src="${esc(i.logo)}" alt="" width="32" height="32" loading="lazy">` : `<span>${esc(iniciais(i.org))}</span>`}</span>
+      <span class="crono-m-txt"><strong>${esc(i.org)}</strong><span>${esc(i.titulo)}</span></span>
+      <span class="crono-m-dur mono">${dur(meses(i))}</span>
+      <span class="crono-m-trilho" aria-hidden="true"><i class="crono-${esc(i.cat || 'x')} ${i.fim ? '' : 'atual'}" style="--l:${x0}%;--w:${w}%"></i></span>
+      <span class="crono-m-per mono">${esc(per)}${i.chip ? ` · ${esc(i.chip)}` : ''}</span>
+    </button></li>`;
+  };
+  const grupoMovel = (tipo, nome) => {
+    const lista = itens.filter(i => i.tipo === tipo).sort((a, b) => data(b.ini) - data(a.ini));
+    return lista.length ? `<p class="crono-grupo mono">${esc(nome)}</p><ul class="crono-m-lista">${lista.map(linhaMovel).join('')}</ul>` : '';
+  };
+  const movel = `<div class="crono-movel">
+    <ul class="crono-kpis">${kpis}</ul>
+    <div class="crono-m-eixo mono" aria-hidden="true"><span>${a0}</span><span>${Math.round((a0 + a1) / 2)}</span><span>${t('carreira.hoje')}</span></div>
+    ${grupoMovel('exp', t('carreira.profissional'))}${grupoMovel('form', t('carreira.academico'))}
+  </div>`;
   return `<figure class="carreira revelar" data-carreira>
   <figcaption><h2 class="titulo-secundario">${t('carreira.titulo')}</h2><p>${t('carreira.legenda')}</p>
     <ul class="carreira-legenda">${[['QA', t('trajetoria.cat.QA')], ['DEV', t('trajetoria.cat.DEV')], ['INFRA', t('trajetoria.cat.INFRA')], ['FORM', t('carreira.academico')], ['agora', t('carreira.atual')]]
@@ -320,6 +348,7 @@ export function graficoCarreira(d, t, hoje = new Date()) {
       ${grupo('exp', t('carreira.profissional'))}${grupo('form', t('carreira.academico'))}
     </div>
   </div>
+  ${movel}
 </figure>`;
 }
 

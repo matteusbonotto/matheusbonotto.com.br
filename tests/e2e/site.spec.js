@@ -106,17 +106,20 @@ test('link direto para um projeto abre o modal', async ({ page }) => {
   await expect(page.locator('[data-modal] h2')).toHaveText('QA Toolbar Sandbox');
 });
 
-test('trajetória: gráfico profissional + acadêmico e filtro', async ({ page }) => {
+test('trajetória: gráfico profissional + acadêmico e filtro', async ({ page, isMobile }) => {
   await page.goto('/trajetoria/');
   const total = dados.experiencias.length + dados.formacoes.length;
-  await expect(page.locator('.crono-barra')).toHaveCount(total);
+  // desktop: gráfico de barras; celular: painel com indicadores e uma linha por período (sem rolagem lateral)
+  const barra = isMobile ? '.crono-m-linha' : '.crono-barra';
+  await expect(page.locator(`${barra}:visible`)).toHaveCount(total);
+  if (isMobile) await expect(page.locator('.crono-kpi').first()).toBeVisible();
   await expect(page.locator('.linha-item:visible')).toHaveCount(total);
   await page.getByRole('tab', { name: 'Acadêmico' }).click();
   await expect(page.locator('.linha-item:visible')).toHaveCount(dados.formacoes.length);
-  await expect(page.locator('.crono-linha.apagada')).toHaveCount(dados.experiencias.length);
+  await expect(page.locator(isMobile ? '.crono-m-linha.apagada' : '.crono-linha.apagada')).toHaveCount(dados.experiencias.length);
   // clicar na barra da UNASP abre o modal com detalhes e as imagens cadastradas (foto de formatura)
   const unasp = dados.formacoes.find(f => f.instituicao === 'UNASP');
-  await page.locator(`.crono-barra[data-abrir-carreira="form:${unasp.id}"]`).click();
+  await page.locator(`${barra}[data-abrir-carreira="form:${unasp.id}"]`).click();
   await expect(page.locator('[data-modal] h2')).toHaveText(unasp.curso);
   await expect(page.locator('[data-modal] .arquivos li')).toHaveCount(unasp.imagens_urls.length);
   await expect(page.locator('.carreira-legenda li')).toHaveCount(5);

@@ -413,7 +413,7 @@
     "dev",
     "vibe"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/capa.webp?v=mvq502fk",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/capa.webp?v=mvq7fgfv",
    "galeria": [
     {
      "h": 789,
@@ -464,33 +464,33 @@
      "dispositivo": "desktop"
     },
     {
-     "h": 789,
-     "w": 630,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-01-app-jornada.webp",
+     "h": 775,
+     "w": 381,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-01-inicio.webp",
      "dispositivo": "mobile"
     },
     {
-     "h": 789,
-     "w": 630,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-02-app-trilhas.webp",
+     "h": 777,
+     "w": 372,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-02-trilhas.webp",
      "dispositivo": "mobile"
     },
     {
-     "h": 789,
-     "w": 630,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-03-app-biblia.webp",
+     "h": 782,
+     "w": 378,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-03-biblia.webp",
      "dispositivo": "mobile"
     },
     {
-     "h": 789,
-     "w": 630,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-04-app-missoes.webp",
+     "h": 782,
+     "w": 372,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-04-missoes.webp",
      "dispositivo": "mobile"
     },
     {
-     "h": 789,
-     "w": 630,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-05-app-jogos.webp",
+     "h": 782,
+     "w": 373,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/mobile-05-jogos.webp",
      "dispositivo": "mobile"
     }
    ],
