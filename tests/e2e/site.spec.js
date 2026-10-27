@@ -52,7 +52,19 @@ test('navegação: menu, páginas e troca de idioma', async ({ page, isMobile })
   await expect(page.locator('h1')).toHaveAccessibleName('Projects');
 });
 
-test('abertura: título escondido sobre o vídeo e visível depois da rolagem', async ({ page }) => {
+test('tela de abertura: boas-vindas por 3 s na primeira página da sessão, depois não volta', async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(navigator, 'webdriver', { get: () => false }));
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  const splash = page.locator('[data-splash]');
+  await expect(splash).toBeVisible();
+  await expect(splash).toContainText('Bem-vindo');
+  await page.waitForFunction(() => !document.querySelector('[data-splash]'), null, { timeout: 10000 });
+  expect(await page.evaluate(() => performance.now())).toBeGreaterThanOrEqual(3000);
+  await page.goto('/sobre/');
+  await expect(page.locator('[data-splash]')).toHaveCount(0);
+});
+
+test('abertura: título escondido sobre o vídeo e visível depois da rolagem',async ({ page }) => {
   await page.goto('/');
   const titulo = page.locator('.hero-titulo');
   await expect(titulo).toHaveCSS('opacity', '0');

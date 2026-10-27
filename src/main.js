@@ -34,6 +34,21 @@ if (!semMovimento) {
   gsap.ticker.lagSmoothing(0);
 }
 
+// ---------- Tela de abertura ----------
+// Sai quando passaram 3 s e a página (com os quadros do vídeo) carregou; no máximo 8 s.
+const telaAbertura = $('[data-splash]');
+if (telaAbertura && !document.documentElement.classList.contains('sem-splash')) {
+  lenis?.stop();
+  const tempo = new Promise(r => setTimeout(r, Math.max(0, 3000 - performance.now())));
+  const carregou = new Promise(r => (document.readyState === 'complete' ? r() : addEventListener('load', r, { once: true })));
+  Promise.race([Promise.all([tempo, carregou]), new Promise(r => setTimeout(r, 8000))]).then(() => {
+    try { sessionStorage.setItem('splash', '1'); } catch {}
+    telaAbertura.classList.add('saindo');
+    lenis?.start();
+    setTimeout(() => telaAbertura.remove(), 700);
+  });
+} else telaAbertura?.remove();
+
 // ---------- Navegação ----------
 const nav = $('[data-nav]');
 const botaoMenu = $('[data-menu]');
@@ -47,19 +62,22 @@ function menu(abrir) {
 }
 botaoMenu.addEventListener('click', () => menu(!nav.classList.contains('aberta')));
 addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('aberta')) { menu(false); botaoMenu.focus(); } });
-let ultimoY = 0;
+let ultimoY = 0, ultimoEscuro = '';
 const aoRolar = () => {
   const y = scrollY;
+  // lê a altura antes de mexer em classes: ler depois forçaria um layout a cada evento de rolagem
+  const hero = pagina === '' && document.querySelector('.hero.animado');
+  const fimHero = hero ? Math.max(1, hero.offsetHeight - innerHeight) : 1;
   nav.classList.toggle('rolou', y > 10 && pagina !== 'contato');
   if (pagina === 'contato') nav.classList.add('escura', 'contato'); // contato abre sobre vídeo escuro
   // na home a barra começa clara e escurece junto com o vídeo de abertura; quando o vídeo vira quadro, volta ao normal
-  const hero = pagina === '' && document.querySelector('.hero.animado');
   let v = 0;
   if (hero) {
-    const p = Math.min(1, y / Math.max(1, hero.offsetHeight - innerHeight));
+    const p = Math.min(1, y / fimHero);
     v = p < 0.55 ? p / 0.55 : Math.max(0, 1 - (p - 0.55) / 0.2);
   }
-  nav.style.setProperty('--escuro', v.toFixed(3));
+  const escuro = v.toFixed(2);
+  if (escuro !== ultimoEscuro) { nav.style.setProperty('--escuro', escuro); ultimoEscuro = escuro; }
   nav.classList.toggle('escura', v > 0.45);
   nav.classList.toggle('sobre-video', v > 0.02);
 
@@ -485,6 +503,9 @@ function carregarQuadros(canvas, aoPrimeiro) {
   return quadros;
 }
 
+// Densidade do canvas: nunca acima da resolução do quadro (1120px). Pintar 2880px de um quadro de 1120 só custa tempo.
+const densidade = (img, w, h) => Math.max(1, Math.min(devicePixelRatio, mouse ? 2 : 1.5, Math.max(img.naturalWidth / w, img.naturalHeight / h)));
+
 // Degradê transparente de cada borda [esquerda, topo, direita, base] ao longo do vídeo (0 → 1).
 // Início: vídeo estendido, sem degradê. Meio: moeda/rosto centralizados, bordas suaves. Fim: o Matheus fica à
 // direita e de corpo inteiro: a borda direita quase não esfuma e a de baixo nunca esfuma (não "come" os pés).
@@ -502,12 +523,16 @@ function heroEfeitos(raiz) {
   const palco = $('.hero-palco', hero), midia = $('[data-hero-midia]', hero), canvas = $('canvas', midia);
   const g = canvas.getContext('2d');
   hero.classList.add('animado');
-  let atual = 0, progresso = 0;
-  const desenhar = i => {
+  let atual = 0, progresso = 0, ultimo = '';
+  const desenhar = (i, forcar) => {
     const img = quadros[i];
     if (!img?.complete || !img.naturalWidth) return;
-    const w = canvas.clientWidth, h = canvas.clientHeight, dpr = Math.min(devicePixelRatio, mouse ? 2 : 1.5);
+    const w = canvas.clientWidth, h = canvas.clientHeight, dpr = densidade(img, w, h);
     if (!w || !h) return;
+    // a timeline chama a cada tique da rolagem; só repinta se o quadro ou o tamanho mudou
+    const chave = `${i}|${w}|${h}|${dpr}`;
+    if (chave === ultimo && !forcar) return;
+    ultimo = chave;
     if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) { canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); }
     // Começa estendido (cobre a tela) e, até a metade do vídeo, vai se ajustando ao quadro inteiro e centralizado;
     // as bordas ganham um degradê transparente que funde o vídeo no fundo da mesma cor.
@@ -563,7 +588,7 @@ function heroEfeitos(raiz) {
       .to(texto, { opacity: 1, y: 0, stagger: 0.03, duration: 0.14, ease: 'power3.out' }, 0.72)
       .set({}, {}, 1);
   }, raiz);
-  const redim = () => requestAnimationFrame(() => desenhar(atual));
+  const redim = () => requestAnimationFrame(() => desenhar(atual, true));
   addEventListener('resize', redim);
   ScrollTrigger.addEventListener('refresh', redim);
   limpar.push(() => { ctx.revert(); ScrollTrigger.removeEventListener('refreshInit', medir); ScrollTrigger.removeEventListener('refresh', redim); removeEventListener('resize', redim); hero.classList.remove('animado', 'quadros'); });
@@ -590,7 +615,7 @@ function manifestoEfeitos(raiz) {
   const desenhar = i => {
     const img = quadros[i];
     if (!img?.complete || !img.naturalWidth) return;
-    const dpr = Math.min(devicePixelRatio, mouse ? 2 : 1.5), w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
+    const dpr = densidade(img, canvas.clientWidth, canvas.clientHeight), w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
     if (!w || !h) return;
     if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
     // no celular o vídeo aparece inteiro (sem corte); no desktop cobre a tela com o mesmo enquadramento do pôster

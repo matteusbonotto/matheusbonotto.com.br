@@ -50,15 +50,28 @@ export function rodape(lang, t) {
 // Canvas de partículas (rede de pontos ligada por linhas); o JS desenha e pausa fora da tela.
 export const particulas = (tom = 'escuro') => `<canvas class="particulas particulas-${tom}" data-particulas="${tom}" aria-hidden="true"></canvas>`;
 
+// Tela de abertura: cobre a página até os quadros do vídeo carregarem (mínimo de 3 s), uma vez por sessão.
+// Automação (navigator.webdriver) não vê a abertura, para os testes não esperarem 3 s a cada página.
+const BEM_VINDO = { pt: 'Bem-vindo', en: 'Welcome', es: 'Bienvenido' };
+const splash = lang => `<div class="splash" data-splash role="status" aria-label="${BEM_VINDO[lang]}">
+  <div class="splash-caixa">
+    <div class="splash-anel"><img src="/media/logo-128.webp" alt="" width="72" height="72"></div>
+    <p class="splash-bv">${BEM_VINDO[lang]}</p>
+    <p class="splash-nome mono">${SITE.nome}</p>
+    <div class="splash-barra" aria-hidden="true"><i></i></div>
+  </div>
+</div>`;
+
 export function documento({ lang, pagina, titulo, descricao, jsonld, corpo, dadosJson, assinaturaDados, preload = '' }) {
   const t = tradutor(lang);
   return `<!doctype html>
 <html lang="${t('meta.lang')}" data-lang="${lang}">
 <head>
 ${head({ lang, t, titulo, descricao, pagina, jsonld, extra: preload })}
-<script>document.documentElement.classList.add('js')</script>
+<script>document.documentElement.classList.add('js');try{if(navigator.webdriver||sessionStorage.getItem('splash'))document.documentElement.classList.add('sem-splash')}catch(e){}</script>
 </head>
 <body data-pagina="${pagina || 'inicio'}">
+${splash(lang)}
 <canvas class="particulas-fundo" data-particulas="fundo" aria-hidden="true"></canvas>
 ${navegacao(lang, t, pagina)}
 <main id="conteudo" data-main data-assinatura="${assinaturaDados}">

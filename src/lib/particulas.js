@@ -57,6 +57,13 @@ export function particulas(canvas, { semMovimento = false } = {}) {
     cancelAnimationFrame(raf);
     if (visivel && !semMovimento) raf = requestAnimationFrame(passo);
   });
+  // durante a rolagem a rede congela: redesenhar o canvas de tela cheia a cada quadro disputa com a rolagem
+  let retomar = 0;
+  const aoRolar = () => {
+    cancelAnimationFrame(raf); clearTimeout(retomar);
+    retomar = setTimeout(() => { cancelAnimationFrame(raf); if (visivel && !semMovimento) raf = requestAnimationFrame(passo); }, 200);
+  };
+  addEventListener('scroll', aoRolar, { passive: true });
   const mover = e => { const r = canvas.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; };
   const sair = () => { mouse.x = mouse.y = -1e4; };
   const alvo = canvas.dataset.particulas === 'fundo' ? window : canvas.parentElement;
@@ -65,5 +72,5 @@ export function particulas(canvas, { semMovimento = false } = {}) {
   const ro = new ResizeObserver(medir);
   ro.observe(canvas);
   io.observe(canvas);
-  return () => { io.disconnect(); ro.disconnect(); cancelAnimationFrame(raf); alvo.removeEventListener('pointermove', mover); alvo.removeEventListener('pointerleave', sair); };
+  return () => { io.disconnect(); ro.disconnect(); cancelAnimationFrame(raf); clearTimeout(retomar); removeEventListener('scroll', aoRolar); alvo.removeEventListener('pointermove', mover); alvo.removeEventListener('pointerleave', sair); };
 }
