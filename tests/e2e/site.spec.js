@@ -23,7 +23,7 @@ test('SEO: meta tags, Open Graph, hreflang, JSON-LD, sitemap e robots', async ({
   await page.goto('/');
   await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /QA Engineer/);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://matheusbonotto.com.br/');
-  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /og\.jpg$/);
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /og\.jpg(\?v=\d+)?$/);
   await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(4);
   const ld = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent());
   expect(ld['@graph'][0]['@type']).toBe('Person');
