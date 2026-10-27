@@ -109,7 +109,7 @@
     "dev",
     "vibe"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/capa.webp?v=mvq4lnqk",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-toolbar/capa.webp?v=mvq4zwxe",
    "galeria": [
     {
      "h": 789,
@@ -289,18 +289,18 @@
     "dev",
     "vibe"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub-ea09e2.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/capa.webp?v=mvq4zybg",
    "galeria": [
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/stark-hub/desktop-1.webp?v=mvpntm0q",
+     "h": 550,
+     "w": 983,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-01-login.webp",
      "dispositivo": "desktop"
     },
     {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/stark-hub/mobile-1.webp?v=mvpntp6x",
-     "dispositivo": "mobile"
-    },
-    {
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/stark-hub/mobile-2.webp?v=mvpntq67",
+     "h": 489,
+     "w": 288,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-01-login.webp",
      "dispositivo": "mobile"
     }
    ],
@@ -392,7 +392,7 @@
     "dev",
     "vibe"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/capa.webp?v=mvq4lqyg",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/evangeligo/capa.webp?v=mvq502fk",
    "galeria": [
     {
      "h": 789,
@@ -522,8 +522,15 @@
     "qa",
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/mb-copiloto-jira-bullla-f3a7c8.webp",
-   "galeria": [],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/mb-copiloto-jira/capa.webp?v=mvq503j2",
+   "galeria": [
+    {
+     "h": 757,
+     "w": 1600,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/mb-copiloto-jira-bullla-f3a7c8.webp",
+     "dispositivo": "desktop"
+    }
+   ],
    "tecnologias": [
     "HTML",
     "CSS",
@@ -602,7 +609,7 @@
     "dev",
     "vibe"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/capa.webp?v=mvq4lk1y",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/condonotto/capa.webp?v=mvq508ef",
    "galeria": [
     {
      "h": 799,
@@ -795,7 +802,7 @@
     "qa",
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/capa.webp?v=mvq4ltrl",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/qa-cnk-issue-generator/capa.webp?v=mvq50cf9",
    "galeria": [
     {
      "h": 799,
@@ -911,7 +918,7 @@
     "qa",
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/capa.webp?v=mvq4lwur",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/capa.webp?v=mvq50fml",
    "galeria": [
     {
      "h": 789,
@@ -1055,7 +1062,7 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/capa.webp?v=mvq4lzdo",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/squidev/capa.webp?v=mvq50kf6",
    "galeria": [
     {
      "h": 789,
@@ -1156,7 +1163,7 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/instrutora-jaqueline/capa.webp?v=mvq4m245",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/instrutora-jaqueline/capa.webp?v=mvq50od5",
    "galeria": [
     {
      "h": 789,
@@ -1258,8 +1265,15 @@
    "categorias": [
     "qa"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/kabum-challenge-robot-automation-6285c0.webp",
-   "galeria": [],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/kabum-challenge/capa.webp?v=mvq50pay",
+   "galeria": [
+    {
+     "h": 456,
+     "w": 972,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/kabum-challenge-robot-automation-6285c0.webp",
+     "dispositivo": "desktop"
+    }
+   ],
    "tecnologias": [
     "Robot Framework",
     "Python",
@@ -1298,7 +1312,7 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/ipvida/capa.webp?v=mvq4m4ha",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/ipvida/capa.webp?v=mvq50tnb",
    "galeria": [
     {
      "h": 789,
@@ -1399,7 +1413,7 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/capa.webp?v=mvq4m728",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/capa.webp?v=mvq50xlu",
    "galeria": [
     {
      "h": 789,
@@ -1500,8 +1514,15 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/random-brother-bad130.webp",
-   "galeria": [],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/random-brother/capa.webp?v=mvq50ynw",
+   "galeria": [
+    {
+     "h": 732,
+     "w": 1600,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/random-brother-bad130.webp",
+     "dispositivo": "desktop"
+    }
+   ],
    "tecnologias": [
     "HTML",
     "CSS",
@@ -1540,8 +1561,15 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/importaccount-assistant-trinus-66dee6.webp",
-   "galeria": [],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/importaccount-trinus/capa.webp?v=mvq50znt",
+   "galeria": [
+    {
+     "h": 868,
+     "w": 1600,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/importaccount-assistant-trinus-66dee6.webp",
+     "dispositivo": "desktop"
+    }
+   ],
    "tecnologias": [
     "Python",
     "Automação"
@@ -1579,7 +1607,7 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/fofuxa-fashion/capa.webp?v=mvq4m87v",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/fofuxa-fashion/capa.webp?v=mvq511bb",
    "galeria": [
     {
      "h": 789,
@@ -1639,7 +1667,7 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/rodolfo-seifert/capa.webp?v=mvq4m9ed",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/rodolfo-seifert/capa.webp?v=mvq512z0",
    "galeria": [
     {
      "h": 789,
@@ -1700,7 +1728,7 @@
     "qa",
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/taskassistant-americanas/capa.webp?v=mvq4mbem",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/taskassistant-americanas/capa.webp?v=mvq515h7",
    "galeria": [
     {
      "h": 789,
@@ -1783,8 +1811,15 @@
    "categorias": [
     "qa"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/importproducts-assistant-americanas-e3cf5f.webp",
-   "galeria": [],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/importproducts-americanas/capa.webp?v=mvq516n1",
+   "galeria": [
+    {
+     "h": 900,
+     "w": 1600,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/importproducts-assistant-americanas-e3cf5f.webp",
+     "dispositivo": "desktop"
+    }
+   ],
    "tecnologias": [
     "Python",
     "Automação"
@@ -1822,29 +1857,41 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/paraiso-bio-portal-33db83.webp",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/paraiso-bio/capa.webp?v=mvq519qf",
    "galeria": [
     {
+     "h": 900,
+     "w": 1440,
      "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/paraiso-bio/desktop-1.webp?v=mvpnzuep",
      "dispositivo": "desktop"
     },
     {
+     "h": 900,
+     "w": 1440,
      "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/paraiso-bio/desktop-2.webp?v=mvpnzvvr",
      "dispositivo": "desktop"
     },
     {
+     "h": 900,
+     "w": 1440,
      "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/paraiso-bio/desktop-3.webp?v=mvpnzxfi",
      "dispositivo": "desktop"
     },
     {
+     "h": 1328,
+     "w": 780,
      "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/paraiso-bio/mobile-1.webp?v=mvpo050t",
      "dispositivo": "mobile"
     },
     {
+     "h": 1328,
+     "w": 780,
      "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/paraiso-bio/mobile-2.webp?v=mvpo06l3",
      "dispositivo": "mobile"
     },
     {
+     "h": 1328,
+     "w": 780,
      "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/galerias/paraiso-bio/mobile-3.webp?v=mvpo0818",
      "dispositivo": "mobile"
     }
@@ -1887,8 +1934,15 @@
    "categorias": [
     "data"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/dashboard-de-produtos-aa6382.webp",
-   "galeria": [],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/dashboard-produtos/capa.webp?v=mvq51ar5",
+   "galeria": [
+    {
+     "h": 830,
+     "w": 1600,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/dashboard-de-produtos-aa6382.webp",
+     "dispositivo": "desktop"
+    }
+   ],
    "tecnologias": [
     "Power BI",
     "Power Query",
@@ -1960,8 +2014,15 @@
    "categorias": [
     "data"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/dashboard-de-analise-de-perfil-c2bf2d.webp",
-   "galeria": [],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/dashboard-perfil/capa.webp?v=mvq51bri",
+   "galeria": [
+    {
+     "h": 830,
+     "w": 1600,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/dashboard-de-analise-de-perfil-c2bf2d.webp",
+     "dispositivo": "desktop"
+    }
+   ],
    "tecnologias": [
     "Power BI",
     "Power Query",
@@ -2033,8 +2094,15 @@
    "categorias": [
     "data"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/dashboard-sac-740d59.webp",
-   "galeria": [],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/dashboard-sac/capa.webp?v=mvq51czb",
+   "galeria": [
+    {
+     "h": 824,
+     "w": 1600,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/dashboard-sac-740d59.webp",
+     "dispositivo": "desktop"
+    }
+   ],
    "tecnologias": [
     "Power BI",
     "Power Query",
@@ -2106,8 +2174,15 @@
    "categorias": [
     "data"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/dashboard-de-vendas-a1909b.webp",
-   "galeria": [],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/dashboard-vendas/capa.webp?v=mvq51dy8",
+   "galeria": [
+    {
+     "h": 834,
+     "w": 1600,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/dashboard-de-vendas-a1909b.webp",
+     "dispositivo": "desktop"
+    }
+   ],
    "tecnologias": [
     "Power BI",
     "Power Query",

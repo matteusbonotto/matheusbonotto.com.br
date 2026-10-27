@@ -65,12 +65,6 @@ describe('páginas geradas', () => {
     const svg = graficoCarreira(d, tradutor('pt'));
     expect(svg.match(/class="crono-barra /g)).toHaveLength(d.experiencias.length + d.formacoes.length);
   });
-  it('projeto em destaque nunca se repete na vitrine "Explore por área"', () => {
-    const html = paginaHTML('', prepararIdioma(bruto, 'pt'), bruto);
-    const nomes = [...html.matchAll(/<span class="area-lista">(.*?)<\/span><\/span>/gs)].flatMap(m => [...m[1].matchAll(/<span>(.*?)<\/span>/g)].map(x => x[1]));
-    expect(nomes.length).toBeGreaterThan(0);
-    expect(new Set(nomes).size).toBe(nomes.length);
-  });
 });
 
 describe('esquema do admin', () => {

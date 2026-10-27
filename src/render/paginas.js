@@ -10,7 +10,12 @@ export const ehCena = url => /\/capa\.webp/.test(url || '');
 const imgProjeto = (p, t, cls = '') => p.imagem_url
   ? `<img class="${cls} ${ehCena(p.imagem_url) ? 'capa-cena' : ''}" src="${esc(p.imagem_url)}" alt="${esc(t('projetos.print', { titulo: p.titulo }))}" loading="lazy" decoding="async" width="1600" height="1000">`
   : `<div class="${cls} img-vazia" aria-hidden="true">${esc(iniciais(p.titulo))}</div>`;
-const selos = (p, t) => `<span class="selos">${catsProjeto(p).map(c => `<span class="selo selo-${c}">${t(`projetos.cat.${c}`)}</span>`).join('')}</span>`;
+const selos = (p, t, max = Infinity) => {
+  const cats = catsProjeto(p), extra = cats.length - max;
+  const selo = (c, i) => `<span class="selo selo-${c}${i >= max ? ' selo-extra' : ''}" ${i >= max ? 'hidden' : ''}>${t(`projetos.cat.${c}`)}</span>`;
+  // span com papel de botão: o cartão inteiro já é um <button>
+  return `<span class="selos">${cats.map(selo).join('')}${extra > 0 ? `<span class="selo selo-mais" role="button" tabindex="0" aria-expanded="false" aria-label="${t('projetos.maisTags', { n: extra })}" data-mais-selos>+${extra}</span>` : ''}</span>`;
+};
 
 // Alternador de visualização (grade / lista / árvore); o JS guarda a escolha por seção.
 function vistas(alvo, t, opcoes = ['grade', 'lista']) {
@@ -69,7 +74,8 @@ function manifesto(d, t) {
   const frases = textoSite(d.site, 'manifesto', d.lang).frases || [];
   return `<section class="manifesto" id="abordagem" aria-labelledby="manifesto-rotulo" data-manifesto style="--passos:${frases.length}">
   <div class="manifesto-palco">
-    <video class="manifesto-video" data-video-auto muted playsinline preload="none" poster="/media/escritorio-poster.webp" aria-hidden="true"><source src="/media/escritorio.mp4" type="video/mp4"></video>
+    <img class="manifesto-video manifesto-poster" src="/media/escritorio-poster.webp" alt="" width="1280" height="720" loading="lazy" aria-hidden="true">
+    <canvas class="manifesto-video manifesto-canvas" data-sequencia="/media/escritorio/" data-quadros="60" aria-hidden="true"></canvas>
     <div class="manifesto-veu" aria-hidden="true"></div>
     <div class="manifesto-texto container">
       <p class="rotulo rotulo-claro" id="manifesto-rotulo">${t('manifesto.rotulo')}</p>
@@ -93,7 +99,7 @@ function destaques(d, t) {
   const cartao = (p, i, copia) => `<article class="destaque" ${copia ? 'aria-hidden="true" inert' : ''}>
       <div class="destaque-midia">${imgProjeto(p, t)}</div>
       <div class="destaque-corpo">
-        ${selos(p, t)}
+        ${selos(p, t, 1)}
         <h3>${esc(p.titulo)}</h3>
         <p class="destaque-desc">${esc(p.descricao_curta)}</p>
         <button class="btn btn-linha btn-pequeno" type="button" data-abrir-projeto="${esc(p.slug)}">${t('projetos.detalhes')} ${icone('seta')}</button>
@@ -111,32 +117,7 @@ function destaques(d, t) {
       <div class="vitrine-faixa" aria-hidden="true">${dest.map((p, i) => cartao(p, i, true)).join('')}</div>
     </div>
   </div>
-</section>`;
-}
-
-// Cada projeto aparece em uma única área (a primeira da sua lista de categorias ainda com espaço),
-// para a vitrine não repetir o mesmo projeto em vários cartões.
-function explorar(d, t) {
-  const usados = new Set();
-  const porArea = Object.fromEntries(CATS.map(c => [c, []]));
-  // áreas com menos projetos escolhem primeiro, para nenhuma ficar vazia
-  const ordem = [...CATS].sort((a, b) => d.projetos.filter(p => catsProjeto(p).includes(a)).length - d.projetos.filter(p => catsProjeto(p).includes(b)).length);
-  for (const c of ordem) {
-    const candidatos = d.projetos.filter(p => !usados.has(p.slug) && catsProjeto(p).includes(c))
-      .sort((a, b) => (catsProjeto(a)[0] === c ? 0 : 1) - (catsProjeto(b)[0] === c ? 0 : 1));
-    for (const p of candidatos.slice(0, 3)) { porArea[c].push(p); usados.add(p.slug); }
-  }
-  return `<section class="explorar container" aria-labelledby="explorar-titulo">
-  <h2 id="explorar-titulo" class="titulo-secundario">${t('inicio.explorar')}</h2>
-  <ul class="explorar-grade">${CATS.map(c => {
-    const total = d.projetos.filter(p => catsProjeto(p).includes(c)).length;
-    const lista = porArea[c];
-    const capa = lista.find(p => p.imagem_url);
-    return `<li class="revelar"><a class="area" href="${rota(d.lang, 'projetos')}#${c}">
-      <span class="area-img">${capa ? imgProjeto(capa, t) : ''}<span class="area-qtd mono">${t('projetos.qtd', { n: total })}</span></span>
-      <span class="area-info"><strong>${t(`projetos.cat.${c}`)} ${icone('seta')}</strong><span class="area-desc">${t(`projetos.cat.${c}.desc`)}</span>
-        <span class="area-lista">${lista.map(p => `<span>${esc(p.titulo)}</span>`).join('')}</span></span></a></li>`;
-  }).join('')}</ul>
+  <div class="container vitrine-acoes"><a class="btn btn-escuro" href="${rota(d.lang, 'projetos')}" data-magnetico>${t('projetos.verTodos', { n: d.projetos.length })} ${icone('seta')}</a></div>
 </section>`;
 }
 
@@ -225,7 +206,7 @@ function servicos(d, t) {
 }
 
 export function inicio(d, t) {
-  return hero(d, t) + clientes(d, t) + manifesto(d, t) + numeros(d, t) + destaques(d, t) + explorar(d, t) + recomendacoes(d, t) + servicos(d, t);
+  return hero(d, t) + clientes(d, t) + manifesto(d, t) + numeros(d, t) + destaques(d, t) + recomendacoes(d, t) + servicos(d, t);
 }
 
 // ================= PROJETOS =================
@@ -241,7 +222,7 @@ export function projetos(d, t) {
     <ul class="cartoes">${lista.map(p => `<li class="cartao revelar" data-secundario="${catsProjeto(p)[0] !== c}" data-texto="${esc([p.titulo, p.descricao_curta, ...(p.tecnologias || [])].join(' ').toLowerCase())}">
       <button type="button" ${p.bloqueado ? `class="trancado" aria-disabled="true" title="${t('projetos.bloqueado')}"` : `data-abrir-projeto="${esc(p.slug)}" data-inclinar`}>
         <span class="cartao-img">${imgProjeto(p, t)}${p.bloqueado ? `<span class="cartao-cadeado">${icone('cadeado')}</span>` : p.destaque ? '<span class="cartao-estrela" aria-hidden="true">★</span>' : ''}</span>
-        <span class="cartao-corpo">${selos(p, t)}<strong>${esc(p.titulo)}</strong>${origem(p, d) ? `<span class="origem mono">${t('projetos.origem', { org: origem(p, d) })}</span>` : ''}<span class="cartao-desc">${esc(p.descricao_curta)}</span>
+        <span class="cartao-corpo">${selos(p, t, 1)}<strong>${esc(p.titulo)}</strong>${origem(p, d) ? `<span class="origem mono">${t('projetos.origem', { org: origem(p, d) })}</span>` : ''}<span class="cartao-desc">${esc(p.descricao_curta)}</span>
         <span class="tags">${(p.tecnologias || []).slice(0, 3).map(x => `<span>${esc(x)}</span>`).join('')}</span></span>
       </button></li>`).join('')}</ul>
   </section>`;
@@ -269,12 +250,15 @@ ${galeria.length ? `<div class="galeria" data-galeria>
   ${temMobile ? `<div class="galeria-modos" role="tablist" aria-label="${t('projetos.galeria')}">
     <button type="button" role="tab" aria-selected="true" data-modo="desktop">${t('projetos.desktop')}</button>
     <button type="button" role="tab" aria-selected="false" data-modo="mobile">${t('projetos.mobile')}</button></div>` : ''}
-  <div class="galeria-janela"><ul class="galeria-faixa" data-galeria-faixa tabindex="0" aria-label="${t('projetos.galeria')}">${galeria.map((g, i) => `<li class="galeria-item galeria-${disp(g)}" data-dispositivo="${disp(g)}">
-    <figure class="moldura moldura-${disp(g)}${disp(g) === 'mobile' && g.w && g.h / g.w < 1.6 ? ' moldura-tablet' : ''}"><img src="${esc(g.url)}" ${g.w ? `width="${g.w}" height="${g.h}"` : ''} alt="${esc(g.legenda || `${t('projetos.print', { titulo: p.titulo })} (${i + 1})`)}" loading="lazy" decoding="async"></figure></li>`).join('')}</ul></div>
-  <div class="galeria-controles">
-    <button type="button" class="btn-icone" data-galeria-ant aria-label="${t('projetos.anterior')}">${icone('esquerda')}</button>
-    <span class="mono" data-galeria-contador aria-live="polite"></span>
-    <button type="button" class="btn-icone" data-galeria-prox aria-label="${t('projetos.proxima')}">${icone('direita')}</button>
+  <div class="galeria-palco">
+    <ul class="galeria-faixa" data-galeria-faixa aria-label="${t('projetos.galeria')}">${galeria.map((g, i) => `<li class="galeria-item galeria-${disp(g)}" data-dispositivo="${disp(g)}" data-i="${i}">
+      <button type="button" class="galeria-ver" data-galeria-ampliar aria-label="${t('projetos.ampliar')}"><figure class="moldura moldura-${disp(g)}${disp(g) === 'mobile' && g.w && g.h / g.w < 1.6 ? ' moldura-tablet' : ''}"><img src="${esc(g.url)}" ${g.w ? `width="${g.w}" height="${g.h}"` : ''} alt="${esc(g.legenda || `${t('projetos.print', { titulo: p.titulo })} (${i + 1})`)}" loading="lazy" decoding="async"></figure>
+      <span class="galeria-lupa" aria-hidden="true">${icone('ampliar')}</span></button></li>`).join('')}</ul>
+    <button type="button" class="btn-icone galeria-seta galeria-seta-ant" data-galeria-ant aria-label="${t('projetos.anterior')}">${icone('esquerda')}</button>
+    <button type="button" class="btn-icone galeria-seta galeria-seta-prox" data-galeria-prox aria-label="${t('projetos.proxima')}">${icone('direita')}</button>
+  </div>
+  <div class="galeria-controles"><span class="mono" data-galeria-contador aria-live="polite"></span>
+    <ul class="galeria-miniaturas">${galeria.map((g, i) => `<li data-dispositivo="${disp(g)}"><button type="button" class="miniatura miniatura-${disp(g)}" data-galeria-ir="${i}" aria-label="${t('projetos.imagem', { n: i + 1 })}"><img src="${esc(g.url)}" alt="" decoding="async"></button></li>`).join('')}</ul>
   </div>
 </div>` : ''}
 <div class="modal-corpo">
@@ -353,8 +337,8 @@ export function detalheCarreira(i, t, extras = {}) {
 </header>
 <div class="modal-texto carreira-texto">${paragrafos(i.desc)}</div>
 ${projetos.length ? `<section class="modal-bloco"><h3 class="rotulo">${t('carreira.projetos')}</h3><ul class="mini-projetos">${projetos.map(p => `<li><button type="button" data-abrir-projeto="${esc(p.slug)}">${p.imagem_url ? `<img class="${ehCena(p.imagem_url) ? 'capa-cena' : ''}" src="${esc(p.imagem_url)}" alt="" loading="lazy">` : ''}<span><strong>${esc(p.titulo)}</strong><span>${esc(p.descricao_curta)}</span></span></button></li>`).join('')}</ul></section>` : ''}
-${recs.length ? `<section class="modal-bloco"><h3 class="rotulo">${t('carreira.recs')}</h3><ul class="mini-recs">${recs.map(r => `<li><button type="button" data-abrir-rec="${esc(r.id)}">${autor(r, t)}<span class="mini-rec-texto">${esc(r.mensagem.replace(/\s+/g, ' '))}</span></button></li>`).join('')}</ul></section>` : ''}
-${arquivos.length ? `<section class="modal-bloco"><h3 class="rotulo">${t('carreira.arquivos')}</h3><ul class="arquivos">${arquivos.map((u, n) => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${/\.pdf($|\?)/i.test(u) ? `<span class="arquivo-pdf">${icone('arquivo')}PDF</span>` : `<img src="${esc(u)}" alt="${esc(`${i.org} (${n + 1})`)}" loading="lazy">`}</a></li>`).join('')}</ul></section>` : ''}`;
+${recs.length ? `<section class="modal-bloco"><h3 class="rotulo">${t('carreira.recs')}</h3><ul class="mini-recs">${recs.map(r => `<li><button type="button" data-abrir-rec="${esc(r.id)}">${autor(r, t)}<span class="mini-rec-texto">${esc(r.mensagem.trim())}</span></button></li>`).join('')}</ul></section>` : ''}
+${arquivos.length ? `<section class="modal-bloco"><h3 class="rotulo">${t('carreira.arquivos')}</h3><ul class="arquivos">${arquivos.map((u, n) => `<li>${/\.pdf($|\?)/i.test(u) ? `<a href="${esc(u)}" target="_blank" rel="noopener"><span class="arquivo-pdf">${icone('arquivo')}PDF</span></a>` : `<a href="${esc(u)}" data-visor aria-label="${t('projetos.ampliar')}"><img src="${esc(u)}" alt="${esc(`${i.org} (${n + 1})`)}" loading="lazy"><span class="galeria-lupa" aria-hidden="true">${icone('ampliar')}</span></a>`}</li>`).join('')}</ul></section>` : ''}`;
 }
 
 function itemLinha(i, t) {
@@ -478,7 +462,9 @@ export function detalheConquista(c, t, lang) {
   <div class="medalha medalha-g">${c.imagem_url ? `<img src="${esc(c.imagem_url)}" alt="" width="160" height="160">` : `<span>${esc(c.titulo.slice(0, 3))}</span>`}</div>
   <div><p class="mono">${esc(catComp(String(c.categoria).split(',')[0].trim(), t))}</p><h2 id="modal-titulo">${esc(c.titulo)}</h2><p>${esc(c.descricao)}</p>
   <p class="mono conquista-status">${c.desbloqueado ? (data ? t('comp.desbloqueada', { data }) : '✓') : `🔒 ${t('comp.bloqueada')}`}</p>
-  ${evid.length && c.desbloqueado ? `<div class="acoes">${evid.map((u, i) => `<a class="btn btn-linha btn-pequeno" href="${esc(u)}" target="_blank" rel="noopener">${t('comp.evidencia')}${evid.length > 1 ? ` ${i + 1}` : ''} ${icone('externo')}</a>`).join('')}</div>` : ''}</div>
+  ${evid.length && c.desbloqueado ? `<ul class="arquivos">${evid.map((u, i) => (/\.(png|jpe?g|webp|gif|avif)($|\?)/i.test(u)
+    ? `<li><a href="${esc(u)}" data-visor aria-label="${t('projetos.ampliar')}"><img src="${esc(u)}" alt="${esc(`${c.titulo} (${i + 1})`)}" loading="lazy"><span class="galeria-lupa" aria-hidden="true">${icone('ampliar')}</span></a></li>`
+    : `<li><a class="btn btn-linha btn-pequeno" href="${esc(u)}" target="_blank" rel="noopener">${t('comp.evidencia')}${evid.length > 1 ? ` ${i + 1}` : ''} ${icone('externo')}</a></li>`)).join('')}</ul>` : ''}</div>
 </div>`;
 }
 

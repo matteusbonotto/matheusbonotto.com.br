@@ -2,6 +2,7 @@
 // aqui ligamos o comportamento e, se o banco mudou depois do build, redesenhamos com os dados atuais.
 import './styles/site.css';
 import { gsap } from 'gsap';
+import { Flip } from 'gsap/Flip';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js';
@@ -12,7 +13,7 @@ import { assinatura, PAGINAS } from './render/documento.js';
 import { icone } from './render/comum.js';
 import { detalheCarreira, detalheConquista, detalheProjeto, detalheRecomendacao, detalheSkill, formularioRecomendacao } from './render/paginas.js';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, Flip);
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const lang = document.documentElement.dataset.lang || 'pt';
@@ -224,11 +225,15 @@ let origemModal = null;
 function abrirModal(html, hash, estreito = false) {
   origemModal = document.activeElement;
   modal.classList.toggle('modal-estreito', estreito);
-  $('[data-modal-conteudo]', modal).innerHTML = html;
+  modal.classList.remove('fechando');
+  const conteudo = $('[data-modal-conteudo]', modal);
+  conteudo.innerHTML = html;
   if (!modal.open) modal.showModal();
+  else if (!semMovimento) gsap.fromTo(conteudo, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .5, ease: 'power2.out', clearProps: 'all' });
   modal.scrollTop = 0;
   lenis?.stop();
   galeria(modal);
+  esqueletos(modal);
   if (hash) history.pushState({ modal: hash }, '', `#${hash}`);
 }
 function abrirProjeto(slug, hist = true) {
@@ -245,46 +250,181 @@ document.addEventListener('click', e => {
   if (e.target.closest('[data-deixar-rec]')) { abrirModal(formularioRecomendacao(t), null, true); enviarRecomendacao($('[data-form-rec]', modal)); return; }
   const sk = e.target.closest('[data-abrir-skill]');
   if (sk && !sk.closest('.arrastando-moveu')) { const n = dados.arvore?.find(x => x.id === sk.dataset.abrirSkill); if (n) abrirModal(detalheSkill(n, dados.arvore, t), null, true); return; }
+  const vz = e.target.closest('a[data-visor]');
+  if (vz) { e.preventDefault(); const todos = $$('a[data-visor]', vz.closest('ul') || vz.parentElement).map(a => ({ src: a.href, alt: $('img', a)?.alt || '' })); visor(todos, todos.findIndex(x => x.src === vz.href)); return; }
   const r = e.target.closest('[data-abrir-carreira]');
   if (r) { const [tipo, id] = r.dataset.abrirCarreira.split(':'); const it = dados.trajetoria?.find(x => x.tipo === tipo && x.id === id); if (it) abrirModal(detalheCarreira(it, t, dados)); return; }
-  if (e.target.closest('[data-fechar-modal]') || e.target === modal) modal.close();
+  if (e.target.closest('[data-fechar-modal]') || e.target === modal) fecharModal();
 });
+// fecha com transição: a caixa desce e some, depois o <dialog> fecha de verdade
+function fecharModal() {
+  if (!modal.open || modal.classList.contains('fechando')) return;
+  if (semMovimento) { modal.close(); return; }
+  modal.classList.add('fechando');
+  setTimeout(() => { modal.classList.remove('fechando'); modal.close(); }, 260);
+}
+modal.addEventListener('cancel', e => {
+  e.preventDefault();
+  const visor = $('.visor', modal);
+  visor ? visor._fechar() : fecharModal();
+});
+// "+N" nas categorias do cartão: mostra as demais sem abrir o projeto
+function maisSelos(b) {
+  const caixa = b.closest('.selos');
+  caixa.classList.add('aberta');
+  $$('.selo-extra', caixa).forEach((s, i) => { s.hidden = false; if (!semMovimento) gsap.from(s, { opacity: 0, x: -10, duration: .5, delay: i * .08, ease: 'power2.out', clearProps: 'all' }); });
+  b.remove();
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-mais-selos]'); if (b) { e.preventDefault(); e.stopPropagation(); maisSelos(b); } }, true);
+document.addEventListener('keydown', e => { const b = e.target.closest?.('[data-mais-selos]'); if (b && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); e.stopPropagation(); maisSelos(b); } }, true);
 // barras do gráfico também abrem com Enter/Espaço (são role="button")
 document.addEventListener('keydown', e => { const r = e.target.closest?.('g[data-abrir-skill]'); if (r && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); r.dispatchEvent(new MouseEvent('click', { bubbles: true })); } });
 modal.addEventListener('close', () => {
+  $('.visor', modal)?.remove();
   lenis?.start();
   if (location.hash.startsWith('#projeto/')) history.replaceState(null, '', location.pathname + location.search);
   origemModal?.focus?.();
 });
-addEventListener('popstate', () => { const h = location.hash.match(/^#projeto\/(.+)$/); h ? abrirProjeto(h[1], false) : modal.open && modal.close(); });
+addEventListener('popstate', () => { const h = location.hash.match(/^#projeto\/(.+)$/); h ? abrirProjeto(h[1], false) : fecharModal(); });
 
+// galeria do projeto: um print por vez dentro da moldura, miniaturas embaixo e tela cheia com zoom
 function galeria(raiz) {
   const g = $('[data-galeria]', raiz);
   if (!g) return;
-  const faixa = $('[data-galeria-faixa]', g), cont = $('[data-galeria-contador]', g);
+  const itens = $$('.galeria-item', g), minis = $$('[data-galeria-ir]', g), cont = $('[data-galeria-contador]', g);
   const ant = $('[data-galeria-ant]', g), prox = $('[data-galeria-prox]', g);
-  const visiveis = () => $$('.galeria-item:not([hidden])', faixa);
-  const atualizar = () => {
-    const itens = visiveis();
-    const i = itens.findIndex(li => li.offsetLeft + li.offsetWidth / 2 > faixa.scrollLeft + 40);
-    cont.textContent = `${Math.max(i, 0) + 1} / ${itens.length}`;
-    ant.disabled = faixa.scrollLeft < 8;
-    prox.disabled = faixa.scrollLeft + faixa.clientWidth >= faixa.scrollWidth - 8;
+  let modo = 'desktop', atual = 0;
+  const doModo = () => itens.filter(li => !modoAtivo() || li.dataset.dispositivo === modo);
+  const modoAtivo = () => $$('[data-modo]', g).length > 0;
+  const mostrar = (n, dir = 0) => {
+    const lista = doModo();
+    if (!lista.length) return;
+    atual = (n + lista.length) % lista.length;
+    const alvo = lista[atual];
+    for (const li of itens) {
+      const ativo = li === alvo;
+      if (ativo && !li.classList.contains('ativo') && dir && !semMovimento) gsap.fromTo(li, { opacity: 0, x: dir * 24 }, { opacity: 1, x: 0, duration: .6, ease: 'power2.out', clearProps: 'transform,opacity' });
+      li.classList.toggle('ativo', ativo);
+      li.inert = !ativo;
+    }
+    minis.forEach(b => { const on = b.dataset.galeriaIr === alvo.dataset.i; b.classList.toggle('ativa', on); b.setAttribute('aria-current', on); if (on) b.scrollIntoView({ block: 'nearest', inline: 'center', behavior: semMovimento ? 'auto' : 'smooth' }); });
+    cont.textContent = `${atual + 1} / ${lista.length}`;
+    ant.hidden = prox.hidden = lista.length < 2;
   };
-  const mover = dir => { const li = visiveis()[0]; faixa.scrollBy({ left: dir * ((li?.offsetWidth || 300) + 16), behavior: semMovimento ? 'auto' : 'smooth' }); };
-  ant.addEventListener('click', () => mover(-1));
-  prox.addEventListener('click', () => mover(1));
-  faixa.addEventListener('scroll', atualizar, { passive: true });
-  faixa.addEventListener('keydown', e => { if (e.key === 'ArrowRight') mover(1); if (e.key === 'ArrowLeft') mover(-1); });
+  ant.addEventListener('click', () => mostrar(atual - 1, -1));
+  prox.addEventListener('click', () => mostrar(atual + 1, 1));
+  minis.forEach(b => b.addEventListener('click', () => {
+    const i = doModo().findIndex(li => li.dataset.i === b.dataset.galeriaIr);
+    mostrar(i, i > atual ? 1 : -1);
+  }));
+  g.addEventListener('keydown', e => { if (e.target.closest('.galeria-palco, .galeria-miniaturas')) { if (e.key === 'ArrowRight') mostrar(atual + 1, 1); if (e.key === 'ArrowLeft') mostrar(atual - 1, -1); } });
+  // deslizar o dedo no palco troca o print
+  let x0 = null;
+  $('.galeria-palco', g).addEventListener('pointerdown', e => { x0 = e.clientX; });
+  $('.galeria-palco', g).addEventListener('pointerup', e => { if (x0 !== null && Math.abs(e.clientX - x0) > 50) { g._arrastou = true; mostrar(atual + (e.clientX < x0 ? 1 : -1), e.clientX < x0 ? 1 : -1); } x0 = null; });
   const modos = $$('[data-modo]', g);
-  const modo = m => {
-    modos.forEach(b => { b.setAttribute('aria-selected', b.dataset.modo === m); });
-    $$('.galeria-item', faixa).forEach(li => { li.hidden = modos.length > 0 && li.dataset.dispositivo !== m; });
-    faixa.scrollLeft = 0; atualizar();
+  const trocarModo = m => {
+    modo = m;
+    modos.forEach(b => b.setAttribute('aria-selected', b.dataset.modo === m));
+    itens.forEach(li => { li.hidden = modoAtivo() && li.dataset.dispositivo !== m; });
+    minis.forEach(b => { b.parentElement.hidden = modoAtivo() && b.parentElement.dataset.dispositivo !== m; });
+    mostrar(0);
+    if (!semMovimento) gsap.from($('.galeria-palco', g), { opacity: 0, y: 10, duration: .55, ease: 'power2.out', clearProps: 'all' });
   };
-  modos.forEach(b => b.addEventListener('click', () => modo(b.dataset.modo)));
-  modos.length ? modo(innerWidth < 640 && $('[data-dispositivo="mobile"]', faixa) ? 'mobile' : 'desktop') : atualizar();
-  requestAnimationFrame(atualizar);
+  modos.forEach(b => b.addEventListener('click', () => trocarModo(b.dataset.modo)));
+  trocarModo(modos.length && innerWidth < 640 && itens.some(li => li.dataset.dispositivo === 'mobile') ? 'mobile' : 'desktop');
+  g.addEventListener('click', e => {
+    const b = e.target.closest('[data-galeria-ampliar]');
+    if (!b) return;
+    if (g._arrastou) { g._arrastou = false; return; }
+    visor(doModo().map(li => $('img', li)), atual, i => mostrar(i));
+  });
+}
+
+// tela cheia: aproxima e afasta (botões, roda do mouse, pinça, duplo clique), arrasta quando ampliado
+function visor(imgs, inicio, aoTrocar) {
+  const v = document.createElement('div');
+  v.className = 'visor';
+  v.setAttribute('role', 'dialog'); v.setAttribute('aria-modal', 'true'); v.setAttribute('aria-label', t('projetos.galeria'));
+  v.innerHTML = `<div class="visor-area"><img class="visor-img" alt="" draggable="false"></div>
+  <div class="visor-barra">
+    <button type="button" data-v="ant" aria-label="${t('projetos.anterior')}">${icone('esquerda')}</button><span class="mono" data-v-cont></span><button type="button" data-v="prox" aria-label="${t('projetos.proxima')}">${icone('direita')}</button>
+    <span class="visor-sep" aria-hidden="true"></span>
+    <button type="button" data-v="menos" aria-label="${t('projetos.zoomMenos')}">${icone('menos')}</button><span class="mono visor-zoom" data-v-zoom>100%</span><button type="button" data-v="mais" aria-label="${t('projetos.zoomMais')}">${icone('mais')}</button>
+    <button type="button" data-v="ajustar" aria-label="${t('projetos.zoomAjustar')}">${icone('ajustar')}</button>
+  </div>
+  <button type="button" class="visor-fechar" data-v="fechar" aria-label="${t('projetos.fechar')}">${icone('fechar')}</button>`;
+  modal.append(v);
+  const area = $('.visor-area', v), img = $('.visor-img', v);
+  let i = inicio, z = 1, x = 0, y = 0;
+  const aplicar = (anim = true) => {
+    const max = Math.max(0, (z - 1) / 2);
+    x = Math.min(Math.max(x, -img.offsetWidth * max), img.offsetWidth * max);
+    y = Math.min(Math.max(y, -img.offsetHeight * max), img.offsetHeight * max);
+    gsap.to(img, { x, y, scale: z, duration: anim && !semMovimento ? .3 : 0, ease: 'power2.out', overwrite: true });
+    $('[data-v-zoom]', v).textContent = `${Math.round(z * 100)}%`;
+    v.classList.toggle('ampliado', z > 1);
+  };
+  const zoom = (nz, cx, cy) => {
+    nz = Math.min(Math.max(nz, 1), 5);
+    if (cx !== undefined) { // mantém parado o ponto sob o cursor
+      const r = area.getBoundingClientRect(), px = cx - r.left - r.width / 2, py = cy - r.top - r.height / 2;
+      x = px - ((px - x) * nz) / z; y = py - ((py - y) * nz) / z;
+    }
+    z = nz; if (z === 1) { x = 0; y = 0; }
+    aplicar();
+  };
+  const ir = n => {
+    i = (n + imgs.length) % imgs.length;
+    v.classList.add('carregando');
+    img.onload = () => { v.classList.remove('carregando'); if (!semMovimento) gsap.fromTo(img, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .45, ease: 'power2.out' }); };
+    img.src = imgs[i].currentSrc || imgs[i].src; img.alt = imgs[i].alt;
+    z = 1; x = 0; y = 0; aplicar(false);
+    $('[data-v-cont]', v).textContent = `${i + 1} / ${imgs.length}`;
+    $$('[data-v="ant"], [data-v="prox"]', v).forEach(b => { b.hidden = imgs.length < 2; });
+    aoTrocar?.(i);
+  };
+  const fechar = () => {
+    removeEventListener('keydown', teclas);
+    if (semMovimento) { v.remove(); return; }
+    gsap.to(v, { opacity: 0, duration: .35, ease: 'power1.in', onComplete: () => v.remove() });
+  };
+  v._fechar = fechar;
+  const teclas = e => {
+    if (e.key === 'ArrowRight') ir(i + 1);
+    else if (e.key === 'ArrowLeft') ir(i - 1);
+    else if (e.key === '+' || e.key === '=') zoom(z * 1.4);
+    else if (e.key === '-') zoom(z / 1.4);
+    else if (e.key === '0') zoom(1);
+  };
+  addEventListener('keydown', teclas);
+  v.addEventListener('click', e => {
+    const b = e.target.closest('[data-v]');
+    if (!b) { if (e.target === area && z === 1 && !v._moveu) fechar(); return; }
+    ({ ant: () => ir(i - 1), prox: () => ir(i + 1), mais: () => zoom(z * 1.4), menos: () => zoom(z / 1.4), ajustar: () => zoom(1), fechar })[b.dataset.v]();
+  });
+  area.addEventListener('wheel', e => { e.preventDefault(); zoom(z * (e.deltaY < 0 ? 1.15 : 1 / 1.15), e.clientX, e.clientY); }, { passive: false });
+  img.addEventListener('dblclick', e => zoom(z > 1 ? 1 : 2.5, e.clientX, e.clientY));
+  // arrastar com um dedo/mouse; pinça com dois dedos
+  const toques = new Map();
+  let dist0 = 0, z0 = 1, ultimo = null;
+  area.addEventListener('pointerdown', e => { area.setPointerCapture(e.pointerId); toques.set(e.pointerId, e); ultimo = e; if (toques.size === 2) { const [a, b] = [...toques.values()]; dist0 = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY); z0 = z; } });
+  area.addEventListener('pointermove', e => {
+    if (!toques.has(e.pointerId)) return;
+    toques.set(e.pointerId, e);
+    if (toques.size === 2) { const [a, b] = [...toques.values()]; z = Math.min(Math.max(z0 * Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY) / dist0, 1), 5); aplicar(false); return; }
+    if (z > 1 && ultimo) { x += e.clientX - ultimo.clientX; y += e.clientY - ultimo.clientY; aplicar(false); }
+    ultimo = e;
+  });
+  const soltar = e => { toques.delete(e.pointerId); ultimo = null; };
+  area.addEventListener('pointerup', soltar); area.addEventListener('pointercancel', soltar);
+  // deslizar sem zoom troca de imagem
+  let sx = null;
+  area.addEventListener('pointerdown', e => { sx = e.clientX; }, true);
+  area.addEventListener('pointerup', e => { v._moveu = sx !== null && Math.abs(e.clientX - sx) > 10; if (z === 1 && sx !== null && Math.abs(e.clientX - sx) > 60 && toques.size === 0) ir(i + (e.clientX < sx ? 1 : -1)); sx = null; }, true);
+  ir(inicio);
+  if (!semMovimento) gsap.from(v, { opacity: 0, duration: .4, ease: 'power1.out' });
+  $('[data-v="fechar"]', v).focus();
 }
 
 // ================= INÍCIO =================
@@ -397,6 +537,29 @@ function manifestoEfeitos(raiz) {
   const st = ScrollTrigger.create({ trigger: sec, start: 'top top', end: 'bottom bottom', onUpdate: s => ativar(s.progress) });
   limpar.push(() => st.kill());
   transicaoVideo(sec, $('.manifesto-palco', sec), true);
+  // o vídeo do escritório anda quadro a quadro com a rolagem, como a abertura
+  const canvas = $('.manifesto-canvas', sec);
+  if (!canvas || semMovimento) return;
+  const g = canvas.getContext('2d');
+  let atual = 0;
+  const desenhar = i => {
+    const img = quadros[i];
+    if (!img?.complete || !img.naturalWidth) return;
+    const dpr = Math.min(devicePixelRatio, 2), w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
+    if (!w || !h) return;
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+    const k = Math.max(w / img.naturalWidth, h / img.naturalHeight), dw = img.naturalWidth * k, dh = img.naturalHeight * k;
+    const fx = innerWidth <= 600 ? 0.5 : 0.66; // mesmo enquadramento do object-position do pôster
+    g.drawImage(img, (w - dw) * fx, (h - dh) / 2, dw, dh);
+  };
+  const quadros = carregarQuadros(canvas, () => { sec.classList.add('quadros'); requestAnimationFrame(() => desenhar(atual)); });
+  const sq = ScrollTrigger.create({ trigger: sec, start: 'top bottom', end: 'bottom top', onUpdate: s => {
+    const i = Math.min(quadros.length - 1, Math.round(s.progress * (quadros.length - 1)));
+    if (i !== atual) { atual = i; desenhar(i); }
+  } });
+  const redim = () => requestAnimationFrame(() => desenhar(atual));
+  addEventListener('resize', redim);
+  limpar.push(() => { sq.kill(); removeEventListener('resize', redim); sec.classList.remove('quadros'); });
 }
 
 // Entrada: o vídeo nasce como um quadro arredondado e se expande até a tela cheia. Saída: recua e escurece.
@@ -424,7 +587,14 @@ function vistasEfeitos(raiz) {
       try { localStorage.setItem(chave, v); } catch {}
       ScrollTrigger.refresh();
     };
-    botoes.forEach(b => b.addEventListener('click', () => aplicar(b.dataset.vista)));
+    botoes.forEach(b => b.addEventListener('click', () => {
+      if (alvo.dataset.vista === b.dataset.vista) return;
+      const itens = $$(':scope > li:not([hidden]), :scope > [data-grupo]:not([hidden]) .cartao:not([hidden])', alvo).slice(0, 40);
+      if (semMovimento || !itens.length) return aplicar(b.dataset.vista);
+      const estado = Flip.getState(itens);
+      aplicar(b.dataset.vista);
+      Flip.from(estado, { duration: .6, ease: 'power2.inOut', nested: true, stagger: .01, onComplete: () => ScrollTrigger.refresh() });
+    }));
     let salvo = null;
     try { salvo = localStorage.getItem(chave); } catch {}
     if (salvo && botoes.some(b => b.dataset.vista === salvo)) aplicar(salvo);
@@ -465,6 +635,19 @@ function vistasEfeitos(raiz) {
   }
 }
 
+// filtros e trocas de vista com transição: os que ficam deslizam até o lugar novo, os que entram aparecem
+function animarLayout(itens, mudar) {
+  if (semMovimento || !itens.length) { mudar(); ScrollTrigger.refresh(); return; }
+  const estado = Flip.getState(itens);
+  mudar();
+  Flip.from(estado, {
+    duration: .6, ease: 'power2.inOut', absolute: true, nested: true, prune: true,
+    onEnter: els => gsap.fromTo(els, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: .55, delay: .15, stagger: .035, ease: 'power2.out', clearProps: 'transform,opacity' }),
+    onLeave: els => gsap.to(els, { opacity: 0, y: -10, duration: .3, ease: 'power1.in' }),
+    onComplete: () => ScrollTrigger.refresh(),
+  });
+}
+
 // ================= PROJETOS =================
 function projetosEfeitos(raiz) {
   const area = $('[data-projetos]', raiz);
@@ -472,7 +655,8 @@ function projetosEfeitos(raiz) {
   const busca = $('[data-busca]', area), nenhum = $('[data-nenhum]', area);
   const botoes = $$('[data-filtro]', area);
   let filtro = 'todos';
-  const aplicar = () => {
+  const aplicar = (anim = true) => (anim ? animarLayout($$('.cartao', area), filtrarAgora) : filtrarAgora());
+  const filtrarAgora = () => {
     const q = busca.value.trim().toLowerCase();
     let total = 0;
     for (const g of $$('[data-grupo]', area)) {
@@ -488,11 +672,12 @@ function projetosEfeitos(raiz) {
     ScrollTrigger.refresh();
   };
   const marcar = abasTeclado(botoes, b => { filtro = b.dataset.filtro; marcar(b); aplicar(); });
-  busca.addEventListener('input', aplicar);
+  let espera = 0;
+  busca.addEventListener('input', () => { clearTimeout(espera); espera = setTimeout(aplicar, 160); });
   const inicial = location.hash.slice(1);
   const b = botoes.find(x => x.dataset.filtro === inicial);
   if (b) { filtro = inicial; marcar(b); }
-  aplicar();
+  aplicar(false);
 }
 
 // ================= TRAJETÓRIA =================
@@ -503,9 +688,8 @@ function trajetoriaEfeitos(raiz) {
   const marcar = abasTeclado(botoes, b => {
     marcar(b);
     const f = b.dataset.filtroLinha;
-    $$('.linha-item', area).forEach(li => { li.hidden = f !== 'todos' && li.dataset.tipo !== f; li.classList.add('visivel'); });
     $$('.crono-linha', area).forEach(g => g.classList.toggle('apagada', f !== 'todos' && g.dataset.tipo !== f));
-    ScrollTrigger.refresh();
+    animarLayout($$('.linha-item', area), () => $$('.linha-item', area).forEach(li => { li.hidden = f !== 'todos' && li.dataset.tipo !== f; li.classList.add('visivel'); }));
   });
 }
 
@@ -517,8 +701,7 @@ function competenciasEfeitos(raiz) {
   const marcar = abasTeclado(botoes, b => {
     marcar(b);
     const f = b.dataset.filtroConq;
-    $$('.medalhas > li', area).forEach(li => { li.hidden = f !== 'todas' && !li.dataset.cats.split(' ').includes(f); li.classList.add('visivel'); });
-    ScrollTrigger.refresh();
+    animarLayout($$('.medalhas > li', area), () => $$('.medalhas > li', area).forEach(li => { li.hidden = f !== 'todas' && !li.dataset.cats.split(' ').includes(f); li.classList.add('visivel'); }));
   });
 }
 
@@ -721,17 +904,53 @@ function recolhiveis(raiz) {
   }
 }
 
-// vitrine de destaques: no toque, pausa o letreiro por alguns segundos
+// vitrine de destaques: no toque, pausa o letreiro por alguns segundos; com mouse, os cartões
+// perto do cursor crescem como o Dock do Mac e os vizinhos abrem espaço deslizando para os lados
 function vitrine(raiz) {
   const v = $('.vitrine', raiz);
   if (!v) return;
   let pausa = 0;
   v.addEventListener('touchstart', () => { v.classList.add('tocando'); clearTimeout(pausa); }, { passive: true });
   v.addEventListener('touchend', () => { pausa = setTimeout(() => v.classList.remove('tocando'), 2500); }, { passive: true });
+  if (!mouse || semMovimento) return;
+  const cartoes = $$('.destaque', v);
+  const ESCALA = 0.16, ALCANCE = 420;
+  let quadro = 0, mx = null;
+  const dock = () => {
+    quadro = 0;
+    const caixa = v.getBoundingClientRect();
+    const vis = cartoes.map(c => { const r = c.getBoundingClientRect(); return { c, r, cx: r.left + r.width / 2 }; }).filter(o => o.r.right > caixa.left - 200 && o.r.left < caixa.right + 200);
+    if (!vis.length) return;
+    vis.forEach(o => { const d = Math.min(Math.abs(o.cx - mx) / ALCANCE, 1); o.s = 1 + ESCALA * (1 - d * d) ** 2 * (d < 1); o.g = (o.s - 1) * o.r.width; });
+    vis.sort((a, b) => a.cx - b.cx);
+    const k = vis.reduce((m, o, n) => (Math.abs(o.cx - mx) < Math.abs(vis[m].cx - mx) ? n : m), 0);
+    vis.forEach((o, n) => {
+      let x = 0;
+      if (n > k) { x = vis[k].g / 2 + o.g / 2; for (let j = k + 1; j < n; j++) x += vis[j].g; }
+      if (n < k) { x = -(vis[k].g / 2 + o.g / 2); for (let j = n + 1; j < k; j++) x -= vis[j].g; }
+      gsap.to(o.c, { scale: o.s, x, zIndex: Math.round(o.s * 100), duration: .45, ease: 'power3.out', overwrite: 'auto' });
+    });
+  };
+  v.addEventListener('mousemove', e => { mx = e.clientX; if (!quadro) quadro = requestAnimationFrame(dock); });
+  v.addEventListener('mouseleave', () => { cancelAnimationFrame(quadro); quadro = 0; gsap.to(cartoes, { scale: 1, x: 0, duration: .6, ease: 'power3.out', overwrite: 'auto', onComplete: () => gsap.set(cartoes, { clearProps: 'zIndex' }) }); });
+}
+
+// esqueleto animado no lugar da imagem enquanto ela carrega; depois a imagem entra com fade
+const COM_ESQUELETO = '.cartao-img img, .destaque-midia img, .moldura img, .miniatura img, .mini-projetos img, .patrocinio-projetos img, .sobre-foto img';
+function esqueletos(raiz) {
+  for (const img of $$(COM_ESQUELETO, raiz)) {
+    if (img.complete && img.naturalWidth) continue;
+    const caixa = img.parentElement;
+    caixa.classList.add('esqueleto'); img.classList.add('img-espera');
+    const pronto = () => { caixa.classList.remove('esqueleto'); img.classList.remove('img-espera'); };
+    img.addEventListener('load', pronto, { once: true });
+    img.addEventListener('error', pronto, { once: true });
+  }
 }
 
 function iniciar() {
   vitrine(main);
+  esqueletos(main);
   recolhiveis(main);
   dividirPalavras(main);
   revelar(main);

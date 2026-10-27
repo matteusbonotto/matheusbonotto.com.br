@@ -1070,3 +1070,104 @@ details.linha-desc[open] summary { display: none; }
 .moldura-mobile::before { top: 10px; height: 18px; width: 28%; }
 .moldura-tablet { padding-top: 22px; }
 .moldura-tablet::before { top: 7px; height: 8px; width: 8px; }
+
+/* ================= Tags "+N", dock da vitrine, galeria com miniaturas, tela cheia e transições ================= */
+.selos { flex-wrap: nowrap; }
+.selos.aberta { flex-wrap: wrap; }
+.selo-extra[hidden] { display: none !important; }
+.cartao-corpo .selos .selo:nth-child(n+2):not([hidden]) { display: inline-flex; }
+.selo-mais { cursor: pointer; border-style: dashed; color: var(--tinta); font-weight: 600; transition: background-color .2s, border-color .2s; }
+.selo-mais:hover, .selo-mais:focus-visible { background: var(--superficie-2); border-color: var(--tinta-3); border-style: solid; }
+.destaque-corpo .selos.aberta { overflow: visible; }
+
+/* vitrine: espaço para os cartões crescerem como no Dock do Mac */
+.vitrine { padding-block: 34px 40px; margin-block: -24px -20px; }
+.vitrine .destaque { transform-origin: 50% 60%; will-change: transform; position: relative; }
+.vitrine:hover .destaque { transition: border-color .3s; }
+.vitrine:hover .destaque:hover { transform: none; }
+.vitrine-acoes { display: flex; justify-content: center; margin-top: 18px; }
+@media (max-width: 600px) { .vitrine { padding-block: 4px 10px; margin-block: 0; } .vitrine-acoes .btn { width: 100%; } }
+
+/* galeria: um print por vez no palco, setas por cima e miniaturas embaixo */
+.galeria-palco { position: relative; display: grid; justify-items: center; align-items: end; padding: 8px 0 4px; }
+.galeria-palco .galeria-faixa { display: grid; overflow: visible; padding: 0; margin: 0; width: 100%; justify-items: center; align-items: end; scroll-snap-type: none; }
+.galeria-palco .galeria-item { grid-area: 1 / 1; width: auto; opacity: 0; visibility: hidden; transition: opacity .35s, visibility .35s; }
+.galeria-palco .galeria-item.ativo { opacity: 1; visibility: visible; }
+.galeria-palco .galeria-desktop { width: min(100%, 820px); }
+.galeria-palco .galeria-mobile { width: min(62vw, 270px); }
+.galeria-palco .galeria-mobile:has(.moldura-tablet) { width: min(84vw, 460px); }
+.galeria-ver { position: relative; display: block; width: 100%; cursor: zoom-in; border-radius: 18px; }
+.galeria-lupa { position: absolute; top: 14px; right: 14px; z-index: 2; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: rgb(0 0 0 / .6); color: #fff; backdrop-filter: blur(6px); opacity: 0; scale: .8; transition: opacity .25s, scale .25s var(--curva); }
+.galeria-ver:hover .galeria-lupa, .galeria-ver:focus-visible .galeria-lupa { opacity: 1; scale: 1; }
+@media (hover: none) { .galeria-lupa { opacity: .85; scale: 1; } }
+.galeria-seta { position: absolute; top: 50%; translate: 0 -50%; z-index: 3; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(8px); box-shadow: 0 6px 20px -8px rgb(0 0 0 / .4); }
+.galeria-seta-ant { left: 0; }
+.galeria-seta-prox { right: 0; }
+.galeria-seta[hidden] { display: none; }
+.galeria-controles { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+.galeria-controles > .mono { flex: none; min-width: 3.4em; color: var(--tinta-3); }
+.galeria-miniaturas { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 4px; margin: -4px; flex: 1; min-width: 0; }
+.galeria-miniaturas::-webkit-scrollbar { display: none; }
+.galeria-miniaturas li[hidden] { display: none; }
+.miniatura { display: block; flex: none; border-radius: 8px; overflow: hidden; outline: 2px solid transparent; outline-offset: 2px; opacity: .55; transition: opacity .2s, outline-color .2s, translate .2s var(--curva); }
+.miniatura img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.miniatura-desktop { width: 92px; height: 58px; }
+.miniatura-mobile { width: 40px; height: 78px; }
+.miniatura:hover { opacity: .9; translate: 0 -2px; }
+.miniatura.ativa { opacity: 1; outline-color: var(--acento); }
+
+/* tela cheia com zoom */
+.visor { position: fixed; inset: 0; z-index: 50; display: grid; grid-template-rows: 1fr auto; background: rgb(6 7 9 / .94); backdrop-filter: blur(10px); color: #fff; }
+.visor-area { position: relative; overflow: hidden; display: grid; place-items: center; padding: 64px 16px 12px; touch-action: none; cursor: zoom-out; }
+.visor.ampliado .visor-area { cursor: grab; }
+.visor.ampliado .visor-area:active { cursor: grabbing; }
+.visor-img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; user-select: none; cursor: zoom-in; box-shadow: 0 30px 80px -20px rgb(0 0 0 / .8); }
+.visor.ampliado .visor-img { cursor: inherit; }
+.visor-barra { justify-self: center; display: flex; align-items: center; gap: 4px; margin: 0 12px calc(16px + env(safe-area-inset-bottom)); padding: 6px; border-radius: 999px; background: rgb(255 255 255 / .1); border: 1px solid rgb(255 255 255 / .14); }
+.visor-barra button, .visor-fechar { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; color: #fff; transition: background-color .2s; }
+.visor-barra button:hover, .visor-fechar:hover { background: rgb(255 255 255 / .14); }
+.visor-barra button[hidden] { display: none; }
+.visor-barra .mono { min-width: 4.2em; text-align: center; font-size: .8rem; color: rgb(255 255 255 / .8); }
+.visor-sep { width: 1px; height: 24px; background: rgb(255 255 255 / .2); margin-inline: 4px; }
+.visor-fechar { position: absolute; top: 12px; right: 12px; background: rgb(255 255 255 / .1); }
+@media (max-width: 600px) { .visor-barra button { width: 40px; height: 40px; } .visor-barra .mono { min-width: 3.4em; } }
+
+/* modal: entra subindo e sai descendo; o fundo acompanha */
+.modal[open] { animation: modal-entra .45s var(--curva); }
+.modal[open]::backdrop { animation: fundo-entra .4s ease; }
+.modal.fechando { animation: modal-sai .26s ease-in forwards; }
+.modal.fechando::backdrop { animation: fundo-sai .26s ease-in forwards; }
+@keyframes modal-entra { from { opacity: 0; transform: translateY(28px) scale(.98); } }
+@keyframes modal-sai { to { opacity: 0; transform: translateY(24px) scale(.98); } }
+@keyframes fundo-entra { from { opacity: 0; } }
+@keyframes fundo-sai { to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .modal[open], .modal.fechando, .modal[open]::backdrop, .modal.fechando::backdrop { animation: none; } }
+
+/* manifesto: quadros do vídeo pela rolagem; o pôster fica até carregarem */
+.manifesto-canvas { opacity: 0; transition: opacity .4s; }
+.manifesto.quadros .manifesto-canvas { opacity: 1; }
+
+/* esqueleto: brilho que desliza enquanto a imagem carrega; a imagem entra com fade */
+.esqueleto { position: relative; background: var(--superficie-2); overflow: hidden; }
+.esqueleto::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(100deg, transparent 20%, color-mix(in srgb, var(--tinta) 7%, transparent) 50%, transparent 80%) 0 0 / 200% 100%; animation: esqueleto 1.4s ease-in-out infinite; }
+.moldura.esqueleto { overflow: visible; }
+.moldura.esqueleto > img { min-height: 160px; }
+.moldura-mobile.esqueleto > img { min-height: 420px; }
+@keyframes esqueleto { from { background-position: 150% 0; } to { background-position: -50% 0; } }
+img { transition: opacity .6s ease; }
+.img-espera { opacity: 0; }
+.visor.carregando .visor-area::after { content: ''; position: absolute; width: min(70vw, 900px); aspect-ratio: 16 / 10; border-radius: 10px; background: linear-gradient(100deg, rgb(255 255 255 / .04) 20%, rgb(255 255 255 / .12) 50%, rgb(255 255 255 / .04) 80%) 0 0 / 200% 100%; animation: esqueleto 1.4s ease-in-out infinite; }
+.visor.carregando .visor-img { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .esqueleto::after, .visor.carregando .visor-area::after { animation: none; } }
+/* tags extras deslizam suaves, sem estourar */
+.selo-mais { transition: background-color .3s, border-color .3s, opacity .3s; }
+
+/* trajetória no modal: descrição ocupa a largura toda e recomendações aparecem inteiras */
+.modal-texto.carreira-texto { max-width: none; }
+.carreira-texto + .modal-bloco, .carreira-texto ~ .modal-bloco { margin-top: 32px; }
+.mini-rec-texto { display: block; -webkit-line-clamp: unset; overflow: visible; white-space: pre-line; }
+/* fotos de certificados e evidências abrem na galeria com zoom */
+.arquivos a[data-visor] { position: relative; cursor: zoom-in; }
+.arquivos a[data-visor]:hover .galeria-lupa, .arquivos a[data-visor]:focus-visible .galeria-lupa { opacity: 1; scale: 1; }
+.arquivos .galeria-lupa { top: 8px; right: 8px; width: 34px; height: 34px; }
+.arquivos li > .btn { aspect-ratio: auto; }

@@ -294,3 +294,36 @@ test('prints na moldura do aparelho e calculadora recolhida só no celular', asy
   await page.goto('/contato/');
   await expect(page.locator('.valor-dobra')).toHaveJSProperty('open', !isMobile);
 });
+
+test('galeria: miniaturas, tela cheia com zoom e Esc fecha em camadas', async ({ page }) => {
+  const p = dados.projetos.find(x => x.ativo !== false && (x.galeria || []).filter(g => g.dispositivo !== 'mobile').length > 1);
+  await page.goto(`/projetos/#projeto/${p.slug}`);
+  const modal = page.locator('[data-modal]');
+  await modal.locator('[data-modo="desktop"]').click().catch(() => {});
+  await modal.locator('.miniatura:visible').nth(1).click();
+  await expect(modal.locator('[data-galeria-contador]')).toHaveText(/^2 \//);
+  await modal.locator('.galeria-item.ativo [data-galeria-ampliar]').click();
+  const visor = page.locator('.visor');
+  await expect(visor).toBeVisible();
+  await visor.locator('[data-v="mais"]').click();
+  await expect(visor.locator('[data-v-zoom]')).toHaveText('140%');
+  await visor.locator('[data-v="ajustar"]').click();
+  await expect(visor.locator('[data-v-zoom]')).toHaveText('100%');
+  await page.keyboard.press('Escape');
+  await expect(visor).toHaveCount(0);
+  await expect(modal).toHaveAttribute('open', '');
+  await page.keyboard.press('Escape');
+  await expect(modal).not.toHaveAttribute('open', '');
+});
+
+test('tags: "+N" mostra as demais categorias sem abrir o projeto', async ({ page }) => {
+  await page.goto('/projetos/');
+  const cartao = page.locator('.cartao:visible').filter({ has: page.locator('[data-mais-selos]:visible') }).first();
+  test.skip(!(await cartao.count()));
+  const id = await cartao.locator('[data-abrir-projeto]').getAttribute('data-abrir-projeto');
+  await cartao.locator('[data-mais-selos]').click();
+  const mesmo = page.locator(`.cartao:has([data-abrir-projeto="${id}"])`);
+  await expect(mesmo.locator('.selo-extra').first()).toBeVisible();
+  await expect(mesmo.locator('[data-mais-selos]:visible')).toHaveCount(0);
+  await expect(page.locator('[data-modal][open]')).toHaveCount(0);
+});
