@@ -394,7 +394,10 @@ export function itensTrajetoria(d, t) {
 
 export function trajetoria(d, t) {
   const itens = itensTrajetoria(d, t);
-  const cert = d.certificacoes.map(c => `<li class="revelar"><strong>${esc(c.nome)}</strong><span>${esc(c.instituicao)}${c.validade ? ` · ${esc(c.validade)}` : ''}</span></li>`).join('');
+  // certificados com miniatura: tocar abre a galeria em tela cheia com zoom (todos os certificados juntos)
+  const mesAno = s => (s ? new Intl.DateTimeFormat({ pt: 'pt-BR', en: 'en-US', es: 'es-ES' }[d.lang], { month: 'short', year: 'numeric' }).format(new Date(`${s}T12:00:00`)) : '');
+  const cert = d.certificacoes.map(c => `<li class="revelar cert">${c.certificado_url ? `<a class="cert-img" href="${esc(c.certificado_url)}" data-visor aria-label="${t('projetos.ampliar')}: ${esc(c.nome)}"><img src="${esc(c.certificado_url)}" alt="${esc(c.nome)}" loading="lazy"><span class="galeria-lupa" aria-hidden="true">${icone('ampliar')}</span></a>` : `<span class="cert-img cert-sem">${icone('medalha')}</span>`}
+    <span class="cert-txt"><strong>${esc(c.nome)}</strong><span>${esc([c.instituicao, mesAno(c.data_certificacao), c.validade].filter(Boolean).join(' · '))}</span></span></li>`).join('');
   const filtros = [['todos', 'carreira.filtro.todos'], ['exp', 'carreira.filtro.exp'], ['form', 'carreira.filtro.form']];
   return `${cabecalhoPagina(t, 'trajetoria')}
 <div class="container trajetoria" data-trajetoria>

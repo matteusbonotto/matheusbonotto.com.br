@@ -1413,3 +1413,20 @@ img { transition: opacity .6s ease; }
   .crono-m-per { grid-column: 2 / -1; font-size: .72rem; color: var(--tinta-3); }
   .crono-m-linha.apagada { opacity: .25; }
 }
+
+/* certificados: miniatura clicável (abre a galeria com zoom) + texto */
+.certs { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.certs li.cert { flex-direction: row; align-items: center; gap: 14px; padding: 10px 14px 10px 10px; }
+.cert-img { position: relative; flex: none; display: grid; place-items: center; width: 92px; aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; background: var(--superficie-2); border: 1px solid var(--linha); cursor: zoom-in; }
+.cert-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--curva); }
+.cert-img:hover img { transform: scale(1.06); }
+.cert-img .galeria-lupa { top: 50%; left: 50%; right: auto; translate: -50% -50%; width: 30px; height: 30px; }
+.cert-img:hover .galeria-lupa, .cert-img:focus-visible .galeria-lupa { opacity: 1; scale: 1; }
+.cert-sem { cursor: default; color: var(--acento); }
+.cert-txt { display: grid; gap: 3px; min-width: 0; }
+.cert-txt strong { font-size: .95rem; line-height: 1.3; }
+.cert-txt span { font-size: .8rem; color: var(--tinta-3); }
+
+/* abertura no desktop: igual ao celular, sem caixas atrás do aviso e da seta; só o degradê escuro embaixo */
+.hero-intro .status, .hero-rolar { background: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding-inline: 0; text-shadow: 0 1px 10px rgb(0 0 0 / .65); }
+.sombra-v { background: linear-gradient(180deg, rgba(8,8,10,.35) 0%, rgba(8,8,10,0) 16%, rgba(8,8,10,0) 55%, rgba(8,8,10,.85) 100%); }

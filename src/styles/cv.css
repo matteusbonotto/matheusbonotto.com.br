@@ -16,8 +16,10 @@
 .cv-versoes button[aria-pressed="true"] { background: var(--tinta); color: var(--bg); }
 @media (max-width: 719px) { .cv-barra { flex-wrap: wrap; } .cv-versoes { order: 10; width: 100%; justify-content: space-between; } .cv-arquivo { display: none; } }
 /* Palavras-chave para leitores automáticos (ATS/IA): na cor do papel e fora da impressão */
-/* palavras-chave na cor do papel: o robô de seleção lê, a pessoa não vê; ficam no rodapé da última folha */
-.cv-palavras { position: absolute; left: 14mm; right: 14mm; bottom: 9mm; margin: 0; color: #fff !important; font-size: 4pt; line-height: 1.05; user-select: none; pointer-events: none; overflow: hidden; max-height: 12mm; }
+/* palavras-chave na cor do papel (mesma variável do fundo da folha): robôs de triagem leem e copiar/colar pega,
+   mas o olho não vê; ficam no rodapé da última folha */
+.cv-palavras, .folha p.cv-palavras { position: absolute; left: 14mm; right: 14mm; bottom: 9mm; margin: 0; color: var(--papel, #fff) !important; font-size: 4pt; line-height: 1.05; overflow: hidden; max-height: 12mm; }
+.cv-palavras::selection { color: var(--papel, #fff); background: var(--papel, #fff); }
 .cv-zoom { display: none; align-items: center; border: 1px solid var(--linha-forte); border-radius: 8px; overflow: hidden; }
 .cv-zoom button { min-width: 36px; height: 36px; padding: 0 8px; font-size: 1rem; }
 .cv-zoom button.mono { font-size: .78rem; min-width: 56px; border-inline: 1px solid var(--linha); }
@@ -32,7 +34,7 @@
 .cv-paginas { display: flex; flex-direction: column; align-items: center; gap: 16px; width: max-content; min-width: 100%; margin: 0 auto; }
 
 .folha {
-  position: relative; width: 210mm; min-height: 297mm; height: 297mm; padding: 16mm; background: #fff; color: #1c1c1e;
+  --papel: #fff; position: relative; width: 210mm; min-height: 297mm; height: 297mm; padding: 16mm; background: var(--papel); color: #1c1c1e;
   box-shadow: 0 1px 3px rgba(60,64,67,.3), 0 4px 8px 3px rgba(60,64,67,.15);
   font-family: var(--fonte); font-size: 9.6pt; line-height: 1.45; overflow: hidden;
 }

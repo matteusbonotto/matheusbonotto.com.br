@@ -358,3 +358,14 @@ test('competências: grade e lista simples abrem o detalhe da habilidade', async
   await page.locator('.hab-area .hab').first().click();
   await expect(page.locator('[data-modal] .skill-cabeca')).toBeVisible();
 });
+
+test('currículo: palavras-chave para robôs de triagem, na cor da folha e selecionáveis', async ({ page }) => {
+  await page.goto('/cv/');
+  const kw = page.locator('.folha:last-of-type .cv-palavras');
+  await expect(kw).toHaveCount(1);
+  const [cor, fundo, selecao] = await kw.evaluate(el => [getComputedStyle(el).color, getComputedStyle(el.closest('.folha')).backgroundColor, getComputedStyle(el).userSelect]);
+  expect(cor).toBe(fundo);
+  expect(selecao).not.toBe('none');
+  await page.emulateMedia({ media: 'print' });
+  await expect(kw).not.toHaveCSS('display', 'none');
+});

@@ -2383,7 +2383,12 @@
    "atual": false,
    "categoria_profissional": "DEV",
    "logo_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/logos/desenvolvedor-de-software-969ea0.webp",
-   "imagens_urls": [],
+   "imagens_urls": [
+    "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/trajetoria/realiza-1581243020638.webp",
+    "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/trajetoria/realiza-1576393597990.webp",
+    "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/trajetoria/realiza-1576454531851.webp",
+    "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/trajetoria/realiza-1582477653172.webp"
+   ],
    "bloqueado": false,
    "i18n": {
     "en": {
@@ -2489,7 +2494,8 @@
    "atual": false,
    "logo_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/logos/senac-72d723.webp",
    "imagens_urls": [
-    "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/trajetoria/senac-1.webp"
+    "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/trajetoria/senac-1.webp",
+    "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/trajetoria/senac-palestra.webp"
    ],
    "bloqueado": false,
    "i18n": {
@@ -2511,7 +2517,7 @@
    "instituicao": "VINCIT",
    "data_certificacao": "2024-01-01",
    "validade": "Vitalícia",
-   "certificado_url": null,
+   "certificado_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/trajetoria/vincit-1.webp",
    "i18n": {
     "en": {
      "nome": "Postgraduate Specialization in Software Testing",
@@ -2520,6 +2526,58 @@
     "es": {
      "nome": "Especialización en Pruebas de Software",
      "validade": "Vitalicia"
+    }
+   }
+  },
+  {
+   "id": "f0485cd6-9e68-4f49-adb0-f993e91cc1a0",
+   "nome": "Scrum Foundation Professional Certificate (SFPC)",
+   "instituicao": "CertiProf",
+   "data_certificacao": "2020-07-06",
+   "validade": null,
+   "certificado_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/certificados/scrum-foundation.webp",
+   "i18n": {}
+  },
+  {
+   "id": "e417be4d-11d4-43b9-a6ff-2ec35abdf873",
+   "nome": "DevOps Essentials Professional Certificate (DEPC)",
+   "instituicao": "CertiProf",
+   "data_certificacao": "2020-08-26",
+   "validade": null,
+   "certificado_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/certificados/devops-essentials.webp",
+   "i18n": {}
+  },
+  {
+   "id": "2895661c-5e97-4f99-b6f2-0f50c06d638b",
+   "nome": "RPA Business Analysis Fundamentals",
+   "instituicao": "UiPath",
+   "data_certificacao": "2020-08-19",
+   "validade": null,
+   "certificado_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/certificados/rpa-business-analysis.webp",
+   "i18n": {}
+  },
+  {
+   "id": "97d49644-420c-41e3-8cb6-a687b985818e",
+   "nome": "Remote Work and Virtual Collaboration Professional Certificate (RWVCPC)",
+   "instituicao": "CertiProf",
+   "data_certificacao": "2021-01-25",
+   "validade": null,
+   "certificado_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/certificados/remote-work.webp",
+   "i18n": {}
+  },
+  {
+   "id": "1bbb9f82-6446-43a9-90b1-7ebbb3cca334",
+   "nome": "Introdução ao Teste de Software",
+   "instituicao": "USP (Coursera)",
+   "data_certificacao": null,
+   "validade": null,
+   "certificado_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/certificados/usp-teste-de-software.webp",
+   "i18n": {
+    "en": {
+     "nome": "Introduction to Software Testing"
+    },
+    "es": {
+     "nome": "Introducción a las Pruebas de Software"
     }
    }
   }

@@ -99,7 +99,7 @@ ${d.formacoes.map(f => `<div class="cv-atomo cv-item-topo"><h3>${esc(f.curso)} �
 ${d.certificacoes.map(x => `<p class="cv-atomo">${esc(x.nome)} · ${esc(x.instituicao)}${x.validade ? ` (${esc(x.validade)})` : ''}</p>`).join('')}` : ''}
 ${tem('idiomas') ? `${secao(t('sobre.idiomas'))}
 <p class="cv-atomo">${d.idiomas.map(i => `<strong>${esc(i.idioma)}</strong>: ${esc(i.nivel)}`).join(' · ')}</p>` : ''}
-${tem('palavras') && palavras.length ? `<p class="cv-palavras" aria-hidden="true">${palavras.map(esc).join(', ')}</p>` : ''}`;
+${tem('palavras') && palavras.length ? `<p class="cv-palavras">${palavras.map(esc).join(', ')}</p>` : ''}`;
 }
 
 export function paginaCV(d, bruto, qr = '') {
