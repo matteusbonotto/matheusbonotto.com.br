@@ -23,6 +23,7 @@ for (const p of alvos) {
       const pg = await ctx.newPage();
       await pg.goto(p.link_projeto, { waitUntil: 'networkidle', timeout: 45000 }).catch(() => {});
       await pg.waitForTimeout(2000);
+      await pg.locator('[data-consent="nao"]').click({ timeout: 1500 }).catch(() => {}); // fecha aviso de cookies
       // percorre a página para disparar animações de "revelar ao rolar"
       const altura = await pg.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 400) { scrollTo(0, y); await new Promise(r => setTimeout(r, 120)); } return document.documentElement.scrollHeight; });
       const vh = ctxOpts.viewport.height;
