@@ -2347,6 +2347,1740 @@
      "descricao_completa": "Dashboard en Power BI para análisis de ventas, organizando datos comerciales de forma visual, clara y objetiva. Creado durante mis estudios de análisis de datos y Business Intelligence, practicando informes, indicadores, gráficos y presentación de resultados comerciales."
     }
    }
+  },
+  {
+   "id": "c618f0ce-11f8-4935-9784-081ded4d2218",
+   "slug": "marca-bntt",
+   "titulo": "BNTT",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de BNTT: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de BNTT. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-bntt/01-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-bntt/01-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-bntt/01-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-bntt/01-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-bntt/01-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-bntt/01-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-bntt/01-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-bntt/01-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-bntt/01-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-bntt/01-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-bntt/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 300,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for BNTT: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for BNTT. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de BNTT: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de BNTT. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "dc5d473b-73cf-4406-95d4-eddb15466d25",
+   "slug": "marca-condonotto",
+   "titulo": "Condonotto",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de Condonotto: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de Condonotto. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-condonotto/03-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-condonotto/03-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-condonotto/03-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-condonotto/03-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-condonotto/03-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-condonotto/03-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-condonotto/03-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-condonotto/03-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-condonotto/03-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-condonotto/03-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-condonotto/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 301,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for Condonotto: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for Condonotto. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de Condonotto: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de Condonotto. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "daa2b79a-4ed9-453c-a6c2-2ee79a4b65aa",
+   "slug": "marca-nosso-paraiso-bio",
+   "titulo": "Nosso Paraíso Bio",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de Nosso Paraíso Bio: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de Nosso Paraíso Bio. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nosso-paraiso-bio/04-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nosso-paraiso-bio/04-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nosso-paraiso-bio/04-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nosso-paraiso-bio/04-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nosso-paraiso-bio/04-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nosso-paraiso-bio/04-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nosso-paraiso-bio/04-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nosso-paraiso-bio/04-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nosso-paraiso-bio/04-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nosso-paraiso-bio/04-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nosso-paraiso-bio/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 302,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for Nosso Paraíso Bio: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for Nosso Paraíso Bio. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de Nosso Paraíso Bio: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de Nosso Paraíso Bio. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "f12a675f-d932-4277-9885-158cc82c9fb8",
+   "slug": "marca-evangeligo",
+   "titulo": "EvangeliGO",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de EvangeliGO: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de EvangeliGO. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-evangeligo/05-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-evangeligo/05-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-evangeligo/05-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-evangeligo/05-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-evangeligo/05-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-evangeligo/05-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-evangeligo/05-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-evangeligo/05-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-evangeligo/05-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-evangeligo/05-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-evangeligo/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 303,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for EvangeliGO: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for EvangeliGO. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de EvangeliGO: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de EvangeliGO. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "6c0ac310-5d14-4f30-b5b4-995dd5246959",
+   "slug": "marca-matheus-bonotto",
+   "titulo": "Matheus Bonotto",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de Matheus Bonotto: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de Matheus Bonotto. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-matheus-bonotto/06-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-matheus-bonotto/06-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-matheus-bonotto/06-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-matheus-bonotto/06-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-matheus-bonotto/06-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-matheus-bonotto/06-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-matheus-bonotto/06-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-matheus-bonotto/06-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-matheus-bonotto/06-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-matheus-bonotto/06-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-matheus-bonotto/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 304,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for Matheus Bonotto: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for Matheus Bonotto. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de Matheus Bonotto: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de Matheus Bonotto. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "ea2a3ae4-ec19-4c7c-aff4-3646550218e1",
+   "slug": "marca-qa-toolbar-sandbox",
+   "titulo": "QA Toolbar Sandbox",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de QA Toolbar Sandbox: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de QA Toolbar Sandbox. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-qa-toolbar-sandbox/07-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-qa-toolbar-sandbox/07-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-qa-toolbar-sandbox/07-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-qa-toolbar-sandbox/07-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-qa-toolbar-sandbox/07-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-qa-toolbar-sandbox/07-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-qa-toolbar-sandbox/07-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-qa-toolbar-sandbox/07-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-qa-toolbar-sandbox/07-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-qa-toolbar-sandbox/07-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-qa-toolbar-sandbox/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 305,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for QA Toolbar Sandbox: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for QA Toolbar Sandbox. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de QA Toolbar Sandbox: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de QA Toolbar Sandbox. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "312e33cf-249a-40b5-826b-db35356c07ff",
+   "slug": "marca-zunido",
+   "titulo": "Zunido",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de Zunido: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de Zunido. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-zunido/08-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-zunido/08-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-zunido/08-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-zunido/08-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-zunido/08-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-zunido/08-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-zunido/08-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-zunido/08-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-zunido/08-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-zunido/08-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-zunido/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 306,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for Zunido: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for Zunido. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de Zunido: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de Zunido. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "ec5a5337-812b-4124-8400-f557bc8ccd3d",
+   "slug": "marca-achadubom",
+   "titulo": "AchaduBom",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de AchaduBom: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de AchaduBom. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-achadubom/09-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-achadubom/09-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-achadubom/09-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-achadubom/09-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-achadubom/09-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-achadubom/09-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-achadubom/09-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-achadubom/09-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-achadubom/09-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-achadubom/09-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-achadubom/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 307,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for AchaduBom: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for AchaduBom. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de AchaduBom: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de AchaduBom. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "52b32021-8540-4a57-a41f-ba8ff7a0ac04",
+   "slug": "marca-colonia-nerd",
+   "titulo": "Colonia Nerd",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de Colonia Nerd: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de Colonia Nerd. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-colonia-nerd/10-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-colonia-nerd/10-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-colonia-nerd/10-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-colonia-nerd/10-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-colonia-nerd/10-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-colonia-nerd/10-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-colonia-nerd/10-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-colonia-nerd/10-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-colonia-nerd/10-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-colonia-nerd/10-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-colonia-nerd/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 308,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for Colonia Nerd: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for Colonia Nerd. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de Colonia Nerd: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de Colonia Nerd. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "9d63a3b1-1521-4f5d-b2b8-e17bfb8cc9ae",
+   "slug": "marca-mundo-tech-informatica",
+   "titulo": "Mundo Tech Informática",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de Mundo Tech Informática: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de Mundo Tech Informática. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-mundo-tech-informatica/11-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-mundo-tech-informatica/11-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-mundo-tech-informatica/11-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-mundo-tech-informatica/11-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-mundo-tech-informatica/11-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-mundo-tech-informatica/11-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-mundo-tech-informatica/11-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-mundo-tech-informatica/11-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-mundo-tech-informatica/11-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-mundo-tech-informatica/11-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-mundo-tech-informatica/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 309,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for Mundo Tech Informática: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for Mundo Tech Informática. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de Mundo Tech Informática: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de Mundo Tech Informática. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "89663247-ab2f-4e96-8ce7-df65028ed024",
+   "slug": "marca-campwine",
+   "titulo": "CampWine",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de CampWine: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de CampWine. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-campwine/12-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-campwine/12-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-campwine/12-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-campwine/12-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-campwine/12-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-campwine/12-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-campwine/12-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-campwine/12-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-campwine/12-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-campwine/12-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-campwine/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 310,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for CampWine: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for CampWine. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de CampWine: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de CampWine. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "4de7213b-fe4d-4a68-b7ef-61e12ed0f184",
+   "slug": "marca-cia",
+   "titulo": "CIA",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de CIA: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de CIA. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-cia/13-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-cia/13-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-cia/13-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-cia/13-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-cia/13-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-cia/13-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-cia/13-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-cia/13-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-cia/13-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-cia/13-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-cia/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 311,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for CIA: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for CIA. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de CIA: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de CIA. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "2b2d6e8a-fad6-4621-b003-9cab635162a8",
+   "slug": "marca-scriptguard",
+   "titulo": "ScriptGuard",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de ScriptGuard: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de ScriptGuard. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-scriptguard/14-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-scriptguard/14-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-scriptguard/14-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-scriptguard/14-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-scriptguard/14-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-scriptguard/14-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-scriptguard/14-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-scriptguard/14-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-scriptguard/14-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-scriptguard/14-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-scriptguard/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 312,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for ScriptGuard: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for ScriptGuard. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de ScriptGuard: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de ScriptGuard. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "48467f72-c1c7-4000-8436-408129d79d49",
+   "slug": "marca-breno-padovani",
+   "titulo": "Breno Padovani",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de Breno Padovani: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de Breno Padovani. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-breno-padovani/15-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-breno-padovani/15-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-breno-padovani/15-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-breno-padovani/15-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-breno-padovani/15-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-breno-padovani/15-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-breno-padovani/15-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-breno-padovani/15-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-breno-padovani/15-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-breno-padovani/15-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-breno-padovani/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 313,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for Breno Padovani: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for Breno Padovani. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de Breno Padovani: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de Breno Padovani. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "42264380-d2bf-49de-b391-84b4e2b21ddc",
+   "slug": "marca-hyperhelp",
+   "titulo": "Hyperhelp",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de Hyperhelp: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de Hyperhelp. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-hyperhelp/16-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-hyperhelp/16-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-hyperhelp/16-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-hyperhelp/16-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-hyperhelp/16-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-hyperhelp/16-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-hyperhelp/16-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-hyperhelp/16-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-hyperhelp/16-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-hyperhelp/16-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-hyperhelp/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 314,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for Hyperhelp: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for Hyperhelp. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de Hyperhelp: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de Hyperhelp. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "4a7d7fcf-0ea1-43bf-831c-3ef971eb2a5b",
+   "slug": "marca-monumentos-marmores",
+   "titulo": "Monumentos Mármores",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de Monumentos Mármores: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de Monumentos Mármores. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-monumentos-marmores/17-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-monumentos-marmores/17-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-monumentos-marmores/17-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-monumentos-marmores/17-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-monumentos-marmores/17-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-monumentos-marmores/17-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-monumentos-marmores/17-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-monumentos-marmores/17-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-monumentos-marmores/17-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-monumentos-marmores/17-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-monumentos-marmores/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 315,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for Monumentos Mármores: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for Monumentos Mármores. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de Monumentos Mármores: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de Monumentos Mármores. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
+  },
+  {
+   "id": "942aaec0-a101-476e-b1ca-4e6e2be9f942",
+   "slug": "marca-nuasp",
+   "titulo": "NUASP",
+   "papel": "Designer: logotipo e identidade visual",
+   "descricao_curta": "Identidade visual de NUASP: logotipo, variações, paleta, tipografia e aplicações.",
+   "descricao_completa": "Criei o logotipo e o manual de marca de NUASP. O manual explica o conceito do símbolo, as variações de cor (colorida, monocromática, em relevo), a paleta com a psicologia das cores, a tipografia, as regras de uso e exemplos de aplicação.",
+   "categoria": "design",
+   "categorias": [
+    "design"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nuasp/18-01-capa.webp",
+   "galeria": [
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nuasp/18-01-capa.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nuasp/18-02-conceito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nuasp/18-03-logotipo.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nuasp/18-04-variacoes.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nuasp/18-05-paleta.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nuasp/18-06-psicologia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nuasp/18-07-tipografia.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nuasp/18-08-usos.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nuasp/18-09-aplicacoes.webp",
+     "dispositivo": "desktop"
+    }
+   ],
+   "tecnologias": [
+    "Branding",
+    "Logotipo",
+    "Manual de marca"
+   ],
+   "funcionalidades": [
+    "Conceito e construção do logotipo",
+    "Variações de cor e versão em relevo",
+    "Paleta e psicologia das cores",
+    "Tipografia",
+    "Regras de uso",
+    "Aplicações da marca"
+   ],
+   "conquistas": [],
+   "link_projeto": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/branding/marca-nuasp/manual-de-marca.pdf",
+   "link_github": null,
+   "data_projeto": null,
+   "destaque": false,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 316,
+   "i18n": {
+    "en": {
+     "papel": "Designer: logo and visual identity",
+     "conquistas": [],
+     "descricao_curta": "Visual identity for NUASP: logo, variations, palette, typography and applications.",
+     "funcionalidades": [
+      "Logo concept and construction",
+      "Color variations and embossed version",
+      "Palette and color psychology",
+      "Typography",
+      "Usage rules",
+      "Brand applications"
+     ],
+     "descricao_completa": "I designed the logo and brand guidelines for NUASP. The guide covers the symbol concept, color variations (full color, monochrome, embossed), the palette and its color psychology, typography, usage rules and application examples."
+    },
+    "es": {
+     "papel": "Diseñador: logotipo e identidad visual",
+     "conquistas": [],
+     "descricao_curta": "Identidad visual de NUASP: logotipo, variaciones, paleta, tipografía y aplicaciones.",
+     "funcionalidades": [
+      "Concepto y construcción del logotipo",
+      "Variaciones de color y versión en relieve",
+      "Paleta y psicología de los colores",
+      "Tipografía",
+      "Reglas de uso",
+      "Aplicaciones de la marca"
+     ],
+     "descricao_completa": "Creé el logotipo y el manual de marca de NUASP. El manual explica el concepto del símbolo, las variaciones de color (a color, monocromática, en relieve), la paleta con la psicología de los colores, la tipografía, las reglas de uso y ejemplos de aplicación."
+    }
+   }
   }
  ],
  "experiencias": [

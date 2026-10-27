@@ -4,7 +4,7 @@ import { rota } from '../i18n/ui.js';
 import { anosEmQA, textoSite } from '../lib/dados.js';
 import { CAMINHOS, esc, icone, iniciais, paragrafos, periodo } from './comum.js';
 
-export const CATS = ['qa', 'dev', 'vibe', 'data'];
+export const CATS = ['qa', 'dev', 'vibe', 'data', 'design'];
 const catsProjeto = p => { const c = (p.categorias?.length ? p.categorias : [p.categoria]).map(x => String(x || '').toLowerCase()).filter(x => CATS.includes(x)); return c.length ? c : ['dev']; };
 export const ehCena = url => /\/capa\.webp/.test(url || '');
 const imgProjeto = (p, t, cls = '') => p.imagem_url

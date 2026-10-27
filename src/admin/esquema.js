@@ -8,7 +8,7 @@ export const SECOES = {
     campos: [
       { nome: 'titulo', tipo: 'texto', obrigatorio: true, i18n: true },
       { nome: 'slug', tipo: 'texto', obrigatorio: true, ajuda: 'slug' },
-      { nome: 'categorias', tipo: 'multi', opcoes: ['qa', 'dev', 'vibe', 'data'] },
+      { nome: 'categorias', tipo: 'multi', opcoes: ['qa', 'dev', 'vibe', 'data', 'design'] },
       { nome: 'destaque', tipo: 'bool' }, { nome: 'ativo', tipo: 'bool', padrao: true },
       { nome: 'papel', tipo: 'texto', i18n: true },
       { nome: 'descricao_curta', tipo: 'area', obrigatorio: true, i18n: true, max: 220 },

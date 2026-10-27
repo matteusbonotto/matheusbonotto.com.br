@@ -186,7 +186,8 @@ main, .rodape { position: relative; z-index: 1; }
 .selo-qa { border-color: color-mix(in srgb, var(--acento) 55%, transparent); color: var(--acento); }
 .selo-vibe { border-color: color-mix(in srgb, #7b5cff 60%, transparent); color: #7b5cff; }
 .selo-data { border-color: color-mix(in srgb, var(--ok) 60%, transparent); color: var(--ok); }
-@media (prefers-color-scheme: dark) { .selo-vibe { color: #a996ff; } .selo-data { color: #4fd18b; } }
+.selo-design { border-color: color-mix(in srgb, #d6457a 60%, transparent); color: #d6457a; }
+@media (prefers-color-scheme: dark) { .selo-vibe { color: #a996ff; } .selo-data { color: #4fd18b; } .selo-design { color: #f07aa5; } }
 
 /* ---------- Destaques (vitrine horizontal) ---------- */
 .projetos { padding-top: var(--secao); }
