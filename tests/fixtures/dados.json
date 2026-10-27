@@ -2383,12 +2383,7 @@
    "atual": false,
    "categoria_profissional": "DEV",
    "logo_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/logos/desenvolvedor-de-software-969ea0.webp",
-   "imagens_urls": [
-    "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/trajetoria/realiza-1581243020638.webp",
-    "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/trajetoria/realiza-1576393597990.webp",
-    "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/trajetoria/realiza-1576454531851.webp",
-    "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/trajetoria/realiza-1582477653172.webp"
-   ],
+   "imagens_urls": [],
    "bloqueado": false,
    "i18n": {
     "en": {

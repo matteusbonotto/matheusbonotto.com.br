@@ -179,3 +179,4 @@ input[type=range] { padding: 0; accent-color: var(--acento); }
 .login-caixa .botao { justify-content: center; }
 .login-msg { text-align: center; }
 .login-caixa .idiomas { display: flex; justify-content: center; }
+[data-simples] .galeria-admin select { display: none; }

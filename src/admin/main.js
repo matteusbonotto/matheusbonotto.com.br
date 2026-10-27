@@ -263,6 +263,8 @@ function ordenarArvore(dados) {
 }
 
 // ---------- campos do formulário ----------
+// fotos simples (lista de URLs, como nas experiências) viram objetos para reaproveitar o editor de galeria
+const fotos = v => (v || []).map(g => (typeof g === 'string' ? { url: g } : g));
 function campo(c, valor, prefixo = '', tabela = '') {
   const id = `c-${prefixo}${c.nome}`;
   const nome = `${prefixo}${c.nome}`;
@@ -292,9 +294,9 @@ function campo(c, valor, prefixo = '', tabela = '') {
       <div class="imagem-previa">${valor ? `<img src="${esc(valor)}" alt="">` : ''}</div>
       <div class="acoes"><label class="botao">${valor ? tx('trocarImagem') : tx('enviarImagem')}<input type="file" accept="image/*" hidden data-arquivo></label>
       ${valor ? `<button type="button" class="botao perigo" data-remover-imagem>${tx('removerImagem')}</button>` : ''}</div></div>`;
-    case 'galeria': return `<fieldset class="campo" data-campo-galeria="${nome}" data-pasta="${c.pasta}"><legend>${rotulo(c.nome)}</legend>
-      <input type="hidden" name="${nome}" value="${esc(JSON.stringify(valor || []))}" data-json>
-      <ul class="galeria-admin">${(valor || []).map((g, i) => `<li><img src="${esc(g.url)}" alt=""><select data-disp="${i}"><option value="desktop" ${g.dispositivo !== 'mobile' ? 'selected' : ''}>${tx('desktop')}</option><option value="mobile" ${g.dispositivo === 'mobile' ? 'selected' : ''}>${tx('mobile')}</option></select><button type="button" class="botao icone perigo" data-tirar="${i}" aria-label="${tx('remover')}">✕</button></li>`).join('')}</ul>
+    case 'galeria': return `<fieldset class="campo" data-campo-galeria="${nome}" data-pasta="${c.pasta}" ${c.simples ? 'data-simples' : ''}><legend>${rotulo(c.nome)}</legend>
+      <input type="hidden" name="${nome}" value="${esc(JSON.stringify(fotos(valor)))}" data-json>
+      <ul class="galeria-admin">${fotos(valor).map((g, i) => `<li><img src="${esc(g.url)}" alt=""><select data-disp="${i}"><option value="desktop" ${g.dispositivo !== 'mobile' ? 'selected' : ''}>${tx('desktop')}</option><option value="mobile" ${g.dispositivo === 'mobile' ? 'selected' : ''}>${tx('mobile')}</option></select><button type="button" class="botao icone perigo" data-tirar="${i}" aria-label="${tx('remover')}">✕</button></li>`).join('')}</ul>
       <label class="botao">${tx('adicionarPrint')}<input type="file" accept="image/*" multiple hidden data-arquivos></label></fieldset>`;
     default: return `<div class="campo">${lab}<input id="${id}" name="${nome}" value="${esc(valor)}" ${req} ${max}>${ajuda}</div>`;
   }
@@ -310,7 +312,7 @@ function lerCampo(c, form, prefixo = '') {
     case 'nivel': return Number(el.value);
     case 'lista': return el.value.split('\n').map(s => s.trim()).filter(Boolean);
     case 'tags': return el.value.split(',').map(s => s.trim()).filter(Boolean);
-    case 'galeria': return JSON.parse(el.value || '[]');
+    case 'galeria': { const v = JSON.parse(el.value || '[]'); return c.simples ? v.map(g => g.url || g) : v; }
     case 'data': case 'url': case 'select': case 'pai': case 'imagem': return el.value || null;
     default: return el.value.trim();
   }

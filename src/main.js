@@ -395,7 +395,9 @@ function visor(imgs, inicio, aoTrocar) {
     <button type="button" data-v="ajustar" aria-label="${t('projetos.zoomAjustar')}">${icone('ajustar')}</button>
   </div>
   <button type="button" class="visor-fechar" data-v="fechar" aria-label="${t('projetos.fechar')}">${icone('fechar')}</button>`;
-  modal.append(v);
+  // dentro do modal aberto ou, fora dele (ex.: certificados da trajetória), direto na página
+  (modal.open ? modal : document.body).append(v);
+  if (!modal.open) lenis?.stop();
   const area = $('.visor-area', v), img = $('.visor-img', v);
   let i = inicio, z = 1, x = 0, y = 0;
   const aplicar = (anim = true) => {
@@ -427,12 +429,14 @@ function visor(imgs, inicio, aoTrocar) {
   };
   const fechar = () => {
     removeEventListener('keydown', teclas);
+    if (!modal.open) lenis?.start();
     if (semMovimento) { v.remove(); return; }
     gsap.to(v, { opacity: 0, duration: .35, ease: 'power1.in', onComplete: () => v.remove() });
   };
   v._fechar = fechar;
   const teclas = e => {
-    if (e.key === 'ArrowRight') ir(i + 1);
+    if (e.key === 'Escape' && !modal.open) fechar();
+    else if (e.key === 'ArrowRight') ir(i + 1);
     else if (e.key === 'ArrowLeft') ir(i - 1);
     else if (e.key === '+' || e.key === '=') zoom(z * 1.4);
     else if (e.key === '-') zoom(z / 1.4);

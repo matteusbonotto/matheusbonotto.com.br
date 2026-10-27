@@ -369,3 +369,14 @@ test('currículo: palavras-chave para robôs de triagem, na cor da folha e selec
   await page.emulateMedia({ media: 'print' });
   await expect(kw).not.toHaveCSS('display', 'none');
 });
+
+test('certificados abrem na galeria em tela cheia e Esc fecha', async ({ page }) => {
+  test.skip(!dados.certificacoes.some(c => c.certificado_url));
+  await page.goto('/trajetoria/');
+  await page.locator('.cert-img[data-visor]').first().click();
+  const visor = page.locator('.visor');
+  await expect(visor).toBeVisible();
+  await expect(visor.locator('.visor-img')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(visor).toHaveCount(0);
+});
