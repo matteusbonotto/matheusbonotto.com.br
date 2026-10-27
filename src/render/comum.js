@@ -90,7 +90,7 @@ export function head({ lang, t, titulo, descricao, pagina = '', jsonld, extra = 
   const url = SITE.url + rota(lang, pagina);
   const alternos = SITE.idiomas.map(l => `<link rel="alternate" hreflang="${UIlang(l)}" href="${SITE.url + rota(l, pagina)}">`).join('')
     + `<link rel="alternate" hreflang="x-default" href="${SITE.url + rota('pt', pagina)}">`;
-  const og = `${SITE.url}/media/og.jpg`;
+  const og = `${SITE.url}/media/og.jpg?v=2`; // ?v força WhatsApp e LinkedIn a buscar a imagem nova
   return `<meta charset="utf-8">
 <script>try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
