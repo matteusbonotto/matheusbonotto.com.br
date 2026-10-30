@@ -176,6 +176,10 @@ main, .rodape { position: relative; z-index: 1; }
 /* ---------- Números ---------- */
 .numeros { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; padding-block: var(--secao); }
 .numero strong { font-size: clamp(3rem, 2rem + 4vw, 5.6rem); font-weight: 800; font-stretch: 72%; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+/* contagem só no ::after: o texto real continua no HTML, oculto só na pintura, e segura a largura final */
+.numero strong { display: inline-block; position: relative; }
+.numero strong.contando { -webkit-text-fill-color: transparent; }
+.numero strong.contando::after { content: attr(data-mostra); content: attr(data-mostra) / ""; position: absolute; top: 0; left: 0; -webkit-text-fill-color: currentColor; }
 .numero-suf { font-size: clamp(2rem, 1.4rem + 2vw, 3.4rem); font-weight: 800; color: var(--acento); }
 .numero p { margin-top: 8px; color: var(--tinta-2); font-size: .95rem; border-top: 1px solid var(--linha); padding-top: 12px; }
 @media (min-width: 768px) { .numeros { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
@@ -777,7 +781,8 @@ details.linha-desc[open] summary { display: none; }
 /* ---------- vitrine de destaques: letreiro contínuo ---------- */
 .vitrine { overflow: hidden; padding-block: 4px 10px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
 .vitrine-trilho { display: flex; width: max-content; animation: letreiro calc(var(--itens, 6) * 8s) linear infinite; }
-.vitrine:hover .vitrine-trilho, .vitrine:focus-within .vitrine-trilho, .vitrine.tocando .vitrine-trilho { animation-play-state: paused; }
+/* só pausa com mouse em tela larga: no celular o toque deixaria :hover e :focus-within presos e o letreiro parado */
+@media (hover: hover) and (pointer: fine) and (min-width: 768px) { .vitrine:hover .vitrine-trilho, .vitrine:focus-within .vitrine-trilho { animation-play-state: paused; } }
 .vitrine-faixa { display: flex; gap: 16px; padding-right: 16px; }
 .destaque { width: clamp(256px, 70vw, 330px); display: flex; flex-direction: column; background: var(--superficie); border: 1px solid var(--linha); border-radius: var(--raio-g); overflow: hidden; transition: border-color .3s, transform .4s var(--curva); }
 .destaque:hover { border-color: var(--linha-forte); transform: translateY(-3px); }

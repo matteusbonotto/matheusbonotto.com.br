@@ -433,7 +433,7 @@
     "Integração segura com Azure DevOps via backend e Edge Functions",
     "Proteção de configurações globais no Supabase com policies"
    ],
-   "link_projeto": "https://cnkautmblabs.github.io/stark-hub/login",
+   "link_projeto": "https://starkhub-mblabs.web.app/",
    "link_github": null,
    "data_projeto": "2026-07-01",
    "destaque": true,
@@ -910,110 +910,6 @@
    }
   },
   {
-   "id": "079d3358-ecdb-43b4-a891-ce233198599b",
-   "slug": "simulador-ctfl",
-   "titulo": "Simulador CTFL (ISTQB)",
-   "papel": "Ferramenta aberta para a comunidade de QA",
-   "descricao_curta": "Simulado do exame ISTQB CTFL 4.0 com cronômetro, questões por nível cognitivo, gabarito comentado e histórico de tentativas.",
-   "descricao_completa": "Aplicação web criada para auxiliar na preparação para a certificação ISTQB CTFL v4.0, simulando o exame real com temporizador, questões categorizadas por nível cognitivo e controle de desempenho, ajudando candidatos a treinar de forma prática e objetiva.",
-   "categoria": "qa",
-   "categorias": [
-    "qa",
-    "dev"
-   ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/capa.webp?v=mvq50fml",
-   "galeria": [
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-01-inicio.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-02-questao.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-03-ultima-questao.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-04-resultado-gabarito.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-05-historico.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-01-inicio.webp",
-     "dispositivo": "mobile"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-02-questao.webp",
-     "dispositivo": "mobile"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-03-paginacao.webp",
-     "dispositivo": "mobile"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-04-resultado.webp",
-     "dispositivo": "mobile"
-    },
-    {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-05-historico.webp",
-     "dispositivo": "mobile"
-    }
-   ],
-   "tecnologias": [
-    "HTML",
-    "CSS",
-    "JavaScript"
-   ],
-   "funcionalidades": [],
-   "conquistas": [],
-   "link_projeto": "https://matteusbonotto.github.io/qa-simulador-ctfl/",
-   "link_github": "https://github.com/matteusbonotto/simulador-ctfl",
-   "data_projeto": null,
-   "destaque": true,
-   "bloqueado": false,
-   "professional_history_id": null,
-   "ordem": 5,
-   "i18n": {
-    "en": {
-     "papel": "Open tool for the QA community",
-     "titulo": "CTFL Exam Simulator (ISTQB)",
-     "descricao_curta": "ISTQB CTFL 4.0 mock exam with a timer, questions by cognitive level, answer key and attempt history.",
-     "descricao_completa": "Web app to help candidates prepare for the ISTQB CTFL v4.0 certification, simulating the real exam with a timer, questions categorized by cognitive level and performance tracking for practical, focused training."
-    },
-    "es": {
-     "papel": "Herramienta abierta para la comunidad QA",
-     "titulo": "Simulador CTFL (ISTQB)",
-     "descricao_curta": "Simulacro del examen ISTQB CTFL 4.0 con cronómetro, preguntas por nivel cognitivo, respuestas comentadas e historial de intentos.",
-     "descricao_completa": "Aplicación web para ayudar a preparar la certificación ISTQB CTFL v4.0, simulando el examen real con temporizador, preguntas categorizadas por nivel cognitivo y control de desempeño para entrenar de forma práctica y objetiva."
-    }
-   }
-  },
-  {
    "id": "e935da77-5e6d-4884-bc23-21d085ad0700",
    "slug": "zunido",
    "titulo": "Zunido",
@@ -1127,6 +1023,110 @@
       "Narración, lengua de señas y ajuste de texto"
      ],
      "descricao_completa": "Zunido sigue lo que es tendencia en Brasil y lo convierte en artículos con fuentes reales. Un pautero lee Google Trends y Google News, un redactor con IA escribe con la voz del blog, un editor con IA verifica cada dato en las fuentes y quita clichés, y un guardián con reglas fijas bloquea artículos cortos o sin fuentes.\n\nPublica tres artículos al día y un boletín cada dos días, todo programado en GitHub Actions. No hay base de datos: los artículos son archivos Markdown en Git y las portadas se generan por código en el build. El lector tiene tema claro y oscuro, ajuste del tamaño del texto, interfaz en portugués, inglés y español, lengua de señas brasileña y narración con control de velocidad."
+    }
+   }
+  },
+  {
+   "id": "079d3358-ecdb-43b4-a891-ce233198599b",
+   "slug": "simulador-ctfl",
+   "titulo": "Simulador CTFL (ISTQB)",
+   "papel": "Ferramenta aberta para a comunidade de QA",
+   "descricao_curta": "Simulado do exame ISTQB CTFL 4.0 com cronômetro, questões por nível cognitivo, gabarito comentado e histórico de tentativas.",
+   "descricao_completa": "Aplicação web criada para auxiliar na preparação para a certificação ISTQB CTFL v4.0, simulando o exame real com temporizador, questões categorizadas por nível cognitivo e controle de desempenho, ajudando candidatos a treinar de forma prática e objetiva.",
+   "categoria": "qa",
+   "categorias": [
+    "qa",
+    "dev"
+   ],
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/capa.webp?v=mvq50fml",
+   "galeria": [
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-01-inicio.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-02-questao.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-03-ultima-questao.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-04-resultado-gabarito.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 1261,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/desktop-05-historico.webp",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-01-inicio.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-02-questao.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-03-paginacao.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-04-resultado.webp",
+     "dispositivo": "mobile"
+    },
+    {
+     "h": 789,
+     "w": 364,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/simulador-ctfl/mobile-05-historico.webp",
+     "dispositivo": "mobile"
+    }
+   ],
+   "tecnologias": [
+    "HTML",
+    "CSS",
+    "JavaScript"
+   ],
+   "funcionalidades": [],
+   "conquistas": [],
+   "link_projeto": "https://matteusbonotto.github.io/qa-simulador-ctfl/",
+   "link_github": "https://github.com/matteusbonotto/simulador-ctfl",
+   "data_projeto": null,
+   "destaque": true,
+   "bloqueado": false,
+   "professional_history_id": null,
+   "ordem": 5,
+   "i18n": {
+    "en": {
+     "papel": "Open tool for the QA community",
+     "titulo": "CTFL Exam Simulator (ISTQB)",
+     "descricao_curta": "ISTQB CTFL 4.0 mock exam with a timer, questions by cognitive level, answer key and attempt history.",
+     "descricao_completa": "Web app to help candidates prepare for the ISTQB CTFL v4.0 certification, simulating the real exam with a timer, questions categorized by cognitive level and performance tracking for practical, focused training."
+    },
+    "es": {
+     "papel": "Herramienta abierta para la comunidad QA",
+     "titulo": "Simulador CTFL (ISTQB)",
+     "descricao_curta": "Simulacro del examen ISTQB CTFL 4.0 con cronómetro, preguntas por nivel cognitivo, respuestas comentadas e historial de intentos.",
+     "descricao_completa": "Aplicación web para ayudar a preparar la certificación ISTQB CTFL v4.0, simulando el examen real con temporizador, preguntas categorizadas por nivel cognitivo y control de desempeño para entrenar de forma práctica y objetiva."
     }
    }
   },

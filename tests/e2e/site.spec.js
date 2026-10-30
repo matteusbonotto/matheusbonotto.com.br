@@ -427,3 +427,44 @@ test('filtros e troca de currículo mostram carregamento antes do conteúdo', as
   await expect(page.locator('.cv-carregando.ativo')).toHaveCount(0, { timeout: 4000 });
   await expect(outra).toHaveAttribute('aria-pressed', 'true');
 });
+
+test('números: valor real no HTML sem JS e no DOM durante a contagem', async ({ page, browser, request }) => {
+  const html = await (await request.get('/')).text();
+  const esperados = [...html.matchAll(/<strong data-contar="(\d+)">(\d+)<\/strong>/g)];
+  expect(esperados).toHaveLength(4);
+  for (const [, alvo, texto] of esperados) { expect(texto).toBe(alvo); expect(+texto).toBeGreaterThan(0); }
+
+  const ctx = await browser.newContext({ javaScriptEnabled: false });
+  const semJs = await ctx.newPage();
+  await semJs.goto('/');
+  await expect(semJs.locator('.numero strong')).toHaveText(esperados.map(m => m[1]));
+  await ctx.close();
+
+  // grava todo texto que os números tiverem desde a carga: nenhum pode ser diferente do real
+  await page.addInitScript(() => {
+    window.textosNumeros = [];
+    new MutationObserver(() => document.querySelectorAll('[data-contar]').forEach(el => window.textosNumeros.push(el.textContent)))
+      .observe(document, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['data-mostra'] });
+  });
+  await page.goto('/');
+  const primeiro = page.locator('.numero strong').first();
+  await primeiro.scrollIntoViewIfNeeded();
+  await expect(primeiro).toHaveAttribute('data-mostra', /\d/); // a contagem visual aconteceu
+  await expect(primeiro).not.toHaveClass(/contando/);
+  const textos = await page.evaluate(() => [...new Set(window.textosNumeros)]);
+  expect(textos.sort()).toEqual(esperados.map(m => m[1]).sort());
+});
+
+test('celular: a vitrine de projetos não para com toque nem depois dele', async ({ page, isMobile }) => {
+  test.skip(!isMobile);
+  await page.goto('/');
+  const v = page.locator('.vitrine');
+  await v.scrollIntoViewIfNeeded();
+  const pos = () => page.evaluate(() => new DOMMatrix(getComputedStyle(document.querySelector('.vitrine-trilho')).transform).m41);
+  const anda = async () => { const a = await pos(); await page.waitForTimeout(400); expect(await pos(), 'trilho andando').toBeLessThan(a); };
+  await anda();
+  const caixa = await v.boundingBox();
+  await page.evaluate(() => { document.querySelector('.vitrine').addEventListener('click', e => e.preventDefault(), true); });
+  await page.touchscreen.tap(caixa.x + caixa.width / 2, caixa.y + caixa.height / 2);
+  await anda();
+});

@@ -222,11 +222,15 @@ function revelar(raiz) {
   limpar.push(() => { io.disconnect(); io2.disconnect(); });
 }
 
+// o texto do número nunca muda: robôs e leitores de tela leem sempre o valor real, com ou sem JS.
+// A contagem é só visual, num ::after (data-mostra) que cobre o texto enquanto ela dura.
 function contar(el) {
   const alvo = +el.dataset.contar;
-  if (semMovimento || !alvo) { el.textContent = alvo; return; }
+  if (semMovimento || !alvo) return;
   const o = { v: 0 };
-  gsap.to(o, { v: alvo, duration: 1.6, ease: 'power3.out', onUpdate: () => { el.textContent = Math.round(o.v); } });
+  gsap.to(o, { v: alvo, duration: 1.6, ease: 'power3.out',
+    onUpdate: () => { el.dataset.mostra = Math.round(o.v); el.classList.add('contando'); },
+    onComplete: () => el.classList.remove('contando') });
 }
 
 function inclinar(raiz) {
@@ -1008,14 +1012,10 @@ function recolhiveis(raiz) {
   }
 }
 
-// vitrine de destaques: no toque, pausa o letreiro por alguns segundos; com mouse, os cartões
-// perto do cursor crescem como o Dock do Mac e os vizinhos abrem espaço deslizando para os lados
+// vitrine de destaques: com mouse, os cartões perto do cursor crescem como o Dock do Mac e os vizinhos abrem espaço deslizando para os lados
 function vitrine(raiz) {
   const v = $('.vitrine', raiz);
   if (!v) return;
-  let pausa = 0;
-  v.addEventListener('touchstart', () => { v.classList.add('tocando'); clearTimeout(pausa); }, { passive: true });
-  v.addEventListener('touchend', () => { pausa = setTimeout(() => v.classList.remove('tocando'), 2500); }, { passive: true });
   if (!mouse || semMovimento) return;
   const cartoes = $$('.destaque', v);
   const ESCALA = 0.16, ALCANCE = 420;
