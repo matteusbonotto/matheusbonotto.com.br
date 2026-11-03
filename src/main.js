@@ -35,15 +35,15 @@ if (!semMovimento) {
 }
 
 // ---------- Tela de abertura ----------
-// Sai quando passaram 3 s, a página (com os quadros do vídeo) carregou e o vídeo do topo pode tocar; no máximo 8 s.
+// Sai quando passou 1 s, a página (com os quadros do vídeo) carregou e o vídeo do topo pode tocar; no máximo 3 s.
 const telaAbertura = $('[data-splash]');
 if (telaAbertura && !document.documentElement.classList.contains('sem-splash')) {
   lenis?.stop();
-  const tempo = new Promise(r => setTimeout(r, Math.max(0, 3000 - performance.now())));
+  const tempo = new Promise(r => setTimeout(r, Math.max(0, 1000 - performance.now())));
   const carregou = new Promise(r => (document.readyState === 'complete' ? r() : addEventListener('load', r, { once: true })));
   const video = $('.contato-video');
   const videoPronto = new Promise(r => (!video || video.readyState >= 3 ? r() : video.addEventListener('canplay', r, { once: true })));
-  Promise.race([Promise.all([tempo, carregou, videoPronto]), new Promise(r => setTimeout(r, 8000))]).then(() => {
+  Promise.race([Promise.all([tempo, carregou, videoPronto]), new Promise(r => setTimeout(r, 3000))]).then(() => {
     try { sessionStorage.setItem('splash', '1'); sessionStorage.setItem(`splash:${location.pathname}`, '1'); } catch {}
     telaAbertura.classList.add('saindo');
     lenis?.start();
@@ -122,7 +122,7 @@ function magneticos(raiz) {
 }
 magneticos(nav);
 // acesso discreto ao admin: clique direito no logo abre um balão de cheat code; com o código certo
-// aparece o item "Admin" no menu (lembrado neste navegador), que leva à tela de login
+// aparece o item "Admin" no menu só nesta aba (outra aba ou janela não mostra), que leva à tela de login
 const CHEAT = 'iddqd';
 const linkAdmin = (animar = false) => {
   const menu = $('.nav-links', nav);
@@ -132,7 +132,7 @@ const linkAdmin = (animar = false) => {
   $('.nav-cv', menu).before(a);
   if (animar && !semMovimento) gsap.from(a, { opacity: 0, y: -8, duration: .6, ease: 'power2.out' });
 };
-try { if (localStorage.getItem('admin-liberado') === '1') linkAdmin(); } catch {}
+try { localStorage.removeItem('admin-liberado'); if (sessionStorage.getItem('admin-liberado') === '1') linkAdmin(); } catch {}
 function balaoCheat(ancora) {
   $('.cheat')?.remove();
   const b = document.createElement('div');
@@ -158,7 +158,7 @@ function balaoCheat(ancora) {
     e.preventDefault();
     if (campo.value.trim().toLowerCase() === CHEAT) {
       b.classList.remove('erro'); b.classList.add('certo'); msg.textContent = t('cheat.ok');
-      try { localStorage.setItem('admin-liberado', '1'); } catch {}
+      try { sessionStorage.setItem('admin-liberado', '1'); } catch {}
       linkAdmin(true);
       setTimeout(fechar, 1100);
     } else {
@@ -169,17 +169,15 @@ function balaoCheat(ancora) {
   requestAnimationFrame(() => campo.focus());
 }
 document.addEventListener('contextmenu', e => { const m = e.target.closest('.nav-marca img, .rodape-marca img'); if (!m) return; e.preventDefault(); balaoCheat(m); });
-// idioma: escolha lembrada; no celular, a primeira visita pergunta o idioma antes da leitura
+// idioma: escolha lembrada; na primeira visita segue o idioma do navegador (robôs de busca ficam na página que pediram)
 document.addEventListener('click', e => { const a = e.target.closest('a[hreflang]'); if (a) { try { localStorage.setItem('idioma', a.hreflang); } catch {} } });
 (() => {
-  let escolhido = null;
-  try { escolhido = localStorage.getItem('idioma'); } catch {}
-  if (escolhido || !matchMedia('(max-width: 1079px)').matches) return;
-  const aviso = document.createElement('div');
-  aviso.className = 'idioma-aviso'; aviso.setAttribute('role', 'dialog'); aviso.setAttribute('aria-label', 'Idioma · Language · Idioma');
-  aviso.innerHTML = `<p>Idioma · Language · Idioma</p><div>${$$('[data-idioma]').map(a => `<a href="${a.getAttribute('href')}" hreflang="${a.hreflang}" ${a.getAttribute('aria-current') ? 'aria-current="true"' : ''}>${a.textContent}</a>`).join('')}</div><button type="button" aria-label="${t('projetos.fechar')}">×</button>`;
-  $('button', aviso).addEventListener('click', () => { try { localStorage.setItem('idioma', lang); } catch {} aviso.remove(); });
-  document.body.append(aviso);
+  try {
+    if (localStorage.getItem('idioma') || /bot|crawl|spider|lighthouse/i.test(navigator.userAgent)) return;
+    localStorage.setItem('idioma', lang);
+    const pref = (navigator.languages || [navigator.language]).map(l => String(l).slice(0, 2).toLowerCase()).find(l => $(`[data-idioma="${l}"]`));
+    if (pref && pref !== lang) location.replace($(`[data-idioma="${pref}"]`).href);
+  } catch {}
 })();
 // fecha o seletor de idioma ao tocar fora
 document.addEventListener('click', e => { const d = $('[data-lingua]'); if (d?.open && !d.contains(e.target)) d.open = false; });

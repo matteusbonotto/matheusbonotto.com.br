@@ -505,12 +505,19 @@ const linhaServico = s => `<div class="servico"><input data-s-titulo value="${es
 const linhaCliente = c => `<div class="cliente"><input data-c-nome value="${esc(c.nome)}" aria-label="${rotulo('nome')}" placeholder="${rotulo('nome')}">${campo({ nome: 'logo', tipo: 'imagem', pasta: 'clientes', largura: 96 }, c.logo, `cli${Math.random().toString(36).slice(2, 6)}_`)}<button type="button" class="botao icone perigo" data-remover-linha aria-label="${tx('remover')}">✕</button></div>`;
 
 // ---------- início ----------
+const SESSAO_MS = 60 * 60 * 1000;
+let timerSessao;
+async function expirar() { clearTimeout(timerSessao); await sb.auth.signOut(); telaLogin('entrar', tx('sessaoExpirada')); }
 async function iniciar() {
   document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
   if (/type=recovery/.test(location.hash)) return telaLogin('senha');
   const { data: { session } } = await sb.auth.getSession();
   if (!session) return telaLogin();
   if (!(await ehAdmin(session.user))) { await sb.auth.signOut(); return telaLogin('entrar', tx('semPermissao')); }
+  // sessão do admin dura 60 min a partir do login com senha; depois sai sozinha, mesmo com a aba aberta
+  const resta = new Date(session.user.last_sign_in_at).getTime() + SESSAO_MS - Date.now();
+  if (!(resta > 0)) return expirar();
+  clearTimeout(timerSessao); timerSessao = setTimeout(expirar, resta);
   const { count } = await sb.from('contact_messages').select('id', { count: 'exact', head: true }).eq('lida', false);
   naoLidas = count || 0;
   if (!location.hash.startsWith('#/')) location.hash = '#/painel';

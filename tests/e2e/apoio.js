@@ -24,7 +24,7 @@ export async function simularSupabase(page, { admin = false, perguntarIdioma = f
     const [, servico, caminho] = url.pathname.match(/\/(rest|auth|storage)\/v1\/(.*)$/);
     const json = (body, status = 200) => rota.fulfill({ status, contentType: 'application/json', body: JSON.stringify(body) });
     if (servico === 'auth') {
-      const user = { id: 'u1', email: 'matteusbonotto@gmail.com', aud: 'authenticated', role: 'authenticated' };
+      const user = { id: 'u1', email: 'matteusbonotto@gmail.com', aud: 'authenticated', role: 'authenticated', last_sign_in_at: new Date().toISOString() };
       if (caminho.startsWith('token') && req.postDataJSON?.()?.password === 'senha-errada') return json({ error: 'invalid_grant', error_description: 'Invalid login credentials' }, 400);
       if (caminho.startsWith('token')) return json({ access_token: 'tok', refresh_token: 'ref', token_type: 'bearer', expires_in: 3600, expires_at: Math.floor(Date.now() / 1000) + 3600, user });
       if (caminho === 'user') return json(user);

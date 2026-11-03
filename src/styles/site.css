@@ -861,14 +861,6 @@ details.linha-desc[open] summary { display: none; }
 .nav-lingua-lista a { padding: 10px 12px; border-radius: 9px; font-size: .92rem; }
 .nav-lingua-lista a[aria-current] { background: var(--superficie); color: var(--acento); font-weight: 650; }
 @media (min-width: 1080px) { .nav-lingua { display: none; } }
-.idioma-aviso { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 70; display: grid; gap: 10px; padding: 14px 46px 14px 16px; border-radius: 18px; background: color-mix(in srgb, var(--bg) 94%, transparent); color: var(--tinta); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--linha-forte); box-shadow: 0 18px 50px -12px rgba(0,0,0,.55); animation: modal-entra .5s var(--curva); }
-.idioma-aviso p { font-family: var(--mono); font-size: .72rem; letter-spacing: .04em; color: var(--tinta-2); }
-.idioma-aviso div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
-.idioma-aviso a { display: grid; place-items: center; min-height: 42px; padding: 0 6px; border-radius: 999px; border: 1px solid var(--linha-forte); font-size: .86rem; font-weight: 600; white-space: nowrap; }
-.idioma-aviso a[aria-current] { background: var(--acento); border-color: var(--acento); color: #fff; }
-.idioma-aviso button { position: absolute; top: 8px; right: 8px; width: 34px; height: 34px; border-radius: 50%; font-size: 1.3rem; line-height: 1; color: var(--tinta-2); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .idioma-aviso a[aria-current] { color: #062b2a; } }
-:root[data-theme="dark"] .idioma-aviso a[aria-current] { color: #062b2a; }
 
 /* ---------- aviso "deslize": translúcido ---------- */
 .deslize-dica { background: color-mix(in srgb, var(--tinta) 72%, transparent); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: opacity .5s; }

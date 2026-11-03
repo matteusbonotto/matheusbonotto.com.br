@@ -6,6 +6,7 @@ import { anosEmQA, localizar, prepararIdioma, textoSite } from '../../src/lib/da
 import { tradutor } from '../../src/i18n/ui.js';
 import { assinatura, conteudoCV, PAGINAS, paginaCV, paginaHTML } from '../../src/render/documento.js';
 import { detalheSkill, formatarValor, graficoCarreira } from '../../src/render/paginas.js';
+import { tipoAcademico } from '../../src/render/comum.js';
 
 const bruto = JSON.parse(fs.readFileSync(new URL('../fixtures/dados.json', import.meta.url), 'utf8'));
 
@@ -95,5 +96,18 @@ describe('currículo e competências configuráveis', () => {
     expect(html).toContain('skill-caminho');
     expect(html).toContain(t('comp.ondeUsei'));
     expect(html).toContain('data-abrir-projeto="playwright-automation"');
+  });
+});
+
+describe('formação', () => {
+  it('mostra o tipo acadêmico claro em cada idioma e no currículo', () => {
+    const pt = tradutor('pt'), en = tradutor('en');
+    expect(tipoAcademico('Lato Sensu', pt)).toBe('Pós-graduação (especialização)');
+    expect(tipoAcademico('Técnico', en)).toBe('Technical diploma');
+    expect(tipoAcademico('Bacharel', pt)).toBe('Graduação (bacharelado)');
+    expect(tipoAcademico('Outro tipo', pt)).toBe('Outro tipo');
+    expect(tipoAcademico('', pt)).toBe('');
+    const d = prepararIdioma(bruto, 'pt');
+    expect(conteudoCV(d, pt)).toContain('Pós-graduação (especialização)');
   });
 });

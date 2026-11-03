@@ -133,7 +133,7 @@
   "disponibilidade": {
     "ativo": true,
     "pt": {
-      "texto": "Disponível para freelance e vagas remotas"
+      "texto": "Aberto a vagas de QA remotas · também atendo projetos freelance"
     },
     "en": {
       "texto": "Available for freelance and remote roles"
@@ -151,7 +151,7 @@
   "seo": {
     "pt": {
       "titulo": "Matheus Bonotto · QA Engineer | Testes manuais e automação (Playwright, Robot Framework)",
-      "descricao": "QA Engineer com 6 anos de experiência (Samsung, Americanas, Cinemark LATAM, fintechs). Testes manuais, automação com Playwright e Robot Framework, CTFL e Shift-left. Disponível para freelance e vagas remotas."
+      "descricao": "QA Engineer com 6 anos de experiência (Samsung, Americanas, Cinemark LATAM, fintechs). Testes manuais, automação com Playwright e Robot Framework, CTFL e Shift-left. Aberto a vagas de QA remotas e projetos freelance."
     },
     "en": {
       "titulo": "Matheus Bonotto · QA Engineer | Manual testing & automation (Playwright, Robot Framework)",

@@ -13,6 +13,12 @@ export function paragrafos(txt) {
   }).join('');
 }
 
+// Tipo acadêmico do banco ("Lato Sensu", "Bacharel"...) no rótulo que o recrutador entende, no idioma da página
+export function tipoAcademico(v, t) {
+  const k = String(v || '').normalize('NFD').replace(/[̀-ͯ\s]/g, '').toLowerCase();
+  try { return k ? t(`acad.${k}`) : ''; } catch { return v; }
+}
+
 export function periodo(ini, fim, atual, t) {
   const f = d => { if (!d) return ''; const [a, m] = d.split('-'); return `${t('mes')[+m - 1]} ${a}`; };
   return `${f(ini)} → ${atual || !fim ? t('trajetoria.atual') : f(fim)}`;

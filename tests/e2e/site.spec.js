@@ -300,17 +300,14 @@ test('nenhum botão quebra linha ou vaza o texto', async ({ page }) => {
   }
 });
 
-test('celular: primeira visita pergunta o idioma e lembra a escolha', async ({ browser, isMobile }) => {
-  test.skip(!isMobile);
-  const ctx = await browser.newContext({ ...(await import('@playwright/test')).devices['Pixel 7'], locale: 'pt-BR' });
+test('primeira visita segue o idioma do navegador e depois respeita a escolha', async ({ browser }) => {
+  const ctx = await browser.newContext({ locale: 'en-US' });
   const page = await ctx.newPage();
   await simularSupabase(page, { perguntarIdioma: true });
   await page.goto('/');
-  const aviso = page.locator('.idioma-aviso');
-  await expect(aviso).toBeVisible();
-  await aviso.getByRole('link', { name: 'English' }).click();
   await expect(page).toHaveURL(/\/en\/$/);
-  await expect(page.locator('.idioma-aviso')).toHaveCount(0);
+  await page.goto('/es/');
+  await expect(page).toHaveURL(/\/es\/$/);
   await ctx.close();
 });
 
@@ -384,6 +381,12 @@ test('cheat code: errado treme e avisa; certo libera o Admin no menu', async ({ 
   await expect(page.locator('.nav-admin')).toHaveAttribute('href', '/admin/');
   await page.goto('/en/');
   await expect(page.locator('.nav-admin')).toHaveCount(1);
+  // outra aba não herda o acesso
+  const outra = await page.context().newPage();
+  await simularSupabase(outra);
+  await outra.goto('/');
+  await expect(outra.locator('.nav-cv')).toHaveCount(1);
+  await expect(outra.locator('.nav-admin')).toHaveCount(0);
 });
 
 test('competências: grade e lista simples abrem o detalhe da habilidade', async ({ page }) => {

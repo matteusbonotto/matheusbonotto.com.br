@@ -2,7 +2,7 @@
 import { SITE } from '../config.js';
 import { rota } from '../i18n/ui.js';
 import { anosEmQA, textoSite } from '../lib/dados.js';
-import { CAMINHOS, esc, icone, iniciais, paragrafos, periodo } from './comum.js';
+import { CAMINHOS, esc, icone, iniciais, paragrafos, periodo, tipoAcademico } from './comum.js';
 
 export const CATS = ['qa', 'dev', 'vibe', 'data', 'design'];
 const catsProjeto = p => { const c = (p.categorias?.length ? p.categorias : [p.categoria]).map(x => String(x || '').toLowerCase()).filter(x => CATS.includes(x)); return c.length ? c : ['dev']; };
@@ -285,7 +285,7 @@ const iconeLocal = s => ICONE_LOCAL[String(s || '').normalize('NFD').replace(/[\
 export function graficoCarreira(d, t, hoje = new Date()) {
   const itens = [
     ...d.experiencias.map(e => ({ id: e.id, tipo: 'exp', titulo: e.titulo, org: e.instituicao, ini: e.data_inicio, fim: e.atual ? null : e.data_fim, cat: e.categoria_profissional, logo: e.logo_url, chip: e.regime, onde: e.tipo_local, local: e.local })),
-    ...d.formacoes.map(f => ({ id: f.id, tipo: 'form', titulo: f.curso, org: f.instituicao, ini: f.data_inicio, fim: f.atual ? null : f.data_fim, cat: 'FORM', logo: f.logo_url, chip: f.tipo_academico, onde: f.tipo_local, local: '' })),
+    ...d.formacoes.map(f => ({ id: f.id, tipo: 'form', titulo: f.curso, org: f.instituicao, ini: f.data_inicio, fim: f.atual ? null : f.data_fim, cat: 'FORM', logo: f.logo_url, chip: tipoAcademico(f.tipo_academico, t), onde: f.tipo_local, local: '' })),
   ].filter(i => i.ini);
   if (!itens.length) return '';
   const data = s => (s ? new Date(`${s}T00:00:00`) : hoje);
@@ -388,7 +388,7 @@ function itemLinha(i, t) {
 export function itensTrajetoria(d, t) {
   return [
     ...d.experiencias.map(e => ({ id: e.id, bloqueado: e.bloqueado, imagens: e.imagens_urls, tipo: 'exp', titulo: e.titulo, org: e.instituicao, sub: [e.regime, e.tipo_local, e.local].filter(Boolean).join(' · '), per: periodo(e.data_inicio, e.data_fim, e.atual, t), ini: e.data_inicio, desc: e.descricao, logo: e.logo_url, cat: catExp(e.categoria_profissional, t) || t('carreira.profissional') })),
-    ...d.formacoes.map(f => ({ id: f.id, bloqueado: f.bloqueado, imagens: f.imagens_urls, tipo: 'form', titulo: f.curso, org: f.instituicao, sub: [f.tipo_academico, f.tipo_local].filter(Boolean).join(' · '), per: periodo(f.data_inicio, f.data_fim, f.atual, t), ini: f.data_inicio, desc: f.descricao, logo: f.logo_url, cat: t('carreira.academico') })),
+    ...d.formacoes.map(f => ({ id: f.id, bloqueado: f.bloqueado, imagens: f.imagens_urls, tipo: 'form', titulo: f.curso, org: f.instituicao, sub: f.tipo_local, per: periodo(f.data_inicio, f.data_fim, f.atual, t), ini: f.data_inicio, desc: f.descricao, logo: f.logo_url, cat: tipoAcademico(f.tipo_academico, t) || t('carreira.academico') })),
   ].sort((a, b) => String(b.ini).localeCompare(String(a.ini)));
 }
 

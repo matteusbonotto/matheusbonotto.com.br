@@ -2,7 +2,7 @@
 import { SITE } from '../config.js';
 import { rota, tradutor } from '../i18n/ui.js';
 import { idadeEm, textoSite, variaveis } from '../lib/dados.js';
-import { esc, head, icone, paragrafos, periodo } from './comum.js';
+import { esc, head, icone, paragrafos, periodo, tipoAcademico } from './comum.js';
 import { documento } from './layout.js';
 import { canais, competencias, contato, inicio, itensTrajetoria, jsonLd, projetos, sobre, trajetoria } from './paginas.js';
 
@@ -91,7 +91,8 @@ ${tem('competencias') ? `${secao(t('sobre.competencias'))}
 ${Object.entries(grupos).map(([g, i]) => `<p class="cv-atomo"><strong>${esc(g)}:</strong> ${i.map(esc).join(', ')}</p>`).join('')}
 <p class="cv-atomo"><strong>${t('sobre.comportamentais')}:</strong> ${d.comportamentais.map(x => esc(x.nome)).join(', ')}</p>` : ''}
 ${tem('formacao') ? `${secao(t('trajetoria.formacao'))}
-${d.formacoes.map(f => `<div class="cv-atomo cv-item-topo"><h3>${esc(f.curso)} · ${esc(f.instituicao)}</h3><span>${esc(periodo(f.data_inicio, f.data_fim, f.atual, t))}</span></div>`).join('')}
+${d.formacoes.map(f => `<div class="cv-atomo cv-item-topo"><h3>${esc(f.curso)} · ${esc(f.instituicao)}</h3><span>${esc(periodo(f.data_inicio, f.data_fim, f.atual, t))}</span><p class="cv-meta">${esc([tipoAcademico(f.tipo_academico, t), f.tipo_local].filter(Boolean).join(' · '))}</p></div>`).join('')}
+${d.certificacoes.length ? `<h3 class="cv-atomo cv-subsecao" data-junto>${t('trajetoria.certificacoes')}</h3>` : ''}
 ${d.certificacoes.map(x => `<p class="cv-atomo">${esc(x.nome)} · ${esc(x.instituicao)}${x.validade ? ` (${esc(x.validade)})` : ''}</p>`).join('')}` : ''}
 ${tem('idiomas') ? `${secao(t('sobre.idiomas'))}
 <p class="cv-atomo">${d.idiomas.map(i => `<strong>${esc(i.idioma)}</strong>: ${esc(i.nivel)}`).join(' · ')}</p>` : ''}`;

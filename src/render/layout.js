@@ -20,7 +20,7 @@ export function navegacao(lang, t, pagina) {
   <nav class="nav-links" aria-label="${t('nav.menu')}" id="menu-principal">
     <a href="${rota(lang)}" class="nav-so-menu" ${pagina === '' ? 'aria-current="page"' : ''}>${t('nav.inicio')}</a>
     ${PAGINAS_NAV.map(([id, k]) => `<a href="${rota(lang, id)}" ${pagina === id ? 'aria-current="page"' : ''}>${t(k)}</a>`).join('')}
-    <a href="${rota(lang, 'cv')}" class="nav-cv">${icone('download')}${t('nav.cv')}</a>
+    <a href="${rota(lang, 'cv')}${t('cv.arquivo')}" class="nav-cv" download type="application/pdf">${icone('download')}${t('nav.cvPdf')}</a>
     <div class="nav-idiomas" role="group" aria-label="${t('nav.idioma')}">${idiomas}</div>
   </nav>
   <button class="tema-botao" type="button" data-tema aria-label="${t('nav.tema')}" title="${t('nav.tema')}">${icone('sol')}${icone('lua')}</button>
@@ -50,9 +50,9 @@ export function rodape(lang, t) {
 // Canvas de partículas (rede de pontos ligada por linhas); o JS desenha e pausa fora da tela.
 export const particulas = (tom = 'escuro') => `<canvas class="particulas particulas-${tom}" data-particulas="${tom}" aria-hidden="true"></canvas>`;
 
-// Tela de abertura: cobre a página até o vídeo carregar (mínimo de 3 s). Páginas com vídeo (início e contato)
+// Tela de abertura: cobre a página até o vídeo carregar (mínimo de 1 s). Páginas com vídeo (início e contato)
 // a mostram na primeira visita da sessão a cada uma; as demais, só se forem a primeira página aberta.
-// Automação (navigator.webdriver) não vê a abertura, para os testes não esperarem 3 s a cada página.
+// Automação (navigator.webdriver) não vê a abertura, para os testes não esperarem a cada página.
 const BEM_VINDO = { pt: 'Bem-vindo', en: 'Welcome', es: 'Bienvenido' };
 const splash = lang => `<div class="splash" data-splash role="status" aria-label="${BEM_VINDO[lang]}">
   <div class="splash-caixa">

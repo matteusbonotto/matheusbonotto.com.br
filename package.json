@@ -4,13 +4,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/prerender.mjs && vite build",
+    "build": "node scripts/prerender.mjs && vite build && node scripts/cv-pdf.mjs",
     "preview": "vite preview --port 4173",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "test:tudo": "npm test && npm run build && playwright test",
     "sql": "bash scripts/sql.sh",
-    "deploy": "npm run test:tudo && firebase deploy --only hosting"
+    "deploy": "npm run test:tudo && npm run build && firebase deploy --only hosting"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",

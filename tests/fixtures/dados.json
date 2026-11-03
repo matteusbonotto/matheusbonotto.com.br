@@ -596,7 +596,7 @@
    "link_projeto": "https://evangeligo.com.br",
    "link_github": null,
    "data_projeto": null,
-   "destaque": true,
+   "destaque": false,
    "bloqueado": false,
    "professional_history_id": "f5f53f4a-8132-48c3-a871-8f066837c3bb",
    "ordem": 2,
@@ -892,7 +892,7 @@
    "link_projeto": "https://squidev.com.br",
    "link_github": "https://github.com/matteusbonotto/squidev",
    "data_projeto": null,
-   "destaque": true,
+   "destaque": false,
    "bloqueado": false,
    "professional_history_id": "f5f53f4a-8132-48c3-a871-8f066837c3bb",
    "ordem": 4,
@@ -4241,7 +4241,7 @@
    "curso": "Teste de Software",
    "tipo_academico": "Lato Sensu",
    "tipo_local": "Remoto",
-   "descricao": "Formação voltada à qualidade de software, testes, prevenção de falhas, documentação técnica e boas práticas aplicadas à entrega de produtos digitais.",
+   "descricao": "Pós graduação Lato Sensu voltada à qualidade de software, testes, prevenção de falhas, documentação técnica e boas práticas aplicadas à entrega de produtos digitais.",
    "data_inicio": "2023-03-01",
    "data_fim": "2023-08-01",
    "atual": false,
@@ -4252,12 +4252,12 @@
    "bloqueado": false,
    "i18n": {
     "en": {
-     "curso": "Software Testing (postgraduate specialization)",
-     "descricao": "Specialization in software quality, testing, defect prevention, technical documentation and good practices for delivering digital products."
+     "curso": "Software Testing",
+     "descricao": "graduate school Lato Sensu in software quality, testing, defect prevention, technical documentation and good practices for delivering digital products."
     },
     "es": {
-     "curso": "Pruebas de Software (especialización de posgrado)",
-     "descricao": "Especialización en calidad de software, pruebas, prevención de fallas, documentación técnica y buenas prácticas aplicadas a la entrega de productos digitales."
+     "curso": "Pruebas de Software",
+     "descricao": "Posgrado Lato Sensu en calidad de software, pruebas, prevención de fallas, documentación técnica y buenas prácticas aplicadas a la entrega de productos digitales."
     }
    }
   },
@@ -4279,11 +4279,11 @@
    "bloqueado": false,
    "i18n": {
     "en": {
-     "curso": "B.Sc. in Information Systems",
+     "curso": "Information Systems",
      "descricao": "Academic foundation in technology, logic, systems analysis, solution development and the fundamentals of working on digital products."
     },
     "es": {
-     "curso": "Licenciatura en Sistemas de Información",
+     "curso": "Sistemas de Información",
      "descricao": "Base académica en tecnología, lógica, análisis de sistemas, desarrollo de soluciones y fundamentos para trabajar en productos digitales."
     }
    }
@@ -7695,18 +7695,6 @@
     ]
    }
   },
-  "disponibilidade": {
-   "en": {
-    "texto": "Available for freelance and remote roles"
-   },
-   "es": {
-    "texto": "Disponible para freelance y vacantes remotas"
-   },
-   "pt": {
-    "texto": "Disponível para freelance e vagas remotas"
-   },
-   "ativo": true
-  },
   "contato": {
    "email": "contato@matheusbonotto.com.br",
    "github": "https://github.com/matteusbonotto",
@@ -7753,6 +7741,18 @@
     ],
     "carreira": "Minha trajetória começou no suporte técnico, onde aprendi a ouvir usuários e resolver problemas com calma. Passei pelo desenvolvimento, me formei em Sistemas de Informação, me especializei em Teste de Software e, desde 2020, atuo em qualidade: Samsung (via SiDi), Americanas e, pela MB Labs, fintechs e a Cinemark LATAM. Em paralelo, fundei a Squidev para tirar ideias do papel."
    }
+  },
+  "disponibilidade": {
+   "en": {
+    "texto": "Open to remote QA roles · also available for freelance projects"
+   },
+   "es": {
+    "texto": "Abierto a vacantes de QA remotas · también atiendo proyectos freelance"
+   },
+   "pt": {
+    "texto": "Aberto a vagas de QA remotas · também atendo projetos freelance"
+   },
+   "ativo": true
   },
   "clientes": [
    {
@@ -7834,15 +7834,15 @@
   "seo": {
    "en": {
     "titulo": "Matheus Bonotto | QA Engineer | Manual testing & automation (Playwright, Robot Framework)",
-    "descricao": "QA Engineer with {anos} years of experience (Samsung, Americanas, Cinemark LATAM, fintechs). Manual testing, Playwright and Robot Framework automation, CTFL and Shift-left. Available for freelance and remote roles."
+    "descricao": "QA Engineer with {anos} years of experience (Samsung, Americanas, Cinemark LATAM, fintechs). Manual testing, Playwright and Robot Framework automation, CTFL and Shift-left. Open to remote QA roles and freelance projects."
    },
    "es": {
     "titulo": "Matheus Bonotto | QA Engineer | Pruebas manuales y automatización (Playwright, Robot Framework)",
-    "descricao": "QA Engineer con {anos} años de experiencia (Samsung, Americanas, Cinemark LATAM, fintechs). Pruebas manuales, automatización con Playwright y Robot Framework, CTFL y Shift-left. Disponible para freelance y vacantes remotas."
+    "descricao": "QA Engineer con {anos} años de experiencia (Samsung, Americanas, Cinemark LATAM, fintechs). Pruebas manuales, automatización con Playwright y Robot Framework, CTFL y Shift-left. Abierto a vacantes de QA remotas y proyectos freelance."
    },
    "pt": {
     "titulo": "Matheus Bonotto | QA Engineer | Testes manuais e automação (Playwright, Robot Framework)",
-    "descricao": "QA Engineer com {anos} anos de experiência (Samsung, Americanas, Cinemark LATAM, fintechs). Testes manuais, automação com Playwright e Robot Framework, CTFL e Shift-left. Disponível para freelance e vagas remotas."
+    "descricao": "QA Engineer com {anos} anos de experiência (Samsung, Americanas, Cinemark LATAM, fintechs). Testes manuais, automação com Playwright e Robot Framework, CTFL e Shift-left. Aberto a vagas de QA remotas e projetos freelance."
    }
   },
   "patrocinio": {
