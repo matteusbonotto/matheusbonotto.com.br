@@ -106,10 +106,14 @@ const nomeBase = arquivo?.textContent || '';
 function desenhar() {
   botoesV.forEach(b => b.setAttribute('aria-pressed', b.dataset.variante === variante));
   if (arquivo) arquivo.textContent = nomeBase.replace(/_QA\.pdf$/, `_${variante.toUpperCase()}.pdf`);
+  // o PDF de cada versão é gerado no build (scripts/cv-pdf.mjs) com este mesmo nome
+  const baixar = document.querySelector('[data-baixar]');
+  if (baixar && arquivo) baixar.href = location.pathname.replace(/[^/]*$/, '') + arquivo.textContent;
   if (dados) caixa.innerHTML = `<article class="folha" data-fluxo>${conteudoCV(dados, t, '', variante)}</article>`;
   paginar();
   detalhesVivos();
   aplicarZoom();
+  if (dados || variante === primeira) document.documentElement.dataset.cvPronto = variante;
 }
 // troca de versão: as folhas esmaecem com um aviso de carregamento e a nova versão entra em seguida
 const mesa = main;

@@ -174,9 +174,9 @@ document.addEventListener('click', e => { const a = e.target.closest('a[hreflang
 (() => {
   try {
     if (localStorage.getItem('idioma') || /bot|crawl|spider|lighthouse/i.test(navigator.userAgent)) return;
-    localStorage.setItem('idioma', lang);
-    const pref = (navigator.languages || [navigator.language]).map(l => String(l).slice(0, 2).toLowerCase()).find(l => $(`[data-idioma="${l}"]`));
-    if (pref && pref !== lang) location.replace($(`[data-idioma="${pref}"]`).href);
+    const pref = (navigator.languages || [navigator.language]).map(l => String(l).slice(0, 2).toLowerCase()).find(l => $(`[data-idioma="${l}"]`)) || lang;
+    localStorage.setItem('idioma', pref); // daqui em diante vale a escolha feita no seletor PT/EN/ES
+    if (pref !== lang) location.replace($(`[data-idioma="${pref}"]`).href);
   } catch {}
 })();
 // fecha o seletor de idioma ao tocar fora

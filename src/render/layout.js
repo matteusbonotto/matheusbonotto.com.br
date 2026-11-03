@@ -20,7 +20,7 @@ export function navegacao(lang, t, pagina) {
   <nav class="nav-links" aria-label="${t('nav.menu')}" id="menu-principal">
     <a href="${rota(lang)}" class="nav-so-menu" ${pagina === '' ? 'aria-current="page"' : ''}>${t('nav.inicio')}</a>
     ${PAGINAS_NAV.map(([id, k]) => `<a href="${rota(lang, id)}" ${pagina === id ? 'aria-current="page"' : ''}>${t(k)}</a>`).join('')}
-    <a href="${rota(lang, 'cv')}${t('cv.arquivo')}" class="nav-cv" download type="application/pdf">${icone('download')}${t('nav.cvPdf')}</a>
+    <a href="${rota(lang, 'cv')}" class="nav-cv">${icone('download')}${t('nav.cv')}</a>
     <div class="nav-idiomas" role="group" aria-label="${t('nav.idioma')}">${idiomas}</div>
   </nav>
   <button class="tema-botao" type="button" data-tema aria-label="${t('nav.tema')}" title="${t('nav.tema')}">${icone('sol')}${icone('lua')}</button>

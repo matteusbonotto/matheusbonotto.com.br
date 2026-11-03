@@ -471,3 +471,16 @@ test('celular: a vitrine de projetos não para com toque nem depois dele', async
   await page.touchscreen.tap(caixa.x + caixa.width / 2, caixa.y + caixa.height / 2);
   await anda();
 });
+
+test('currículo: o botão do menu abre a página e "Baixar PDF" segue a versão escolhida', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.nav-cv').first()).toHaveAttribute('href', '/cv/');
+  await page.goto('/cv/');
+  const baixar = page.locator('[data-baixar]');
+  await expect(baixar).toHaveAttribute('href', /_QA\.pdf$/);
+  const outra = page.locator('[data-variante]').nth(1);
+  test.skip(!(await outra.count()));
+  const slug = await outra.getAttribute('data-variante');
+  await outra.click();
+  await expect(baixar).toHaveAttribute('href', new RegExp(`_${slug.toUpperCase()}\.pdf$`));
+});

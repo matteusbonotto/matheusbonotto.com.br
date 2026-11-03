@@ -116,7 +116,8 @@ ${head({ lang: d.lang, t, titulo: t('cv.titulo'), descricao: t('cv.descricao'), 
     <button type="button" data-zoom="1" aria-label="${t('cv.zoomMais')}">+</button>
   </div>
   <nav class="nav-idiomas" aria-label="${t('nav.idioma')}">${SITE.idiomas.map(l => `<a href="${rota(l, 'cv')}" hreflang="${l}" ${l === d.lang ? 'aria-current="true"' : ''}>${l.toUpperCase()}</a>`).join('')}</nav>
-  <button class="btn btn-acento btn-pequeno" type="button" data-imprimir>${icone('download')}<span>${t('cv.imprimir')}</span></button>
+  <button class="btn btn-pequeno" type="button" data-imprimir aria-label="${t('cv.imprimir')}">${icone('arquivo')}<span>${t('cv.imprimir')}</span></button>
+  <a class="btn btn-acento btn-pequeno" href="${rota(d.lang, 'cv')}${t('cv.arquivo')}" download type="application/pdf" data-baixar aria-label="${t('cv.baixar')}">${icone('download')}<span>${t('cv.baixar')}</span></a>
 </header>
 <main id="conteudo" class="cv-mesa" data-main data-assinatura="${assinatura(bruto)}">
   <div class="cv-paginas" data-paginas data-rotulo-pagina="${t('cv.pagina')}" data-cabeca="${esc([SITE.nome, (d.site.contato || {}).email, `${d.perfil.local || 'Campinas-SP'}, ${d.perfil.pais || 'Brasil'}`].filter(Boolean).join(' | '))}">
