@@ -4319,18 +4319,18 @@
  "certificacoes": [
   {
    "id": "90d9b2de-4fe6-4804-97a0-c8405b5ccc93",
-   "nome": "Especialização em Teste de Software",
+   "nome": "Latu Sensu em Teste de Software",
    "instituicao": "VINCIT",
    "data_certificacao": "2024-01-01",
    "validade": "Vitalícia",
    "certificado_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/trajetoria/vincit-1.webp",
    "i18n": {
     "en": {
-     "nome": "Postgraduate Specialization in Software Testing",
+     "nome": "Postgraduate Latu Sensu  in Software Testing",
      "validade": "Lifetime"
     },
     "es": {
-     "nome": "Especialización en Pruebas de Software",
+     "nome": "Latu Sensu en Pruebas de Software",
      "validade": "Vitalicia"
     }
    }
@@ -7831,20 +7831,6 @@
    "Remoto",
    "Campinas"
   ],
-  "seo": {
-   "en": {
-    "titulo": "Matheus Bonotto | QA Engineer | Manual testing & automation (Playwright, Robot Framework)",
-    "descricao": "QA Engineer with {anos} years of experience (Samsung, Americanas, Cinemark LATAM, fintechs). Manual testing, Playwright and Robot Framework automation, CTFL and Shift-left. Open to remote QA roles and freelance projects."
-   },
-   "es": {
-    "titulo": "Matheus Bonotto | QA Engineer | Pruebas manuales y automatización (Playwright, Robot Framework)",
-    "descricao": "QA Engineer con {anos} años de experiencia (Samsung, Americanas, Cinemark LATAM, fintechs). Pruebas manuales, automatización con Playwright y Robot Framework, CTFL y Shift-left. Abierto a vacantes de QA remotas y proyectos freelance."
-   },
-   "pt": {
-    "titulo": "Matheus Bonotto | QA Engineer | Testes manuais e automação (Playwright, Robot Framework)",
-    "descricao": "QA Engineer com {anos} anos de experiência (Samsung, Americanas, Cinemark LATAM, fintechs). Testes manuais, automação com Playwright e Robot Framework, CTFL e Shift-left. Aberto a vagas de QA remotas e projetos freelance."
-   }
-  },
   "patrocinio": {
    "en": {
     "texto": "Some of my projects are free and self-funded. A sponsorship pays for servers, domain and new features, and your brand appears as a supporter.",
@@ -7872,6 +7858,20 @@
    },
    "pt": {
     "texto": "Sou brasileiro, de Campinas-SP, e QA Engineer com {anos} anos protegendo produtos em produção, de fintechs à Cinemark LATAM. Não espero o bug aparecer: entro cedo na demanda, questiono a regra de negócio e, quando um processo do time é repetitivo, construo a ferramenta que resolve. Comecei no suporte técnico, passei pelo desenvolvimento e encontrei no QA o ponto onde análise, criatividade e cuidado com quem usa o produto se encontram."
+   }
+  },
+  "seo": {
+   "en": {
+    "titulo": "Matheus Bonotto | QA Engineer | Test Automation with Playwright | Open to remote roles",
+    "descricao": "QA Engineer with {anos} years of experience (Samsung, Americanas, Cinemark LATAM, fintechs). Manual testing, Playwright and Robot Framework automation, CTFL and Shift-left. Open to remote QA roles and freelance projects."
+   },
+   "es": {
+    "titulo": "Matheus Bonotto | Ingeniero QA y Tester de Software | Automatización con Playwright | Remoto",
+    "descricao": "QA Engineer con {anos} años de experiencia (Samsung, Americanas, Cinemark LATAM, fintechs). Pruebas manuales, automatización con Playwright y Robot Framework, CTFL y Shift-left. Abierto a vacantes de QA remotas y proyectos freelance."
+   },
+   "pt": {
+    "titulo": "Matheus Bonotto | QA Engineer e Analista de Testes | Automação com Playwright | Remoto",
+    "descricao": "QA Engineer com {anos} anos de experiência (Samsung, Americanas, Cinemark LATAM, fintechs). Testes manuais, automação com Playwright e Robot Framework, CTFL e Shift-left. Aberto a vagas de QA remotas e projetos freelance."
    }
   }
  }

@@ -41,8 +41,8 @@ export const UI = {
     'contato.canais': 'Ou fale direto', 'contato.whatsapp': 'WhatsApp', 'contato.linkedin': 'LinkedIn', 'contato.github': 'GitHub', 'contato.cv': 'Baixar currículo',
     'rodape.direitos': 'Todos os direitos reservados.', 'rodape.topo': 'Voltar ao topo', 'rodape.feito': 'Feito por Matheus Bonotto, fundador da Squidev, com auxílio do Claude Code.',
     'cv.imprimir': 'Imprimir', 'cv.baixar': 'Baixar PDF', 'cv.trocando': 'Montando currículo…', 'cv.voltar': 'Voltar ao site', 'cv.resumo': 'Resumo', 'cv.contato': 'Contato',
-    'cv.projetos': 'Projetos selecionados', 'cv.atual': 'atual', 'cv.titulo': 'Currículo · Matheus Bonotto, QA Engineer',
-    'cv.descricao': 'Currículo de Matheus Bonotto, QA Engineer: experiência, formação, competências e projetos.',
+    'cv.projetos': 'Projetos selecionados', 'cv.atual': 'atual', 'cv.titulo': 'Currículo Matheus Bonotto · QA Engineer e Analista de Testes (PDF)',
+    'cv.descricao': 'Currículo de Matheus Bonotto, QA Engineer e Analista de Testes: experiência em Samsung, Americanas e Cinemark LATAM, automação com Playwright, CTFL. Versões QA, DEV e Freelancer em PDF.',
     'mes': ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
   },
   en: {
@@ -84,8 +84,8 @@ export const UI = {
     'contato.canais': 'Or reach me directly', 'contato.whatsapp': 'WhatsApp', 'contato.linkedin': 'LinkedIn', 'contato.github': 'GitHub', 'contato.cv': 'Download résumé',
     'rodape.direitos': 'All rights reserved.', 'rodape.topo': 'Back to top', 'rodape.feito': 'Built by Matheus Bonotto, founder of Squidev, with help from Claude Code.',
     'cv.imprimir': 'Print', 'cv.baixar': 'Download PDF', 'cv.trocando': 'Building résumé…', 'cv.voltar': 'Back to site', 'cv.resumo': 'Summary', 'cv.contato': 'Contact',
-    'cv.projetos': 'Selected projects', 'cv.atual': 'present', 'cv.titulo': 'Résumé · Matheus Bonotto, QA Engineer',
-    'cv.descricao': "Matheus Bonotto's résumé, QA Engineer: experience, education, skills and projects.",
+    'cv.projetos': 'Selected projects', 'cv.atual': 'present', 'cv.titulo': 'Matheus Bonotto Résumé · QA Engineer and Software Tester (PDF)',
+    'cv.descricao': "Matheus Bonotto's résumé, QA Engineer open to remote roles: experience at Samsung, Americanas and Cinemark LATAM, Playwright automation, ISTQB CTFL. QA, DEV and Freelance versions in PDF.",
     'mes': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
   },
   es: {
@@ -127,8 +127,8 @@ export const UI = {
     'contato.canais': 'O escríbeme directo', 'contato.whatsapp': 'WhatsApp', 'contato.linkedin': 'LinkedIn', 'contato.github': 'GitHub', 'contato.cv': 'Descargar currículum',
     'rodape.direitos': 'Todos los derechos reservados.', 'rodape.topo': 'Volver arriba', 'rodape.feito': 'Hecho por Matheus Bonotto, fundador de Squidev, con ayuda de Claude Code.',
     'cv.imprimir': 'Imprimir', 'cv.baixar': 'Descargar PDF', 'cv.trocando': 'Armando currículum…', 'cv.voltar': 'Volver al sitio', 'cv.resumo': 'Resumen', 'cv.contato': 'Contacto',
-    'cv.projetos': 'Proyectos seleccionados', 'cv.atual': 'actual', 'cv.titulo': 'Currículum · Matheus Bonotto, QA Engineer',
-    'cv.descricao': 'Currículum de Matheus Bonotto, QA Engineer: experiencia, formación, competencias y proyectos.',
+    'cv.projetos': 'Proyectos seleccionados', 'cv.atual': 'actual', 'cv.titulo': 'Currículum Matheus Bonotto · Ingeniero QA y Tester de Software (PDF)',
+    'cv.descricao': 'Currículum de Matheus Bonotto, Ingeniero QA abierto a trabajo remoto: experiencia en Samsung, Americanas y Cinemark LATAM, automatización con Playwright, ISTQB CTFL. Versiones QA, DEV y Freelance en PDF.',
     'mes': ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
   },
 };

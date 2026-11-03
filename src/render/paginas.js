@@ -663,7 +663,15 @@ export function jsonLd(d, t, pagina, titulo) {
     sameAs: [c.linkedin, c.github].filter(Boolean),
     knowsAbout: ['Software Quality Assurance', 'Test Automation', 'Playwright', 'Robot Framework', 'Cypress', 'Gherkin', 'BDD', 'Shift-left Testing', 'ISTQB CTFL', 'Jira', 'Azure DevOps', 'Regression Testing', 'Exploratory Testing', 'AI-assisted development'],
     knowsLanguage: ['pt-BR', 'en', 'es'],
-    alumniOf: d.formacoes.map(f => ({ '@type': 'EducationalOrganization', name: f.instituicao })),
+    alternateName: ['Matheus Bonotto QA', 'Matheus Bonotto Analista de QA'],
+    alumniOf: d.formacoes.map(f => ({ '@type': 'CollegeOrUniversity', name: f.instituicao })),
+    // cargo, formação e certificações em formato que o Google e os sites de vaga entendem
+    hasOccupation: { '@type': 'Occupation', name: 'QA Engineer', alternateName: ['Analista de QA', 'Analista de Testes', 'Software Tester', 'Ingeniero QA'],
+      occupationLocation: { '@type': 'Country', name: 'Brasil' }, skills: d.competencias.map(x => x.nome).join(', ') },
+    hasCredential: [
+      ...d.formacoes.map(f => ({ '@type': 'EducationalOccupationalCredential', name: f.curso, credentialCategory: tipoAcademico(f.tipo_academico, t) || undefined, recognizedBy: { '@type': 'CollegeOrUniversity', name: f.instituicao } })),
+      ...d.certificacoes.map(c => ({ '@type': 'EducationalOccupationalCredential', name: c.nome, credentialCategory: t('acad.cert'), recognizedBy: { '@type': 'Organization', name: c.instituicao }, url: c.certificado_url || undefined })),
+    ],
     worksFor: d.experiencias.filter(e => e.atual).map(e => ({ '@type': 'Organization', name: e.instituicao })) };
   const url = SITE.url + rota(d.lang, pagina);
   const pag = pagina === 'projetos'

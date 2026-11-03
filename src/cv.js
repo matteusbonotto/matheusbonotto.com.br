@@ -24,21 +24,23 @@ function paginar() {
     medida.className = 'folha medindo';
     caixa.append(medida);
     atomos.forEach(a => medida.append(a));
-    const alt = atomos.map(a => {
-      const cs = getComputedStyle(a);
-      return a.getBoundingClientRect().height + parseFloat(cs.marginTop) + parseFloat(cs.marginBottom);
+    // posições reais no fluxo (somar alturas + margens contava duas vezes as margens que se sobrepõem)
+    const pos = atomos.map(a => {
+      const r = a.getBoundingClientRect();
+      return { topo: r.top - parseFloat(getComputedStyle(a).marginTop), base: r.bottom };
     });
     medida.remove();
-    return alt;
+    return pos;
   };
   // distribui os blocos; um bloco "junto" (título, cabeçalho de cargo) só fica na folha se o próximo couber com ele
-  const distribuir = alt => {
-    const plano = [{ itens: [], usado: 0 }];
+  const distribuir = pos => {
+    const plano = [];
+    let inicio = 0;
     for (let i = 0; i < atomos.length; i++) {
-      const preciso = atomos[i].hasAttribute('data-junto') && i + 1 < atomos.length ? alt[i] + alt[i + 1] : alt[i];
-      let f = plano.at(-1);
-      if (f.usado > 0 && f.usado + preciso > ALTURA_UTIL) { f = { itens: [], usado: 0 }; plano.push(f); }
-      f.itens.push(i); f.usado += alt[i];
+      const fim = atomos[i].hasAttribute('data-junto') && i + 1 < atomos.length ? pos[i + 1].base : pos[i].base;
+      if (!plano.length || fim - inicio > ALTURA_UTIL) { plano.push({ itens: [], usado: 0 }); inicio = pos[i].topo; }
+      const f = plano.at(-1);
+      f.itens.push(i); f.usado = pos[i].base - inicio;
     }
     return plano;
   };
