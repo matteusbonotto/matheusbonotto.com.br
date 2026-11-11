@@ -52,13 +52,8 @@ fs.rmSync(tmp);
 // quadros da seção "Como eu trabalho" (canvas rolado pelo scroll); sem eles o vídeo fica congelado no poster
 execFileSync(process.execPath, ['scripts/quadros-video.mjs', `${DESTINO}/escritorio.mp4`, `${DESTINO}/escritorio`, '60', '1280'], { stdio: 'inherit' });
 
-// Imagem de compartilhamento 1200x630
-const foto = await sharp(path.join(ORIGEM, 'perfil-social.png')).resize({ height: 630 }).toBuffer();
-const svg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="630" fill="#EEEEEC"/>
-<text x="72" y="120" font-family="Consolas, monospace" font-size="24" fill="#D7301F" letter-spacing="2">QA ENGINEER</text>
-<text x="68" y="250" font-family="Arial Black, Arial" font-weight="900" font-size="96" fill="#0E0E10" letter-spacing="-3">Matheus</text>
-<text x="68" y="350" font-family="Arial Black, Arial" font-weight="900" font-size="96" fill="#0E0E10" letter-spacing="-3">Bonotto</text>
-<text x="72" y="430" font-family="Arial" font-size="30" fill="#4A4A50">Testes manuais · Automação · Playwright · Robot</text>
-<text x="72" y="560" font-family="Consolas, monospace" font-size="24" fill="#4A4A50">matheusbonotto.com.br</text></svg>`;
-await sharp(Buffer.from(svg)).composite([{ input: foto, left: 1200 - 473, top: 0 }]).jpeg({ quality: 82 }).toFile(`${DESTINO}/og.jpg`);
+// Imagem de compartilhamento 1200x630: último quadro da abertura (nome + pessoa), em alta, com corpo inteiro
+execFileSync('ffmpeg', ['-v', 'error', '-y', '-sseof', '-0.1', '-i', path.join(ORIGEM, 'intro-name.mp4'), '-frames:v', '1', 'node_modules/.og.png']);
+await sharp('node_modules/.og.png').extract({ left: 94, top: 196, width: 2300, height: 1208 }).resize(1200, 630).jpeg({ quality: 86, mozjpeg: true }).toFile(`${DESTINO}/og.jpg`);
+fs.rmSync('node_modules/.og.png');
 console.log('ok', fs.readdirSync(`${DESTINO}/intro`).length, 'quadros');

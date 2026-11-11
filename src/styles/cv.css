@@ -11,10 +11,10 @@
 .cv-voltar .ic { width: 16px; height: 16px; order: -1; }
 .cv-voltar:hover { background: var(--superficie-2); }
 .cv-arquivo { flex: 1; min-width: 0; font-size: .92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cv-versoes { display: inline-flex; padding: 3px; border-radius: 10px; border: 1px solid var(--linha-forte); flex: none; }
-.cv-versoes button { padding: 6px 10px; border-radius: 7px; font-size: .8rem; color: var(--tinta-2); }
+.cv-versoes { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; padding: 3px; border-radius: 10px; border: 1px solid var(--linha-forte); flex: none; }
+.cv-versoes button { min-height: 34px; padding: 6px 14px; text-align: center; border-radius: 7px; font-size: .8rem; color: var(--tinta-2); }
 .cv-versoes button[aria-pressed="true"] { background: var(--tinta); color: var(--bg); }
-@media (max-width: 719px) { .cv-barra { flex-wrap: wrap; } .cv-versoes { order: 10; width: 100%; justify-content: space-between; } .cv-arquivo { display: none; } }
+@media (max-width: 719px) { .cv-barra { flex-wrap: wrap; } .cv-versoes { order: 10; width: 100%; grid-auto-flow: row; grid-template-columns: repeat(auto-fit, minmax(104px, 1fr)); } .cv-arquivo { display: none; } }
 .cv-zoom { display: none; align-items: center; border: 1px solid var(--linha-forte); border-radius: 8px; overflow: hidden; }
 .cv-zoom button { min-width: 36px; height: 36px; padding: 0 8px; font-size: 1rem; }
 .cv-zoom button.mono { font-size: .78rem; min-width: 56px; border-inline: 1px solid var(--linha); }
