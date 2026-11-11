@@ -1635,66 +1635,66 @@
    "categorias": [
     "dev"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/capa.webp?v=mvq50xlu",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/capa.webp?v=mw0yg0vp",
    "galeria": [
     {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-01-hero.webp",
+     "h": 900,
+     "w": 1440,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-01-hero.webp?v=mw0yfvsc",
      "dispositivo": "desktop"
     },
     {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-02-produtos-em-alta.webp",
+     "h": 900,
+     "w": 1440,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-02-produtos-em-alta.webp?v=mw0yfw7p",
      "dispositivo": "desktop"
     },
     {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-03-busca.webp",
+     "h": 900,
+     "w": 1440,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-03-busca.webp?v=mw0yfwk9",
      "dispositivo": "desktop"
     },
     {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-04-resultado-busca.webp",
+     "h": 900,
+     "w": 1440,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-04-resultado-busca.webp?v=mw0yfwvz",
      "dispositivo": "desktop"
     },
     {
-     "h": 789,
-     "w": 1261,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-05-filtro-categorias.webp",
+     "h": 900,
+     "w": 1440,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/desktop-05-filtro-categorias.webp?v=mw0yfx6h",
      "dispositivo": "desktop"
     },
     {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-01-produtos-em-alta.webp",
+     "h": 1328,
+     "w": 780,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-01-produtos-em-alta.webp?v=mw0yfxh4",
      "dispositivo": "mobile"
     },
     {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-02-lista-achadinhos.webp",
+     "h": 1328,
+     "w": 780,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-02-lista-achadinhos.webp?v=mw0yfxrc",
      "dispositivo": "mobile"
     },
     {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-03-filtros.webp",
+     "h": 1328,
+     "w": 780,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-03-filtros.webp?v=mw0yfzgs",
      "dispositivo": "mobile"
     },
     {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-04-sobre.webp",
+     "h": 1328,
+     "w": 780,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-04-sobre.webp?v=mw0yfzsb",
      "dispositivo": "mobile"
     },
     {
-     "h": 789,
-     "w": 364,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-05-hero.webp",
+     "h": 1328,
+     "w": 780,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/achadubom/mobile-05-hero.webp?v=mw0yg03q",
      "dispositivo": "mobile"
     }
    ],

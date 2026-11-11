@@ -97,7 +97,8 @@ for (const proj of projetos) {
       // print em pé vai para o celular, mesmo que o nome diga desktop (ex.: detalhe do cartão digital)
       const dispositivo = /^mobile/i.test(f) || h > w * 1.1 ? 'mobile' : 'desktop';
       const web = await sharp(buf).resize({ width: Math.min(w, dispositivo === 'mobile' ? 780 : 1600), withoutEnlargement: true }).webp({ quality: 80 }).toBuffer();
-      galeria.push({ url: process.env.SECO ? "" : await subir(web, `projetos/${slug}/${f.replace(/\.\w+$/, '.webp')}`), dispositivo, w, h });
+      // ?v= fura o cache de 1 ano do upload quando o print é refeito com o mesmo nome
+      galeria.push({ url: process.env.SECO ? "" : `${await subir(web, `projetos/${slug}/${f.replace(/\.\w+$/, '.webp')}`)}?v=${Date.now().toString(36)}`, dispositivo, w, h });
       bufs.push({ buf, dispositivo });
     }
   } else {
