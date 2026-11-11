@@ -1441,3 +1441,6 @@ img { transition: opacity .6s ease; }
 .nav.topo-claro:not(.escura):not(.aberta) .nav-links > a, .nav.topo-claro:not(.escura):not(.aberta) .nav-idiomas a { color: #3A3A40; }
 .nav.topo-claro:not(.escura):not(.aberta) .nav-idiomas a[aria-current="true"], .nav.topo-claro:not(.escura):not(.aberta) .nav-links .nav-cv,
 .nav.topo-claro:not(.escura):not(.aberta) .tema-botao, .nav.topo-claro:not(.escura):not(.aberta) .nav-botao { border-color: rgba(14,14,16,.28); color: #0E0E10; }
+.nav.topo-claro:not(.escura):not(.aberta) .tema-botao, .nav.topo-claro:not(.escura):not(.aberta) .nav-botao, .nav.topo-claro:not(.escura):not(.aberta) .nav-lingua summary { background: rgba(255,255,255,.72); color: #0E0E10; }
+/* sobre o vídeo branco a barra clareia (branca) em vez de escurecer */
+.nav.topo-claro.sobre-video:not(.aberta) { background: rgba(255,255,255, calc(var(--escuro, 0) * .84)); box-shadow: 0 1px 0 rgba(14,14,16, calc(var(--escuro, 0) * .08)); }

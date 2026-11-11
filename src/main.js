@@ -79,10 +79,10 @@ const aoRolar = () => {
     v = p < 0.55 ? p / 0.55 : Math.max(0, 1 - (p - 0.55) / 0.2);
   }
   // vídeo de abertura tem fundo branco: até a barra escurecer, o texto fica escuro em qualquer tema
-  nav.classList.toggle('topo-claro', !!hero && p < 0.6);
+  nav.classList.toggle('topo-claro', !!hero && p < 0.8);
   const escuro = v.toFixed(2);
   if (escuro !== ultimoEscuro) { nav.style.setProperty('--escuro', escuro); ultimoEscuro = escuro; }
-  nav.classList.toggle('escura', v > 0.45);
+  nav.classList.toggle('escura', !hero && v > 0.45);
   nav.classList.toggle('sobre-video', v > 0.02);
 
 
