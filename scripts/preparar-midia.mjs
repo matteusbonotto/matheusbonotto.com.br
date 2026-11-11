@@ -10,7 +10,8 @@ const ORIGEM = 'assets', DESTINO = 'public/media';
 fs.rmSync(`${DESTINO}/escritorio`, { recursive: true, force: true });
 fs.mkdirSync(`${DESTINO}/intro`, { recursive: true });
 const LOGO = 'C:/Users/Matheus Bonotto/Documents/github/old/matheusbonotto.com.br/assets/logo-branco.png';
-for (const t of [64, 128]) await sharp(LOGO).resize(t).webp({ quality: 90 }).toFile(`${DESTINO}/logo-${t}.webp`);
+// o logo de origem pode não existir mais; os .webp já gerados ficam em public/media
+if (fs.existsSync(LOGO)) for (const t of [64, 128]) await sharp(LOGO).resize(t).webp({ quality: 90 }).toFile(`${DESTINO}/logo-${t}.webp`);
 
 for (const f of fs.readdirSync(ORIGEM).filter(f => f.endsWith('.png')))
   await sharp(path.join(ORIGEM, f)).resize({ width: 768 }).webp({ quality: 78 }).toFile(`${DESTINO}/${f.replace('.png', '.webp')}`);
