@@ -118,6 +118,9 @@
         "destination": "/admin/",
         "type": 301
       }
+    ],
+    "predeploy": [
+      "node scripts/checar-pdfs.mjs"
     ]
   }
 }

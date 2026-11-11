@@ -19,3 +19,4 @@ public/robots.txt
 /sobre/
 .firebase/
 assets/Branding/
+dist-e2e/

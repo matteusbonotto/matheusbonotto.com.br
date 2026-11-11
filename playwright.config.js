@@ -14,7 +14,7 @@ export default defineConfig({
     { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1366, height: 768 } } },
   ],
   webServer: {
-    command: 'npx cross-env FIXTURE=1 node scripts/prerender.mjs && npx vite build && npx vite preview --port 4173 --strictPort',
+    command: 'npx cross-env FIXTURE=1 node scripts/prerender.mjs && npx vite build --outDir dist-e2e && npx vite preview --outDir dist-e2e --port 4173 --strictPort',
     url: 'http://localhost:4173',
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
