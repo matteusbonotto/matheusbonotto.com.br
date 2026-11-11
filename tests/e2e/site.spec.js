@@ -484,3 +484,11 @@ test('currículo: o botão do menu abre a página e "Baixar PDF" segue a versão
   await outra.click();
   await expect(baixar).toHaveAttribute('href', new RegExp(`_${slug.toUpperCase()}\.pdf$`));
 });
+
+test('vídeos rolados pelo scroll têm todos os quadros publicados', async ({ page, request }) => {
+  await page.goto('/');
+  const seqs = await page.locator('[data-sequencia]').evaluateAll(els => els.map(e => [e.dataset.sequencia, +e.dataset.quadros]));
+  expect(seqs.length).toBeGreaterThanOrEqual(2);
+  for (const [pasta, n] of seqs)
+    for (const i of [0, n - 1]) expect((await request.get(`${pasta}${String(i).padStart(3, '0')}.webp`)).status(), `${pasta} quadro ${i}`).toBe(200);
+});

@@ -1,6 +1,7 @@
 // Gera public/media a partir de assets/: fotos e logo em WebP, posters dos vídeos, sequência de quadros do vídeo
 // de abertura (a rolagem controla o quadro, como nas páginas da Apple) e a imagem de compartilhamento (OG).
 import fs from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium } from '@playwright/test';
@@ -45,6 +46,8 @@ dur = await abrir('entrevista.mp4');
 await sharp(await quadro(1)).webp({ quality: 70 }).toFile(`${DESTINO}/entrevista-poster.webp`);
 await b.close();
 fs.rmSync(tmp);
+// quadros da seção "Como eu trabalho" (canvas rolado pelo scroll); sem eles o vídeo fica congelado no poster
+execFileSync(process.execPath, ['scripts/quadros-video.mjs', `${DESTINO}/escritorio.mp4`, `${DESTINO}/escritorio`, '60', '1280'], { stdio: 'inherit' });
 
 // Imagem de compartilhamento 1200x630
 const foto = await sharp(path.join(ORIGEM, 'perfil-social.png')).resize({ height: 630 }).toBuffer();
