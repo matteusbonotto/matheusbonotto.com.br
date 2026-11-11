@@ -19,6 +19,9 @@ for (const f of fs.readdirSync(ORIGEM).filter(f => f.endsWith('.png')))
 
 const videos = { 'intro-name.mp4': 'intro.mp4', 'trabalhando-escritório.mp4': 'escritorio.mp4', 'fazendo-entrevista.mp4': 'entrevista.mp4' };
 for (const [de, para] of Object.entries(videos)) fs.copyFileSync(path.join(ORIGEM, de), `${DESTINO}/${para}`);
+// contato em bumerangue: ida + volta, para o loop não ter emenda. 1280px e 2 threads: o reverse guarda todos os quadros na memória
+execFileSync('ffmpeg', ['-v', 'error', '-y', '-threads', '2', '-i', path.join(ORIGEM, 'fazendo-entrevista.mp4'), '-filter_complex', '[0:v]scale=1280:-2,split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1:a=0[v]',
+  '-map', '[v]', '-an', '-c:v', 'libx264', '-crf', '23', '-preset', 'veryfast', '-threads', '2', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', `${DESTINO}/entrevista.mp4`]);
 
 // Chrome (canal "chrome") decodifica H.264; o Chromium do Playwright não.
 const b = await chromium.launch({ channel: 'chrome', args: ['--allow-file-access-from-files'] });
