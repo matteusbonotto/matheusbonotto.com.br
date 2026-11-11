@@ -73,11 +73,13 @@ const aoRolar = () => {
   nav.classList.toggle('rolou', y > 10 && pagina !== 'contato');
   if (pagina === 'contato') nav.classList.add('escura', 'contato'); // contato abre sobre vídeo escuro
   // na home a barra começa clara e escurece junto com o vídeo de abertura; quando o vídeo vira quadro, volta ao normal
-  let v = 0;
+  let v = 0, p = 1;
   if (hero) {
-    const p = Math.min(1, y / fimHero);
+    p = Math.min(1, y / fimHero);
     v = p < 0.55 ? p / 0.55 : Math.max(0, 1 - (p - 0.55) / 0.2);
   }
+  // vídeo de abertura tem fundo branco: até a barra escurecer, o texto fica escuro em qualquer tema
+  nav.classList.toggle('topo-claro', !!hero && p < 0.6);
   const escuro = v.toFixed(2);
   if (escuro !== ultimoEscuro) { nav.style.setProperty('--escuro', escuro); ultimoEscuro = escuro; }
   nav.classList.toggle('escura', v > 0.45);
