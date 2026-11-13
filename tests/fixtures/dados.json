@@ -7744,13 +7744,16 @@
   },
   "disponibilidade": {
    "en": {
-    "texto": "Open to remote QA roles · also available for freelance projects"
+    "curto": "Available · remote QA and freelance",
+    "texto": "Available for remote QA roles and freelance projects"
    },
    "es": {
-    "texto": "Abierto a vacantes de QA remotas · también atiendo proyectos freelance"
+    "curto": "Disponible · QA remoto y freelance",
+    "texto": "Disponible para vacantes de QA remotas y proyectos freelance"
    },
    "pt": {
-    "texto": "Aberto a vagas de QA remotas · também atendo projetos freelance"
+    "curto": "Disponível · QA remoto e freelance",
+    "texto": "Disponível para vagas de QA remotas e projetos freelance"
    },
    "ativo": true
   },

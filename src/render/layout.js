@@ -17,12 +17,16 @@ export function navegacao(lang, t, pagina) {
   </a>
   <details class="nav-lingua" data-lingua><summary aria-label="${t('nav.idioma')}">${icone('traduzir')}<span>${lang.toUpperCase()}</span></summary>
     <div class="nav-lingua-lista">${SITE.idiomas.map(l => `<a href="${rota(l, pagina)}" hreflang="${l}" lang="${l}" data-idioma="${l}" ${l === lang ? 'aria-current="true"' : ''}>${NOMES_IDIOMA[l]}</a>`).join('')}</div></details>
-  <nav class="nav-links" aria-label="${t('nav.menu')}" id="menu-principal">
+  <nav class="nav-links" aria-label="${t('nav.menu')}" id="menu-principal" data-lenis-prevent>
     <a href="${rota(lang)}" class="nav-so-menu" ${pagina === '' ? 'aria-current="page"' : ''}>${t('nav.inicio')}</a>
-    ${PAGINAS_NAV.map(([id, k]) => `<a href="${rota(lang, id)}" ${pagina === id ? 'aria-current="page"' : ''}>${t(k)}</a>`).join('')}
+    ${PAGINAS_NAV.map(([id, k]) => `<a href="${id === 'sobre' ? `${rota(lang)}#sobre` : rota(lang, id)}" ${pagina === id ? 'aria-current="page"' : ''}>${t(k)}</a>`).join('')}
+    <button type="button" class="nav-so-menu nav-menu-apresentar" data-apresentacao>${t('nav.apresentarCurto')}</button>
     <a href="${rota(lang, 'cv')}" class="nav-cv">${icone('download')}${t('nav.cv')}</a>
+    <div class="nav-so-menu nav-fonte-menu"><span>${t('nav.fonte')}</span><div class="fonte-controle" role="group" aria-label="${t('nav.fonte')}"><button type="button" data-fonte="-1" aria-label="${t('nav.fonteMenos')}" title="${t('nav.fonteMenos')}">A<span aria-hidden="true">−</span></button><button type="button" data-fonte="1" aria-label="${t('nav.fonteMais')}" title="${t('nav.fonteMais')}">A<span aria-hidden="true">+</span></button></div></div>
     <div class="nav-idiomas" role="group" aria-label="${t('nav.idioma')}">${idiomas}</div>
   </nav>
+  <div class="fonte-controle" role="group" aria-label="${t('nav.fonte')}"><button type="button" data-fonte="-1" aria-label="${t('nav.fonteMenos')}" title="${t('nav.fonteMenos')}">A<span aria-hidden="true">−</span></button><button type="button" data-fonte="1" aria-label="${t('nav.fonteMais')}" title="${t('nav.fonteMais')}">A<span aria-hidden="true">+</span></button></div>
+  <button class="tema-botao nav-apresentar" type="button" data-apresentacao aria-label="${t('nav.apresentar')}" title="${t('nav.apresentar')}">${icone('quadro')}</button>
   <button class="tema-botao" type="button" data-tema aria-label="${t('nav.tema')}" title="${t('nav.tema')}">${icone('sol')}${icone('lua')}</button>
   <a class="btn btn-acento nav-cta" href="${rota(lang, 'contato')}" data-magnetico>${t('nav.cta')}</a>
   <button class="nav-botao" type="button" aria-expanded="false" aria-controls="menu-principal" data-menu aria-label="${t('nav.menu')}" data-rotulo-abrir="${t('nav.menu')}" data-rotulo-fechar="${t('nav.fechar')}">${icone('menu')}</button>
@@ -35,7 +39,7 @@ export function rodape(lang, t) {
     <div class="rodape-marca"><img src="/media/logo-64.webp" alt="" width="40" height="40" loading="lazy"><div><strong>${SITE.nome}</strong><p class="mono">QA Engineer · Campinas, BR</p></div></div>
     <nav class="rodape-links" aria-label="${t('nav.menu')}">
       <a href="${rota(lang)}">${t('nav.inicio')}</a>
-      ${PAGINAS_NAV.map(([id, k]) => `<a href="${rota(lang, id)}">${t(k)}</a>`).join('')}
+      ${PAGINAS_NAV.map(([id, k]) => `<a href="${id === 'sobre' ? `${rota(lang)}#sobre` : rota(lang, id)}">${t(k)}</a>`).join('')}
       <a href="${rota(lang, 'cv')}">${t('nav.cv')}</a>
     </nav>
   </div>

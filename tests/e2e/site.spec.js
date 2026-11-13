@@ -28,7 +28,7 @@ test('SEO: meta tags, Open Graph, hreflang, JSON-LD, sitemap e robots', async ({
   const ld = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent());
   expect(ld['@graph'][0]['@type']).toBe('Person');
   const sitemap = await (await request.get('/sitemap.xml')).text();
-  expect(sitemap.match(/<loc>/g)).toHaveLength(21);
+  expect(sitemap.match(/<loc>/g)).toHaveLength(18); // sobre agora é seção do início
   expect(await (await request.get('/robots.txt')).text()).toContain('Disallow: /admin/');
   expect((await request.get('/media/og.jpg')).ok()).toBeTruthy();
 });
@@ -60,7 +60,7 @@ test('tela de abertura: boas-vindas por 3 s na primeira página da sessão, depo
   await expect(splash).toContainText('Bem-vindo');
   await page.waitForFunction(() => !document.querySelector('[data-splash]'), null, { timeout: 10000 });
   expect(await page.evaluate(() => performance.now())).toBeGreaterThanOrEqual(3000);
-  await page.goto('/sobre/');
+  await page.goto('/cv/');
   await expect(page.locator('[data-splash]')).toHaveCount(0);
 });
 
@@ -262,7 +262,7 @@ test('modal rola com a roda do mouse e recomendações mostram 5 + ver mais', as
   await page.goto('/');
   const itens = page.locator('.recs-grade > li');
   const total = dados.recomendacoes.length;
-  test.skip(total <= 5 || isMobile); // no celular as recomendações viram uma fileira deslizante com todas
+  test.skip(total <= 5 || isMobile); // no celular a lista é simples e o "ver mais" tem outro layout
   await expect(page.locator('.recs-grade > li:visible')).toHaveCount(5);
   await page.locator('[data-ver-mais-recs]').click();
   await expect(page.locator('.recs-grade > li:visible')).toHaveCount(total);
@@ -491,4 +491,19 @@ test('vídeos rolados pelo scroll têm todos os quadros publicados', async ({ pa
   expect(seqs.length).toBeGreaterThanOrEqual(2);
   for (const [pasta, n] of seqs)
     for (const i of [0, n - 1]) expect((await request.get(`${pasta}${String(i).padStart(3, '0')}.webp`)).status(), `${pasta} quadro ${i}`).toBe(200);
+});
+
+test('tamanho do texto: A+ aumenta, fica salvo e A− volta ao padrão', async ({ page, isMobile }) => {
+  await page.goto('/');
+  const tamanho = () => page.evaluate(() => parseFloat(getComputedStyle(document.documentElement).fontSize));
+  const padrao = await tamanho();
+  const grupo = isMobile ? '.nav-fonte-menu' : '.nav > .fonte-controle';
+  if (isMobile) await page.locator('[data-menu]').click();
+  await page.locator(`${grupo} [data-fonte="1"]`).click();
+  expect(await tamanho()).toBeGreaterThan(padrao);
+  await page.reload();
+  expect(await tamanho()).toBeGreaterThan(padrao);
+  if (isMobile) await page.locator('[data-menu]').click();
+  await page.locator(`${grupo} [data-fonte="-1"]`).click();
+  expect(await tamanho()).toBeCloseTo(padrao, 1);
 });

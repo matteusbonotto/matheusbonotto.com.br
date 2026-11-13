@@ -9,6 +9,8 @@ import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js';
 import { tradutor } from './i18n/ui.js';
 import { buscarTudo, prepararIdioma } from './lib/dados.js';
 import { particulas } from './lib/particulas.js';
+import { iniciarFonte } from './lib/fonte.js';
+iniciarFonte();
 import { assinatura, PAGINAS } from './render/documento.js';
 import { icone } from './render/comum.js';
 import { detalheCarreira, detalheConquista, detalheProjeto, detalheRecomendacao, detalheSkill, formularioRecomendacao } from './render/paginas.js';
@@ -63,6 +65,17 @@ function menu(abrir) {
   abrir ? lenis?.stop() : lenis?.start();
 }
 botaoMenu.addEventListener('click', () => menu(!nav.classList.contains('aberta')));
+// modo apresentação: pede a tela cheia ainda dentro do clique (o navegador exige) e carrega os slides sob demanda
+$$('[data-apresentacao]').forEach(b => b.addEventListener('click', () => {
+  if (nav.classList.contains('aberta')) menu(false);
+  if (modal?.open) fecharModal(); // um modal aberto ficaria por cima dos slides
+  document.querySelector('.visor')?.remove();
+  document.documentElement.requestFullscreen?.().catch(() => {});
+  lenis?.stop();
+  import('./apresentacao.js').then(m => m.abrir(() => lenis?.start()));
+}));
+// rolagem própria do menu (celular deitado tem pouca altura): a Lenis parada cancelaria o gesto, então ele não sobe até ela
+['wheel', 'touchstart', 'touchmove'].forEach(tipo => $('#menu-principal')?.addEventListener(tipo, e => e.stopPropagation(), { passive: true }));
 addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('aberta')) { menu(false); botaoMenu.focus(); } });
 let ultimoY = 0, ultimoEscuro = '';
 const aoRolar = () => {
@@ -99,7 +112,9 @@ document.addEventListener('click', e => {
   if (!alvo) return;
   e.preventDefault();
   if (nav.classList.contains('aberta')) menu(false);
-  lenis ? lenis.scrollTo(alvo, { offset: -8 }) : alvo.scrollIntoView({ behavior: semMovimento ? 'auto' : 'smooth' });
+  // pula o respiro do topo da seção: o conteúdo encosta logo abaixo do cabeçalho
+  const offset = (parseFloat(getComputedStyle(alvo).paddingTop) || 0) - nav.offsetHeight;
+  lenis ? lenis.scrollTo(alvo, { offset }) : scrollTo({ top: alvo.getBoundingClientRect().top + scrollY + offset, behavior: semMovimento ? 'auto' : 'smooth' });
   history.replaceState(null, '', url.hash);
 });
 
@@ -312,7 +327,14 @@ document.addEventListener('click', e => {
   if (c) { const q = dados.conquistas?.find(x => x.id === c.dataset.abrirConquista); if (q) abrirModal(detalheConquista(q, t, lang), null, true); return; }
   const rc = e.target.closest('[data-abrir-rec]');
   if (rc) { const x = dados.recomendacoes?.find(r => r.id === rc.dataset.abrirRec); if (x) abrirModal(detalheRecomendacao(x, t), null, true); return; }
-  if (e.target.closest('[data-deixar-rec]')) { abrirModal(formularioRecomendacao(t), null, true); enviarRecomendacao($('[data-form-rec]', modal)); return; }
+  if (e.target.closest('[data-deixar-rec]')) {
+    abrirModal(formularioRecomendacao(t), null, true);
+    const f = $('[data-form-rec]', modal);
+    enviarRecomendacao(f);
+    const msg = $('#r-msg', f), conta = $('[data-contador]', f);
+    msg.addEventListener('input', () => { conta.textContent = `${msg.value.length} / 3000`; });
+    return;
+  }
   const sk = e.target.closest('[data-abrir-skill]');
   if (sk && !sk.closest('.arrastando-moveu')) { const n = dados.arvore?.find(x => x.id === sk.dataset.abrirSkill); if (n) abrirModal(detalheSkill(n, dados.arvore, t, dados.projetos), null, true); return; }
   const vz = e.target.closest('a[data-visor]');
@@ -412,6 +434,7 @@ function visor(imgs, inicio, aoTrocar) {
   v.className = 'visor';
   v.setAttribute('role', 'dialog'); v.setAttribute('aria-modal', 'true'); v.setAttribute('aria-label', t('projetos.galeria'));
   v.innerHTML = `<div class="visor-area"><img class="visor-img" alt="" draggable="false"></div>
+  <p class="visor-legenda" data-v-leg hidden></p>
   <div class="visor-barra">
     <button type="button" data-v="ant" aria-label="${t('projetos.anterior')}">${icone('esquerda')}</button><span class="mono" data-v-cont></span><button type="button" data-v="prox" aria-label="${t('projetos.proxima')}">${icone('direita')}</button>
     <span class="visor-sep" aria-hidden="true"></span>
@@ -448,6 +471,7 @@ function visor(imgs, inicio, aoTrocar) {
     img.src = imgs[i].currentSrc || imgs[i].src; img.alt = imgs[i].alt;
     z = 1; x = 0; y = 0; aplicar(false);
     $('[data-v-cont]', v).textContent = `${i + 1} / ${imgs.length}`;
+    const leg = $('[data-v-leg]', v), txt = imgs[i].legenda || imgs[i].dataset?.legenda || ''; leg.textContent = txt; leg.hidden = !txt;
     $$('[data-v="ant"], [data-v="prox"]', v).forEach(b => { b.hidden = imgs.length < 2; });
     aoTrocar?.(i);
   };

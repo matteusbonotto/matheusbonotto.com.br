@@ -84,6 +84,21 @@
     ],
     "redirects": [
       {
+        "source": "/es/sobre{,/**}",
+        "destination": "/es/#sobre",
+        "type": 301
+      },
+      {
+        "source": "/en/sobre{,/**}",
+        "destination": "/en/#sobre",
+        "type": 301
+      },
+      {
+        "source": "/sobre{,/**}",
+        "destination": "/#sobre",
+        "type": 301
+      },
+      {
         "source": "/historia.html",
         "destination": "/trajetoria/",
         "type": 301

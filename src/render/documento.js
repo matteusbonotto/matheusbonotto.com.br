@@ -4,7 +4,7 @@ import { rota, tradutor } from '../i18n/ui.js';
 import { idadeEm, textoSite, variaveis } from '../lib/dados.js';
 import { esc, head, icone, paragrafos, periodo, tipoAcademico } from './comum.js';
 import { documento } from './layout.js';
-import { canais, competencias, contato, inicio, itensTrajetoria, jsonLd, projetos, sobre, trajetoria } from './paginas.js';
+import { canais, competencias, contato, inicio, itensTrajetoria, jsonLd, projetos, trajetoria } from './paginas.js';
 
 // Assinatura do conteúdo: o navegador só redesenha a página se os dados do banco mudaram desde o build.
 // Inclui os números calculados pela data (anos, idade): quando viram, a página se redesenha sozinha.
@@ -16,10 +16,12 @@ export function assinatura(d) {
 }
 
 // id da página = caminho (sem idioma); "" é o início. "dados" = o que o navegador precisa para modais.
+// projetos mostrados na galeria do modo apresentação (src/apresentacao.js, AREAS): só as 2 primeiras imagens vão para a página
+const PROJETOS_APRESENTACAO = ['qa-toolbar', 'stark-hub', 'simulador-ctfl', 'playwright-automation', 'qa-cnk-issue-generator', 'condonotto', 'evangeligo', 'zunido', 'achadubom', 'squidev', 'instrutora-jaqueline', 'ipvida', 'fofuxa-fashion'];
+
 export const PAGINAS = {
-  '': { corpo: inicio, seo: (d, t) => textoSite(d.site, 'seo', d.lang), dados: d => ({ projetos: d.projetos.filter(p => p.destaque), recomendacoes: d.recomendacoes, experiencias: d.experiencias.map(e => ({ id: e.id, instituicao: e.instituicao })) }),
+  '': { corpo: inicio, seo: (d, t) => textoSite(d.site, 'seo', d.lang), dados: d => ({ projetos: d.projetos.filter(p => p.destaque), apresentacao: d.projetos.filter(p => PROJETOS_APRESENTACAO.includes(p.slug)).map(p => ({ slug: p.slug, titulo: p.titulo, galeria: (p.galeria || []).slice(0, 2) })), recomendacoes: d.recomendacoes, experiencias: d.experiencias.map(e => ({ id: e.id, instituicao: e.instituicao })) }),
     preload: '<link rel="preload" as="image" href="/media/intro-poster.webp" fetchpriority="high">' },
-  sobre: { corpo: sobre, seo: (d, t) => ({ titulo: t('seo.sobre.titulo'), descricao: t('seo.sobre.descricao') }), dados: () => ({}) },
   projetos: { corpo: projetos, seo: (d, t) => ({ titulo: t('seo.projetos.titulo'), descricao: t('seo.projetos.descricao') }), dados: d => ({ projetos: d.projetos, experiencias: d.experiencias.map(e => ({ id: e.id, instituicao: e.instituicao })) }) },
   trajetoria: { corpo: trajetoria, seo: (d, t) => ({ titulo: t('seo.trajetoria.titulo'), descricao: t('seo.trajetoria.descricao') }), dados: (d, t) => ({ trajetoria: itensTrajetoria(d, t), recomendacoes: d.recomendacoes, projetos: d.projetos, experiencias: d.experiencias.map(e => ({ id: e.id, instituicao: e.instituicao })) }) },
   competencias: { corpo: competencias, seo: (d, t) => ({ titulo: t('seo.competencias.titulo'), descricao: t('seo.competencias.descricao') }), dados: d => ({ conquistas: d.conquistas, arvore: d.arvore, projetos: d.projetos, experiencias: d.experiencias.map(e => ({ id: e.id, instituicao: e.instituicao })) }) },

@@ -1444,3 +1444,152 @@ img { transition: opacity .6s ease; }
 .nav.topo-claro:not(.escura):not(.aberta) .tema-botao, .nav.topo-claro:not(.escura):not(.aberta) .nav-botao, .nav.topo-claro:not(.escura):not(.aberta) .nav-lingua summary { background: rgba(255,255,255,.72); color: #0E0E10; }
 /* sobre o vídeo branco a barra clareia (branca) em vez de escurecer */
 .nav.topo-claro.sobre-video:not(.aberta) { background: rgba(255,255,255, calc(var(--escuro, 0) * .84)); box-shadow: 0 1px 0 rgba(14,14,16, calc(var(--escuro, 0) * .08)); }
+
+/* menu aberto rola sozinho (celular deitado tem pouca altura); a rolagem suave não intercepta o toque aqui */
+.nav-links { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+@media (max-width: 1079px) { .nav.aberta .nav-links { justify-content: flex-start; max-height: 100dvh; overflow-y: auto; } }
+
+/* tamanho do texto (A− / A+): discreto, junto do botão de tema no desktop e dentro do menu no celular */
+.fonte-controle { display: inline-flex; align-items: center; gap: 2px; padding: 2px; border-radius: 999px; border: 1px solid var(--linha-forte); }
+.fonte-controle button { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: none; border: 0; color: inherit; font-family: var(--fonte); font-size: .8rem; font-weight: 600; line-height: 1; cursor: pointer; opacity: .8; }
+.fonte-controle button span { font-size: .7em; margin-left: 1px; }
+.fonte-controle button:hover { opacity: 1; background: var(--superficie); }
+.fonte-controle button:disabled { opacity: .3; cursor: default; background: none; }
+.nav-fonte-menu { display: none; }
+@media (max-width: 1079px) {
+  .nav > .fonte-controle { display: none; }
+  .nav-fonte-menu { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; font-size: .9rem; color: var(--tinta-2); }
+}
+
+/* ===== Melhorias portadas do site da Beatriz (nov/2026) ===== */
+/* selo de disponibilidade: uma linha sempre; versão curta no celular e na coluna do topo */
+.status-curto { display: none; }
+.status { white-space: nowrap; max-width: 100%; }
+.hero-texto .status.tem-curto .status-txt { display: none; }
+.hero-texto .status.tem-curto .status-curto { display: inline; }
+@media (max-width: 599px) {
+  .status.tem-curto .status-txt { display: none; }
+  .status.tem-curto .status-curto { display: inline; }
+  .hero-intro .status { max-width: none; }
+}
+/* ícones de contato abaixo do subtítulo do topo */
+.hero-redes { list-style: none; margin: 18px 0 0; padding: 0; display: flex; gap: 10px; }
+.hero-redes a { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; color: var(--acento); border: 1px solid var(--linha-forte); transition: background-color .2s, color .2s; }
+.hero-redes a:hover { background: var(--acento); color: #fff; }
+.hero-redes .ic { width: 18px; height: 18px; }
+/* cabeçalho sobre o vídeo claro do topo: hover legível (antes ficava pílula escura com texto escuro) */
+@media (min-width: 1080px) {
+  /* sobre o vídeo a barra ainda é transparente: o hover mantém o texto claro até ela ganhar cor */
+  .nav:not(.rolou) .nav-links > a:hover, .nav:not(.rolou) .nav-links > a[aria-current="page"],
+  .nav.sobre-video .nav-links > a:hover, .nav.sobre-video .nav-links > a[aria-current="page"],
+  .nav.topo-claro:not(.rolou):not(.escura) .nav-links > a:hover,
+  .nav.topo-claro:not(.rolou):not(.escura) .nav-links > a[aria-current="page"] { background: rgba(14,14,16,.55); color: #fff; }
+}
+/* recomendações: no desktop fica o layout original (primeira em destaque); no celular, lista simples e compacta */
+@media (max-width: 899px) {
+  .recs-grade[data-vista] { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; overflow: visible; margin-inline: 0; padding: 0; scroll-snap-type: none; }
+  .recs-grade > li, .recs-grade > li[data-rec-extra][hidden] { flex: none; }
+  .recs-grade > li[data-rec-extra][hidden] { display: none !important; }
+  .recs-grade .rec-texto p, .recs-grade .rec-destaque .rec-texto p { -webkit-line-clamp: 3; font-size: .88rem; }
+  .recs-grade .rec { padding: 14px 16px; gap: 8px; }
+  .autor { grid-template-columns: 36px minmax(0, 1fr) auto; gap: 10px; }
+  .autor img, .autor-ini { width: 36px; height: 36px; }
+  .autor-info > strong { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .recs-mais { display: flex; }
+}
+/* legendas das imagens dos projetos (modal e tela cheia) */
+.galeria-legenda { margin: 10px auto 0; max-width: 62ch; text-align: center; font-size: .86rem; line-height: 1.45; color: var(--tinta-2); }
+.visor-legenda { position: absolute; left: 50%; bottom: 84px; transform: translateX(-50%); width: min(720px, calc(100% - 32px)); margin: 0; padding: 10px 16px; border-radius: 10px; background: rgba(14,14,16,.82); color: #fff; font-size: .9rem; line-height: 1.45; text-align: center; z-index: 2; }
+/* apresentação: ícone no cabeçalho do desktop, "Apresentar" dentro do menu do celular */
+.nav-apresentar .ic { position: static; opacity: 1 !important; transform: none !important; }
+.nav-menu-apresentar { display: none; }
+@media (max-width: 1079px) {
+  .nav-apresentar { display: none !important; }
+  .nav-menu-apresentar { display: block; width: 100%; text-align: left; white-space: nowrap; background: none; border: 0; border-bottom: 1px solid var(--linha); color: inherit; cursor: pointer; font: inherit; font-size: clamp(1.2rem, 5.6vw, 1.5rem); font-weight: 700; padding: 9px 0; }
+}
+.contato-secao .contato-hero { min-height: calc(100svh - var(--nav)); }
+/* celular compacto: base menor, respiros e alturas menores */
+@media (max-width: 599px) {
+  html { font-size: 14px; }
+  :root { --secao: 36px; --margem: 16px; }
+  h2[data-dividir], .cabecalho h2, .secao-topo h2, .titulo-secundario { font-size: 1.3rem; line-height: 1.12; }
+  .cabecalho, .secao-topo { margin-bottom: 12px; }
+  .hero-titulo { font-size: 1.7rem; }
+  .numero strong { font-size: 1.6rem; }
+  .nav-links > a { font-size: clamp(1.2rem, 5.6vw, 1.5rem); padding: 9px 0; }
+  .projetos-grade, .percurso-linha { margin-top: 12px; gap: 12px; }
+  .destaque-midia { aspect-ratio: 16 / 9; }
+  .destaque-corpo { padding: 14px; gap: 6px; }
+  .rec, .recs-grade .rec { padding: 12px 14px; gap: 8px; }
+  .recs, .servicos, .numeros, .sobre-pagina { padding-block: var(--secao); }
+  .rotulo { font-size: .66rem; }
+  .sobre-foto { max-width: 70%; margin-inline: auto; }
+}
+/* A− / A+ nunca quebram em duas linhas */
+.fonte-controle button { width: auto; min-width: 30px; padding: 0 7px; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; }
+/* telas baixas: ícones de contato menores para o texto do topo caber sem rolar */
+@media (max-height: 800px) and (min-width: 600px) { .hero-redes { margin-top: 6px; gap: 8px; } .hero-redes a { width: 30px; height: 30px; } .hero-redes .ic { width: 15px; height: 15px; } }
+
+/* títulos de seção em no máximo 2 linhas no desktop */
+.cabecalho h2, .secao-topo h2 { max-width: 28ch; text-wrap: balance; }
+
+/* patrocínio no formato de anúncio: compacto e discreto */
+.patrocinio { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 18px 20px; border-radius: 14px; border: 1px solid var(--linha); background: var(--superficie); }
+@media (min-width: 900px) { .patrocinio { grid-template-columns: minmax(0, 340px) minmax(0, 1fr); align-items: center; gap: 24px; } }
+.pat-selo { display: inline-block; font-family: var(--mono); font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-2); border: 1px solid var(--linha-forte); border-radius: 4px; padding: 1px 6px; }
+.pat-cab h2 { font-size: 1.05rem; line-height: 1.25; margin: 8px 0 4px; letter-spacing: 0; font-stretch: 100%; }
+.patrocinio .pat-cab p { font-size: .82rem; line-height: 1.45; color: var(--tinta-2); margin: 0 0 8px; max-width: 48ch; }
+.pat-cta { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; font-weight: 600; color: var(--acento); white-space: nowrap; }
+.pat-cta .ic { width: 14px; height: 14px; }
+.patrocinio-projetos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+.patrocinio-projetos .pat-ad { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px; align-items: start; padding: 10px; border-radius: 10px; background: var(--bg); border: 1px solid var(--linha); transition: border-color .2s; }
+.patrocinio-projetos .pat-ad:hover { border-color: var(--acento); }
+.patrocinio-projetos .pat-ad img { width: 72px; height: 54px; aspect-ratio: auto; object-fit: cover; object-position: top; border-radius: 6px; }
+.pat-ad-corpo { display: grid; gap: 2px; min-width: 0; }
+.pat-ad-topo { font-size: .7rem; color: var(--tinta-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pat-ad-topo b { color: var(--tinta); }
+.pat-ad strong { font-size: .9rem; color: var(--acento); line-height: 1.25; }
+.patrocinio-projetos .pat-ad-desc { font-size: .78rem; line-height: 1.4; color: var(--tinta-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* formulário de recomendação: cabeçalho com ícone, campos em grade, contador e ações no rodapé */
+.form-rec { max-width: 620px; display: grid; gap: 16px; }
+.rec-form-cab { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; align-items: start; }
+.rec-form-ic { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: color-mix(in srgb, var(--acento) 16%, transparent); color: var(--acento); }
+.rec-form-ic .ic { width: 22px; height: 22px; }
+.rec-form-cab h2 { font-size: 1.4rem; line-height: 1.15; margin: 0 0 4px; }
+.rec-form-cab .dica-form { margin: 0; font-size: .86rem; color: var(--tinta-2); }
+.rec-form-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 14px; }
+.rec-form-grade .campo { display: grid; gap: 6px; margin: 0; }
+.rec-form-grade .campo-largo { grid-column: 1 / -1; position: relative; }
+.rec-form-grade label { font-size: .74rem; letter-spacing: .02em; color: var(--tinta-2); }
+.rec-form-grade input, .rec-form-grade textarea { min-height: 42px; padding: 10px 12px; border-radius: 10px; font-size: .92rem; }
+.rec-form-grade textarea { min-height: 120px; resize: vertical; }
+.rec-form-conta { justify-self: end; font-family: var(--mono); font-size: .68rem; color: var(--tinta-2); }
+.rec-form-pe { display: flex; justify-content: flex-end; gap: 10px; padding-top: 4px; border-top: 1px solid var(--linha); padding-top: 14px; }
+.rec-form-pe .btn { white-space: nowrap; }
+@media (max-width: 599px) { .rec-form-grade { grid-template-columns: 1fr; } .rec-form-pe .btn { flex: 1; justify-content: center; } }
+/* o formulário já está dentro do modal: sem segundo cartão em volta */
+.form.form-rec { background: none; border: 0; box-shadow: none; padding: 0; }
+
+/* sobre o vídeo a barra ainda é transparente: o hover mantém o texto claro até ela ganhar cor */
+@media (min-width: 1080px) {
+  .nav:not(.rolou) .nav-links > a:hover, .nav:not(.rolou) .nav-links > a[aria-current="page"],
+  .nav.sobre-video .nav-links > a:hover, .nav.sobre-video .nav-links > a[aria-current="page"],
+  .nav.topo-claro:not(.rolou):not(.escura) .nav-links > a:hover,
+  .nav.topo-claro:not(.rolou):not(.escura) .nav-links > a[aria-current="page"] { background: rgba(14,14,16,.55); color: #fff; }
+}
+/* patrocínio compacto no celular: uma linha por anúncio, imagem pequena */
+@media (max-width: 599px) {
+  .patrocinio { padding: 14px; gap: 10px; }
+  .patrocinio-projetos { gap: 8px; }
+  .patrocinio-projetos .pat-ad { grid-template-columns: 56px minmax(0, 1fr); grid-template-rows: auto; align-content: start; align-items: start; gap: 10px; padding: 8px; }
+  .patrocinio-projetos .pat-ad img { grid-row: auto; width: 56px; height: 42px; }
+  .pat-ad strong { font-size: .84rem; }
+  .patrocinio-projetos .pat-ad-desc { font-size: .74rem; -webkit-line-clamp: 2; }
+}
+
+/* trajetória e contato também na landing: mesmas peças das páginas, com respiro de seção */
+.trajetoria-secao, .contato-secao { padding-block: var(--secao); }
+.trajetoria-secao .trajetoria { padding-top: 0; }
+.secao-sub { color: var(--tinta-2); max-width: 62ch; margin: 6px 0 0; }
+.contato-secao .contato-grade { margin-top: 18px; }

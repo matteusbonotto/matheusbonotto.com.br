@@ -35,7 +35,7 @@ function cabecalhoPagina(t, chave) {
 function hero(d, t) {
   const h = textoSite(d.site, 'hero', d.lang);
   const disp = textoSite(d.site, 'disponibilidade', d.lang);
-  const status = disp.ativo ? `<p class="status"><span class="status-ponto" aria-hidden="true"></span>${esc(disp.texto)}</p>` : '';
+  const status = disp.ativo ? `<p class="status${disp.curto ? ' tem-curto' : ''}"><span class="status-ponto" aria-hidden="true"></span><span class="status-txt">${esc(disp.texto)}</span>${disp.curto ? `<span class="status-curto">${esc(disp.curto)}</span>` : ''}</p>` : '';
   // Fase 1: a rolagem avança o vídeo de abertura quadro a quadro (moeda → rosto → nome).
   // Fase 2: o quadro encolhe e o texto entra. Sem JS / movimento reduzido: estado final direto.
   return `<section class="hero" id="topo" data-hero>
@@ -52,9 +52,10 @@ function hero(d, t) {
         <p class="rotulo">${esc(h.eyebrow)}</p>
         <h1 class="hero-titulo">${esc(h.titulo)}</h1>
         <p class="hero-sub">${esc(h.subtitulo)}</p>
+        <ul class="hero-redes" aria-label="${t('contato.canais')}">${canais(d, t).map(([href, ic, txt]) => `<li><a href="${esc(href)}" target="_blank" rel="noopener" aria-label="${esc(txt)}" title="${esc(txt)}">${icone(ic)}</a></li>`).join('')}</ul>
         <p class="rotulo caminhos-titulo">${t('hero.caminhos')}</p>
         <nav class="caminhos" aria-label="${t('hero.caminhos')}">${[['sobre', 'nav.sobre', 'escudo'], ['projetos', 'nav.projetos', 'vista-grade'], ['trajetoria', 'nav.trajetoria', 'grafico'], ['competencias', 'nav.competencias', 'estrela'], ['contato', 'nav.contato', 'email'], ['cv', 'nav.cv', 'download']]
-          .map(([pg, k, ic], n) => `<a class="caminho ${n === 0 ? 'caminho-forte' : ''}" href="${rota(d.lang, pg)}" data-magnetico>${icone(ic)}<span>${t(k)}</span></a>`).join('')}</nav>
+          .map(([pg, k, ic], n) => `<a class="caminho ${n === 0 ? 'caminho-forte' : ''}" href="${pg === 'sobre' ? `${rota(d.lang)}#sobre` : rota(d.lang, pg)}" data-magnetico>${icone(ic)}<span>${t(k)}</span></a>`).join('')}</nav>
       </div>
     </div>
   </div>
@@ -144,13 +145,18 @@ export function detalheRecomendacao(x, t) {
 export function formularioRecomendacao(t) {
   return `<button class="modal-fechar" type="button" data-fechar-modal aria-label="${t('projetos.fechar')}">${icone('fechar')}</button>
 <form class="form form-rec" data-form-rec novalidate aria-labelledby="modal-titulo">
-  <h2 id="modal-titulo" class="titulo-secundario">${t('recs.formTitulo')}</h2><p class="dica-form">${t('recs.formTexto')}</p>
-  <div class="campo"><label for="r-nome">${t('contato.nome')}</label><input id="r-nome" name="nome" required maxlength="120" autocomplete="name"></div>
-  <div class="campo"><label for="r-cargo">${t('recs.cargo')}</label><input id="r-cargo" name="cargo" maxlength="140"></div>
-  <div class="campo"><label for="r-empresa">${t('recs.empresa')}</label><input id="r-empresa" name="empresa" maxlength="140"></div>
-  <div class="campo"><label for="r-msg">${t('contato.mensagem')}</label><textarea id="r-msg" name="mensagem" rows="6" required maxlength="3000"></textarea></div>
+  <header class="rec-form-cab"><span class="rec-form-ic" aria-hidden="true">${icone('conversa')}</span><div><h2 id="modal-titulo">${t('recs.formTitulo')}</h2><p class="dica-form">${t('recs.formTexto')}</p></div></header>
+  <div class="rec-form-grade">
+    <div class="campo"><label for="r-nome">${t('contato.nome')}</label><input id="r-nome" name="nome" required maxlength="120" autocomplete="name"></div>
+    <div class="campo"><label for="r-cargo">${t('recs.cargo')}</label><input id="r-cargo" name="cargo" maxlength="140" autocomplete="organization-title"></div>
+    <div class="campo campo-largo"><label for="r-empresa">${t('recs.empresa')}</label><input id="r-empresa" name="empresa" maxlength="140" autocomplete="organization"></div>
+    <div class="campo campo-largo"><label for="r-msg">${t('contato.mensagem')}</label><textarea id="r-msg" name="mensagem" rows="5" required maxlength="3000"></textarea><small class="rec-form-conta" data-contador aria-live="polite">0 / 3000</small></div>
+  </div>
   <div class="campo-isca" aria-hidden="true"><label for="r-site">Site</label><input id="r-site" name="site" tabindex="-1" autocomplete="off"></div>
-  <button class="btn btn-acento" type="submit">${t('recs.enviar')} ${icone('seta')}</button>
+  <footer class="rec-form-pe">
+    <button class="btn btn-linha" type="button" data-fechar-modal>${t('projetos.fechar')}</button>
+    <button class="btn btn-acento" type="submit">${t('recs.enviar')} ${icone('seta')}</button>
+  </footer>
   <p class="form-status" role="status" aria-live="polite" data-status data-ok="${esc(t('recs.enviada'))}" data-erro="${esc(t('contato.erro'))}" data-invalido="${esc(t('contato.invalido'))}"></p>
 </form>`;
 }
@@ -206,7 +212,7 @@ function servicos(d, t) {
 }
 
 export function inicio(d, t) {
-  return hero(d, t) + clientes(d, t) + manifesto(d, t) + numeros(d, t) + destaques(d, t) + recomendacoes(d, t) + servicos(d, t);
+  return hero(d, t) + clientes(d, t) + manifesto(d, t) + sobre(d, t) + numeros(d, t) + destaques(d, t) + trajetoriaSecao(d, t) + recomendacoes(d, t) + servicos(d, t) + contatoSecao(d, t);
 }
 
 // ================= PROJETOS =================
@@ -252,8 +258,8 @@ ${galeria.length ? `<div class="galeria" data-galeria>
     <button type="button" role="tab" aria-selected="false" data-modo="mobile">${t('projetos.mobile')}</button></div>` : ''}
   <div class="galeria-palco">
     <ul class="galeria-faixa" data-galeria-faixa aria-label="${t('projetos.galeria')}">${galeria.map((g, i) => `<li class="galeria-item galeria-${disp(g)}" data-dispositivo="${disp(g)}" data-i="${i}">
-      <button type="button" class="galeria-ver" data-galeria-ampliar aria-label="${t('projetos.ampliar')}"><figure class="moldura moldura-${disp(g)}${disp(g) === 'mobile' && g.w && g.h / g.w < 1.6 ? ' moldura-tablet' : ''}"><img src="${esc(g.url)}" ${g.w ? `width="${g.w}" height="${g.h}"` : ''} alt="${esc(g.legenda || `${t('projetos.print', { titulo: p.titulo })} (${i + 1})`)}" loading="lazy" decoding="async"></figure>
-      <span class="galeria-lupa" aria-hidden="true">${icone('ampliar')}</span></button></li>`).join('')}</ul>
+      <button type="button" class="galeria-ver" data-galeria-ampliar aria-label="${t('projetos.ampliar')}"><figure class="moldura moldura-${disp(g)}${disp(g) === 'mobile' && g.w && g.h / g.w < 1.6 ? ' moldura-tablet' : ''}"><img src="${esc(g.url)}" ${g.w ? `width="${g.w}" height="${g.h}"` : ''} alt="${esc(g.legenda || `${t('projetos.print', { titulo: p.titulo })} (${i + 1})`)}"${g.legenda ? ` data-legenda="${esc(g.legenda)}"` : ''} loading="lazy" decoding="async"></figure>
+      <span class="galeria-lupa" aria-hidden="true">${icone('ampliar')}</span></button>${g.legenda ? `<p class="galeria-legenda">${esc(g.legenda)}</p>` : ''}</li>`).join('')}</ul>
     <button type="button" class="btn-icone galeria-seta galeria-seta-ant" data-galeria-ant aria-label="${t('projetos.anterior')}">${icone('esquerda')}</button>
     <button type="button" class="btn-icone galeria-seta galeria-seta-prox" data-galeria-prox aria-label="${t('projetos.proxima')}">${icone('direita')}</button>
   </div>
@@ -408,6 +414,25 @@ export function trajetoria(d, t) {
   ${cert ? `<h2 class="titulo-secundario certs-titulo">${t('trajetoria.certificacoes')}</h2><ul class="certs">${cert}</ul>` : ''}
 </div>
 ${recomendacoes(d, t)}`;
+}
+
+// trajetória na landing: mesma linha do tempo e certificados, sem o cabeçalho de página e sem repetir as recomendações
+export function trajetoriaSecao(d, t) {
+  const itens = itensTrajetoria(d, t);
+  const mesAno = s => (s ? new Intl.DateTimeFormat({ pt: 'pt-BR', en: 'en-US', es: 'es-ES' }[d.lang], { month: 'short', year: 'numeric' }).format(new Date(`${s}T12:00:00`)) : '');
+  const cert = d.certificacoes.map(c => `<li class="revelar cert">${c.certificado_url ? `<a class="cert-img" href="${esc(c.certificado_url)}" data-visor aria-label="${t('projetos.ampliar')}: ${esc(c.nome)}"><img src="${esc(c.certificado_url)}" alt="${esc(c.nome)}" loading="lazy"><span class="galeria-lupa" aria-hidden="true">${icone('ampliar')}</span></a>` : `<span class="cert-img cert-sem">${icone('medalha')}</span>`}
+    <span class="cert-txt"><strong>${esc(c.nome)}</strong><span>${esc([c.instituicao, mesAno(c.data_certificacao), c.validade].filter(Boolean).join(' · '))}</span></span></li>`).join('');
+  const filtros = [['todos', 'carreira.filtro.todos'], ['exp', 'carreira.filtro.exp'], ['form', 'carreira.filtro.form']];
+  return `<section class="trajetoria-secao" id="trajetoria" aria-labelledby="trajetoria-titulo">
+  <div class="container trajetoria" data-trajetoria>
+    <div class="secao-topo"><div><p class="rotulo">${t('trajetoria.rotulo')}</p><h2 id="trajetoria-titulo" data-dividir>${t('pag.trajetoria.titulo')}</h2><p class="secao-sub">${t('pag.trajetoria.sub')}</p></div></div>
+    ${graficoCarreira(d, t)}
+    <div class="linha-barra"><div class="filtros filtros-linha" role="tablist" aria-label="${t('trajetoria.rotulo')}">${filtros.map(([f, k], i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-filtro-linha="${f}">${t(k)}</button>`).join('')}</div>
+    ${vistas('trajetoria', t, ['lista', 'grade'])}</div>
+    <ol class="linha" data-vista-alvo="trajetoria" data-vista="lista">${itens.map(i => itemLinha(i, t)).join('')}</ol>
+    ${cert ? `<h2 class="titulo-secundario certs-titulo">${t('trajetoria.certificacoes')}</h2><ul class="certs">${cert}</ul>` : ''}
+  </div>
+</section>`;
 }
 
 // ================= COMPETÊNCIAS =================
@@ -586,7 +611,8 @@ export function competencias(d, t) {
 export function sobre(d, t) {
   const s = textoSite(d.site, 'sobre', d.lang), m = textoSite(d.site, 'sobre_mim', d.lang), pat = textoSite(d.site, 'patrocinio', d.lang);
   const apoiados = (d.site.patrocinio?.projetos || []).map(slug => d.projetos.find(p => p.slug === slug)).filter(Boolean);
-  return `${cabecalhoPagina(t, 'sobre')}
+  return `<section class="sobre-secao" id="sobre" aria-labelledby="sobre-titulo">
+<div class="container cabecalho"><p class="rotulo">${t('nav.sobre')}</p><h2 id="sobre-titulo" data-dividir>${t('pag.sobre.sub')}</h2></div>
 <div class="container sobre-pagina">
   <section class="sobre-intro">
     <figure class="sobre-foto revelar"><img src="/media/perfil-padrao.webp" alt="${t('sobre.foto')}" width="768" height="1024" loading="lazy"></figure>
@@ -603,11 +629,12 @@ export function sobre(d, t) {
     <article class="revelar"><span class="mvv-ic">${icone('estrela')}</span><h2>${t('sobre.valores')}</h2><ul class="lista-check">${(m.valores || []).map(v => `<li>${icone('check')}${esc(v)}</li>`).join('')}</ul></article>
   </section>
   ${pat.titulo ? `<section class="patrocinio revelar" aria-labelledby="pat-titulo">
-    <div><h2 id="pat-titulo" class="titulo-secundario">${esc(pat.titulo)}</h2><p>${esc(pat.texto)}</p>
-      <a class="btn btn-acento" href="${rota(d.lang, 'contato')}?assunto=patrocinio">${t('patrocinio.cta')} ${icone('seta')}</a></div>
-    ${apoiados.length ? `<ul class="patrocinio-projetos">${apoiados.map(p => `<li><a href="${esc(p.link_projeto || '#')}" target="_blank" rel="noopener">${p.imagem_url ? `<img class="${ehCena(p.imagem_url) ? 'capa-cena' : ''}" src="${esc(p.imagem_url)}" alt="" loading="lazy">` : ''}<strong>${esc(p.titulo)}</strong><span>${esc(p.descricao_curta)}</span></a></li>`).join('')}</ul>` : ''}
+    <div class="pat-cab"><span class="pat-selo">${t('patrocinio.selo')}</span><h2 id="pat-titulo">${esc(pat.titulo)}</h2><p>${esc(pat.texto)}</p>
+      <a class="pat-cta" href="${rota(d.lang, 'contato')}?assunto=patrocinio">${t('patrocinio.cta')} ${icone('seta')}</a></div>
+    ${apoiados.length ? `<ul class="patrocinio-projetos">${apoiados.map(p => `<li><a class="pat-ad" href="${esc(p.link_projeto || '#')}" target="_blank" rel="noopener">${p.imagem_url ? `<img src="${esc(p.imagem_url)}" alt="" loading="lazy">` : ''}<span class="pat-ad-corpo"><span class="pat-ad-topo"><b>${t('patrocinio.anuncio')}</b> · ${esc((p.link_projeto || '').replace(/^https?:\/\//, '').replace(/\/$/, ''))}</span><strong>${esc(p.titulo)}</strong><span class="pat-ad-desc">${esc(p.descricao_curta)}</span></span></a></li>`).join('')}</ul>` : ''}
   </section>` : ''}
-</div>`;
+</div>
+</section>`;
 }
 
 // ================= CONTATO =================
@@ -651,6 +678,33 @@ export function contato(d, t) {
     <details class="valor-dobra" data-dobra-desktop><summary>${icone('grafico')}<span>${t('valor.titulo')}</span>${icone('baixo')}</summary>${cartaoValor(d, t)}</details>
   </div>
 </div>`;
+}
+
+// contato na landing: o mesmo formulário e os mesmos canais da página, sem o vídeo de abertura
+export function contatoSecao(d, t) {
+  return `<section class="contato-secao" id="contato" aria-labelledby="contato-titulo">
+  <div class="container">
+    <div class="secao-topo"><div><p class="rotulo">${t('contato.rotulo')}</p><h2 id="contato-titulo" data-dividir>${t('pag.contato.titulo')}</h2><p class="secao-sub">${t('pag.contato.sub')}</p></div></div>
+    <div class="contato-grade">
+      <form class="form" data-form novalidate aria-labelledby="form-titulo">
+        <h3 id="form-titulo" class="titulo-secundario">${t('contato.formTitulo')}</h3>
+        <div class="campo"><label for="f-nome">${t('contato.nome')}</label><input id="f-nome" name="nome" autocomplete="name" required maxlength="120"></div>
+        <div class="campo"><label for="f-email">${t('contato.email')}</label><input id="f-email" name="email" type="email" autocomplete="email" required maxlength="200"></div>
+        <div class="campo"><label for="f-tipo">${t('contato.tipo')}</label><select id="f-tipo" name="assunto">
+          <option value="vaga">${t('contato.tipo.vaga')}</option><option value="freela">${t('contato.tipo.freela')}</option><option value="patrocinio">${t('contato.tipo.patrocinio')}</option><option value="outro">${t('contato.tipo.outro')}</option></select></div>
+        <div class="campo"><label for="f-msg">${t('contato.mensagem')}</label><textarea id="f-msg" name="mensagem" rows="5" required maxlength="5000"></textarea></div>
+        <div class="campo-isca" aria-hidden="true"><label for="f-site">Site</label><input id="f-site" name="site" tabindex="-1" autocomplete="off"></div>
+        <button class="btn btn-acento" type="submit" data-enviar data-texto-enviando="${t('contato.enviando')}">${t('contato.enviar')} ${icone('seta')}</button>
+        <p class="form-status" role="status" aria-live="polite" data-status data-ok="${esc(t('contato.ok'))}" data-erro="${esc(t('contato.erro'))}" data-invalido="${esc(t('contato.invalido'))}"></p>
+      </form>
+      <div class="contato-lado">
+        <h3 class="rotulo">${t('contato.canais')}</h3>
+        <ul class="canais">${canais(d, t).map(([href, ic, txt]) => `<li><a href="${esc(href)}" ${href.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>${icone(ic)}<span>${esc(txt)}</span>${icone('seta')}</a></li>`).join('')}
+          <li><a href="${rota(d.lang, 'cv')}">${icone('download')}<span>${t('contato.cv')}</span>${icone('seta')}</a></li></ul>
+      </div>
+    </div>
+  </div>
+</section>`;
 }
 
 // JSON-LD (Person + WebSite + página)

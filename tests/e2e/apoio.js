@@ -11,7 +11,7 @@ const TABELAS = {
   contact_messages: [{ id: 'm1', nome: 'Recrutadora Teste', email: 'rh@empresa.com', assunto: 'vaga', mensagem: 'Olá, Matheus!', lida: false, created_at: '2026-10-26T12:00:00Z', idioma: 'pt' }],
   admins: [{ user_id: 'u1' }],
 };
-export const URLS = ['/', '/sobre/', '/projetos/', '/trajetoria/', '/competencias/', '/contato/', '/cv/'].flatMap(p => [p, `/en${p}`, `/es${p}`]);
+export const URLS = ['/', '/projetos/', '/trajetoria/', '/competencias/', '/contato/', '/cv/'].flatMap(p => [p, `/en${p}`, `/es${p}`]);
 
 export async function simularSupabase(page, { admin = false, perguntarIdioma = false } = {}) {
   const escritas = [];
