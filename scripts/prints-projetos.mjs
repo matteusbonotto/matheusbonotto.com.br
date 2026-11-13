@@ -19,18 +19,17 @@ const subir = async (buf, nome) => {
   return `${SUPABASE_URL}/storage/v1/object/public/media/${nome}`;
 };
 const baixar = async url => Buffer.from(await (await fetch(url)).arrayBuffer());
-const dataUri = async (buf, w, h) => `data:image/png;base64,${(await sharp(buf).resize(Math.round(w), Math.round(h), { fit: 'fill' }).png().toBuffer()).toString('base64')}`;
+const dataUri = async (buf, w, h) => `data:image/png;base64,${(await sharp(buf).resize(Math.round(w), Math.round(h), { fit: 'cover', position: 'northwest' }).png().toBuffer()).toString('base64')}`;
 
-// Capa 1600x1000 com fundo transparente. As telas assumem a proporção de cada print, então nada é cortado.
+// Capa 1600x1000 com fundo transparente. Telas com proporção fixa (monitor 16:10, celular e tablet padrão) para todas as capas ficarem iguais; o print é recortado a partir do canto superior esquerdo.
 async function capa(desk, mob) {
-  const md = await sharp(desk).metadata();
-  const rD = md.height / md.width;
+  const rD = 0.625;
   const b = 18, PE = 104; // aro do monitor e altura do pé
   const SW = Math.min(1060, 700 / rD), SH = SW * rD;
   let cel = null;
   if (mob) {
     const mm = await sharp(mob).metadata();
-    const rM = mm.height / mm.width;
+    const rM = mm.height / mm.width < 1.6 ? 1.33 : 2.1;
     const tablet = rM < 1.6;
     const BAR = tablet ? 26 : 44, pb = tablet ? 16 : 13;
     const HC = Math.min(tablet ? 470 : 590, (tablet ? 400 : 290) * rM), WC = HC / rM;
