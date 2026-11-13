@@ -23,10 +23,15 @@ const sobreTexto = () => document.querySelector('.sobre-lead')?.textContent.trim
 const fotoPerfil = () => document.querySelector('.sobre-foto img')?.getAttribute('src') || '';
 const iniciais = nome => String(nome || '').split(/\s+/).filter(Boolean).slice(0, 2).map(p => p[0].toUpperCase()).join('');
 
-// Até 3 recomendações curtas, com foto de perfil (ou iniciais quando não houver)
+// até 3 feedbacks na ordem em que a landing carrega, garantindo pelo menos um de gestão
+const GESTAO = /gestor|gerente|lead|coorden|diretor|head|ceo|cto|fundador|s[óo]cio|supervisor|manager|product owner/i;
+const recorte = (s, n) => { const t = String(s || '').trim(); if (t.length <= n) return t; const c = t.slice(0, n); return c.slice(0, c.lastIndexOf(' ')) + '…'; };
 function feedbacks() {
-  const recs = dadosPagina().recomendacoes || [];
-  return recs.filter(r => r.mensagem && r.mensagem.length < 320).sort((a, b) => a.mensagem.length - b.mensagem.length).slice(0, 3);
+  const recs = (dadosPagina().recomendacoes || []).filter(r => r.mensagem);
+  const escolhidos = recs.slice(0, 3);
+  const gestao = recs.find(r => GESTAO.test(`${r.cargo || ''} ${r.empresa || ''}`));
+  if (gestao && !escolhidos.includes(gestao)) escolhidos[escolhidos.length - 1] = gestao;
+  return escolhidos.filter(Boolean).sort((a, b) => recs.indexOf(a) - recs.indexOf(b));
 }
 const avatar = r => r.imagem_url ? `<img class="ap-avatar" src="${esc(r.imagem_url)}" alt="" loading="lazy">` : `<span class="ap-avatar ap-avatar-ini" aria-hidden="true">${esc(iniciais(r.nome))}</span>`;
 
@@ -45,7 +50,7 @@ function mvv() {
 
 // Slides padrão da estrutura de entrevista: sobre, carreira, casos, feedbacks, projetos, por que eu, encerramento
 const slideSobre = (titulo, pilares, notas) => ({ fundo: 'aurora', html: () => `
-      <div class="ap-sobre">${fotoPerfil() ? `<img class="ap-foto" src="${esc(fotoPerfil())}" alt="" style="--i:1">` : ''}
+      <div class="ap-sobre">${fotoPerfil() ? `<div class="ap-foto-caixa" style="--i:1"><img class="ap-foto" src="${esc(fotoPerfil())}" alt=""></div>` : ''}
       <div><p class="ap-rotulo">Sobre</p><h2>${titulo}</h2>${sobreTexto() ? `<p class="ap-sub ap-resumo">${esc(sobreTexto())}</p>` : ''}${seq(pilares)}</div></div>`, notas });
 const slideMvv = notas => ({ fundo: 'aurora', html: () => `<p class="ap-rotulo">Quem sou</p><h2>Missão, visão e valores.</h2>${seq(mvv())}`, notas });
 
@@ -64,11 +69,43 @@ const slideCarreira = (titulo, itens, notas) => ({ fundo: 'ondas', html: () => {
       <div class="ap-gantt-linha ap-gantt-eixo"><span></span><span class="ap-gantt-trilho">${marcas.map(a => `<small style="left:${x(a)}%">${a}</small>`).join('')}</span></div>
     </div>`;
 }, notas });
-const slideCaso = (areas, video, rotulo, titulo, problema, solucao, impacto, regra, notas) => ({ areas, video,
-  html: `<p class="ap-rotulo">Case de sucesso</p><h2>${titulo}</h2>${caso(rotulo.split('·').pop().trim(), problema, solucao, impacto)}${regra ? `<p class="ap-regra">${regra}</p>` : ''}`, notas });
+// prova do caso: a tela da ferramenta quando existe; senão, um feedback da mesma empresa
+function provaHTML(prova) {
+  if (!prova) return '';
+  const d = dadosPagina(); const projetos = d.apresentacao || d.projetos || [];
+  const p = prova.projeto ? projetos.find(x => x.slug === prova.projeto) : null;
+  const img = p?.galeria?.[0];
+  if (img) return `<figure class="ap-prova"><img src="${esc(img.url)}" alt="${esc(prova.rotulo || p.titulo)}" loading="lazy"><figcaption>${esc(prova.rotulo || p.titulo)}</figcaption></figure>`;
+  if (prova.referencia) return `<figure class="ap-prova ap-prova-ref"><blockquote>${esc(prova.referencia.texto)}</blockquote><figcaption>${esc(prova.referencia.titulo)}</figcaption></figure>`;
+  const recs = (d.recomendacoes || []).filter(r => prova.empresa && r.empresa && r.empresa.toLowerCase().includes(prova.empresa.toLowerCase()));
+  const rec = recs[prova.indice || 0];
+  if (rec) return `<figure class="ap-prova ap-prova-rec"><blockquote>"${esc(recorte(rec.mensagem, 220))}"</blockquote><figcaption>${esc(rec.nome)}${rec.cargo ? ` · ${esc(rec.cargo)}` : ''}</figcaption></figure>`;
+  return '';
+}
+const slideCaso = (areas, video, rotulo, titulo, problema, solucao, impacto, regra, notas, prova) => ({ areas, video,
+  html: `<p class="ap-rotulo">Case de sucesso</p><h2>${titulo}</h2>
+    <div class="ap-caso"><div>${caso(rotulo.split('·').pop().trim(), problema, solucao, impacto)}${regra && !prova?.referencia ? `<p class="ap-regra">${regra}</p>` : ''}</div>${provaHTML(prova)}</div>`, notas });
+// formação: técnico, graduação, pós e certificações na mesma grade de cartões
+const ano = s => (s ? String(s).slice(0, 4) : '');
+const slideFormacao = notas => ({ fundo: 'aurora', html: () => {
+  const d = dadosPagina();
+  const form = (d.formacoes || []).slice().sort((a, b) => String(b.inicio).localeCompare(String(a.inicio)));
+  const item = (t, sub, i) => `<li style="--i:${i + 1}"><b>${esc(t)}</b><span>${esc(sub)}</span></li>`;
+  const semAcento = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const tipoLabel = v => { const s = semAcento(v); return /lato|pos|especializ|mba/.test(s) ? 'Pós-graduação' : /bacharel|gradua|licenciatura|tecnologo/.test(s) ? 'Graduação' : /tecnic/.test(s) ? 'Curso técnico' : /livre/.test(s) ? 'Curso livre' : String(v || ''); };
+  const periodo = f => { const a = ano(f.inicio), b = f.atual ? 'atual' : ano(f.fim); return !b || b === a ? a : `${a} → ${b}`; };
+  const cursos = form.map(f => semAcento(f.curso));
+  const certs = (d.certificacoes || []).filter(c => !cursos.some(cur => cur && semAcento(c.nome).includes(cur))).sort((a, b) => String(b.data).localeCompare(String(a.data)));
+  const grupos = [
+    form.length ? `<div class="ap-grupo"><h3>Formação acadêmica</h3><ul>${form.map((f, i) => item(f.curso, [tipoLabel(f.tipo), f.instituicao, periodo(f)].filter(Boolean).join(' · '), i)).join('')}</ul></div>` : '',
+    certs.length ? `<div class="ap-grupo"><h3>Cursos e certificações</h3><ul>${certs.map((c, i) => item(c.nome, [c.instituicao, ano(c.data)].filter(Boolean).join(' · '), i)).join('')}</ul></div>` : '',
+  ].filter(Boolean).join('');
+  return `<p class="ap-rotulo">Formação</p><h2>Técnico, graduação e cursos.</h2>
+    <div class="ap-formacao">${grupos || '<p class="ap-sub">Formação e certificações estão na página Trajetória do site.</p>'}</div>`;
+}, notas });
 const slideFeedbacks = (titulo, notas) => ({ video: V.entrevista, html: () => `
       <p class="ap-rotulo">Feedbacks</p><h2>${titulo}</h2>
-      <div class="ap-recs">${feedbacks().map((r, i) => `<blockquote style="--i:${i + 1}"><p>“${esc(r.mensagem)}”</p><footer>${avatar(r)}<cite><b>${esc(r.nome)}</b>${[r.cargo, r.empresa].filter(Boolean).map(esc).join(' · ')}</cite></footer></blockquote>`).join('')}</div>`, notas });
+      <div class="ap-recs">${feedbacks().map((r, i) => `<blockquote style="--i:${i + 1}"><p>“${esc(recorte(r.mensagem, 200))}”</p><footer>${avatar(r)}<cite><b>${esc(r.nome)}</b>${[r.cargo, r.empresa].filter(Boolean).map(esc).join(' · ')}</cite></footer></blockquote>`).join('')}</div>`, notas });
 
 // legenda da foto: o texto cadastrado ou, na falta dele, o nome do arquivo (desktop-02-monitoramento -> Monitoramento)
 const ACENTOS = { Inicio: 'Início', Questao: 'Questão', Configuracoes: 'Configurações', Descricao: 'Descrição', Relatorio: 'Relatório' };
@@ -79,12 +116,12 @@ const rotuloFoto = url => {
   const texto = nome.charAt(0).toUpperCase() + nome.slice(1);
   return texto.split(' ').map(p => ACENTOS[p] || p).join(' ');
 };
-// imagens dos projetos da área escolhida (as duas primeiras de cada um), com a legenda cadastrada
+// uma imagem por projeto, na ordem dos destaques da área
 function fotosProjetos(area) {
   const d = dadosPagina(); const projetos = d.apresentacao || d.projetos || [];
-  return AREAS[area].projetos.map(slug => projetos.find(p => p.slug === slug)).filter(Boolean)
-    .flatMap(p => (p.galeria || []).slice(0, 2).map(g => ({ src: g.url, legenda: [(g.legenda || p.titulo).split(':')[0], g.legenda ? '' : rotuloFoto(g.url)].filter(Boolean).join(' · ') })))
-    .slice(0, 6);
+  return AREAS[area].destaques.map(slug => projetos.find(p => p.slug === slug)).filter(Boolean)
+    .map(p => { const g = (p.galeria || [])[0]; return g ? { src: g.url, legenda: p.titulo, tela: g.legenda ? '' : rotuloFoto(g.url) } : null; })
+    .filter(Boolean);
 }
 // contatos publicados na página (e-mail, WhatsApp, LinkedIn, GitHub), mais o site
 function contatos() {
@@ -97,9 +134,9 @@ function contatos() {
 
 // Áreas: o tema escolhido no início define os casos, as imagens e a profissão da capa
 const AREAS = {
-  qa: { nome: 'QA', cargo: 'QA Engineer', projetos: ['qa-toolbar', 'stark-hub', 'qa-cnk-issue-generator', 'simulador-ctfl', 'playwright-automation'] },
-  dev: { nome: 'Desenvolvimento', cargo: 'Desenvolvedor web', projetos: ['condonotto', 'evangeligo', 'zunido', 'achadubom'] },
-  squidev: { nome: 'Squidev', cargo: 'Fundador da Squidev', projetos: ['squidev', 'instrutora-jaqueline', 'ipvida', 'fofuxa-fashion'] },
+  qa: { nome: 'QA', cargo: 'QA Engineer', projetos: ['qa-toolbar', 'stark-hub', 'qa-cnk-issue-generator', 'simulador-ctfl', 'playwright-automation'], destaques: ['qa-toolbar', 'stark-hub', 'qa-cnk-issue-generator', 'simulador-ctfl'] },
+  dev: { nome: 'Desenvolvimento', cargo: 'Desenvolvedor web', projetos: ['condonotto', 'evangeligo', 'zunido', 'achadubom'], destaques: ['condonotto', 'evangeligo', 'zunido', 'achadubom'] },
+  squidev: { nome: 'Squidev', cargo: 'Fundador da Squidev', projetos: ['squidev', 'instrutora-jaqueline', 'ipvida', 'fofuxa-fashion'], destaques: ['squidev', 'instrutora-jaqueline', 'ipvida', 'fofuxa-fashion'] },
 };
 
 const SLIDES = (area) => [
@@ -127,47 +164,58 @@ const SLIDES = (area) => [
     [2025, null, 'Squidev', 'Fundador e desenvolvedor'],
   ], 'Conte a carreira como uma história: suporte deu empatia com o usuário, desenvolvimento deu base técnica, QA juntou as duas coisas. Não leia as datas, comente o aprendizado de cada etapa.'),
 
+  // 3b. Formação
+  slideFormacao('Diga o que cada formação somou: o técnico deu base prática, a graduação deu fundamento, a pós especializou em teste de software. Cite um curso que mudou sua forma de trabalhar.'),
+
   // 4. Casos reais por área
   slideCaso(['qa'], V.entrevista, 'Caso real · QA Toolbar Sandbox', 'O kit do QA a um clique.',
     'Troca constante de ambiente, conta de teste e massa de dados durante os testes.',
     'Criei uma extensão do Chrome que reúne ambientes, contas de teste e atalhos de produtividade.',
     'Publicada na Chrome Web Store; menos tempo procurando dado e ambiente, mais tempo testando.',
-    '', 'Comece pela dor do time, depois mostre a solução e o resultado. Diga como garantiu segurança dos dados de teste.'),
+    '', 'Comece pela dor do time, depois mostre a solução e o resultado. Diga como garantiu segurança dos dados de teste.',
+    { projeto: 'qa-toolbar', rotulo: 'QA Toolbar Sandbox na Chrome Web Store' }),
   slideCaso(['qa'], V.escritorio, 'Caso real · Cinemark (MB Labs)', 'Bugs padronizados do primeiro registro.',
     'Bugs e incidentes chegavam com informações faltando, e o time perdia tempo pedindo detalhes.',
     'Montei o QA CNK Issue Generator: formulário com ambiente, passos, evidências e regra de negócio.',
     'Registros completos e no mesmo padrão, prontos para o time de desenvolvimento agir.',
-    '', 'Mostre que QA também melhora processo. Se perguntarem, fale de como alinhou o padrão com o time.'),
+    '', 'Mostre que QA também melhora processo. Se perguntarem, fale de como alinhou o padrão com o time.',
+    { projeto: 'qa-cnk-issue-generator', rotulo: 'QA CNK Issue Generator' }),
   slideCaso(['qa'], V.entrevista, 'Caso real · Stark Hub', 'Governança e QA sobre o Azure DevOps.',
     'Acompanhamento de qualidade espalhado entre quadros, planilhas e mensagens.',
     'Plataforma que lê o fluxo real do Azure DevOps e organiza governança, QA e produtividade.',
     'Visão única do andamento, pronta para ser escalada para outros times.',
-    'Também no portfólio: simulador do exame ISTQB CTFL 4.0 e suíte end-to-end com Playwright.', 'Use este caso para falar de visão de processo e métricas de qualidade.'),
+    'Também no portfólio: simulador do exame ISTQB CTFL 4.0 e suíte end-to-end com Playwright.', 'Use este caso para falar de visão de processo e métricas de qualidade.',
+    { projeto: 'stark-hub', rotulo: 'Stark Hub · monitoramento' }),
   slideCaso(['dev'], V.escritorio, 'Caso real · Condonotto', 'O condomínio inteiro no navegador.',
     'Encomendas, visitas e avisos controlados em papel e em grupos de mensagem.',
     'App web com encomendas pela foto, visitas, avisos, enquetes e mapa do condomínio.',
     'Moradores e portaria com o mesmo registro, sem instalar nada.',
-    '', 'Explique as decisões técnicas: web sem instalação, foto como registro, permissões por perfil.'),
+    '', 'Explique as decisões técnicas: web sem instalação, foto como registro, permissões por perfil.',
+    { projeto: 'condonotto', rotulo: 'Condonotto' }),
   slideCaso(['dev'], V.entrevista, 'Caso real · EvangeliGO', 'Hábitos que viram jogo.',
     'Dificuldade de manter constância em hábitos diários.',
     'PWA gamificado com metas, progresso e recompensas.',
     'Experiência de aplicativo no celular, publicada como PWA.',
-    '', 'Destaque produto e engajamento: o que motivou cada mecânica do jogo.'),
+    '', 'Destaque produto e engajamento: o que motivou cada mecânica do jogo.',
+    { projeto: 'evangeligo', rotulo: 'EvangeliGO' }),
   slideCaso(['dev'], V.escritorio, 'Caso real · Zunido', 'Um blog que se escreve e se publica sozinho.',
     'Manter um blog atualizado exige tempo diário de pesquisa, escrita e divulgação.',
     'Automação que escreve, revisa, publica e divulga posts sobre assuntos do momento.',
     'Publicação contínua com custo zero de infraestrutura.',
-    '', 'Fale de automação de ponta a ponta e de como controla a qualidade do conteúdo gerado.'),
+    '', 'Fale de automação de ponta a ponta e de como controla a qualidade do conteúdo gerado.',
+    { projeto: 'zunido', rotulo: 'Zunido' }),
   slideCaso(['squidev'], V.escritorio, 'Caso real · Squidev', 'Soluções digitais para pequenos negócios.',
     'Pequenos negócios precisam de presença digital rápida, bonita e barata de manter.',
     'Sites, PWAs, cartões digitais e identidade visual, do briefing à publicação.',
     'Clientes como a Instrutora Jaqueline, a IPVida e a Fofuxa Moda com canal direto para o cliente.',
-    '', 'Mostre que cuida do projeto inteiro: conversa com o cliente, design, código, teste e publicação.'),
+    '', 'Mostre que cuida do projeto inteiro: conversa com o cliente, design, código, teste e publicação.',
+    { projeto: 'squidev', rotulo: 'Squidev' }),
   slideCaso(['squidev'], V.entrevista, 'Caso real · Instrutora Jaqueline', 'Um site com cara de aplicativo.',
     'A instrutora divulgava aulas e regiões só por mensagem.',
     'Site PWA com aulas, pacotes e regiões de atendimento.',
     'Clientes encontram tudo num só lugar e falam direto pelo WhatsApp.',
-    '', 'Use como exemplo de entrega rápida para cliente real.'),
+    '', 'Use como exemplo de entrega rápida para cliente real.',
+    { projeto: 'instrutora-jaqueline', rotulo: 'Instrutora Jaqueline' }),
 
   // 5. Pausa
   { pausa: true, fundo: 'constelacao', html: `<p class="ap-rotulo">Pausa</p><h2>Alguma pergunta até aqui?</h2><p class="ap-sub">Posso detalhar qualquer caso antes de seguir.</p>`,
@@ -179,7 +227,7 @@ const SLIDES = (area) => [
   // 7. Projetos
   { fundo: 'constelacao', html: () => `
       <p class="ap-rotulo">Projetos</p><h2>Alguns projetos desta área.</h2>
-      <ul class="ap-galeria">${fotosProjetos(area).map((f, i) => `<li style="--i:${i + 1}"><img src="${esc(f.src)}" alt="" loading="lazy"><span>${esc(f.legenda)}</span></li>`).join('')}</ul>`,
+      <ul class="ap-galeria">${fotosProjetos(area).map((f, i) => `<li style="--i:${i + 1}"><img src="${esc(f.src)}" alt="" loading="lazy"><span><b>${esc(f.legenda)}</b>${f.tela ? `<em>${esc(f.tela)}</em>` : ''}</span></li>`).join('')}</ul>`,
     notas: 'Passe rápido pelas imagens. Se houver tempo, abra um projeto ao vivo no site.' },
 
   // 8. Por que eu

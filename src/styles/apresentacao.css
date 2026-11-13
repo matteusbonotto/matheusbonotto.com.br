@@ -33,7 +33,7 @@
 .ap-regra { margin-top: 22px; font-size: .95rem; color: #8de8de; border-left: 2px solid #3CC6B8; padding-left: 14px; max-width: 70ch; }
 .ap-recs { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .ap-recs blockquote { margin: 0; padding: 22px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); border-radius: 8px; }
-.ap-recs p { font-family: var(--titulo); font-size: 1.25rem; line-height: 1.4; margin: 0 0 12px; color: #fff; }
+.ap-recs p { font-family: var(--titulo); font-size: 1.25rem; line-height: 1.4; margin: 0 0 12px; color: #fff; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
 .ap-recs cite { font-style: normal; font-size: .85rem; color: #3CC6B8; }
 .ap-link { display: inline-block; margin-top: 24px; padding: 12px 22px; background: #3CC6B8; color: #0E0E10; font-weight: 600; border-radius: 999px; white-space: nowrap; }
 .ap-pausa h2 { font-size: clamp(2.6rem, 1.4rem + 5vw, 5.2rem); }
@@ -215,3 +215,67 @@ dialog.ap::backdrop { background: #000; }
   .ap-gantt-trilho em { font-size: .5rem; padding: 0 5px; }
 }
 .ap { --ap-acento: #3CC6B8; }
+
+/* ===== ajustes nov/2026: sem barras de rolagem, alinhamento único e prova nos casos ===== */
+/* a apresentação ocupa a tela sem rolar: o dialog não passa da viewport nem cria barras */
+/* o vídeo cobre a tela sem estourar a caixa (o scale antigo criava 29 px de sobra) */
+.ap-video { transform: none; }
+dialog.ap { width: 100%; height: 100%; max-width: 100%; max-height: 100%; overflow: hidden; }
+.ap { overflow: hidden; }
+.ap-slide { min-height: 0; overflow: hidden; }
+@media (max-width: 640px) { .ap-slide { overflow-y: auto; } }
+
+/* coluna única: rótulo, título, texto, cartões e galeria começam na mesma borda */
+.ap-slide > * { max-width: 100%; }
+.ap-seq, .ap-galeria, .ap-formacao, .ap-caso { width: 100%; }
+.ap-resumo { max-width: 100%; }
+
+/* sobre: foto com mais zoom e altura igual à coluna de texto (topo e base alinhados) */
+.ap-sobre { align-items: stretch; }
+.ap-foto-caixa { position: relative; overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,.15); min-height: 260px; }
+.ap-foto-caixa .ap-foto { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; border: 0; border-radius: 0; object-fit: cover; object-position: 50% 0%; transform: scale(1.62); transform-origin: 50% 0%; }
+.ap-sobre > div:not(.ap-foto-caixa) { display: flex; flex-direction: column; justify-content: center; }
+
+/* caso: cartões à esquerda, prova à direita */
+.ap-caso { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px); gap: clamp(16px, 3vw, 40px); align-items: start; }
+.ap-prova { margin: 0; display: grid; gap: 8px; }
+.ap-prova img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 10px; border: 1px solid rgba(255,255,255,.16); background: #fff; }
+.ap-prova figcaption { font-family: var(--mono); font-size: .7rem; letter-spacing: .06em; color: rgba(255,255,255,.6); }
+.ap-prova-rec, .ap-prova-ref { padding: 18px; border-radius: 10px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); }
+.ap-prova-rec blockquote, .ap-prova-ref blockquote { margin: 0; font-family: var(--titulo); font-size: 1.02rem; line-height: 1.45; color: #fff; }
+.ap-prova-ref blockquote { font-size: .95rem; color: #d9e4e3; }
+.ap-prova-rec figcaption, .ap-prova-ref figcaption { color: var(--ap-acento); }
+
+/* formação: duas colunas de cartões, na mesma grade do resto */
+.ap-formacao { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; align-items: start; }
+.ap-grupo h3 { margin: 0 0 10px; font-family: var(--mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ap-acento); }
+.ap-grupo ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.ap-grupo li { padding: 12px 14px; border-radius: 10px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); }
+.ap-grupo b { display: block; color: #fff; font-size: .95rem; }
+.ap-grupo span { color: rgba(255,255,255,.72); font-size: .82rem; line-height: 1.4; }
+
+/* projetos: uma imagem por projeto, quatro na linha */
+.ap-galeria { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.ap-galeria span { white-space: normal; text-overflow: clip; }
+.ap-galeria span b { display: block; color: #fff; font-size: .82rem; }
+.ap-galeria span em { display: block; font-style: normal; color: rgba(255,255,255,.6); font-size: .72rem; }
+
+@media (max-height: 500px), (orientation: portrait) and (max-width: 700px) {
+  .ap-caso { grid-template-columns: minmax(0, 1fr) minmax(0, 150px); gap: 10px; }
+  .ap-prova-rec, .ap-prova-ref { padding: 8px; }
+  .ap-prova-rec blockquote, .ap-prova-ref blockquote { font-size: .62rem; line-height: 1.35; }
+  .ap-prova figcaption { font-size: .55rem; }
+  .ap-foto-caixa { min-height: 0; }
+  .ap-foto-caixa .ap-foto { transform: none; object-position: 50% 18%; }
+  .ap-formacao { gap: 8px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+  .ap-grupo li { padding: 7px 9px; }
+  .ap-grupo b { font-size: .78rem; }
+  .ap-grupo span { font-size: .66rem; }
+  .ap-galeria { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ap-galeria li:nth-child(n+4) { display: block; }
+}
+
+/* celular em pé: gira para a horizontal usando a própria altura do elemento (100vw), não 100% */
+@media (orientation: portrait) and (max-width: 700px) {
+  dialog.ap { width: 100svh; height: 100vw; max-width: none; max-height: none; transform: rotate(90deg) translateY(-100vw); transform-origin: top left; }
+}
