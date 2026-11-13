@@ -245,7 +245,7 @@ test('celular: cabeçalho só com o logo e menu ocupando a tela', async ({ page,
   await page.locator('[data-menu]').click();
   const painel = await page.locator('.nav-links').boundingBox();
   expect(painel.height).toBeGreaterThan(page.viewportSize().height * 0.9);
-  await expect(page.locator('.nav-links a[href="/contato/"]')).toBeInViewport();
+  await expect(page.locator('.nav-links a[href="/#contato"]')).toBeInViewport();
 });
 
 test('modal rola com a roda do mouse e recomendações mostram 5 + ver mais', async ({ page, isMobile }) => {

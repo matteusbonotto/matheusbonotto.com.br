@@ -55,7 +55,7 @@ function hero(d, t) {
         <ul class="hero-redes" aria-label="${t('contato.canais')}">${canais(d, t).map(([href, ic, txt]) => `<li><a href="${esc(href)}" target="_blank" rel="noopener" aria-label="${esc(txt)}" title="${esc(txt)}">${icone(ic)}</a></li>`).join('')}</ul>
         <p class="rotulo caminhos-titulo">${t('hero.caminhos')}</p>
         <nav class="caminhos" aria-label="${t('hero.caminhos')}">${[['sobre', 'nav.sobre', 'escudo'], ['projetos', 'nav.projetos', 'vista-grade'], ['trajetoria', 'nav.trajetoria', 'grafico'], ['competencias', 'nav.competencias', 'estrela'], ['contato', 'nav.contato', 'email'], ['cv', 'nav.cv', 'download']]
-          .map(([pg, k, ic], n) => `<a class="caminho ${n === 0 ? 'caminho-forte' : ''}" href="${pg === 'sobre' ? `${rota(d.lang)}#sobre` : rota(d.lang, pg)}" data-magnetico>${icone(ic)}<span>${t(k)}</span></a>`).join('')}</nav>
+          .map(([pg, k, ic], n) => `<a class="caminho ${n === 0 ? 'caminho-forte' : ''}" href="${['sobre', 'trajetoria', 'contato'].includes(pg) ? `${rota(d.lang)}#${pg}` : rota(d.lang, pg)}" data-magnetico>${icone(ic)}<span>${t(k)}</span></a>`).join('')}</nav>
       </div>
     </div>
   </div>
@@ -683,8 +683,16 @@ export function contato(d, t) {
 // contato na landing: o mesmo formulário e os mesmos canais da página, sem o vídeo de abertura
 export function contatoSecao(d, t) {
   return `<section class="contato-secao" id="contato" aria-labelledby="contato-titulo">
+  <div class="contato-hero">
+    <video class="contato-video" data-video-auto muted loop playsinline preload="metadata" poster="/media/entrevista-poster.webp" aria-hidden="true"><source src="/media/entrevista.mp4" type="video/mp4"></video>
+    <div class="contato-veu" aria-hidden="true"></div>
+    <div class="container contato-texto">
+      <p class="rotulo rotulo-claro">${t('contato.rotulo')}</p>
+      <h2 id="contato-titulo" class="pag-titulo" data-dividir>${t('pag.contato.titulo')}</h2>
+      <p>${t('pag.contato.sub')}</p>
+    </div>
+  </div>
   <div class="container">
-    <div class="secao-topo"><div><p class="rotulo">${t('contato.rotulo')}</p><h2 id="contato-titulo" data-dividir>${t('pag.contato.titulo')}</h2><p class="secao-sub">${t('pag.contato.sub')}</p></div></div>
     <div class="contato-grade">
       <form class="form" data-form novalidate aria-labelledby="form-titulo">
         <h3 id="form-titulo" class="titulo-secundario">${t('contato.formTitulo')}</h3>

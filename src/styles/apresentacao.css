@@ -279,3 +279,171 @@ dialog.ap { width: 100%; height: 100%; max-width: 100%; max-height: 100%; overfl
 @media (orientation: portrait) and (max-width: 700px) {
   dialog.ap { width: 100svh; height: 100vw; max-width: none; max-height: none; transform: rotate(90deg) translateY(-100vw); transform-origin: top left; }
 }
+
+/* ===== rodada 14/11: logos, balões da carreira, case com imagem à esquerda, galeria e feedback completo ===== */
+.ap-logo { width: 34px; height: 34px; flex: none; border-radius: 8px; object-fit: contain; background: #fff; padding: 3px; }
+.ap-logo-ini { display: grid; place-items: center; font-size: .7rem; font-weight: 700; color: #111; background: var(--ap-acento); padding: 0; }
+.ap-dica { align-self: end; font-size: .7rem; color: rgba(255,255,255,.5); }
+/* carreira: rótulo com logo, barra clicável e balão com os detalhes */
+.ap-gantt-linha { grid-template-columns: minmax(0, 250px) minmax(0, 1fr); }
+.ap-gantt-rot { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.ap-gantt-rot > span { display: grid; min-width: 0; }
+.ap-gantt-rot b, .ap-gantt-rot > span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ap-gantt-rot .ap-logo { width: 28px; height: 28px; }
+.ap-gantt-trilho { height: 26px; }
+.ap-gantt-barra { position: absolute; top: 0; height: 26px; min-width: 24px; display: flex; align-items: center; padding: 0 8px; border: 0; border-radius: 6px; cursor: pointer; overflow: hidden;
+  background: linear-gradient(90deg, var(--ap-acento), color-mix(in srgb, var(--ap-acento) 55%, #fff)); transition: filter .2s, transform .2s; }
+.ap-gantt-barra:hover, .ap-gantt-barra[aria-expanded="true"] { filter: brightness(1.12); transform: scaleY(1.12); }
+.ap-gantt-barra em { color: #111; font-weight: 700; }
+.ap-balao { position: absolute; z-index: 3; top: 34px; left: var(--x); width: max-content; max-width: 300px; display: grid; gap: 2px; padding: 10px 12px; border-radius: 10px;
+  background: #fff; color: #222; font-size: .76rem; line-height: 1.4; box-shadow: 0 14px 32px -10px rgba(0,0,0,.55); }
+.ap-balao[hidden] { display: none; }
+.ap-balao b { font-size: .86rem; color: #111; }
+.ap-balao::before { content: ""; position: absolute; top: -6px; left: 14px; border: 6px solid transparent; border-top: 0; border-bottom-color: #fff; }
+.ap-balao-esq { transform: translateX(-100%); }
+.ap-balao-esq::before { left: auto; right: 14px; }
+/* formação com logo */
+.ap-grupo li { display: flex; gap: 12px; align-items: center; }
+/* case: imagem à esquerda, em perspectiva, abre a galeria */
+.ap-caso { grid-template-columns: minmax(0, 400px) minmax(0, 1fr); align-items: center; }
+.ap-caso > .ap-prova { order: -1; }
+.ap-prova-ver { position: relative; display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; perspective: 900px; }
+.ap-prova-ver img { display: block; transform: rotateY(14deg) rotateX(4deg) rotateZ(-1.5deg); transform-origin: left center; box-shadow: 24px 26px 46px -18px rgba(0,0,0,.65); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.ap-prova-ver:hover img, .ap-prova-ver:focus-visible img { transform: none; }
+.ap-prova-mais { position: absolute; right: 10px; bottom: 10px; padding: 5px 10px; border-radius: 999px; font-size: .72rem; font-weight: 600; color: #111; background: var(--ap-acento); white-space: nowrap; }
+.ap-onde { display: inline-flex; align-items: center; gap: 10px; }
+.ap-onde .ap-logo { width: 30px; height: 30px; }
+/* feedbacks clicáveis */
+.ap-recs blockquote[data-rec] { cursor: pointer; transition: border-color .2s, transform .2s; }
+.ap-recs blockquote[data-rec]:hover, .ap-recs blockquote[data-rec]:focus-visible { border-color: var(--ap-acento); transform: translateY(-3px); outline: none; }
+.ap-logo-rec { margin-left: auto; width: 30px; height: 30px; }
+/* camadas por cima do slide: galeria e feedback completo */
+.ap-camada { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: 24px; background: rgba(0,0,0,.78); backdrop-filter: blur(4px); animation: ap-in .3s ease both; }
+.ap-camada-caixa { position: relative; max-width: min(1100px, 100%); max-height: 100%; }
+.ap-camada-fechar { position: absolute; top: -14px; right: -14px; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 0; background: #fff; color: #111; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,.4); }
+.ap-camada-fechar .ic { width: 18px; height: 18px; }
+.ap-lb { margin: 0; display: grid; gap: 10px; }
+.ap-lb img { max-width: 100%; max-height: calc(100dvh - 120px); border-radius: 10px; background: #fff; object-fit: contain; }
+.ap-lb figcaption { text-align: center; font-size: .85rem; color: rgba(255,255,255,.8); }
+.ap-lb-seta { position: absolute; top: 50%; left: -20px; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.92); color: #111; font-size: 1.2rem; cursor: pointer; }
+.ap-lb-dir { left: auto; right: -20px; }
+.ap-rec-completo { width: min(680px, calc(100vw - 48px)); max-height: calc(100dvh - 48px); overflow-y: auto; padding: 26px 28px; border-radius: 16px; background: #fff; color: #222; }
+.ap-rec-completo header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.ap-rec-completo header div { display: grid; font-size: .8rem; color: #555; }
+.ap-rec-completo header b { font-size: 1rem; color: #111; }
+.ap-rec-completo header .ap-logo { margin-left: auto; border: 1px solid #eee; }
+.ap-rec-completo blockquote { margin: 0; font-size: 1rem; line-height: 1.65; }
+@media (max-height: 500px), (orientation: portrait) and (max-width: 700px) {
+  .ap-gantt-linha { grid-template-columns: minmax(0, 150px) minmax(0, 1fr); }
+  .ap-gantt-rot .ap-logo { width: 20px; height: 20px; }
+  .ap-gantt-trilho, .ap-gantt-barra { height: 18px; }
+  .ap-balao { top: 24px; font-size: .64rem; max-width: 220px; }
+  .ap-caso { grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 12px; }
+  .ap-logo { width: 22px; height: 22px; }
+  .ap-prova-mais { font-size: .55rem; padding: 3px 7px; }
+  .ap-dica { display: none; }
+}
+
+/* balão sempre por cima: a linha com o balão aberto sobe de camada (as linhas animadas criam camadas próprias) */
+.ap-gantt-linha { position: relative; z-index: 1; }
+.ap-gantt-linha:has(.ap-balao:not([hidden])) { z-index: 50; }
+.ap-balao { z-index: 60; }
+
+/* sobre na apresentação: rosto no centro da moldura, foto do rótulo até o último cartão */
+.ap-sobre { align-items: stretch; }
+.ap-foto-caixa .ap-foto { object-position: 50% 0%; transform: scale(1.40); transform-origin: 50% 14%; }
+/* a animação de entrada fica na moldura; na foto ela prendia o transform e o zoom não aparecia */
+.ap-foto-caixa { animation: ap-in .8s cubic-bezier(.2,.7,.2,1) both; }
+.ap-foto-caixa .ap-foto { animation: none; }
+
+/* ===== Apresentação no celular (deitado ou girada), revisada em 14/11 =====
+   o slide ocupa o espaço entre o topo e a barra, centraliza o conteúdo numa coluna confortável
+   e, se não couber, rola só ele (a barra fica sempre visível) */
+@media (max-height: 500px), (orientation: portrait) and (max-width: 700px) {
+  .ap { grid-template-rows: minmax(0, 1fr) auto; }
+  .ap-slide { align-self: stretch; min-height: 0; max-height: none; width: min(820px, 100%); margin: 0 auto; padding: 14px 28px 12px;
+    overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; justify-content: safe center; scrollbar-width: thin; }
+  .ap-slide > * { flex: none; }
+  .ap-slide h2 { font-size: 1.35rem; line-height: 1.12; margin: 0 0 10px; max-width: 30ch; }
+  .ap-rotulo { margin: 0 0 6px; font-size: .62rem; }
+  .ap-sub { font-size: .82rem; }
+  /* listas numeradas mais baixas */
+  .ap-seq { gap: 6px; margin-top: 4px; }
+  .ap-seq li { padding: 7px 10px; gap: 10px; grid-template-columns: 22px minmax(0, 1fr); border-radius: 8px; }
+  .ap-seq-n { width: 22px; height: 22px; font-size: .66rem; }
+  .ap-seq b { font-size: .8rem; margin: 0; }
+  .ap-seq span:not(.ap-seq-n) { font-size: .74rem; line-height: 1.4; }
+  /* sobre: foto em pé com largura fixa (antes ficava fina) e texto ao lado */
+  .ap-sobre { grid-template-columns: 136px minmax(0, 1fr); gap: 18px; align-items: start; }
+  .ap-foto-caixa { min-height: 0; height: auto; aspect-ratio: 3 / 4; align-self: start; border-radius: 12px; }
+  .ap-foto-caixa .ap-foto { position: absolute; inset: 0; transform: scale(1.25); transform-origin: 50% 12%; object-position: 50% 0%; }
+  .ap-resumo { -webkit-line-clamp: 3; font-size: .74rem; line-height: 1.45; margin-bottom: 6px; }
+  /* carreira */
+  .ap-numeros { gap: 18px; margin: 0 0 8px; font-size: .66rem; }
+  .ap-numeros b { font-size: 1.25rem; }
+  .ap-gantt { gap: 3px; }
+  .ap-gantt-linha { grid-template-columns: minmax(0, 170px) minmax(0, 1fr); gap: 8px; }
+  .ap-gantt-rot { gap: 7px; font-size: .6rem; }
+  .ap-gantt-rot b { font-size: .7rem; }
+  .ap-gantt-rot .ap-logo { width: 20px; height: 20px; padding: 2px; border-radius: 5px; }
+  .ap-gantt-trilho, .ap-gantt-barra { height: 18px; }
+  .ap-gantt-barra { padding: 0 5px; }
+  .ap-gantt-barra em { font-size: .5rem; }
+  .ap-balao { top: 22px; font-size: .64rem; max-width: 230px; padding: 7px 9px; }
+  /* formação */
+  .ap-formacao { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .ap-grupo h3 { font-size: .6rem; margin-bottom: 5px; }
+  .ap-grupo ul { gap: 5px; }
+  .ap-grupo li { padding: 6px 8px; gap: 8px; }
+  .ap-grupo .ap-logo { width: 22px; height: 22px; }
+  .ap-grupo b { font-size: .72rem; }
+  .ap-grupo span { font-size: .62rem; }
+  /* case: imagem pequena à esquerda, passos à direita */
+  .ap-caso { grid-template-columns: 200px minmax(0, 1fr); gap: 16px; align-items: start; }
+  .ap-prova-ver img { transform: rotateY(10deg) rotateZ(-1deg); }
+  .ap-prova figcaption { font-size: .55rem; }
+  .ap-prova-mais { font-size: .55rem; padding: 3px 7px; right: 6px; bottom: 6px; }
+  .ap-onde .ap-logo { width: 20px; height: 20px; }
+  .ap-regra { font-size: .66rem; margin-top: 6px; padding-left: 8px; }
+  /* feedbacks em 3 colunas compactas */
+  .ap-recs { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .ap-recs blockquote { padding: 10px; }
+  .ap-recs p { font-size: .72rem; line-height: 1.4; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+  .ap-recs cite { font-size: .58rem; }
+  .ap-recs cite b { font-size: .66rem; }
+  .ap-avatar, .ap-logo-rec { width: 24px; height: 24px; }
+  /* galeria: 3 projetos numa linha */
+  .ap-galeria { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .ap-galeria li:nth-child(n+4) { display: none; }
+  .ap-galeria img { aspect-ratio: 16 / 10; }
+  .ap-galeria span { padding: 5px 7px; font-size: .62rem; }
+  .ap-galeria span em { display: none; }
+  /* escolha do tema e encerramento */
+  .ap-areas { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .ap-areas button { padding: 12px; font-size: .9rem; gap: 8px; }
+  .ap-areas span { width: 24px; height: 24px; font-size: .66rem; }
+  .ap-fim { grid-template-columns: minmax(0, 1fr) auto; gap: 20px; align-items: center; }
+  .ap-qr div { width: 120px; padding: 6px; }
+  .ap-contatos { gap: 5px; font-size: .78rem; margin-top: 8px; }
+  .ap-contato-ic { width: 24px; height: 24px; }
+  .ap-contato-ic .ic { width: 12px; height: 12px; }
+  /* capa: texto embaixo, sem rolar */
+  .ap-capa { justify-content: flex-end; overflow: hidden; }
+  /* barra mais baixa */
+  .ap-barra { padding: 6px 16px 8px; gap: 8px; font-size: .66rem; }
+  .ap-acoes { gap: 5px; }
+  .ap-acoes button { padding: 5px 9px; font-size: .66rem; min-width: 0; }
+  .ap-fonte button { min-width: 30px; }
+  /* camadas (galeria e feedback completo) */
+  .ap-camada { padding: 12px; }
+  .ap-lb img { max-height: calc(100dvh - 70px); }
+  .ap-rec-completo { padding: 16px 18px; }
+  .ap-rec-completo blockquote { font-size: .82rem; }
+}
+@media (max-height: 500px), (orientation: portrait) and (max-width: 700px) {
+  /* encerramento: texto e contatos à esquerda, QR à direita, rolando se precisar */
+  .ap-slide.ap-capa.ap-fim { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-content: center; gap: 20px; overflow-y: auto; text-align: left; }
+  .ap-fim .ap-nome-1 { font-size: 2.6rem; }
+  .ap-fim .ap-nome-2 { font-size: .9rem; }
+  .ap-fim .ap-nome-cargo { font-size: .55rem; }
+}

@@ -5,6 +5,7 @@ import QRCode from 'qrcode';
 import { SITE } from './config.js';
 import { alinharNome } from './lib/alinhar-nome.js';
 import { icone } from './render/comum.js';
+import { traduzirApresentacao } from './lib/apresentacao-i18n.js';
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -55,17 +56,53 @@ const slideSobre = (titulo, pilares, notas) => ({ fundo: 'aurora', html: () => `
 const slideMvv = notas => ({ fundo: 'aurora', html: () => `<p class="ap-rotulo">Quem sou</p><h2>Missão, visão e valores.</h2>${seq(mvv())}`, notas });
 
 // carreira: linha do tempo em barras (gráfico) com os números na mesma tela; itens = [início, fim ou null, empresa, papel]
-const slideCarreira = (titulo, itens, notas) => ({ fundo: 'ondas', html: () => {
-  const hoje = new Date().getFullYear();
-  const ini = Math.min(...itens.map(i => i[0])), fim = hoje + 1;
-  const x = a => ((a - ini) / (fim - ini)) * 100;
-  const marcas = Array.from({ length: fim - ini + 1 }, (_, k) => ini + k).filter(a => (a - ini) % 3 === 0);
-  if (hoje - marcas[marcas.length - 1] >= 2) marcas.push(hoje); // o ano atual só entra se não encostar na marca anterior
-  const empresas = new Set(itens.filter(i => !/técnico em|curso|formação/i.test(i[2] + ' ' + i[3])).map(i => i[2].split(' (')[0])).size;
+// ---- logos e detalhes (tudo vem do que já tá publicado no site) ----
+const semAc = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+// logo da empresa: primeiro nas experiências, depois na faixa de empresas da home
+function logoEmpresa(nome) {
+  if (!nome) return '';
+  const n = semAc(nome).split(/[\s(]/)[0];
+  const e = (dadosPagina().experiencias || []).find(x => x.logo && semAc(x.instituicao).includes(n));
+  if (e) return e.logo;
+  // na faixa de empresas o nome fica no texto do item, não no alt da imagem
+  const li = [...document.querySelectorAll('main li')].find(l => l.querySelector('img') && semAc(l.textContent).includes(n));
+  const img = li?.querySelector('img');
+  return img ? img.currentSrc || img.src : '';
+}
+const marca = (src, nome) => src ? `<img class="ap-logo" src="${esc(src)}" alt="" loading="lazy">` : `<span class="ap-logo ap-logo-ini" aria-hidden="true">${esc(iniciais(nome))}</span>`;
+const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+const mesAno = d => { if (!d) return 'hoje'; const [a, m] = String(d).split('-'); return `${MESES[+m - 1]} ${a}`; };
+const nomeCurto = org => (String(org).match(/\(([^)]+)\)/) || [])[1] || String(org).replace(/ Advogados Associados$/, '');
+// duração tipo "2 anos e 3 meses"
+function duracao(ini, fim) {
+  const [a1, m1] = String(ini).split('-').map(Number);
+  const f = fim ? String(fim).split('-').map(Number) : [new Date().getFullYear(), new Date().getMonth() + 1];
+  const tot = (f[0] - a1) * 12 + (f[1] - m1) + 1;
+  const a = Math.floor(tot / 12), m = tot % 12;
+  return [a ? `${a} ${a > 1 ? 'anos' : 'ano'}` : '', m ? `${m} ${m > 1 ? 'meses' : 'mês'}` : ''].filter(Boolean).join(' e ');
+}
+
+const slideCarreira = (titulo, notas) => ({ fundo: 'ondas', html: () => {
+  const exps = (dadosPagina().experiencias || []).filter(e => e.inicio).sort((x, y) => String(x.inicio).localeCompare(String(y.inicio)));
+  const agora = new Date(); const hoje = agora.getFullYear() + agora.getMonth() / 12;
+  const num = d => d ? +String(d).slice(0, 4) + (+String(d).slice(5, 7) - 1) / 12 : hoje;
+  const ini = Math.floor(Math.min(...exps.map(e => num(e.inicio)))), fim = Math.ceil(hoje + 0.05);
+  const x = v => ((v - ini) / (fim - ini)) * 100;
+  const marcas = []; for (let a = ini; a <= agora.getFullYear(); a += 2) marcas.push(a);
+  // anos de experiência = soma dos períodos trabalhados (sem contar os buracos e sem contar 2x o que se sobrepõe)
+  const per = exps.map(e => [num(e.inicio), num(e.fim)]).sort((p, q) => p[0] - q[0]);
+  let anos = 0, ate = -Infinity;
+  for (const [a, b] of per) { const c = Math.max(a, ate); if (b > c) anos += b - c; ate = Math.max(ate, b); }
+  const empresas = new Set(exps.map(e => semAc(nomeCurto(e.instituicao)).split(' ')[0])).size;
+  // barra fica pra cima do balão quando tá na metade da direita (senão sai da tela)
   return `<p class="ap-rotulo">Carreira</p><h2>${titulo}</h2>
-    <div class="ap-numeros"><span><b>${hoje - ini}</b> anos de experiência</span><span><b>${empresas}</b> empresas</span></div>
-    <div class="ap-gantt" role="img" aria-label="Linha do tempo da carreira">
-      ${itens.map(([a, b, org, papel], i) => `<div class="ap-gantt-linha" style="--i:${i + 1}"><span class="ap-gantt-rot"><b>${org}</b>${papel}</span><span class="ap-gantt-trilho"><i style="left:${x(a)}%;width:${x((b ?? hoje) + 1) - x(a)}%"><em>${b ? `${a} a ${b}` : `desde ${a}`}</em></i></span></div>`).join('')}
+    <div class="ap-numeros"><span><b>${Math.floor(anos)}</b> anos de experiência</span><span><b>${empresas}</b> empresas</span><span class="ap-dica">Toque numa barra para ver os detalhes</span></div>
+    <div class="ap-gantt">
+      ${exps.slice().reverse().map((e, k) => { const l = x(num(e.inicio)), w = Math.max(x(num(e.fim)) - l, 2.5); return `<div class="ap-gantt-linha" style="--i:${k + 1}">
+        <span class="ap-gantt-rot">${marca(e.logo, nomeCurto(e.instituicao))}<span><b>${esc(nomeCurto(e.instituicao))}</b>${esc(e.titulo || '')}</span></span>
+        <span class="ap-gantt-trilho"><button type="button" class="ap-gantt-barra" style="left:${l}%;width:${w}%" aria-expanded="false" data-balao><em>${w < 9 ? String(e.inicio).slice(0, 4) : e.fim ? `${String(e.inicio).slice(0, 4)} a ${String(e.fim).slice(0, 4)}` : `desde ${String(e.inicio).slice(0, 4)}`}</em></button>
+          <span class="ap-balao ${l > 50 ? 'ap-balao-esq' : ''}" style="--x:${l > 50 ? l + w : l}%" hidden><b>${esc(e.titulo || '')}</b><span>${esc(e.instituicao)}</span><span>${mesAno(e.inicio)} a ${mesAno(e.fim)} · ${duracao(e.inicio, e.fim)}</span><span>${[e.local, e.modalidade, e.regime].filter(Boolean).map(esc).join(' · ')}</span></span></span>
+      </div>`; }).join('')}
       <div class="ap-gantt-linha ap-gantt-eixo"><span></span><span class="ap-gantt-trilho">${marcas.map(a => `<small style="left:${x(a)}%">${a}</small>`).join('')}</span></div>
     </div>`;
 }, notas });
@@ -74,30 +111,38 @@ function provaHTML(prova) {
   if (!prova) return '';
   const d = dadosPagina(); const projetos = d.apresentacao || d.projetos || [];
   const p = prova.projeto ? projetos.find(x => x.slug === prova.projeto) : null;
-  const img = p?.galeria?.[0];
-  if (img) return `<figure class="ap-prova"><img src="${esc(img.url)}" alt="${esc(prova.rotulo || p.titulo)}" loading="lazy"><figcaption>${esc(prova.rotulo || p.titulo)}</figcaption></figure>`;
+  const gal = p?.galeria || [];
+  const k = Math.max(0, gal.findIndex(g => prova.foto && g.url.includes(prova.foto)));
+  const img = gal[k];
+  if (img) return `<figure class="ap-prova"><button type="button" class="ap-prova-ver" data-galeria="${esc(p.slug)}" data-inicio="${k}" aria-label="Ver imagens de ${esc(p.titulo)}"><img src="${esc(img.url)}" alt="${esc(prova.rotulo || p.titulo)}" loading="lazy"><span class="ap-prova-mais">${gal.length > 1 ? `Ver ${gal.length} imagens` : 'Ampliar'}</span></button><figcaption>${esc(prova.rotulo || p.titulo)}</figcaption></figure>`;
   if (prova.referencia) return `<figure class="ap-prova ap-prova-ref"><blockquote>${esc(prova.referencia.texto)}</blockquote><figcaption>${esc(prova.referencia.titulo)}</figcaption></figure>`;
   const recs = (d.recomendacoes || []).filter(r => prova.empresa && r.empresa && r.empresa.toLowerCase().includes(prova.empresa.toLowerCase()));
   const rec = recs[prova.indice || 0];
   if (rec) return `<figure class="ap-prova ap-prova-rec"><blockquote>"${esc(recorte(rec.mensagem, 220))}"</blockquote><figcaption>${esc(rec.nome)}${rec.cargo ? ` · ${esc(rec.cargo)}` : ''}</figcaption></figure>`;
   return '';
 }
+function ondeHTML(rotulo) {
+  const nome = rotulo.split('·').pop().trim();
+  const lugar = ONDE[nome] || [nome];
+  const logo = lugar.map(logoEmpresa).find(Boolean);
+  return `<span class="ap-onde">${marca(logo, lugar[0])}${esc(lugar.join(' · '))}</span>`;
+}
 const slideCaso = (areas, video, rotulo, titulo, problema, solucao, impacto, regra, notas, prova) => ({ areas, video,
   html: `<p class="ap-rotulo">Case de sucesso</p><h2>${titulo}</h2>
-    <div class="ap-caso"><div>${caso(rotulo.split('·').pop().trim(), problema, solucao, impacto)}${regra && !prova?.referencia ? `<p class="ap-regra">${regra}</p>` : ''}</div>${provaHTML(prova)}</div>`, notas });
+    <div class="ap-caso"><div>${caso(ondeHTML(rotulo), problema, solucao, impacto)}${regra && !prova?.referencia ? `<p class="ap-regra">${regra}</p>` : ''}</div>${provaHTML(prova)}</div>`, notas });
 // formação: técnico, graduação, pós e certificações na mesma grade de cartões
 const ano = s => (s ? String(s).slice(0, 4) : '');
 const slideFormacao = notas => ({ fundo: 'aurora', html: () => {
   const d = dadosPagina();
   const form = (d.formacoes || []).slice().sort((a, b) => String(b.inicio).localeCompare(String(a.inicio)));
-  const item = (t, sub, i) => `<li style="--i:${i + 1}"><b>${esc(t)}</b><span>${esc(sub)}</span></li>`;
+  const item = (t, sub, i, logo, nome) => `<li style="--i:${i + 1}">${nome ? marca(logo, nome) : ''}<div><b>${esc(t)}</b><span>${esc(sub)}</span></div></li>`;
   const semAcento = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   const tipoLabel = v => { const s = semAcento(v); return /lato|pos|especializ|mba/.test(s) ? 'Pós-graduação' : /bacharel|gradua|licenciatura|tecnologo/.test(s) ? 'Graduação' : /tecnic/.test(s) ? 'Curso técnico' : /livre/.test(s) ? 'Curso livre' : String(v || ''); };
   const periodo = f => { const a = ano(f.inicio), b = f.atual ? 'atual' : ano(f.fim); return !b || b === a ? a : `${a} → ${b}`; };
   const cursos = form.map(f => semAcento(f.curso));
   const certs = (d.certificacoes || []).filter(c => !cursos.some(cur => cur && semAcento(c.nome).includes(cur))).sort((a, b) => String(b.data).localeCompare(String(a.data)));
   const grupos = [
-    form.length ? `<div class="ap-grupo"><h3>Formação acadêmica</h3><ul>${form.map((f, i) => item(f.curso, [tipoLabel(f.tipo), f.instituicao, periodo(f)].filter(Boolean).join(' · '), i)).join('')}</ul></div>` : '',
+    form.length ? `<div class="ap-grupo"><h3>Formação acadêmica</h3><ul>${form.map((f, i) => item(f.curso, [tipoLabel(f.tipo), f.instituicao, periodo(f), f.modalidade].filter(Boolean).join(' · '), i, f.logo, f.instituicao)).join('')}</ul></div>` : '',
     certs.length ? `<div class="ap-grupo"><h3>Cursos e certificações</h3><ul>${certs.map((c, i) => item(c.nome, [c.instituicao, ano(c.data)].filter(Boolean).join(' · '), i)).join('')}</ul></div>` : '',
   ].filter(Boolean).join('');
   return `<p class="ap-rotulo">Formação</p><h2>Técnico, graduação e cursos.</h2>
@@ -105,7 +150,7 @@ const slideFormacao = notas => ({ fundo: 'aurora', html: () => {
 }, notas });
 const slideFeedbacks = (titulo, notas) => ({ video: V.entrevista, html: () => `
       <p class="ap-rotulo">Feedbacks</p><h2>${titulo}</h2>
-      <div class="ap-recs">${feedbacks().map((r, i) => `<blockquote style="--i:${i + 1}"><p>“${esc(recorte(r.mensagem, 200))}”</p><footer>${avatar(r)}<cite><b>${esc(r.nome)}</b>${[r.cargo, r.empresa].filter(Boolean).map(esc).join(' · ')}</cite></footer></blockquote>`).join('')}</div>`, notas });
+      <div class="ap-recs">${feedbacks().map((r, i) => `<blockquote style="--i:${i + 1}" role="button" tabindex="0" data-rec="${i}" aria-label="Ler o feedback completo de ${esc(r.nome)}"><p>“${esc(recorte(r.mensagem, 200))}”</p><footer>${avatar(r)}<cite><b>${esc(r.nome)}</b>${[r.cargo, r.empresa].filter(Boolean).map(esc).join(' · ')}</cite>${logoEmpresa(r.empresa) ? `<img class="ap-logo ap-logo-rec" src="${esc(logoEmpresa(r.empresa))}" alt="${esc(r.empresa)}">` : ''}</footer></blockquote>`).join('')}</div>`, notas });
 
 // legenda da foto: o texto cadastrado ou, na falta dele, o nome do arquivo (desktop-02-monitoramento -> Monitoramento)
 const ACENTOS = { Inicio: 'Início', Questao: 'Questão', Configuracoes: 'Configurações', Descricao: 'Descrição', Relatorio: 'Relatório' };
@@ -124,12 +169,15 @@ function fotosProjetos(area) {
     .filter(Boolean);
 }
 // contatos publicados na página (e-mail, WhatsApp, LinkedIn, GitHub), mais o site
+// +55 (19) 99591-0737
+const fone = n => { const d = String(n).replace(/\D/g, ''); return d.length >= 12 ? `+${d.slice(0, 2)} (${d.slice(2, 4)}) ${d.slice(4, -4)}-${d.slice(-4)}` : d; };
+const semHttp = u => String(u).replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 function contatos() {
   const vistos = new Set();
   const lista = [...document.querySelectorAll('a[href^="mailto:"], a[href*="wa.me/"], a[href*="linkedin.com"], a[href*="github.com"]')]
-    .map(a => a.href.startsWith('mailto:') ? [a.href, a.href.slice(7), 'email'] : a.href.includes('wa.me') ? [a.href, 'WhatsApp', 'whatsapp'] : a.href.includes('github') ? [a.href, 'GitHub', 'github'] : [a.href, 'LinkedIn', 'linkedin'])
+    .map(a => a.href.startsWith('mailto:') ? [a.href, a.href.slice(7), 'email'] : a.href.includes('wa.me') ? [a.href, fone(a.href.split('wa.me/')[1]), 'whatsapp'] : a.href.includes('github') ? [a.href, semHttp(a.href), 'github'] : [a.href, semHttp(a.href), 'linkedin'])
     .filter(([h]) => !vistos.has(h) && vistos.add(h));
-  return [...lista, [SITE.url, SITE.url.replace('https://', ''), 'globo']];
+  return [...lista, [SITE.url, semHttp(SITE.url), 'globo']];
 }
 
 // Áreas: o tema escolhido no início define os casos, as imagens e a profissão da capa
@@ -137,6 +185,18 @@ const AREAS = {
   qa: { nome: 'QA', cargo: 'QA Engineer', projetos: ['qa-toolbar', 'stark-hub', 'qa-cnk-issue-generator', 'simulador-ctfl', 'playwright-automation'], destaques: ['qa-toolbar', 'stark-hub', 'qa-cnk-issue-generator', 'simulador-ctfl'] },
   dev: { nome: 'Desenvolvimento', cargo: 'Desenvolvedor web', projetos: ['condonotto', 'evangeligo', 'zunido', 'achadubom'], destaques: ['condonotto', 'evangeligo', 'zunido', 'achadubom'] },
   squidev: { nome: 'Squidev', cargo: 'Fundador da Squidev', projetos: ['squidev', 'instrutora-jaqueline', 'ipvida', 'fofuxa-fashion'], destaques: ['squidev', 'instrutora-jaqueline', 'ipvida', 'fofuxa-fashion'] },
+};
+
+// onde cada solução rodou (o logo sai da empresa listada primeiro)
+const ONDE = {
+  'QA Toolbar Sandbox': ['Cinemark LATAM', 'MB Labs'],
+  'Cinemark (MB Labs)': ['Cinemark LATAM', 'MB Labs'],
+  'Stark Hub': ['MB Labs', 'projeto Cinemark LATAM'],
+  'Condonotto': ['Squidev', 'produto próprio'],
+  'EvangeliGO': ['Squidev', 'produto próprio'],
+  'Zunido': ['Squidev', 'produto próprio'],
+  'Squidev': ['Squidev'],
+  'Instrutora Jaqueline': ['Squidev', 'cliente Instrutora Jaqueline'],
 };
 
 const SLIDES = (area) => [
@@ -155,24 +215,17 @@ const SLIDES = (area) => [
   slideMvv('Fale da missão com suas palavras e dê um exemplo real de cada valor no trabalho. Isso responde "como você trabalha?" antes da pergunta.'),
 
   // 3. Carreira: linha do tempo e números na mesma tela
-  slideCarreira('Do suporte técnico ao QA e à própria marca.', [
-    [2016, 2019, 'Crespo e Caires', 'Analista de Suporte Técnico'],
-    [2019, 2020, 'Realiza Software', 'Desenvolvedor de Software'],
-    [2020, 2022, 'SiDi', 'Quality Assurance Test'],
-    [2022, 2023, 'Americanas S.A.', 'Técnico de Garantia de Qualidade'],
-    [2024, null, 'MB Labs', 'Quality Assurance (Cinemark)'],
-    [2025, null, 'Squidev', 'Fundador e desenvolvedor'],
-  ], 'Conte a carreira como uma história: suporte deu empatia com o usuário, desenvolvimento deu base técnica, QA juntou as duas coisas. Não leia as datas, comente o aprendizado de cada etapa.'),
+  slideCarreira('Do suporte técnico ao QA e à própria marca.', 'Conte a carreira como uma história: suporte deu empatia com o usuário, desenvolvimento deu base técnica, QA juntou as duas coisas. Não leia as datas, comente o aprendizado de cada etapa.'),
 
   // 3b. Formação
   slideFormacao('Diga o que cada formação somou: o técnico deu base prática, a graduação deu fundamento, a pós especializou em teste de software. Cite um curso que mudou sua forma de trabalhar.'),
 
   // 4. Casos reais por área
-  slideCaso(['qa'], V.entrevista, 'Caso real · QA Toolbar Sandbox', 'O kit do QA a um clique.',
-    'Troca constante de ambiente, conta de teste e massa de dados durante os testes.',
-    'Criei uma extensão do Chrome que reúne ambientes, contas de teste e atalhos de produtividade.',
-    'Publicada na Chrome Web Store; menos tempo procurando dado e ambiente, mais tempo testando.',
-    '', 'Comece pela dor do time, depois mostre a solução e o resultado. Diga como garantiu segurança dos dados de teste.',
+  slideCaso(['qa'], V.entrevista, 'Caso real · QA Toolbar Sandbox', 'Ambiente e país trocados em um clique.',
+    'No projeto Cinemark, cada teste exigia trocar de ambiente (dev, homologação, produção) e conferir o mesmo fluxo em vários países, cada um com suas contas e dados.',
+    'Criei a QA Toolbar: extensão do Chrome que reconhece o ambiente e guarda clientes, países, contas de teste e macros, além de preencher formulários com dados falsos.',
+    'Troca de ambiente e de país em um clique, menos erro de massa de dados e mais tempo testando. Virou produto publicado na Chrome Web Store.',
+    '', 'Comece pela dor: quantos ambientes e países você conferia por história. Depois mostre a barra funcionando e conte que virou produto, com planos e painel.',
     { projeto: 'qa-toolbar', rotulo: 'QA Toolbar Sandbox na Chrome Web Store' }),
   slideCaso(['qa'], V.escritorio, 'Caso real · Cinemark (MB Labs)', 'Bugs padronizados do primeiro registro.',
     'Bugs e incidentes chegavam com informações faltando, e o time perdia tempo pedindo detalhes.',
@@ -180,12 +233,12 @@ const SLIDES = (area) => [
     'Registros completos e no mesmo padrão, prontos para o time de desenvolvimento agir.',
     '', 'Mostre que QA também melhora processo. Se perguntarem, fale de como alinhou o padrão com o time.',
     { projeto: 'qa-cnk-issue-generator', rotulo: 'QA CNK Issue Generator' }),
-  slideCaso(['qa'], V.entrevista, 'Caso real · Stark Hub', 'Governança e QA sobre o Azure DevOps.',
-    'Acompanhamento de qualidade espalhado entre quadros, planilhas e mensagens.',
-    'Plataforma que lê o fluxo real do Azure DevOps e organiza governança, QA e produtividade.',
-    'Visão única do andamento, pronta para ser escalada para outros times.',
-    'Também no portfólio: simulador do exame ISTQB CTFL 4.0 e suíte end-to-end com Playwright.', 'Use este caso para falar de visão de processo e métricas de qualidade.',
-    { projeto: 'stark-hub', rotulo: 'Stark Hub · monitoramento' }),
+  slideCaso(['qa'], V.entrevista, 'Caso real · Stark Hub', 'O nosso "Jira", sem mexer no Azure DevOps.',
+    'O Azure DevOps da empresa tem regras rígidas e vários parceiros no mesmo projeto: o time não podia criar campos, painéis nem fluxos próprios, e a informação ficava espalhada entre board, planilhas e Slack.',
+    'Construí o Stark Hub, que lê o Azure DevOps por um backend seguro e soma o que faltava: Quality Board, Meus Itens para Dev e QA, governança com horas x meta, colaboradores e importação de work items.',
+    'Dev, QA e gestão com ferramentas sob medida e uma visão única de qualidade, horas e pessoas, sem interferir no Azure DevOps da empresa.',
+    'Acesso por perfil (Dev, QA e Gestão) e nenhum token exposto no navegador.', 'Explique o "porquê": regras do Azure e muitos parceiros. Mostre um módulo por perfil: Meus Itens (Dev), Quality Board (QA) e Governança (gestão).',
+    { projeto: 'stark-hub', foto: '02-qualidade-desktop', rotulo: 'Stark Hub · Quality Board' }),
   slideCaso(['dev'], V.escritorio, 'Caso real · Condonotto', 'O condomínio inteiro no navegador.',
     'Encomendas, visitas e avisos controlados em papel e em grupos de mensagem.',
     'App web com encomendas pela foto, visitas, avisos, enquetes e mapa do condomínio.',
@@ -337,6 +390,7 @@ export function abrir(aoFechar = () => {}) {
       <i class="ap-progresso"></i>
     </footer>`;
   document.body.appendChild(raiz);
+  const pararTraducao = traduzirApresentacao(raiz); // EN/ES: troca os textos fixos conforme o idioma da página
   raiz.showModal();
   raiz.addEventListener('cancel', e => { e.preventDefault(); fechar(); });
   document.documentElement.classList.add('ap-aberta');
@@ -395,6 +449,7 @@ export function abrir(aoFechar = () => {}) {
 
   function fechar() {
     if (!raiz) return;
+    pararTraducao();
     clearInterval(relogio);
     revelar?.();
     soltarNome();
@@ -429,7 +484,39 @@ export function abrir(aoFechar = () => {}) {
     $('[data-ap="prox"]').focus();
   }
 
+  // ---- camadas (galeria e feedback completo) ----
+  const fecharCamada = () => { const c = raiz.querySelector('.ap-camada'); if (!c) return false; c.remove(); return true; };
+  function abrirCamada(html) {
+    fecharCamada();
+    const c = document.createElement('div');
+    c.className = 'ap-camada';
+    c.innerHTML = `<div class="ap-camada-caixa" role="dialog" aria-modal="true">${html}<button type="button" class="ap-camada-fechar" data-camada-fechar aria-label="Fechar">${icone('fechar')}</button></div>`;
+    raiz.appendChild(c);
+    c.querySelector('[data-camada-fechar]').focus();
+    return c;
+  }
+  function verGaleria(slug, k) {
+    const d = dadosPagina(); const p = (d.apresentacao || d.projetos || []).find(x => x.slug === slug);
+    const fotos = p?.galeria || []; if (!fotos.length) return;
+    const c = abrirCamada(`<figure class="ap-lb"><img alt=""><figcaption></figcaption></figure>${fotos.length > 1 ? '<button type="button" class="ap-lb-seta" data-lb="-1" aria-label="Imagem anterior">←</button><button type="button" class="ap-lb-seta ap-lb-dir" data-lb="1" aria-label="Próxima imagem">→</button>' : ''}`);
+    c.classList.add('ap-camada-galeria');
+    const pinta = () => { const f = fotos[k]; c.querySelector('img').src = f.url; c.querySelector('figcaption').textContent = `${f.legenda || p.titulo} · ${k + 1} de ${fotos.length}`; };
+    c.mover = passo => { k = (k + passo + fotos.length) % fotos.length; pinta(); };
+    pinta();
+  }
+  function verFeedback(r) {
+    const logo = logoEmpresa(r.empresa);
+    abrirCamada(`<div class="ap-rec-completo"><header>${avatar(r)}<div><b>${esc(r.nome)}</b><span>${[r.cargo, r.empresa].filter(Boolean).map(esc).join(' · ')}</span></div>${logo ? `<img class="ap-logo" src="${esc(logo)}" alt="${esc(r.empresa)}">` : ''}</header><blockquote>${esc(r.mensagem).replace(/\n+/g, '<br><br>')}</blockquote></div>`);
+  }
+  raiz.addEventListener('cancel', e => { if (fecharCamada()) { e.preventDefault(); e.stopImmediatePropagation(); } }, true);
+
   function teclas(e) {
+    const camada = raiz.querySelector('.ap-camada');
+    if (camada) {
+      if (camada.mover && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) { e.preventDefault(); camada.mover(e.key === 'ArrowRight' ? 1 : -1); }
+      return; // Esc fica com o evento cancel do dialog
+    }
+    if (e.key === 'Enter' && e.target.closest?.('[data-rec]')) { e.preventDefault(); verFeedback(feedbacks()[+e.target.closest('[data-rec]').dataset.rec]); return; }
     if (!slides.length) {
       const area = { 1: 'qa', 2: 'dev', 3: 'squidev' }[e.key];
       if (area) iniciar(area); else if (e.key === 'Escape') fechar();
@@ -451,6 +538,24 @@ export function abrir(aoFechar = () => {}) {
   raiz.addEventListener('click', e => {
     const area = e.target.closest('[data-area]')?.dataset.area;
     if (area) { iniciar(area); return; }
+    const camada = e.target.closest('.ap-camada');
+    if (camada) {
+      if (e.target.closest('[data-camada-fechar]') || e.target === camada) fecharCamada();
+      else if (e.target.closest('[data-lb]')) camada.mover(+e.target.closest('[data-lb]').dataset.lb);
+      return;
+    }
+    const barra = e.target.closest('[data-balao]');
+    if (barra) {
+      const balao = barra.nextElementSibling, abre = balao.hidden;
+      raiz.querySelectorAll('.ap-balao').forEach(b => { b.hidden = true; b.previousElementSibling.setAttribute('aria-expanded', 'false'); });
+      balao.hidden = !abre; barra.setAttribute('aria-expanded', String(abre));
+      return;
+    }
+    if (!e.target.closest('.ap-balao')) raiz.querySelectorAll('.ap-balao').forEach(b => { b.hidden = true; });
+    const gal = e.target.closest('[data-galeria]');
+    if (gal) { verGaleria(gal.dataset.galeria, +gal.dataset.inicio || 0); return; }
+    const rec = e.target.closest('[data-rec]');
+    if (rec) { verFeedback(feedbacks()[+rec.dataset.rec]); return; }
     const acao = e.target.closest('[data-ap]')?.dataset.ap;
     if (acao === 'prox') { if (revelar && raiz.classList.contains('ap-so-video')) { revelar(); revelar = null; } else mostrar(i + 1); }
     else if (acao === 'ant') mostrar(i - 1);
@@ -467,7 +572,7 @@ export function abrir(aoFechar = () => {}) {
     toque = { x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now() };
   }, { passive: true });
   raiz.addEventListener('touchend', e => {
-    if (!toque || !slides.length || e.target.closest('button, a, [data-area], .ap-notas')) { toque = null; return; }
+    if (!toque || !slides.length || e.target.closest('button, a, [data-area], .ap-notas, .ap-camada, [data-rec], .ap-balao')) { toque = null; return; }
     const f = e.changedTouches[0];
     const girada = matchMedia('(orientation: portrait) and (max-width: 700px)').matches;
     const [d, cruz, pos, tam] = girada ? [f.clientY - toque.y, f.clientX - toque.x, f.clientY, innerHeight] : [f.clientX - toque.x, f.clientY - toque.y, f.clientX, innerWidth];

@@ -310,102 +310,90 @@
     "dev",
     "vibe"
    ],
-   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/capa.webp?v=mvqshbc5",
+   "imagem_url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/capa.webp?v=mwetkeg4",
    "galeria": [
     {
-     "h": 789,
-     "w": 1438,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-01-inicio.webp",
+     "h": 1000,
+     "w": 1600,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/01-inicio-desktop.webp?v=mwetkasd",
+     "legenda": "Início: atalhos por perfil (Dev, QA e Gestão) e o resumo do dia.",
      "dispositivo": "desktop"
     },
     {
-     "h": 789,
-     "w": 1438,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-02-monitoramento.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1438,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-03-daily.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1438,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-04-quality-board.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1438,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-05-novo-item.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1438,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-06-importar-itens.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1438,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-07-equipe.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 1438,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/desktop-08-painel-executivo.webp",
-     "dispositivo": "desktop"
-    },
-    {
-     "h": 789,
-     "w": 488,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-01-inicio.webp",
+     "h": 1688,
+     "w": 780,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/01-inicio-mobile.webp?v=mwetkb19",
+     "legenda": "Início: atalhos por perfil (Dev, QA e Gestão) e o resumo do dia.",
      "dispositivo": "mobile"
     },
     {
-     "h": 789,
-     "w": 488,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-02-monitoramento.webp",
+     "h": 1000,
+     "w": 1600,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/02-qualidade-desktop.webp?v=mwetkbaz",
+     "legenda": "Quality Board: work items em fluxo de QA, status por ambiente e país e métricas por QA.",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 1688,
+     "w": 780,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/02-qualidade-mobile.webp?v=mwetkbkr",
+     "legenda": "Quality Board: work items em fluxo de QA, status por ambiente e país e métricas por QA.",
      "dispositivo": "mobile"
     },
     {
-     "h": 789,
-     "w": 488,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-03-daily.webp",
+     "h": 1000,
+     "w": 1600,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/03-kanban-daily-desktop.webp?v=mwetkbvr",
+     "legenda": "Kanban da daily: o andamento do time num quadro só, sem depender do board do Azure.",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 1688,
+     "w": 780,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/03-kanban-daily-mobile.webp?v=mwetkc55",
+     "legenda": "Kanban da daily: o andamento do time num quadro só, sem depender do board do Azure.",
      "dispositivo": "mobile"
     },
     {
-     "h": 789,
-     "w": 488,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-04-quality-board.webp",
+     "h": 1000,
+     "w": 1600,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/04-itens-desktop.webp?v=mwetkcef",
+     "legenda": "Meus Itens: cards do Dev ou do QA, com responsável e resultado dos testes.",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 1688,
+     "w": 780,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/04-itens-mobile.webp?v=mwetkcmo",
+     "legenda": "Meus Itens: cards do Dev ou do QA, com responsável e resultado dos testes.",
      "dispositivo": "mobile"
     },
     {
-     "h": 789,
-     "w": 488,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-05-novo-item.webp",
+     "h": 1000,
+     "w": 1600,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/05-dashboard-desktop.webp?v=mwetkcwc",
+     "legenda": "Governança: horas x meta, cards sem apontamento e relatório executivo para a gestão.",
+     "dispositivo": "desktop"
+    },
+    {
+     "h": 1688,
+     "w": 780,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/05-dashboard-mobile.webp?v=mwetkd4f",
+     "legenda": "Governança: horas x meta, cards sem apontamento e relatório executivo para a gestão.",
      "dispositivo": "mobile"
     },
     {
-     "h": 789,
-     "w": 488,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-06-importar-itens.webp",
-     "dispositivo": "mobile"
+     "h": 1000,
+     "w": 1600,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/06-colaboradores-desktop.webp?v=mwetkddf",
+     "legenda": "Colaboradores: papéis, avatares e apelidos que cruzam o Azure com as evidências de teste.",
+     "dispositivo": "desktop"
     },
     {
-     "h": 789,
-     "w": 488,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-07-equipe.webp",
-     "dispositivo": "mobile"
-    },
-    {
-     "h": 789,
-     "w": 488,
-     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/mobile-08-painel-executivo.webp",
+     "h": 1688,
+     "w": 780,
+     "url": "https://rncpbkzszbbqqipkqcgs.supabase.co/storage/v1/object/public/media/projetos/stark-hub/06-colaboradores-mobile.webp?v=mwetkdle",
+     "legenda": "Colaboradores: papéis, avatares e apelidos que cruzam o Azure com as evidências de teste.",
      "dispositivo": "mobile"
     }
    ],

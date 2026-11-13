@@ -247,12 +247,7 @@ body:has(.nav.escondida) .barra-filtros { top: 0; }
 .nenhum { padding: 48px 0; color: var(--tinta-2); text-align: center; }
 
 /* ---------- Modal ---------- */
-.modal { width: 100%; max-width: 100%; height: 100%; max-height: 100%; margin: 0; padding: 0; border: 0; background: var(--bg); color: var(--tinta); overscroll-behavior: contain; }
-.modal::backdrop { background: rgba(8,8,10,.6); backdrop-filter: blur(6px); }
-.modal[open] { animation: modal-entra .45s var(--curva); }
 @keyframes modal-entra { from { opacity: 0; transform: translateY(24px); } }
-.modal-caixa { position: relative; padding: 20px var(--margem) 48px; }
-.modal-fechar { position: sticky; top: 12px; float: right; z-index: 3; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: var(--tinta); color: var(--bg); }
 .modal-cabeca { padding: 8px 0 20px; }
 .modal-cabeca h2 { font-size: clamp(2rem, 1.4rem + 2.4vw, 3.4rem); margin: 10px 0 8px; }
 .modal-corpo { display: grid; gap: 32px; margin-top: 28px; }
@@ -263,8 +258,6 @@ body:has(.nav.escondida) .barra-filtros { top: 0; }
 .modal-bloco .rotulo { margin-bottom: 10px; }
 .modal-lado .acoes { margin-top: 28px; }
 @media (min-width: 960px) {
-  .modal { width: min(1180px, calc(100% - 64px)); height: auto; max-height: calc(100svh - 64px); margin: auto; border-radius: var(--raio-g); }
-  .modal-caixa { padding: 32px 48px 56px; }
   .modal-corpo { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 56px; }
 }
 .galeria { margin-top: 8px; }
@@ -687,10 +680,7 @@ details.linha-desc[open] summary { display: none; }
 @media (max-width: 599px) { .recs-mais .btn { width: 100%; } .recs-acoes { width: 100%; justify-content: space-between; } }
 
 /* modal: rola por dentro (Lenis ignora com data-lenis-prevent); textos curtos em modal estreito */
-.modal { overflow-y: auto; }
 @media (min-width: 960px) {
-  .modal.modal-estreito { width: min(820px, calc(100% - 64px)); }
-  .modal.modal-estreito .modal-caixa { padding: 32px 40px 40px; }
 }
 .modal-estreito .rec-modal { max-width: none; }
 
@@ -1137,10 +1127,6 @@ details.linha-desc[open] summary { display: none; }
 @media (max-width: 600px) { .visor-barra button { width: 40px; height: 40px; } .visor-barra .mono { min-width: 3.4em; } }
 
 /* modal: entra subindo e sai descendo; o fundo acompanha */
-.modal[open] { animation: modal-entra .45s var(--curva); }
-.modal[open]::backdrop { animation: fundo-entra .4s ease; }
-.modal.fechando { animation: modal-sai .26s ease-in forwards; }
-.modal.fechando::backdrop { animation: fundo-sai .26s ease-in forwards; }
 @keyframes modal-entra { from { opacity: 0; transform: translateY(28px) scale(.98); } }
 @keyframes modal-sai { to { opacity: 0; transform: translateY(24px) scale(.98); } }
 @keyframes fundo-entra { from { opacity: 0; } }
@@ -1304,7 +1290,6 @@ img { transition: opacity .6s ease; }
   .destaque-corpo { padding: 12px 14px 14px; gap: 6px; }
   .destaque-corpo h3 { font-size: 1.08rem; }
   .btn { min-height: 44px; padding: 10px 18px; font-size: .92rem; }
-  .modal-caixa { padding: 14px var(--margem) 36px; }
   .modal-cabeca h2 { font-size: 1.8rem; }
   /* modal da trajetória: logo em cima, texto na largura toda */
   .carreira-cabeca { flex-direction: column; align-items: flex-start; gap: 10px; padding-right: 52px; }
@@ -1362,14 +1347,8 @@ img { transition: opacity .6s ease; }
 /* o <dialog> modal tem inset 0: com height auto ele esticava até o fim da tela; fit-content mede o conteúdo */
 @media (min-width: 960px) { .modal { height: fit-content; } }
 /* o botão de fechar fica preso no canto sem ocupar uma coluna (antes o float empurrava o conteúdo e sobrava espaço à direita) */
-.modal-fechar { float: none; position: sticky; top: 14px; margin: 0 0 -44px auto; box-shadow: 0 6px 18px -6px rgb(0 0 0 / .35); transition: transform .3s var(--curva), background-color .2s; }
-.modal-fechar:hover { transform: rotate(90deg); }
-.modal-fechar:focus-visible { outline: 2px solid var(--acento); outline-offset: 3px; }
-.modal-fechar:focus:not(:focus-visible) { outline: none; }
 .modal-cabeca, .carreira-cabeca, .skill-cabeca, .rec-modal .autor, .conquista-detalhe > div:not(.medalha) > :first-child, .form-rec > h2 { padding-right: 56px; }
 .modal-cabeca { border-bottom: 1px solid var(--linha); padding-bottom: 18px; margin-bottom: 4px; }
-.modal-caixa { padding-top: 22px; }
-@media (min-width: 960px) { .modal-caixa { padding: 28px 44px 44px; } .modal.modal-estreito .modal-caixa { padding: 28px 36px 36px; } }
 
 /* recomendação: autor em destaque e texto como citação */
 .rec-modal { gap: 16px; }
@@ -1389,8 +1368,6 @@ img { transition: opacity .6s ease; }
 
 /* celular: o modal ocupa a tela, com cabeçalho mais enxuto */
 @media (max-width: 959px) {
-  .modal-caixa { padding: 16px var(--margem) 32px; }
-  .modal-fechar { width: 40px; height: 40px; margin-bottom: -40px; top: 10px; }
 }
 
 /* ================= Trajetória no celular: painel de BI mobile ================= */
@@ -1593,3 +1570,44 @@ img { transition: opacity .6s ease; }
 .trajetoria-secao .trajetoria { padding-top: 0; }
 .secao-sub { color: var(--tinta-2); max-width: 62ch; margin: 6px 0 0; }
 .contato-secao .contato-grade { margin-top: 18px; }
+
+/* ===== Modal refeito do zero (nov/2026): um bloco só, X alinhado com a borda direita do conteúdo ===== */
+.modal { box-sizing: border-box; width: 100%; max-width: 100%; height: 100%; max-height: 100%; margin: 0; padding: 0; border: 0; background: var(--bg); color: var(--tinta); overflow-y: auto; overscroll-behavior: contain; }
+.modal::backdrop { background: rgba(8,8,10,.62); backdrop-filter: blur(6px); }
+.modal[open] { animation: modal-entra .4s var(--curva); }
+.modal[open]::backdrop { animation: fundo-entra .35s ease; }
+.modal.fechando { animation: modal-sai .24s ease-in forwards; }
+.modal.fechando::backdrop { animation: fundo-sai .24s ease-in forwards; }
+.modal-caixa { position: relative; padding: 16px var(--margem) 36px; }
+/* o X flutua à direita do conteúdo (mesma borda dos campos) e acompanha a rolagem */
+.modal-fechar { position: sticky; top: 0; z-index: 5; float: right; width: 40px; height: 40px; margin: 0 0 -40px 12px; display: grid; place-items: center; padding: 0; border-radius: 50%; border: 1px solid var(--linha-forte); background: var(--bg); color: var(--tinta); cursor: pointer; box-shadow: 0 4px 14px -6px rgb(0 0 0 / .3); transition: background-color .2s, transform .25s; }
+.modal-fechar:hover { background: var(--superficie); transform: rotate(90deg); }
+.modal-fechar:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+.modal-fechar:focus:not(:focus-visible) { outline: none; }
+.modal-fechar .ic { width: 18px; height: 18px; }
+@media (min-width: 960px) {
+  .modal { width: min(1120px, calc(100% - 64px)); height: fit-content; max-height: calc(100svh - 64px); margin: auto; border-radius: 18px; border: 1px solid var(--linha); box-shadow: 0 30px 80px -30px rgb(0 0 0 / .5); }
+  .modal-caixa { padding: 28px 36px 36px; }
+  .modal.modal-estreito { width: min(720px, calc(100% - 64px)); }
+  .modal.modal-estreito .modal-caixa { padding: 26px 30px 30px; }
+}
+/* formulário de recomendação ocupa a largura do modal (antes parava antes do X) */
+.form.form-rec { max-width: none; width: 100%; }
+.rec-form-cab { padding-right: 52px; }
+
+/* sobre: zoom na foto (rosto e ombros em vez do corpo inteiro) */
+
+/* sobre: a foto vai do topo do texto até a linha dos botões, com zoom centrado no rosto */
+@media (min-width: 960px) {
+  .sobre-intro { align-items: stretch; }
+  .sobre-foto { position: relative; top: auto; align-self: stretch; aspect-ratio: auto; height: auto; min-height: 420px; max-width: none; overflow: hidden; }
+  .sobre-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; transform: scale(1.32); transform-origin: 50% 12%; }
+}
+/* contato na landing com o mesmo vídeo da página de contato (na seção não precisa do recuo do cabeçalho) */
+.contato-secao .contato-video { margin-top: 0; }
+@media (max-width: 759px) { .contato-secao .contato-hero { min-height: 0; padding-bottom: 20px; } }
+
+/* fade no topo dos vídeos de contato e do "trabalhando": o vídeo nasce da cor da página em vez de um corte seco */
+/* o fade fica na seção (que rola), não no palco ancorado: senão ficaria grudado no topo da tela */
+.contato-secao { position: relative; }
+.manifesto::before, .contato-secao::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: clamp(70px, 14vh, 160px); background: linear-gradient(var(--bg), transparent); pointer-events: none; z-index: 4; }

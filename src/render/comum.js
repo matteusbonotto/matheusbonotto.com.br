@@ -64,6 +64,7 @@ export const CAMINHOS = {
   peca: '<path d="M10 4h4v3a2 2 0 1 0 0 4v3h3v6H7v-6h3a2 2 0 1 0 0-4H7V4z"/>',
   grafico: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
   infinito: '<path d="M7 9a3 3 0 1 0 0 6c2 0 3-1.5 5-3s3-3 5-3a3 3 0 1 1 0 6c-2 0-3-1.5-5-3s-3-3-5-3z"/>',
+  apresentacao: '<path d="M2 4h20M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4M12 16v3M8 21l4-2 4 2M8 11l3-3 2 2 3-3"/>',
   quadro: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 4v16M5.5 8h1.5M11.5 8h1.5M11.5 11h1.5M17.5 8h1"/>',
   pincel: '<path d="M14 4 20 10l-8 8H6v-6z"/><path d="m11 7 6 6"/>',
   brilho: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/>',

@@ -92,11 +92,13 @@ const aoRolar = () => {
     v = p < 0.55 ? p / 0.55 : Math.max(0, 1 - (p - 0.55) / 0.2);
   }
   // vídeo de abertura tem fundo branco: até a barra escurecer, o texto fica escuro em qualquer tema
-  nav.classList.toggle('topo-claro', !!hero && p < 0.8);
   const escuro = v.toFixed(2);
   if (escuro !== ultimoEscuro) { nav.style.setProperty('--escuro', escuro); ultimoEscuro = escuro; }
   nav.classList.toggle('escura', !hero && v > 0.45);
   nav.classList.toggle('sobre-video', v > 0.02);
+  // texto escuro só quando o fundo atrás é claro de verdade: no topo (quadro branco) e com a barra já quase branca;
+  // no resto da rolagem fica a cor do tema (antes escurecia cedo demais e ficava escuro em cima da barra escura)
+  nav.classList.toggle('topo-claro', !!hero && (y <= 10 || v > 0.45));
 
 
   ultimoY = y;
@@ -112,9 +114,12 @@ document.addEventListener('click', e => {
   if (!alvo) return;
   e.preventDefault();
   if (nav.classList.contains('aberta')) menu(false);
-  // pula o respiro do topo da seção: o conteúdo encosta logo abaixo do cabeçalho
-  const offset = (parseFloat(getComputedStyle(alvo).paddingTop) || 0) - nav.offsetHeight;
-  lenis ? lenis.scrollTo(alvo, { offset }) : scrollTo({ top: alvo.getBoundingClientRect().top + scrollY + offset, behavior: semMovimento ? 'auto' : 'smooth' });
+  // seção com vídeo: o vídeo encosta embaixo do menu (tela cheia, sem faixa vazia em cima);
+  // sem vídeo: pula o respiro do topo da seção. Posição em px porque a Lenis desconta o scroll-padding sozinha.
+  const video = alvo.querySelector('video, .manifesto-palco');
+  const ref = video && video.getBoundingClientRect().top - alvo.getBoundingClientRect().top < innerHeight ? video : null;
+  const topo = (ref || alvo).getBoundingClientRect().top + scrollY + (ref ? 0 : parseFloat(getComputedStyle(alvo).paddingTop) || 0) - nav.offsetHeight;
+  lenis ? lenis.scrollTo(topo) : scrollTo({ top: topo, behavior: semMovimento ? 'auto' : 'smooth' });
   history.replaceState(null, '', url.hash);
 });
 
