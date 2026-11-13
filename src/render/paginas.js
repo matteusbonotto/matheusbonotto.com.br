@@ -11,10 +11,13 @@ const imgProjeto = (p, t, cls = '') => p.imagem_url
   ? `<img class="${cls} ${ehCena(p.imagem_url) ? 'capa-cena' : ''}" src="${esc(p.imagem_url)}" alt="${esc(t('projetos.print', { titulo: p.titulo }))}" loading="lazy" decoding="async" width="1600" height="1000">`
   : `<div class="${cls} img-vazia" aria-hidden="true">${esc(iniciais(p.titulo))}</div>`;
 const selos = (p, t, max = Infinity) => {
-  const cats = catsProjeto(p), extra = cats.length - max;
+  const todas = catsProjeto(p);
+  // projeto com IA mostra o selo mesmo quando o cartão só tem espaço para a categoria principal
+  const ia = todas.indexOf('vibe') >= max;
+  const cats = ia ? todas.filter(c => c !== 'vibe') : todas, extra = cats.length - max;
   const selo = (c, i) => `<span class="selo selo-${c}${i >= max ? ' selo-extra' : ''}" ${i >= max ? 'hidden' : ''}>${t(`projetos.cat.${c}`)}</span>`;
   // span com papel de botão: o cartão inteiro já é um <button>
-  return `<span class="selos">${cats.map(selo).join('')}${extra > 0 ? `<span class="selo selo-mais" role="button" tabindex="0" aria-expanded="false" aria-label="${t('projetos.maisTags', { n: extra })}" data-mais-selos>+${extra}</span>` : ''}</span>`;
+  return `<span class="selos">${cats.map(selo).join('')}${ia ? `<span class="selo selo-vibe selo-ia" title="${t('projetos.cat.vibe')}">${t('projetos.selo.ia')}</span>` : ''}${extra > 0 ? `<span class="selo selo-mais" role="button" tabindex="0" aria-expanded="false" aria-label="${t('projetos.maisTags', { n: extra })}" data-mais-selos>+${extra}</span>` : ''}</span>`;
 };
 
 // Alternador de visualização (grade / lista / árvore); o JS guarda a escolha por seção.

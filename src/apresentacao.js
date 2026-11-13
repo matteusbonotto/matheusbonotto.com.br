@@ -278,6 +278,15 @@ const SLIDES = (area) => [
     '', 'Use como exemplo de entrega rápida para cliente real.',
     { projeto: 'instrutora-jaqueline', rotulo: 'Instrutora Jaqueline' }),
 
+  // IA e engenharia de prompts (todos os temas)
+  { fundo: 'ondas', html: `<p class="ap-rotulo">IA e engenharia de prompts</p><h2>IA com método, não com dependência.</h2>${seq([
+      ['Desenvolvimento com agentes', 'Claude Code no dia a dia, com regras, papéis e revisão: QA Toolbar, EvangeliGO e QAllor saíram assim.'],
+      ['IA dentro do produto', 'Gemini no Zunido e no QAllor, com prompts versionados e troca de modelo quando um falha.'],
+      ['Prompts para QA', 'Cenários, revisão de requisitos e rascunho de bugs com IA, sempre com revisão humana.'],
+      ['Testar sistemas com IA', 'Alucinação, consistência das respostas, viés e prompt injection entram no plano de teste.'],
+    ])}<p class="ap-sub" style="margin-top:18px">Uso a IA para ir mais rápido, não para pensar por mim: entendo, reviso e testo tudo o que entrego.</p>`,
+    notas: 'Mostre maturidade: a IA acelera, mas a responsabilidade é sua. Dê um exemplo real de prompt que você refinou e de um erro da IA que o seu teste pegou.' },
+
   // 5. Pausa
   { pausa: true, fundo: 'constelacao', html: `<p class="ap-rotulo">Pausa</p><h2>Alguma pergunta até aqui?</h2><p class="ap-sub">Posso detalhar qualquer caso antes de seguir.</p>`,
     notas: 'Pare de verdade e espere. Se não houver perguntas, pergunte qual dos casos mais se parece com o dia a dia da vaga.' },
@@ -296,6 +305,7 @@ const SLIDES = (area) => [
       ['Qualidade desde o início', 'Testo pensando no usuário e no negócio, não só no critério de aceite.'],
       ['Automação que se paga', 'Tiro o trabalho repetitivo da regressão e deixo o time mais rápido.'],
       ['Autonomia', 'Quando falta uma ferramenta ou processo, eu proponho e construo.'],
+      ['IA com critério', 'Prompts bem feitos para ganhar velocidade, com revisão e testes meus no resultado.'],
     ])}`,
     notas: 'Resuma o valor em três frases. Depois faça suas perguntas: como o time trabalha com qualidade hoje, qual o maior desafio e quais os próximos passos do processo.' },
 
