@@ -12,7 +12,9 @@ const subir = async (caminho, buf, contentType) => {
   if (error) throw new Error(`${caminho}: ${error.message}`);
   return publica(caminho);
 };
+const filtro = process.argv.slice(2); // ex.: node scripts/branding.mjs QAllor (sem argumento, publica todas)
 for (const [i, pasta] of fs.readdirSync(RAIZ).sort().entries()) {
+  if (filtro.length && !filtro.some(f => pasta.includes(f))) continue;
   const base = pasta.replace(/^\d+-/, '');
   const titulo = NOMES[base] || base.replace(/-/g, ' ');
   const slug = `marca-${base.toLowerCase()}`;
