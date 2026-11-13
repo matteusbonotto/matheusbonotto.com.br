@@ -19,9 +19,17 @@ const V = {
 
 // Até 3 feedbacks reais (avaliações do Google já publicadas no site), curtos.
 // ---------- Dados lidos da própria página (fonte única: o que já está publicado no site) ----------
-const dadosPagina = () => { try { return JSON.parse(document.getElementById('dados')?.textContent || '{}'); } catch { return {}; } };
-const sobreTexto = () => document.querySelector('.sobre-lead')?.textContent.trim() || '';
-const fotoPerfil = () => document.querySelector('.sobre-foto img')?.getAttribute('src') || '';
+// A apresentação lê sempre da home (no idioma atual), mesmo aberta de /projetos/ ou /contato/:
+// as outras páginas não têm foto do Sobre, feedbacks, formação nem missão e valores.
+let base = document;
+export async function preparar() {
+  if (document.querySelector('.sobre-foto img') && document.getElementById('dados')) { base = document; return; }
+  const home = location.pathname.match(/^\/(en|es)\//)?.[0] || '/';
+  try { base = new DOMParser().parseFromString(await (await fetch(home)).text(), 'text/html'); } catch { base = document; }
+}
+const dadosPagina = () => { try { return JSON.parse(base.getElementById('dados')?.textContent || '{}'); } catch { return {}; } };
+const sobreTexto = () => base.querySelector('.sobre-lead')?.textContent.trim() || '';
+const fotoPerfil = () => base.querySelector('.sobre-foto img')?.getAttribute('src') || '';
 const iniciais = nome => String(nome || '').split(/\s+/).filter(Boolean).slice(0, 2).map(p => p[0].toUpperCase()).join('');
 
 // até 3 feedbacks na ordem em que a landing carrega, garantindo pelo menos um de gestão
@@ -43,7 +51,7 @@ const caso = (onde, problema, solucao, impacto) => seq([['Onde', onde], ['Proble
 
 // missão, visão e valores publicados na seção Sobre do site
 function mvv() {
-  return [...document.querySelectorAll('.mvv article')].map(a => {
+  return [...base.querySelectorAll('.mvv article')].map(a => {
     const itens = [...a.querySelectorAll('li')].map(li => li.textContent.trim());
     return [a.querySelector('h2')?.textContent.trim() || '', itens.length ? itens.join(' · ') : a.querySelector('p')?.textContent.trim() || ''];
   }).filter(([t, d]) => t && d);
@@ -65,7 +73,7 @@ function logoEmpresa(nome) {
   const e = (dadosPagina().experiencias || []).find(x => x.logo && semAc(x.instituicao).includes(n));
   if (e) return e.logo;
   // na faixa de empresas o nome fica no texto do item, não no alt da imagem
-  const li = [...document.querySelectorAll('main li')].find(l => l.querySelector('img') && semAc(l.textContent).includes(n));
+  const li = [...base.querySelectorAll('main li')].find(l => l.querySelector('img') && semAc(l.textContent).includes(n));
   const img = li?.querySelector('img');
   return img ? img.currentSrc || img.src : '';
 }
@@ -174,7 +182,7 @@ const fone = n => { const d = String(n).replace(/\D/g, ''); return d.length >= 1
 const semHttp = u => String(u).replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 function contatos() {
   const vistos = new Set();
-  const lista = [...document.querySelectorAll('a[href^="mailto:"], a[href*="wa.me/"], a[href*="linkedin.com"], a[href*="github.com"]')]
+  const lista = [...base.querySelectorAll('a[href^="mailto:"], a[href*="wa.me/"], a[href*="linkedin.com"], a[href*="github.com"]')]
     .map(a => a.href.startsWith('mailto:') ? [a.href, a.href.slice(7), 'email'] : a.href.includes('wa.me') ? [a.href, fone(a.href.split('wa.me/')[1]), 'whatsapp'] : a.href.includes('github') ? [a.href, semHttp(a.href), 'github'] : [a.href, semHttp(a.href), 'linkedin'])
     .filter(([h]) => !vistos.has(h) && vistos.add(h));
   return [...lista, [SITE.url, semHttp(SITE.url), 'globo']];
@@ -480,6 +488,8 @@ export function abrir(aoFechar = () => {}) {
   }
   function iniciar(area) {
     slides = SLIDES(area).filter(s => !s.areas || s.areas.includes(area));
+    // baixa já as imagens de todos os slides: sem isso a prova do caso aparecia em branco até carregar
+    slides.forEach(s => String((typeof s.html === 'function' ? s.html() : s.html) || '').replace(/<img[^>]+src="([^"]+)"/g, (_, src) => { new Image().src = src.replace(/&amp;/g, '&'); return ''; }));
     mostrar(0);
     $('[data-ap="prox"]').focus();
   }

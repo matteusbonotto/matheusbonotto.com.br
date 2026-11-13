@@ -72,7 +72,7 @@ $$('[data-apresentacao]').forEach(b => b.addEventListener('click', () => {
   document.querySelector('.visor')?.remove();
   document.documentElement.requestFullscreen?.().catch(() => {});
   lenis?.stop();
-  import('./apresentacao.js').then(m => m.abrir(() => lenis?.start()));
+  import('./apresentacao.js').then(async m => { await m.preparar(); m.abrir(() => lenis?.start()); });
 }));
 // rolagem própria do menu (celular deitado tem pouca altura): a Lenis parada cancelaria o gesto, então ele não sobe até ela
 ['wheel', 'touchstart', 'touchmove'].forEach(tipo => $('#menu-principal')?.addEventListener(tipo, e => e.stopPropagation(), { passive: true }));
