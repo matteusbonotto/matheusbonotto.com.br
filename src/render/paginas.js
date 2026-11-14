@@ -276,6 +276,7 @@ ${galeria.length ? `<div class="galeria" data-galeria>
     ${lista(t('projetos.funcionalidades'), p.funcionalidades)}
     ${lista(t('projetos.resultados'), p.conquistas)}
     ${p.tecnologias?.length ? `<div class="modal-bloco"><h3 class="rotulo">${t('projetos.tecnologias')}</h3><ul class="tags">${p.tecnologias.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
+    ${(p.documentos || []).filter(d => /^https:\/\//.test(d.url || '')).length ? `<div class="modal-bloco"><h3 class="rotulo">${t('projetos.documentos')}</h3><ul class="docs">${p.documentos.filter(d => /^https:\/\//.test(d.url || '')).map(d => `<li><a class="btn btn-linha btn-doc" href="${esc(d.url)}" target="_blank" rel="noopener">${icone('arquivo')} ${esc(d.titulo)} <span class="mono">PDF</span></a></li>`).join('')}</ul></div>` : ''}
     <div class="acoes">
       ${p.link_projeto ? `<a class="btn btn-escuro" href="${esc(p.link_projeto)}" target="_blank" rel="noopener">${t('projetos.visitar')} ${icone('externo')}</a>` : ''}
       ${p.link_github ? `<a class="btn btn-linha" href="${esc(p.link_github)}" target="_blank" rel="noopener">${icone('github')} ${t('projetos.codigo')}</a>` : ''}

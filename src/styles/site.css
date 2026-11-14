@@ -1611,3 +1611,8 @@ img { transition: opacity .6s ease; }
 /* o fade fica na seção (que rola), não no palco ancorado: senão ficaria grudado no topo da tela */
 .contato-secao { position: relative; }
 .manifesto::before, .contato-secao::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: clamp(70px, 14vh, 160px); background: linear-gradient(var(--bg), transparent); pointer-events: none; z-index: 4; }
+
+/* PDFs do projeto no modal: um botão por documento, texto sem quebrar */
+.docs { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.btn-doc { width: 100%; justify-content: flex-start; gap: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.btn-doc .mono { margin-left: auto; font-size: .66rem; opacity: .7; }
