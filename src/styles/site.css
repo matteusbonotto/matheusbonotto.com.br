@@ -1384,6 +1384,7 @@ img { transition: opacity .6s ease; }
   .crono-m-lista { display: grid; }
   .crono-m-linha { width: 100%; display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; column-gap: 12px; row-gap: 6px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--linha); text-align: left; color: inherit; transition: opacity .3s; }
   .crono-m-linha .crono-logo { grid-row: span 3; align-self: start; width: 32px; height: 32px; }
+  .crono-m-linha .crono-logo img, .crono-m-linha .crono-logo > span { width: 32px; height: 32px; }
   .crono-m-txt { display: grid; min-width: 0; }
   .crono-m-txt strong { font-size: .92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .crono-m-txt span { font-size: .8rem; color: var(--tinta-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
